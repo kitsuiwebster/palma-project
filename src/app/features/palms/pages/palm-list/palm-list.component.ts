@@ -1,7 +1,9 @@
 // src/app/features/palms/pages/palm-list/palm-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DataService, PalmTrait } from '../../../../core/services/data.service';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { DataService } from '../../../../core/services/data.service';
+import { PalmTrait } from '../../../../core/models/palm-trait.model';
 import { SearchBarComponent } from '../../../../shared/components/search-bar/search-bar.component';
 import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
 import { RouterModule } from '@angular/router';
@@ -21,7 +23,7 @@ import {
 import { MatNavList, MatListItem } from '@angular/material/list';
 import { MatExpansionPanelTitle } from '@angular/material/expansion';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
-
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-palm-list',
@@ -45,32 +47,97 @@ import { SortPipe } from '../../../../shared/pipes/sort.pipe';
     MatListItem,
     MatExpansionPanelTitle,
     SortPipe,
+    MatPaginator,
   ],
 })
 export class PalmListComponent implements OnInit {
-  palms$: Observable<PalmTrait[]>;
-  palmsByGenus$: Observable<{ [genus: string]: PalmTrait[] }>;
-  viewMode = 'grid'; // 'grid' or 'list'
+  // Les observables pour les données
+  palmsByGenus$!: Observable<{ [genus: string]: PalmTrait[] }>;
+  
+  // Propriétés pour la pagination
+  palms: PalmTrait[] = []; // Remplace palms$
+  currentPage = 0;
+  pageSize = 20;
+  totalItems = 0;
+  pageSizeOptions = [10, 20, 50, 100];
+  
+  // Autres propriétés
+  viewMode = 'grid'; // 'grid' ou 'list'
   loading = true;
   error = false;
   protected Object = Object;
 
-  constructor(private dataService: DataService) {
-    this.palms$ = this.dataService.getAllPalms();
-    this.palmsByGenus$ = this.dataService.getPalmsByGenus();
-  }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.palms$.subscribe({
-      next: () => (this.loading = false),
-      error: () => {
+    console.log("PalmListComponent initialized");
+    // Charger le nombre total d'éléments
+    this.loadTotalCount();
+    // Charger la première page
+    this.loadCurrentPage();
+    // Charger les groupes par genre (pour l'affichage par liste)
+    this.loadGenera();
+  }
+
+  loadTotalCount(): void {
+    this.dataService.getTotalPalmsCount().subscribe({
+      next: (count) => {
+        console.log("Total palm count:", count);
+        this.totalItems = count;
+      },
+      error: (err) => console.error("Error getting total count:", err)
+    });
+  }
+
+  loadCurrentPage(): void {
+    console.log(`Loading page ${this.currentPage}, size ${this.pageSize}`);
+    this.loading = true;
+    this.error = false;
+    
+    this.dataService.getPaginatedPalms(this.currentPage, this.pageSize).subscribe({
+      next: (palms) => {
+        console.log(`Page loaded with ${palms.length} palms`);
+        this.palms = palms;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error("Error loading page:", error);
         this.loading = false;
         this.error = true;
-      },
+      }
     });
+  }
+
+  loadGenera(): void {
+    this.palmsByGenus$ = this.dataService.getPalmsByGenus().pipe(
+      tap(genera => {
+        console.log("Genera loaded:", Object.keys(genera).length);
+      }),
+      catchError(error => {
+        console.error("Error loading genera:", error);
+        return of({});
+      })
+    );
+  }
+
+  onPageChange(event: any): void {
+    console.log("Page event:", event);
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadCurrentPage();
   }
 
   toggleView(mode: string): void {
     this.viewMode = mode;
+  }
+
+  // Helper method to get the name to display in the list view
+  getSpeciesName(palm: PalmTrait): string {
+    return palm.species || palm.SpecName || 'Unknown Species';
+  }
+
+  // Get the total number of palms in a genus group
+  getGenusCount(palms: PalmTrait[]): number {
+    return palms?.length || 0;
   }
 }

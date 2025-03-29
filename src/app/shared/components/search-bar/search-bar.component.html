@@ -1,36 +1,28 @@
 <!-- src/app/shared/components/search-bar/search-bar.component.html -->
-<div class="search-container">
+<div class="search-bar-container">
     <form (ngSubmit)="onSearchSubmit()">
-        <mat-form-field appearance="outline" class="search-field">
+        <mat-form-field appearance="outline" class="search-input">
             <mat-icon matPrefix>search</mat-icon>
-            <input matInput type="text" placeholder="Search palm species, genus, habitat..."
-                [formControl]="searchControl" autocomplete="off">
-            <mat-spinner matSuffix diameter="20" *ngIf="loading"></mat-spinner>
-            <button mat-icon-button matSuffix *ngIf="searchControl.value && !loading" type="button"
+            <input matInput [formControl]="searchControl" placeholder="Search palms by name, genus, or tribe..."
+                autocomplete="off">
+            <mat-spinner *ngIf="loading" matSuffix diameter="20"></mat-spinner>
+            <button *ngIf="!loading && searchControl.value" mat-icon-button matSuffix type="button"
                 (click)="searchControl.setValue('')">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
     </form>
 
-    <div class="search-results-dropdown" *ngIf="(searchResults$ | async) as results">
+    <div *ngIf="searchControl.value && (searchResults$ | async) as results" class="search-results">
         <mat-list *ngIf="results.length > 0">
-            <mat-list-item *ngFor="let palm of results.slice(0, 5)" (click)="goToPalmDetail(palm)">
-                <div class="result-item">
-                    <span class="species-name">{{palm.species}}</span>
-                    <span class="genus-name">{{palm.genus}}</span>
-                </div>
-            </mat-list-item>
-            <mat-list-item *ngIf="results.length > 5" (click)="onSearchSubmit()">
-                <div class="result-item view-all">
-                    <mat-icon>search</mat-icon>
-                    <span>View all {{results.length}} results</span>
-                </div>
+            <mat-list-item *ngFor="let palm of results" (click)="goToPalmDetail(palm)">
+                <mat-icon matListItemIcon>eco</mat-icon>
+                <div matListItemTitle>{{getSpeciesName(palm)}}</div>
+                <div matListItemLine>{{getGenusName(palm)}}</div>
             </mat-list-item>
         </mat-list>
-        <div class="no-results" *ngIf="results.length === 0 && searchControl.value && searchControl.value.length > 2">
-            <mat-icon>search_off</mat-icon>
-            <span>No palms found matching "{{searchControl.value}}"</span>
+        <div *ngIf="results.length === 0 && !loading" class="no-results">
+            <p>No palms matching your search criteria.</p>
         </div>
     </div>
 </div>

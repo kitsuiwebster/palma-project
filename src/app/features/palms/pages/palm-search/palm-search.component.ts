@@ -4,7 +4,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
-import { DataService, PalmTrait } from '../../../../core/services/data.service';
+import { DataService } from '../../../../core/services/data.service';
+import { PalmTrait } from '../../../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -56,8 +57,23 @@ export class PalmSearchComponent implements OnInit {
   // Filter options
   genera: string[] = [];
   habitats: string[] = [];
-  regions: string[] = [];
-  conservationStatuses: string[] = [];
+  palmTribes: string[] = [];
+  palmSubfamilies: string[] = [];
+  fruitSizes: string[] = [];
+  conspicuousness: string[] = [];
+  
+  // Caractéristiques binaires pour filtrer
+  stemTypes = [
+    { value: 'Climbing', displayName: 'Climbing' },
+    { value: 'Acaulescent', displayName: 'Acaulescent' },
+    { value: 'Erect', displayName: 'Erect' }
+  ];
+  
+  stemProperties = [
+    { value: 'StemSolitary', displayName: 'Solitary Stem' },
+    { value: 'StemArmed', displayName: 'Armed Stem' },
+    { value: 'LeavesArmed', displayName: 'Armed Leaves' }
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -68,11 +84,15 @@ export class PalmSearchComponent implements OnInit {
     this.searchForm = this.fb.group({
       query: [''],
       genus: [''],
-      habitat: [''],
-      region: [''],
-      conservationStatus: [''],
+      tribe: [''],
+      subfamily: [''],
       heightMin: [null],
       heightMax: [null],
+      stemType: [''],
+      stemProperty: [''],
+      understoreyCanopy: [''],
+      fruitSize: [''],
+      conspicuousness: ['']
     });
 
     this.searchResults$ = of([]);
@@ -82,24 +102,17 @@ export class PalmSearchComponent implements OnInit {
     // Get filter options from data
     this.dataService.getAllPalms().subscribe((palms) => {
       // Extract unique values for filter dropdowns
-      this.genera = [...new Set(palms.map((p) => p.genus))].sort();
-      this.habitats = [
-        ...new Set(palms.map((p) => p.habitat).filter((h) => h !== 'Unknown')),
-      ].sort();
+      this.genera = [...new Set(palms.map((p) => p.accGenus || p.genus).filter(Boolean) as string[])].sort();
 
-      // Extract regions from distribution field
-      const allRegions = palms.flatMap((p) =>
-        p.distribution.split(',').map((r) => r.trim())
-      );
-      this.regions = [...new Set(allRegions)]
-        .filter((r) => r !== 'Unknown')
-        .sort();
-
-      this.conservationStatuses = [
-        ...new Set(palms.map((p) => p.conservation_status)),
-      ]
-        .filter((s) => s !== 'Unknown')
-        .sort();
+      this.palmTribes = [...new Set(palms.map((p) => p.PalmTribe || p.tribe).filter(Boolean) as string[])].sort();
+      
+      this.palmSubfamilies = [...new Set(palms.map((p) => p.PalmSubfamily).filter(Boolean))].sort();
+      
+      this.habitats = [...new Set(palms.map((p) => p.UnderstoreyCanopy).filter(Boolean))].sort();
+      
+      this.fruitSizes = [...new Set(palms.map((p) => p.FruitSizeCategorical).filter(Boolean))].sort();
+      
+      this.conspicuousness = [...new Set(palms.map((p) => p.Conspicuousness).filter(Boolean))].sort();
     });
 
     // Initialize search from URL parameters
@@ -109,24 +122,26 @@ export class PalmSearchComponent implements OnInit {
       this.searchForm.patchValue({ query });
 
       // Apply other filters from URL if they exist
-      if (params.has('genus'))
+      if (params.has('genus')) 
         this.searchForm.patchValue({ genus: params.get('genus') });
-      if (params.has('habitat'))
-        this.searchForm.patchValue({ habitat: params.get('habitat') });
-      if (params.has('region'))
-        this.searchForm.patchValue({ region: params.get('region') });
-      if (params.has('conservationStatus'))
-        this.searchForm.patchValue({
-          conservationStatus: params.get('conservationStatus'),
-        });
+      if (params.has('tribe')) 
+        this.searchForm.patchValue({ tribe: params.get('tribe') });
+      if (params.has('subfamily')) 
+        this.searchForm.patchValue({ subfamily: params.get('subfamily') });
+      if (params.has('stemType')) 
+        this.searchForm.patchValue({ stemType: params.get('stemType') });
+      if (params.has('stemProperty'))
+        this.searchForm.patchValue({ stemProperty: params.get('stemProperty') });
+      if (params.has('understoreyCanopy'))
+        this.searchForm.patchValue({ understoreyCanopy: params.get('understoreyCanopy') });
+      if (params.has('fruitSize'))
+        this.searchForm.patchValue({ fruitSize: params.get('fruitSize') });
+      if (params.has('conspicuousness'))
+        this.searchForm.patchValue({ conspicuousness: params.get('conspicuousness') });
       if (params.has('heightMin'))
-        this.searchForm.patchValue({
-          heightMin: Number(params.get('heightMin')),
-        });
+        this.searchForm.patchValue({ heightMin: Number(params.get('heightMin')) });
       if (params.has('heightMax'))
-        this.searchForm.patchValue({
-          heightMax: Number(params.get('heightMax')),
-        });
+        this.searchForm.patchValue({ heightMax: Number(params.get('heightMax')) });
     });
 
     // Subscribe to form changes and search results
@@ -140,15 +155,15 @@ export class PalmSearchComponent implements OnInit {
 
         const query = params.get('q') || '';
         const genus = params.get('genus') || '';
-        const habitat = params.get('habitat') || '';
-        const region = params.get('region') || '';
-        const conservationStatus = params.get('conservationStatus') || '';
-        const heightMin = params.has('heightMin')
-          ? Number(params.get('heightMin'))
-          : null;
-        const heightMax = params.has('heightMax')
-          ? Number(params.get('heightMax'))
-          : null;
+        const tribe = params.get('tribe') || '';
+        const subfamily = params.get('subfamily') || '';
+        const stemType = params.get('stemType') || '';
+        const stemProperty = params.get('stemProperty') || '';
+        const understoreyCanopy = params.get('understoreyCanopy') || '';
+        const fruitSize = params.get('fruitSize') || '';
+        const conspicuousness = params.get('conspicuousness') || '';
+        const heightMin = params.has('heightMin') ? Number(params.get('heightMin')) : null;
+        const heightMax = params.has('heightMax') ? Number(params.get('heightMax')) : null;
 
         // Filter palms based on all criteria
         let results = allPalms;
@@ -157,42 +172,70 @@ export class PalmSearchComponent implements OnInit {
           const searchQuery = query.toLowerCase();
           results = results.filter(
             (palm) =>
-              palm.species.toLowerCase().includes(searchQuery) ||
-              palm.genus.toLowerCase().includes(searchQuery) ||
-              palm.tribe.toLowerCase().includes(searchQuery) ||
-              palm.distribution.toLowerCase().includes(searchQuery) ||
-              palm.habitat.toLowerCase().includes(searchQuery) ||
-              (palm.description &&
-                palm.description.toLowerCase().includes(searchQuery))
+              (palm.SpecName && palm.SpecName.toLowerCase().includes(searchQuery)) ||
+              (palm.accGenus && palm.accGenus.toLowerCase().includes(searchQuery)) ||
+              (palm.accSpecies && palm.accSpecies.toLowerCase().includes(searchQuery)) ||
+              (palm.PalmTribe && palm.PalmTribe.toLowerCase().includes(searchQuery)) ||
+              (palm.PalmSubfamily && palm.PalmSubfamily.toLowerCase().includes(searchQuery))
           );
         }
 
         if (genus) {
-          results = results.filter((palm) => palm.genus === genus);
+          results = results.filter((palm) => (palm.accGenus || palm.genus) === genus);
         }
 
-        if (habitat) {
-          results = results.filter((palm) => palm.habitat.includes(habitat));
+        if (tribe) {
+          results = results.filter((palm) => (palm.PalmTribe || palm.tribe) === tribe);
         }
 
-        if (region) {
-          results = results.filter((palm) =>
-            palm.distribution.includes(region)
-          );
+        if (subfamily) {
+          results = results.filter((palm) => palm.PalmSubfamily === subfamily);
         }
 
-        if (conservationStatus) {
-          results = results.filter(
-            (palm) => palm.conservation_status === conservationStatus
-          );
+        if (stemType) {
+          if (stemType === 'Climbing') {
+            results = results.filter((palm) => palm.Climbing === 1);
+          } else if (stemType === 'Acaulescent') {
+            results = results.filter((palm) => palm.Acaulescent === 1);
+          } else if (stemType === 'Erect') {
+            results = results.filter((palm) => palm.Erect === 1);
+          }
+        }
+
+        if (stemProperty) {
+          if (stemProperty === 'StemSolitary') {
+            results = results.filter((palm) => palm.StemSolitary === 1);
+          } else if (stemProperty === 'StemArmed') {
+            results = results.filter((palm) => palm.StemArmed === 1);
+          } else if (stemProperty === 'LeavesArmed') {
+            results = results.filter((palm) => palm.LeavesArmed === 1);
+          }
+        }
+
+        if (understoreyCanopy) {
+          results = results.filter((palm) => palm.UnderstoreyCanopy === understoreyCanopy);
+        }
+
+        if (fruitSize) {
+          results = results.filter((palm) => palm.FruitSizeCategorical === fruitSize);
+        }
+
+        if (conspicuousness) {
+          results = results.filter((palm) => palm.Conspicuousness === conspicuousness);
         }
 
         if (heightMin !== null) {
-          results = results.filter((palm) => palm.height_max_m >= heightMin);
+          results = results.filter((palm) => {
+            const height = palm.MaxStemHeight_m || palm.height_max_m || 0;
+            return height !== null && height >= heightMin;
+          });
         }
 
         if (heightMax !== null) {
-          results = results.filter((palm) => palm.height_max_m <= heightMax);
+          results = results.filter((palm) => {
+            const height = palm.MaxStemHeight_m || palm.height_max_m || 0;
+            return height !== null && height <= heightMax;
+          });
         }
 
         this.totalResults = results.length;
@@ -209,10 +252,13 @@ export class PalmSearchComponent implements OnInit {
 
     if (formValues.query) queryParams.q = formValues.query;
     if (formValues.genus) queryParams.genus = formValues.genus;
-    if (formValues.habitat) queryParams.habitat = formValues.habitat;
-    if (formValues.region) queryParams.region = formValues.region;
-    if (formValues.conservationStatus)
-      queryParams.conservationStatus = formValues.conservationStatus;
+    if (formValues.tribe) queryParams.tribe = formValues.tribe;
+    if (formValues.subfamily) queryParams.subfamily = formValues.subfamily;
+    if (formValues.stemType) queryParams.stemType = formValues.stemType;
+    if (formValues.stemProperty) queryParams.stemProperty = formValues.stemProperty;
+    if (formValues.understoreyCanopy) queryParams.understoreyCanopy = formValues.understoreyCanopy;
+    if (formValues.fruitSize) queryParams.fruitSize = formValues.fruitSize;
+    if (formValues.conspicuousness) queryParams.conspicuousness = formValues.conspicuousness;
     if (formValues.heightMin) queryParams.heightMin = formValues.heightMin;
     if (formValues.heightMax) queryParams.heightMax = formValues.heightMax;
 
@@ -223,9 +269,13 @@ export class PalmSearchComponent implements OnInit {
   clearFilters(): void {
     this.searchForm.patchValue({
       genus: '',
-      habitat: '',
-      region: '',
-      conservationStatus: '',
+      tribe: '',
+      subfamily: '',
+      stemType: '',
+      stemProperty: '',
+      understoreyCanopy: '',
+      fruitSize: '',
+      conspicuousness: '',
       heightMin: null,
       heightMax: null,
     });

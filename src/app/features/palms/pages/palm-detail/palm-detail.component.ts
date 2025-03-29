@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, of, switchMap, catchError } from 'rxjs';
-import { DataService, PalmTrait } from '../../../../core/services/data.service';
+import { DataService } from '../../../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { ConservationClassPipe } from '../../../../shared/pipes/conservation-class.pipe';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatDivider } from '@angular/material/divider';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { PalmTrait } from '../../../../core/models/palm-trait.model';
 
 @Component({
   selector: 'app-palm-detail',
@@ -31,7 +32,7 @@ import { MatTabGroup, MatTab } from '@angular/material/tabs';
   ],
 })
 export class PalmDetailComponent implements OnInit {
-  palm$: Observable<PalmTrait | undefined>;
+  palm$: Observable<PalmTrait | null>;
   loading = true;
   error = false;
   notFound = false;
@@ -43,22 +44,21 @@ export class PalmDetailComponent implements OnInit {
     private titleService: Title,
     private metaService: Meta
   ) {
-    this.palm$ = of(undefined);
+    this.palm$ = of(null);
   }
 
   ngOnInit(): void {
     this.palm$ = this.route.paramMap.pipe(
       switchMap((params) => {
         const speciesSlug = params.get('species') || '';
-        const speciesName = speciesSlug.split('-').join(' ');
         this.loading = true;
-
-        return this.dataService.getPalmBySpecies(speciesName).pipe(
+        
+        return this.dataService.getPalmBySlug(speciesSlug).pipe(
           catchError((error) => {
             console.error('Error fetching palm details:', error);
             this.loading = false;
             this.error = true;
-            return of(undefined);
+            return of(null);
           })
         );
       })
@@ -66,7 +66,6 @@ export class PalmDetailComponent implements OnInit {
 
     this.palm$.subscribe((palm) => {
       this.loading = false;
-
       if (!palm) {
         this.notFound = true;
         this.titleService.setTitle('Palm Not Found - Palm Encyclopedia');
@@ -74,11 +73,97 @@ export class PalmDetailComponent implements OnInit {
       }
 
       // Set page title and meta for SEO
-      this.titleService.setTitle(`${palm.species} - Palm Encyclopedia`);
+      const speciesName = palm.SpecName || palm.species || 'Unknown Species';
+      const genus = palm.accGenus || palm.genus || 'Unknown Genus';
+      const distribution = palm.distribution || 'various regions';
+
+      this.titleService.setTitle(`${speciesName} - Palm Encyclopedia`);
       this.metaService.updateTag({
         name: 'description',
-        content: `Learn about ${palm.species}, a palm species from the ${palm.genus} genus native to ${palm.distribution}.`,
+        content: `Learn about ${speciesName}, a palm species from the ${genus} genus native to ${distribution}.`,
       });
     });
+  }
+
+  // Méthodes utilitaires pour accéder aux propriétés du palmier de manière sécurisée
+  getSpeciesName(palm: PalmTrait): string {
+    return palm?.SpecName || palm?.species || 'Unknown Species';
+  }
+
+  getGenus(palm: PalmTrait): string {
+    return palm?.accGenus || palm?.genus || 'Unknown Genus';
+  }
+
+  getTribe(palm: PalmTrait): string {
+    return palm?.PalmTribe || palm?.tribe || 'Unknown Tribe';
+  }
+
+  getSubfamily(palm: PalmTrait): string {
+    return palm?.PalmSubfamily || 'Unknown Subfamily';
+  }
+
+  getHeight(palm: PalmTrait): string {
+    const height = palm?.MaxStemHeight_m || palm?.height_max_m;
+    return height ? `${height} m` : 'Unknown';
+  }
+
+  getStemDiameter(palm: PalmTrait): string {
+    return palm?.MaxStemDia_cm ? `${palm.MaxStemDia_cm} cm` : 'Unknown';
+  }
+
+  getHabitat(palm: PalmTrait): string {
+    return palm?.UnderstoreyCanopy || palm?.habitat || 'Unknown';
+  }
+
+  getStemType(palm: PalmTrait): string[] {
+    const types = [];
+    if (palm?.Climbing === 1) types.push('Climbing');
+    if (palm?.Acaulescent === 1) types.push('Acaulescent');
+    if (palm?.Erect === 1) types.push('Erect');
+    return types.length > 0 ? types : ['Unknown'];
+  }
+
+  getStemProperties(palm: PalmTrait): string[] {
+    const properties = [];
+    if (palm?.StemSolitary === 1) properties.push('Solitary');
+    if (palm?.StemArmed === 1) properties.push('Armed');
+    if (palm?.LeavesArmed === 1) properties.push('Armed Leaves');
+    return properties;
+  }
+
+  getLeafInfo(palm: PalmTrait): string {
+    return palm?.MaxLeafNumber 
+      ? `Up to ${palm.MaxLeafNumber} leaves`
+      : 'Leaf information not available';
+  }
+
+  getFruitInfo(palm: PalmTrait): string {
+    if (palm?.FruitSizeCategorical) {
+      let info = `${palm.FruitSizeCategorical} sized`;
+      if (palm.FruitShape) info += `, ${palm.FruitShape}`;
+      if (palm.MainFruitColors) info += `, ${palm.MainFruitColors} colored`;
+      return info;
+    }
+    return 'Fruit information not available';
+  }
+
+  // Déterminer si ce palmier a des caractéristiques particulières
+  hasFruitData(palm: PalmTrait): boolean {
+    return !!palm?.FruitSizeCategorical || !!palm?.FruitShape || !!palm?.MainFruitColors;
+  }
+
+  hasLeafData(palm: PalmTrait): boolean {
+    return !!palm?.MaxLeafNumber || !!palm?.Max_Blade_Length_m || !!palm?.Max_Rachis_Length_m;
+  }
+
+  getConservationStatus(palm: PalmTrait): string {
+    if (palm?.conservation_status) {
+      return palm.conservation_status;
+    }
+    // Logique basée sur les données disponibles
+    if (palm?.Conspicuousness === 'cryptic') {
+      return 'Rare';
+    }
+    return 'Status unknown';
   }
 }

@@ -1,36 +1,33 @@
 <!-- src/app/shared/components/palm-card/palm-card.component.html -->
-<mat-card class="palm-card" [routerLink]="['/palms', palm.species | slugify]">
+<mat-card class="palm-card" [routerLink]="['/palms', getSpecies() | slugify]">
     <div class="card-image-container">
-        <img mat-card-image [src]="palm.image_url" [alt]="palm.species" class="palm-image">
+        <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image">
         <div class="conservation-status" [ngClass]="getConservationStatusClass()">
-            {{palm.conservation_status}}
+            {{palm.conservation_status || 'Status unknown'}}
         </div>
     </div>
-
     <mat-card-header>
         <mat-card-title-group>
-            <mat-card-title>{{palm.species}}</mat-card-title>
-            <mat-card-subtitle>{{palm.genus}} | {{palm.tribe}}</mat-card-subtitle>
+            <mat-card-title>{{getSpecies()}}</mat-card-title>
+            <mat-card-subtitle>{{getGenus()}} | {{getTribe()}}</mat-card-subtitle>
         </mat-card-title-group>
     </mat-card-header>
-
     <mat-card-content>
         <div class="palm-quick-info">
             <div class="info-item">
                 <mat-icon>height</mat-icon>
-                <span>{{palm.height_max_m}} m</span>
+                <span>{{getHeight()}}</span>
             </div>
             <div class="info-item">
                 <mat-icon>place</mat-icon>
-                <span>{{palm.distribution}}</span>
+                <span>{{getDistribution()}}</span>
             </div>
             <div class="info-item">
                 <mat-icon>eco</mat-icon>
-                <span>{{palm.habitat}}</span>
+                <span>{{getHabitat()}}</span>
             </div>
         </div>
     </mat-card-content>
-
     <mat-card-actions>
         <button mat-button color="primary">VIEW DETAILS</button>
     </mat-card-actions>

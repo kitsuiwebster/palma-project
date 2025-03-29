@@ -10,7 +10,8 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
-import { DataService, PalmTrait } from '../../../core/services/data.service';
+import { DataService } from '../../../core/services/data.service';
+import { PalmTrait } from '../../../core/models/palm-trait.model';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -80,9 +81,33 @@ export class SearchBarComponent implements OnInit {
   }
 
   goToPalmDetail(palm: PalmTrait): void {
-    // Assuming you have a slugify pipe to convert species name to URL-friendly format
-    const speciesSlug = palm.species.toLowerCase().replace(/\s+/g, '-');
+    // Obtenir le nom d'espèce, en tenant compte de la structure de données
+    const speciesName = palm.SpecName || palm.species || '';
+    // Convertir en slug URL-friendly
+    const speciesSlug = this.slugify(speciesName);
     this.router.navigate(['/palms', speciesSlug]);
     this.searchControl.setValue('');
+  }
+
+  // Obtenir le nom d'espèce pour l'affichage
+  getSpeciesName(palm: PalmTrait): string {
+    return palm.SpecName || palm.species || 'Unknown Species';
+  }
+
+  // Obtenir le genre pour l'affichage
+  getGenusName(palm: PalmTrait): string {
+    return palm.accGenus || palm.genus || 'Unknown Genus';
+  }
+
+  // Fonction utilitaire pour convertir un texte en format slug
+  private slugify(text: string): string {
+    return text
+      .toString()
+      .toLowerCase()
+      .replace(/\s+/g, '-')      // Remplacer les espaces par des tirets
+      .replace(/[^\w\-]+/g, '')  // Supprimer tous les caractères non-word
+      .replace(/\-\-+/g, '-')    // Remplacer les tirets multiples par un seul
+      .replace(/^-+/, '')        // Supprimer les tirets au début
+      .replace(/-+$/, '');       // Supprimer les tirets à la fin
   }
 }

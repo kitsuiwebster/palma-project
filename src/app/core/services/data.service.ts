@@ -1,146 +1,287 @@
 // src/app/core/services/data.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import * as Papa from 'papaparse';
-
-export interface PalmTrait {
-  species: string;
-  genus: string;
-  tribe: string;
-  subfamily: string;
-  family: string;
-  height_max_m: number;
-  stem_diameter_max_cm: number;
-  leaf_number_max: number;
-  leaf_length_max_m: number;
-  fruit_length_max_cm: number;
-  fruit_diameter_max_cm: number;
-  range_size_km2: number;
-  distribution: string;
-  habitat: string;
-  uses: string;
-  conservation_status: string;
-  image_url?: string;
-  description?: string;
-}
+import { Observable, catchError, map, of, tap } from 'rxjs';
+import { PalmTrait } from '../models/palm-trait.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-  private palmsData: PalmTrait[] = [];
-  private dataUrl = 'assets/data/palmtraits.csv'; // Path to your dataset
+  private dataFilePath = 'assets/data/PalmTraits_1.0.txt';
+  private cachedPalms: PalmTrait[] | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  /**
-   * Load and parse PalmTraits data from CSV
-   */
-  loadPalmsData(): Observable<PalmTrait[]> {
-    if (this.palmsData.length > 0) {
-      return of(this.palmsData);
-    }
-
-    return this.http.get('assets/data/PalmTraits_1.0.txt', { responseType: 'text' })
-      .pipe(
-        map(csv => {
-          const results = Papa.parse(csv, {
-            header: true,
-            delimiter: '\t',
-            dynamicTyping: true,
-            skipEmptyLines: true
-          });
-          
-          // Process and clean data
-          this.palmsData = results.data.map((palm: any) => {
-            return {
-              species: palm.species || '',
-              genus: palm.genus || '',
-              tribe: palm.tribe || '',
-              subfamily: palm.subfamily || '',
-              family: palm.family || 'Arecaceae',
-              height_max_m: palm.height_max_m || null,
-              stem_diameter_max_cm: palm.stem_diameter_max_cm || null,
-              leaf_number_max: palm.leaf_number_max || null,
-              leaf_length_max_m: palm.leaf_length_max_m || null,
-              fruit_length_max_cm: palm.fruit_length_max_cm || null,
-              fruit_diameter_max_cm: palm.fruit_diameter_max_cm || null,
-              range_size_km2: palm.range_size_km2 || null,
-              distribution: palm.distribution || 'Unknown',
-              habitat: palm.habitat || 'Unknown',
-              uses: palm.uses || 'Unknown',
-              conservation_status: palm.conservation_status || 'Unknown',
-              image_url: palm.image_url || 'assets/images/palm-placeholder.jpg',
-              description: palm.description || 'No description available.'
-            };
-          });
-          
-          return this.palmsData;
-        }),
-        catchError(error => {
-          console.error('Error loading palm data:', error);
-          return throwError(() => new Error('Failed to load palm data. Please try again later.'));
-        })
-      );
-  }
-
-  /**
-   * Get all palm species
-   */
   getAllPalms(): Observable<PalmTrait[]> {
-    return this.loadPalmsData();
-  }
-
-  /**
-   * Get palm by species name
-   */
-  getPalmBySpecies(species: string): Observable<PalmTrait | undefined> {
-    return this.loadPalmsData().pipe(
-      map(palms => palms.find(palm => 
-        palm.species.toLowerCase() === species.toLowerCase()
-      ))
-    );
-  }
-
-  /**
-   * Search palms by term (genus, species, or other attributes)
-   */
-  searchPalms(term: string): Observable<PalmTrait[]> {
-    if (!term.trim()) {
-      return of([]);
+    console.log('getAllPalms called');
+    // Si les données sont déjà en cache, retourner le cache
+    if (this.cachedPalms) {
+      console.log('Returning cached data:', this.cachedPalms.length, 'palms');
+      return of(this.cachedPalms);
     }
-    
-    const searchTerm = term.toLowerCase();
-    return this.loadPalmsData().pipe(
-      map(palms => palms.filter(palm => 
-        palm.species.toLowerCase().includes(searchTerm) ||
-        palm.genus.toLowerCase().includes(searchTerm) ||
-        palm.tribe.toLowerCase().includes(searchTerm) ||
-        palm.subfamily.toLowerCase().includes(searchTerm) ||
-        palm.distribution.toLowerCase().includes(searchTerm) ||
-        palm.habitat.toLowerCase().includes(searchTerm) ||
-        palm.uses.toLowerCase().includes(searchTerm)
-      ))
+
+    // Sinon, charger depuis le fichier texte local
+    console.log('Loading data from text file:', this.dataFilePath);
+    return this.http.get(this.dataFilePath, { responseType: 'text' }).pipe(
+      tap((textData) =>
+        console.log(
+          'Raw data received, length:',
+          textData.length,
+          'Preview:',
+          textData.substring(0, 100)
+        )
+      ),
+      map((textData) => this.parseTextData(textData)),
+      tap((parsedData) =>
+        console.log('Data parsed:', parsedData.length, 'items')
+      ),
+      map((palms) => palms.map((palm) => this.processPalmData(palm))),
+      tap((processedPalms) => {
+        console.log('Data processed:', processedPalms.length, 'palms');
+        this.cachedPalms = processedPalms;
+      }),
+      catchError((error) => {
+        console.error('ERROR LOADING DATA:', error);
+        if (error.status) {
+          console.error('HTTP status:', error.status, error.statusText);
+        }
+        return of([]);
+      })
     );
   }
 
-  /**
-   * Get palms grouped by genus
-   */
-  getPalmsByGenus(): Observable<{[genus: string]: PalmTrait[]}> {
-    return this.loadPalmsData().pipe(
-      map(palms => {
+  // Fonction pour rechercher des palmiers par terme
+  searchPalms(term: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const searchTerm = term.toLowerCase().trim();
+        return palms
+          .filter((palm) => {
+            // Rechercher dans différents champs pertinents
+            return (
+              (palm.SpecName &&
+                palm.SpecName.toLowerCase().includes(searchTerm)) ||
+              (palm.accGenus &&
+                palm.accGenus.toLowerCase().includes(searchTerm)) ||
+              (palm.species &&
+                palm.species.toLowerCase().includes(searchTerm)) ||
+              (palm.genus && palm.genus.toLowerCase().includes(searchTerm)) ||
+              (palm.PalmTribe &&
+                palm.PalmTribe.toLowerCase().includes(searchTerm)) ||
+              (palm.tribe && palm.tribe.toLowerCase().includes(searchTerm)) ||
+              (palm.PalmSubfamily &&
+                palm.PalmSubfamily.toLowerCase().includes(searchTerm))
+            );
+          })
+          .slice(0, 10); // Limiter à 10 résultats pour la performance
+      })
+    );
+  }
+
+  // Fonction pour récupérer un palmier par son nom d'espèce exact
+  getPalmBySpecies(speciesName: string): Observable<PalmTrait | null> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const normalizedName = speciesName.toLowerCase().trim();
+        const palm = palms.find((p) => {
+          const palmSpecies = (p.SpecName || p.species || '')
+            .toLowerCase()
+            .trim();
+          return palmSpecies === normalizedName;
+        });
+        return palm || null;
+      })
+    );
+  }
+
+  // Grouper les palmiers par genre
+  getPalmsByGenus(): Observable<{ [genus: string]: PalmTrait[] }> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        // Regrouper les palmiers par genre (accGenus ou genus)
         return palms.reduce((acc, palm) => {
-          const genus = palm.genus;
+          const genus = palm.accGenus || palm.genus || 'Unknown';
           if (!acc[genus]) {
             acc[genus] = [];
           }
           acc[genus].push(palm);
           return acc;
-        }, {} as {[genus: string]: PalmTrait[]});
+        }, {} as { [genus: string]: PalmTrait[] });
       })
     );
+  }
+
+  // Récupérer un palmier par son slug URL
+  getPalmBySlug(slug: string): Observable<PalmTrait | null> {
+    // Si on a déjà les palmiers en cache
+    if (this.cachedPalms) {
+      const palm = this.cachedPalms.find(
+        (p) => this.slugify(p.species || p.SpecName || '') === slug
+      );
+      return of(palm || null);
+    }
+
+    // Sinon, charger tous les palmiers puis filtrer
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        return (
+          palms.find(
+            (p) => this.slugify(p.species || p.SpecName || '') === slug
+          ) || null
+        );
+      })
+    );
+  }
+
+  // Dans DataService
+  getPaginatedPalms(page: number, pageSize: number): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const startIndex = page * pageSize;
+        return palms.slice(startIndex, startIndex + pageSize);
+      })
+    );
+  }
+
+  // Méthode pour obtenir le nombre total de palmiers
+  getTotalPalmsCount(): Observable<number> {
+    return this.getAllPalms().pipe(map((palms) => palms.length));
+  }
+
+  // Parse le fichier texte en objets
+  private parseTextData(textData: string): any[] {
+    console.log('parseTextData started');
+
+    // Diviser par lignes
+    const lines = textData.split('\n');
+    console.log('Number of lines:', lines.length);
+
+    if (lines.length === 0) {
+      console.error('No lines found in text data');
+      return [];
+    }
+
+    // La première ligne contient les en-têtes
+    const firstLine = lines[0];
+    console.log('First line:', firstLine);
+
+    // Déterminer le délimiteur utilisé
+    const delimiter = firstLine.includes('\t') ? '\t' : ' ';
+    console.log('Detected delimiter:', delimiter === '\t' ? 'TAB' : 'SPACE');
+
+    const headers = firstLine.split(delimiter).map((header) => header.trim());
+    console.log('Headers:', headers);
+
+    const result: any[] = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      if (i === 1 || i === 2) {
+        console.log(`Line ${i}:`, lines[i]);
+      }
+
+      // Ignorer les lignes vides
+      if (!lines[i].trim()) continue;
+
+      const currentLine = lines[i].split(delimiter);
+
+      if (i === 1) {
+        console.log('First data line split:', currentLine);
+      }
+
+      // Créer l'objet pour cette ligne
+      const obj: any = {};
+
+      // Mapper les valeurs aux en-têtes
+      for (let j = 0; j < headers.length; j++) {
+        if (j < currentLine.length) {
+          const value = currentLine[j]?.trim();
+
+          // Convertir les valeurs numériques si possible
+          if (value && !isNaN(Number(value))) {
+            obj[headers[j]] = Number(value);
+          } else {
+            obj[headers[j]] = value || null;
+          }
+        } else {
+          obj[headers[j]] = null; // Valeur manquante
+        }
+      }
+
+      result.push(obj);
+    }
+
+    console.log('Parsing complete, items:', result.length);
+    return result;
+  }
+
+  // Fonction pour standardiser les données du palmier
+  private processPalmData(palm: any): PalmTrait {
+    // Enrichir les données avec des propriétés calculées
+    return {
+      ...palm, // Garder toutes les propriétés originales
+
+      // Ajouter des propriétés calculées qui correspondent à ce que votre UI attend
+      genus: palm.accGenus || 'Unknown',
+      species: palm.SpecName || 'Unknown',
+      tribe: palm.PalmTribe || 'Unknown',
+      height_max_m: palm.MaxStemHeight_m || null,
+
+      // Valeurs par défaut pour les attributs manquants
+      distribution: this.getDistribution(palm),
+      habitat: this.getHabitat(palm),
+      image_url: this.getImageUrl(palm),
+      conservation_status: this.getConservationStatus(palm),
+    };
+  }
+
+  // Méthodes pour calculer les valeurs manquantes
+  private getDistribution(palm: any): string {
+    // Vous pouvez personnaliser ceci avec des informations réelles
+    if (palm.SpecName) {
+      return `Native regions of ${palm.SpecName}`;
+    }
+    return 'Distribution information not available';
+  }
+
+  private getHabitat(palm: any): string {
+    if (palm.UnderstoreyCanopy) {
+      return palm.UnderstoreyCanopy === 'understorey'
+        ? 'Forest understory'
+        : 'Forest canopy';
+    }
+    if (palm.Conspicuousness) {
+      return palm.Conspicuousness === 'conspicuous'
+        ? 'Open habitat'
+        : 'Hidden habitat';
+    }
+    return 'Habitat information not available';
+  }
+
+  private getImageUrl(palm: any): string {
+    // Générer une URL d'image basée sur le nom d'espèce
+    const speciesSlug = this.slugify(palm.SpecName || '');
+    // Chemin vers l'image
+    return `assets/images/palms/${speciesSlug}.jpg`;
+  }
+
+  private getConservationStatus(palm: any): string {
+    // Logique basée sur les propriétés disponibles dans vos données
+    if (palm.Conspicuousness === 'cryptic') {
+      return 'Rare';
+    }
+    return 'Common';
+  }
+
+  // Méthode utilitaire pour créer un slug à partir d'une chaîne
+  private slugify(text: string): string {
+    return text
+      .toString()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
   }
 }
