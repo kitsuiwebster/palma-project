@@ -1,0 +1,108 @@
+<!-- src/app/features/palms/pages/palm-search/palm-search.component.html -->
+<div class="search-page-container">
+    <div class="search-header">
+        <button mat-icon-button class="back-button" [routerLink]="['/palms']">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1>Palm Search Results</h1>
+    </div>
+
+    <div class="search-content">
+        <div class="filters-panel">
+            <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+                <h2>Search & Filter</h2>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Search</mat-label>
+                    <input matInput formControlName="query" placeholder="Enter search term...">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <h3>Filters</h3>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Genus</mat-label>
+                    <mat-select formControlName="genus">
+                        <mat-option value="">All Genera</mat-option>
+                        <mat-option *ngFor="let genus of genera" [value]="genus">{{ genus }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Habitat</mat-label>
+                    <mat-select formControlName="habitat">
+                        <mat-option value="">All Habitats</mat-option>
+                        <mat-option *ngFor="let habitat of habitats" [value]="habitat">{{ habitat }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Region</mat-label>
+                    <mat-select formControlName="region">
+                        <mat-option value="">All Regions</mat-option>
+                        <mat-option *ngFor="let region of regions" [value]="region">{{ region }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Conservation Status</mat-label>
+                    <mat-select formControlName="conservationStatus">
+                        <mat-option value="">All Statuses</mat-option>
+                        <mat-option *ngFor="let status of conservationStatuses" [value]="status">
+                            {{ status }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="height-range">
+                    <h4>Height Range (meters)</h4>
+                    <div class="height-inputs">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Min</mat-label>
+                            <input matInput type="number" min="0" formControlName="heightMin">
+                        </mat-form-field>
+
+                        <span class="range-separator">to</span>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Max</mat-label>
+                            <input matInput type="number" min="0" formControlName="heightMax">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button mat-flat-button color="primary" type="submit">Apply Filters</button>
+                    <button mat-stroked-button type="button" (click)="clearFilters()">Clear Filters</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="results-panel">
+            <div *ngIf="loading" class="loading-spinner">
+                <mat-spinner></mat-spinner>
+                <p>Searching palms...</p>
+            </div>
+
+            <ng-container *ngIf="!loading">
+                <div class="results-header">
+                    <h2>
+                        <span *ngIf="searchQuery">Results for "{{ searchQuery }}"</span>
+                        <span *ngIf="!searchQuery">All Results</span>
+                    </h2>
+                    <span class="results-count">{{ totalResults }} palms found</span>
+                </div>
+
+                <div class="no-results" *ngIf="(searchResults$ | async)?.length === 0">
+                    <mat-icon>search_off</mat-icon>
+                    <p>No palms match your search criteria.</p>
+                    <button mat-stroked-button color="primary" (click)="clearFilters()">Clear All Filters</button>
+                </div>
+
+                <div class="palm-results-grid" *ngIf="(searchResults$ | async)?.length">
+                    <app-palm-card *ngFor="let palm of (searchResults$ | async)" [palm]="palm"></app-palm-card>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

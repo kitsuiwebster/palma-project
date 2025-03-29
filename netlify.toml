@@ -1,0 +1,8 @@
+[build]
+  publish = "dist/palm-encyclopedia"
+  command = "yarn build:prod"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,62 @@
+<!-- src/app/core/components/header/header.component.html -->
+<mat-toolbar color="primary" class="header">
+    <div class="container header-container">
+        <div class="logo" routerLink="/">
+            <mat-icon>eco</mat-icon>
+            <span class="app-title">Palm Encyclopedia</span>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- Navigation for desktop -->
+        <nav class="desktop-nav">
+            <a mat-button routerLink="/palms" routerLinkActive="active">Browse Palms</a>
+            <a mat-button routerLink="/palms/search" routerLinkActive="active">Advanced Search</a>
+            <button mat-icon-button [matMenuTriggerFor]="infoMenu" aria-label="Info Menu">
+                <mat-icon>info</mat-icon>
+            </button>
+            <mat-menu #infoMenu="matMenu">
+                <button mat-menu-item disabled>
+                    <span>About PalmTraits 1.0</span>
+                </button>
+                <button mat-menu-item disabled>
+                    <span>References</span>
+                </button>
+                <button mat-menu-item disabled>
+                    <span>Credits</span>
+                </button>
+            </mat-menu>
+        </nav>
+
+        <!-- Mobile menu button -->
+        <button mat-icon-button class="mobile-menu-button" (click)="toggleMenu()">
+            <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<!-- Mobile navigation menu -->
+<div class="mobile-nav" [class.open]="isMenuOpen">
+    <nav>
+        <a mat-button routerLink="/palms" routerLinkActive="active" (click)="toggleMenu()">
+            <mat-icon>format_list_bulleted</mat-icon>
+            <span>Browse Palms</span>
+        </a>
+        <a mat-button routerLink="/palms/search" routerLinkActive="active" (click)="toggleMenu()">
+            <mat-icon>search</mat-icon>
+            <span>Advanced Search</span>
+        </a>
+        <a mat-button disabled>
+            <mat-icon>info</mat-icon>
+            <span>About PalmTraits 1.0</span>
+        </a>
+        <a mat-button disabled>
+            <mat-icon>menu_book</mat-icon>
+            <span>References</span>
+        </a>
+        <a mat-button disabled>
+            <mat-icon>people</mat-icon>
+            <span>Credits</span>
+        </a>
+    </nav>
+</div>

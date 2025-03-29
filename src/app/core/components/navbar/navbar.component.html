@@ -1,0 +1,20 @@
+<!-- src/app/core/components/navbar/navbar.component.html -->
+<nav class="navbar">
+    <div class="container navbar-container">
+        <ul class="nav-links">
+            <li><a routerLink="/palms" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/palms/search" routerLinkActive="active">Search</a></li>
+            <li class="dropdown">
+                <a (click)="toggleNavbar()" class="dropdown-toggle">
+                    Categories <span class="icon">▼</span>
+                </a>
+                <div class="dropdown-menu" [class.expanded]="isExpanded">
+                    <a [routerLink]="['/palms']" [queryParams]="{genus: 'Cocos'}">Coconut Palms</a>
+                    <a [routerLink]="['/palms']" [queryParams]="{genus: 'Phoenix'}">Date Palms</a>
+                    <a [routerLink]="['/palms']" [queryParams]="{conservation_status: 'Endangered'}">Endangered
+                        Species</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

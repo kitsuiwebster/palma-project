@@ -1,0 +1,127 @@
+<!-- src/app/features/palms/pages/palm-detail/palm-detail.component.html -->
+<div class="palm-detail-container">
+    <button mat-icon-button class="back-button" [routerLink]="['/palms']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <div *ngIf="loading" class="loading-spinner">
+        <mat-spinner></mat-spinner>
+        <p>Loading palm information...</p>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+        <mat-icon color="warn">error</mat-icon>
+        <p>Failed to load palm data. Please try again later.</p>
+        <button mat-raised-button color="primary" (click)="ngOnInit()">Retry</button>
+    </div>
+
+    <div *ngIf="notFound" class="not-found">
+        <mat-icon color="warn">search_off</mat-icon>
+        <h2>Palm Not Found</h2>
+        <p>Sorry, the palm species you're looking for doesn't exist in our database.</p>
+        <button mat-raised-button color="primary" [routerLink]="['/palms']">Return to Palm List</button>
+    </div>
+
+    <ng-container *ngIf="(palm$ | async) as palm">
+        <div class="palm-detail-header">
+            <div class="palm-image-container">
+                <img [src]="palm.image_url" [alt]="palm.species" class="palm-detail-image">
+                <div class="conservation-badge" [ngClass]="palm.conservation_status | conservationClass">
+                    {{ palm.conservation_status }}
+                </div>
+            </div>
+
+            <div class="palm-header-info">
+                <h1 class="palm-species">{{ palm.species }}</h1>
+                <div class="taxonomy">
+                    <span class="taxonomy-item">{{ palm.genus }}</span> >
+                    <span class="taxonomy-item">{{ palm.tribe }}</span> >
+                    <span class="taxonomy-item">{{ palm.subfamily }}</span> >
+                    <span class="taxonomy-item">{{ palm.family }}</span>
+                </div>
+
+                <div class="quick-facts">
+                    <div class="fact">
+                        <mat-icon>public</mat-icon>
+                        <span>{{ palm.distribution }}</span>
+                    </div>
+                    <div class="fact">
+                        <mat-icon>terrain</mat-icon>
+                        <span>{{ palm.habitat }}</span>
+                    </div>
+                    <div class="fact" *ngIf="palm.uses">
+                        <mat-icon>eco</mat-icon>
+                        <span>{{ palm.uses }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="palm-detail-content">
+            <mat-tab-group>
+                <mat-tab label="Characteristics">
+                    <div class="tab-content">
+                        <h2>Physical Characteristics</h2>
+                        <div class="characteristics-grid">
+                            <div class="characteristic-item" *ngIf="palm.height_max_m">
+                                <div class="characteristic-label">Maximum Height</div>
+                                <div class="characteristic-value">{{ palm.height_max_m }} m</div>
+                            </div>
+                            <div class="characteristic-item" *ngIf="palm.stem_diameter_max_cm">
+                                <div class="characteristic-label">Maximum Stem Diameter</div>
+                                <div class="characteristic-value">{{ palm.stem_diameter_max_cm }} cm</div>
+                            </div>
+                            <div class="characteristic-item" *ngIf="palm.leaf_number_max">
+                                <div class="characteristic-label">Maximum Leaf Number</div>
+                                <div class="characteristic-value">{{ palm.leaf_number_max }}</div>
+                            </div>
+                            <div class="characteristic-item" *ngIf="palm.leaf_length_max_m">
+                                <div class="characteristic-label">Maximum Leaf Length</div>
+                                <div class="characteristic-value">{{ palm.leaf_length_max_m }} m</div>
+                            </div>
+                            <div class="characteristic-item" *ngIf="palm.fruit_length_max_cm">
+                                <div class="characteristic-label">Maximum Fruit Length</div>
+                                <div class="characteristic-value">{{ palm.fruit_length_max_cm }} cm</div>
+                            </div>
+                            <div class="characteristic-item" *ngIf="palm.fruit_diameter_max_cm">
+                                <div class="characteristic-label">Maximum Fruit Diameter</div>
+                                <div class="characteristic-value">{{ palm.fruit_diameter_max_cm }} cm</div>
+                            </div>
+                            <div class="characteristic-item" *ngIf="palm.range_size_km2">
+                                <div class="characteristic-label">Range Size</div>
+                                <div class="characteristic-value">{{ palm.range_size_km2 | number }} km²</div>
+                            </div>
+                        </div>
+
+                        <h2>Description</h2>
+                        <p class="palm-description">{{ palm.description || 'No detailed description available for this
+                            species.' }}</p>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Distribution">
+                    <div class="tab-content">
+                        <h2>Geographic Distribution</h2>
+                        <p>{{ palm.distribution }}</p>
+                        <!-- Map visualization could be added here -->
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Conservation">
+                    <div class="tab-content">
+                        <h2>Conservation Status</h2>
+                        <div class="conservation-info">
+                            <div class="status-indicator" [ngClass]="palm.conservation_status | conservationClass">
+                            </div>
+                            <h3>{{ palm.conservation_status }}</h3>
+                        </div>
+                        <p>{{ palm.conservation_status || 'No detailed conservation information available for this
+                            species.' }}</p>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </ng-container>
+</div>

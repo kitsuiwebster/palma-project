@@ -1,0 +1,36 @@
+<!-- src/app/shared/components/search-bar/search-bar.component.html -->
+<div class="search-container">
+    <form (ngSubmit)="onSearchSubmit()">
+        <mat-form-field appearance="outline" class="search-field">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput type="text" placeholder="Search palm species, genus, habitat..."
+                [formControl]="searchControl" autocomplete="off">
+            <mat-spinner matSuffix diameter="20" *ngIf="loading"></mat-spinner>
+            <button mat-icon-button matSuffix *ngIf="searchControl.value && !loading" type="button"
+                (click)="searchControl.setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+
+    <div class="search-results-dropdown" *ngIf="(searchResults$ | async) as results">
+        <mat-list *ngIf="results.length > 0">
+            <mat-list-item *ngFor="let palm of results.slice(0, 5)" (click)="goToPalmDetail(palm)">
+                <div class="result-item">
+                    <span class="species-name">{{palm.species}}</span>
+                    <span class="genus-name">{{palm.genus}}</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item *ngIf="results.length > 5" (click)="onSearchSubmit()">
+                <div class="result-item view-all">
+                    <mat-icon>search</mat-icon>
+                    <span>View all {{results.length}} results</span>
+                </div>
+            </mat-list-item>
+        </mat-list>
+        <div class="no-results" *ngIf="results.length === 0 && searchControl.value && searchControl.value.length > 2">
+            <mat-icon>search_off</mat-icon>
+            <span>No palms found matching "{{searchControl.value}}"</span>
+        </div>
+    </div>
+</div>
