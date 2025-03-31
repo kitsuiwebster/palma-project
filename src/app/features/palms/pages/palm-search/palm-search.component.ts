@@ -7,7 +7,6 @@ import { map, debounceTime } from 'rxjs/operators';
 import { DataService } from '../../../../core/services/data.service';
 import { PalmTrait } from '../../../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
-import { MatIcon } from '@angular/material/icon';
 import {
   MatButton,
   MatIconButton,
@@ -34,7 +33,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     PalmCardComponent,
     RouterModule,
-    MatIcon,
     MatButton,
     MatIconButton,
     MatProgressSpinner,
@@ -47,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
 })
+
 export class PalmSearchComponent implements OnInit {
   searchResults$: Observable<PalmTrait[]>;
   loading = true;

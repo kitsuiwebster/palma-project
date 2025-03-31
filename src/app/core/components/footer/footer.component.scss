@@ -1,23 +1,52 @@
 @import '../../../../styles.scss';
 
 .footer {
-  background: $primary-color;
   color: $text-dark;
-  padding-top: 40px;
-  margin-top: 40px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  padding-top: 70px;
+  margin-top: 60px;
+  position: relative;
+  background: linear-gradient(180deg, rgba($primary-color, 0.05) 0%, rgba($primary-color, 0.15) 100%);
   
+  // Effet de vague en haut du footer
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,288L60,266.7C120,245,240,203,360,192C480,181,600,203,720,213.3C840,224,960,224,1080,213.3C1200,203,1320,181,1380,170.7L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: bottom center;
+  }
+
   .footer-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
-    padding-bottom: 32px;
+    gap: 40px;
+    padding-bottom: 60px;
+    position: relative;
+    
+    // Décoration tropicale subtile
+    &::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 180px;
+      height: 180px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.3;
+      transform: rotate(45deg) scale(3);
+      pointer-events: none;
+    }
     
     @media (max-width: 768px) {
       flex-direction: column;
     }
   }
-  
+
   .footer-section {
     flex: 1;
     min-width: 250px;
@@ -25,81 +54,86 @@
     @media (max-width: 768px) {
       min-width: 100%;
     }
-    
+
     h3 {
-      color: $text-dark;
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-      font-weight: 500;
+      color: $primary-dark;
+      font-size: 1.25rem;
+      margin-bottom: 24px;
+      font-weight: 700;
       position: relative;
-      padding-bottom: 8px;
+      display: inline-block;
       
       &::after {
         content: "";
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: -8px;
         width: 40px;
-        height: 2px;
-        background-color: $text-secondary;
+        height: 3px;
+        background: linear-gradient(to right, $primary-color, $accent-color);
+        border-radius: 3px;
       }
     }
-    
+
     p {
       font-size: 0.95rem;
-      line-height: 1.6;
-      opacity: 0.9;
+      line-height: 1.7;
+      color: $text-secondary;
+      margin-bottom: 16px;
     }
   }
-  
+
   .footer-nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     
     a {
-      color: $text-dark;
+      color: $text-secondary;
       text-decoration: none;
       font-size: 0.95rem;
-      padding: 4px 0;
+      padding: 8px 0;
       transition: all 0.3s ease;
-      display: inline-block;
-      position: relative;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
       
       &::before {
-        content: "→";
-        opacity: 0;
-        margin-right: 4px;
-        transform: translateX(-8px);
+        content: "";
         display: inline-block;
-        transition: all 0.2s ease;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, $primary-color, $accent-color);
+        margin-right: 0;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        border-radius: 2px;
       }
       
       &:hover {
-        color: $text-secondary;
-        transform: translateX(4px);
-        text-decoration: underline;
-        cursor: pointer;
+        color: $primary-dark;
+        transform: translateX(8px);
         
         &::before {
-          opacity: 1;
-          transform: translateX(0);
+          width: 20px;
+          margin-right: 8px;
         }
       }
     }
   }
-  
+
   .footer-bottom {
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 16px 0;
-    font-size: 0.85rem;
+    background-color: rgba($primary-dark, 0.03);
+    padding: 24px 0;
+    font-size: 0.9rem;
+    position: relative;
+    border-top: 1px solid rgba($primary-dark, 0.08);
     
     .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 16px;
       
       @media (max-width: 600px) {
         flex-direction: column;
@@ -108,16 +142,35 @@
       
       p {
         margin: 0;
+        color: $text-secondary;
       }
       
       a {
-        color: $text-secondary;
+        color: $primary-dark;
         text-decoration: none;
-        transition: color 0.2s ease;
+        transition: all 0.2s ease;
+        position: relative;
+        padding: 0 6px;
+        font-weight: 500;
         
         &:hover {
-          color: $text-secondary;
-          text-decoration: underline;
+          color: $accent-dark;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(to right, $primary-color, $accent-color);
+          transition: width 0.3s ease;
+          border-radius: 2px;
+        }
+        
+        &:hover::after {
+          width: 100%;
         }
       }
     }

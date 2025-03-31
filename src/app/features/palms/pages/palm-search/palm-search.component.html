@@ -1,131 +1,139 @@
 <!-- src/app/features/palms/pages/palm-search/palm-search.component.html -->
 <div class="search-container">
     <div class="search-header">
-      <h1>Search Palm Encyclopedia</h1>
-  
-      <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
-        <div class="search-input-container">
-          <mat-form-field appearance="outline" class="search-input">
-            <mat-label>Search palms...</mat-label>
-            <input matInput formControlName="query" placeholder="Enter palm name, genus, tribe...">
-            <button mat-icon-button matSuffix type="submit" aria-label="Search">
-              <mat-icon>search</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-  
-        <div class="filter-panel">
-          <h2>Refine Results</h2>
-          
-          <div class="filters-grid">
-            <!-- Taxonomic Filters -->
-            <mat-form-field appearance="outline">
-              <mat-label>Genus</mat-label>
-              <mat-select formControlName="genus">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let g of genera" [value]="g">{{g}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Tribe</mat-label>
-              <mat-select formControlName="tribe">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let t of palmTribes" [value]="t">{{t}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Subfamily</mat-label>
-              <mat-select formControlName="subfamily">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let s of palmSubfamilies" [value]="s">{{s}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <!-- Physical Characteristics -->
-            <mat-form-field appearance="outline">
-              <mat-label>Stem Type</mat-label>
-              <mat-select formControlName="stemType">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let type of stemTypes" [value]="type.value">{{type.displayName}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Stem Property</mat-label>
-              <mat-select formControlName="stemProperty">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let prop of stemProperties" [value]="prop.value">{{prop.displayName}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Canopy Type</mat-label>
-              <mat-select formControlName="understoreyCanopy">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let h of habitats" [value]="h">{{h}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <!-- Fruit Characteristics -->
-            <mat-form-field appearance="outline">
-              <mat-label>Fruit Size</mat-label>
-              <mat-select formControlName="fruitSize">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let size of fruitSizes" [value]="size">{{size}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Conspicuousness</mat-label>
-              <mat-select formControlName="conspicuousness">
-                <mat-option value="">Any</mat-option>
-                <mat-option *ngFor="let c of conspicuousness" [value]="c">{{c}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-  
-            <!-- Height Range -->
-            <div class="height-range">
-              <mat-form-field appearance="outline">
-                <mat-label>Min Height (m)</mat-label>
-                <input matInput type="number" formControlName="heightMin" min="0">
-              </mat-form-field>
-  
-              <mat-form-field appearance="outline">
-                <mat-label>Max Height (m)</mat-label>
-                <input matInput type="number" formControlName="heightMax" min="0">
-              </mat-form-field>
+        <h1>Search Palm Encyclopedia</h1>
+
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
+            <div class="search-input-container">
+                <mat-form-field appearance="outline" class="search-input">
+                    <mat-label>Search palms...</mat-label>
+                    <input matInput formControlName="query" placeholder="Enter palm name, genus, tribe...">
+                    <button mat-icon-button matSuffix type="submit" aria-label="Search">
+                        <span class="icon-wrapper">
+                            <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
+                        </span>
+                    </button>
+                </mat-form-field>
             </div>
-          </div>
-  
-          <div class="filter-actions">
-            <button mat-stroked-button type="button" (click)="clearFilters()">
-              <mat-icon>filter_alt_off</mat-icon>
-              Clear Filters
-            </button>
-            <button mat-raised-button color="primary" type="submit">
-              <mat-icon>search</mat-icon>
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
+
+            <div class="filter-panel">
+                <h2>Refine Results</h2>
+
+                <div class="filters-grid">
+                    <!-- Taxonomic Filters -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Genus</mat-label>
+                        <mat-select formControlName="genus">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let g of genera" [value]="g">{{g}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tribe</mat-label>
+                        <mat-select formControlName="tribe">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let t of palmTribes" [value]="t">{{t}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Subfamily</mat-label>
+                        <mat-select formControlName="subfamily">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let s of palmSubfamilies" [value]="s">{{s}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Physical Characteristics -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Stem Type</mat-label>
+                        <mat-select formControlName="stemType">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let type of stemTypes"
+                                [value]="type.value">{{type.displayName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Stem Property</mat-label>
+                        <mat-select formControlName="stemProperty">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let prop of stemProperties"
+                                [value]="prop.value">{{prop.displayName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Canopy Type</mat-label>
+                        <mat-select formControlName="understoreyCanopy">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let h of habitats" [value]="h">{{h}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Fruit Characteristics -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fruit Size</mat-label>
+                        <mat-select formControlName="fruitSize">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let size of fruitSizes" [value]="size">{{size}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Conspicuousness</mat-label>
+                        <mat-select formControlName="conspicuousness">
+                            <mat-option value="">Any</mat-option>
+                            <mat-option *ngFor="let c of conspicuousness" [value]="c">{{c}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Height Range -->
+                    <div class="height-range">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Min Height (m)</mat-label>
+                            <input matInput type="number" formControlName="heightMin" min="0">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Max Height (m)</mat-label>
+                            <input matInput type="number" formControlName="heightMax" min="0">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="filter-actions">
+                    <button mat-stroked-button type="button" (click)="clearFilters()">
+                        <span class="icon-wrapper">
+                            <img src="assets/icons/filter_alt_off.svg" alt="Clear filters" class="custom-icon">
+                        </span>
+                        Clear Filters
+                    </button>
+                    <button mat-raised-button color="primary" type="submit">
+                        <span class="icon-wrapper">
+                            <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
+                        </span>
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-  
+
     <div class="search-results">
-      <div class="results-header">
-        <h2 *ngIf="totalResults > 0">{{totalResults}} results</h2>
-        <h2 *ngIf="totalResults === 0">No palms found</h2>
-      </div>
-  
-      <div *ngIf="loading" class="loading-spinner">
-        <mat-spinner diameter="40"></mat-spinner>
-        <p>Searching palm database...</p>
-      </div>
-  
-      <div *ngIf="!loading" class="palm-grid">
-        <app-palm-card *ngFor="let palm of (searchResults$ | async)" [palm]="palm"></app-palm-card>
-      </div>
+        <div class="results-header">
+            <h2 *ngIf="totalResults > 0">{{totalResults}} results</h2>
+            <h2 *ngIf="totalResults === 0">No palms found</h2>
+        </div>
+
+        <div *ngIf="loading" class="loading-spinner">
+            <mat-spinner diameter="40"></mat-spinner>
+            <p>Searching palm database...</p>
+        </div>
+
+        <div *ngIf="!loading" class="palm-grid">
+            <app-palm-card *ngFor="let palm of (searchResults$ | async)" [palm]="palm"></app-palm-card>
+        </div>
     </div>
-  </div>
+</div>

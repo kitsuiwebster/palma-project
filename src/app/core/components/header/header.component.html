@@ -3,9 +3,9 @@
     <div class="container header-container">
       <div class="logo" routerLink="/">
         <span class="icon-wrapper logo-icon">
-          <img src="assets/icons/eco.svg" alt="Logo icon" class="custom-icon">
+          <img src="assets/icons/palma.png" alt="Logo icon" class="custom-icon">
         </span>
-        <span class="app-title">Palmier</span>
+        <span class="app-title">Palma</span>
       </div>
       <div class="spacer"></div>
       <!-- Navigation for desktop -->
@@ -36,10 +36,10 @@
         </div>
       </nav>
       <!-- Mobile menu button -->
-      <button class="icon-button mobile-menu-button" (click)="toggleMenu()">
+      <button class="mobile-menu-button" (click)="toggleMenu()">
         <span class="icon-wrapper">
-          <img *ngIf="!isMenuOpen" src="assets/icons/menu.svg" alt="Menu icon" class="custom-icon">
-          <img *ngIf="isMenuOpen" src="assets/icons/close.svg" alt="Close icon" class="custom-icon">
+          <img *ngIf="!isMenuOpen" src="assets/icons/hamburger.svg" alt="Menu icon" class="openmenu-icon">
+          <img *ngIf="isMenuOpen" src="assets/icons/cross.png" alt="Close icon" class="openmenu-icon">
         </span>
       </button>
     </div>
@@ -48,35 +48,23 @@
   <div class="mobile-nav" [class.open]="isMenuOpen">
     <div class="mobile-nav-container">
       <nav class="mobile-nav-links">
-        <a class="mobile-nav-link" routerLink="/palms" routerLinkActive="active" (click)="toggleMenu()">
-          <span class="icon-wrapper mobile-nav-icon">
-            <img src="assets/icons/format_list_bulleted.svg" alt="Browse icon" class="custom-icon">
-          </span>
-          <span class="mobile-nav-text">Browse Palms</span>
-        </a>
         <a class="mobile-nav-link" routerLink="/palms/search" routerLinkActive="active" (click)="toggleMenu()">
           <span class="icon-wrapper mobile-nav-icon">
-            <img src="assets/icons/search.svg" alt="Search icon" class="custom-icon">
+            <img src="assets/icons/search.png" alt="Search icon" class="custom-icon">
           </span>
           <span class="mobile-nav-text">Advanced Search</span>
         </a>
         <a class="mobile-nav-link disabled">
           <span class="icon-wrapper mobile-nav-icon">
-            <img src="assets/icons/info.svg" alt="Info icon" class="custom-icon">
+            <img src="assets/icons/mindmap.png" alt="Info icon" class="custom-icon">
           </span>
           <span class="mobile-nav-text">About PalmTraits 1.0</span>
         </a>
         <a class="mobile-nav-link disabled">
           <span class="icon-wrapper mobile-nav-icon">
-            <img src="assets/icons/menu_book.svg" alt="Book icon" class="custom-icon">
+            <img src="assets/icons/book.png" alt="Book icon" class="custom-icon">
           </span>
           <span class="mobile-nav-text">References</span>
-        </a>
-        <a class="mobile-nav-link disabled">
-          <span class="icon-wrapper mobile-nav-icon">
-            <img src="assets/icons/people.svg" alt="People icon" class="custom-icon">
-          </span>
-          <span class="mobile-nav-text">Credits</span>
         </a>
       </nav>
     </div>
