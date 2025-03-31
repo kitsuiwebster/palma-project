@@ -1,34 +1,40 @@
 <!-- src/app/shared/components/palm-card/palm-card.component.html -->
 <mat-card class="palm-card" [routerLink]="['/palms', getSpecies() | slugify]">
     <div class="card-image-container">
-        <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image">
-        <div class="conservation-status" [ngClass]="getConservationStatusClass()">
-            {{palm.conservation_status || 'Status unknown'}}
-        </div>
+      <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image">
+      <div class="conservation-status" [ngClass]="getConservationStatusClass()">
+        {{palm.conservation_status || 'Status unknown'}}
+      </div>
     </div>
     <mat-card-header>
-        <mat-card-title-group>
-            <mat-card-title>{{getSpecies()}}</mat-card-title>
-            <mat-card-subtitle>{{getGenus()}} | {{getTribe()}}</mat-card-subtitle>
-        </mat-card-title-group>
+      <mat-card-title-group>
+        <mat-card-title>{{getSpecies()}}</mat-card-title>
+        <mat-card-subtitle>{{getGenus()}} | {{getTribe()}}</mat-card-subtitle>
+      </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-        <div class="palm-quick-info">
-            <div class="info-item">
-                <mat-icon>height</mat-icon>
-                <span>{{getHeight()}}</span>
-            </div>
-            <div class="info-item">
-                <mat-icon>place</mat-icon>
-                <span>{{getDistribution()}}</span>
-            </div>
-            <div class="info-item">
-                <mat-icon>eco</mat-icon>
-                <span>{{getHabitat()}}</span>
-            </div>
+      <div class="palm-quick-info">
+        <div class="info-item">
+          <span class="icon-wrapper">
+            <img src="assets/icons/height.svg" alt="Height" class="custom-icon">
+          </span>
+          <span>{{getHeight()}}</span>
         </div>
+        <div class="info-item">
+          <span class="icon-wrapper">
+            <img src="assets/icons/place.svg" alt="Location" class="custom-icon">
+          </span>
+          <span>{{getDistribution()}}</span>
+        </div>
+        <div class="info-item">
+          <span class="icon-wrapper">
+            <img src="assets/icons/eco.svg" alt="Habitat" class="custom-icon">
+          </span>
+          <span>{{getHabitat()}}</span>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button color="primary">VIEW DETAILS</button>
+      <button mat-button color="primary">VIEW DETAILS</button>
     </mat-card-actions>
-</mat-card>
+  </mat-card>

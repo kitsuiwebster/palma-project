@@ -13,7 +13,6 @@ import {
 import { DataService } from '../../../core/services/data.service';
 import { PalmTrait } from '../../../core/models/palm-trait.model';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
 import {
   MatFormField,
   MatPrefix,
@@ -33,7 +32,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatIcon,
     MatFormField,
     MatPrefix,
     MatSuffix,
@@ -104,10 +102,10 @@ export class SearchBarComponent implements OnInit {
     return text
       .toString()
       .toLowerCase()
-      .replace(/\s+/g, '-')      // Remplacer les espaces par des tirets
-      .replace(/[^\w\-]+/g, '')  // Supprimer tous les caractères non-word
-      .replace(/\-\-+/g, '-')    // Remplacer les tirets multiples par un seul
-      .replace(/^-+/, '')        // Supprimer les tirets au début
-      .replace(/-+$/, '');       // Supprimer les tirets à la fin
+      .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
+      .replace(/[^\w\-]+/g, '') // Supprimer tous les caractères non-word
+      .replace(/\-\-+/g, '-') // Remplacer les tirets multiples par un seul
+      .replace(/^-+/, '') // Supprimer les tirets au début
+      .replace(/-+$/, ''); // Supprimer les tirets à la fin
   }
 }

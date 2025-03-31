@@ -36,7 +36,6 @@ import { MatPaginator } from '@angular/material/paginator';
     RouterModule,
     SlugifyPipe,
     CommonModule,
-    MatIcon,
     MatButton,
     MatIconButton,
     MatProgressSpinner,

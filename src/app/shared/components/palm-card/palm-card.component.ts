@@ -15,7 +15,6 @@ import {
   MatCardTitleGroup,
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
 import { SlugifyPipe } from '../../pipes/slugify.pipe';
 import { RouterLink } from '@angular/router';
 
@@ -35,20 +34,18 @@ import { RouterLink } from '@angular/router';
     MatCardSubtitle,
     MatCardTitleGroup,
     MatButton,
-    MatIcon,
     SlugifyPipe,
     RouterLink,
   ],
 })
 export class PalmCardComponent implements OnInit {
   @Input() palm!: PalmTrait;
-  
   // Valeurs par défaut
   defaultImagePath = 'assets/images/palm-default.jpg';
-
+  
   ngOnInit() {
   }
-
+  
   getConservationStatusClass(): string {
     if (!this.palm?.conservation_status) return 'status-unknown';
     const status = this.palm.conservation_status.toLowerCase();
@@ -64,7 +61,6 @@ export class PalmCardComponent implements OnInit {
   }
   
   // Méthodes pour obtenir des valeurs sécurisées avec des valeurs par défaut
-  
   getSpecies(): string {
     return this.palm?.species || this.palm?.SpecName || 'Unknown Species';
   }
@@ -94,14 +90,12 @@ export class PalmCardComponent implements OnInit {
     if (this.palm?.image_url) {
       return this.palm.image_url;
     }
-    
     // Construire un chemin d'image basé sur le nom de l'espèce
     const speciesName = this.palm?.SpecName || this.palm?.species || '';
     if (speciesName) {
       const slug = this.slugify(speciesName);
       return `assets/images/palms/${slug}.jpg`;
     }
-    
     return this.defaultImagePath;
   }
   
