@@ -1,62 +1,83 @@
 <!-- src/app/core/components/header/header.component.html -->
-<mat-toolbar color="primary" class="header">
+<header class="header">
     <div class="container header-container">
-        <div class="logo" routerLink="/">
-            <mat-icon>eco</mat-icon>
-            <span class="app-title">Palm Encyclopedia</span>
-        </div>
-
-        <div class="spacer"></div>
-
-        <!-- Navigation for desktop -->
-        <nav class="desktop-nav">
-            <a mat-button routerLink="/palms" routerLinkActive="active">Browse Palms</a>
-            <a mat-button routerLink="/palms/search" routerLinkActive="active">Advanced Search</a>
-            <button mat-icon-button [matMenuTriggerFor]="infoMenu" aria-label="Info Menu">
-                <mat-icon>info</mat-icon>
-            </button>
-            <mat-menu #infoMenu="matMenu">
-                <button mat-menu-item disabled>
-                    <span>About PalmTraits 1.0</span>
-                </button>
-                <button mat-menu-item disabled>
-                    <span>References</span>
-                </button>
-                <button mat-menu-item disabled>
-                    <span>Credits</span>
-                </button>
-            </mat-menu>
-        </nav>
-
-        <!-- Mobile menu button -->
-        <button mat-icon-button class="mobile-menu-button" (click)="toggleMenu()">
-            <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+      <div class="logo" routerLink="/">
+        <span class="icon-wrapper logo-icon">
+          <img src="assets/icons/eco.svg" alt="Logo icon" class="custom-icon">
+        </span>
+        <span class="app-title">Palmier</span>
+      </div>
+      <div class="spacer"></div>
+      <!-- Navigation for desktop -->
+      <nav class="desktop-nav">
+        <a class="nav-link" routerLink="/palms" routerLinkActive="active">
+          <span class="nav-text">Browse Palms</span>
+        </a>
+        <a class="nav-link" routerLink="/palms/search" routerLinkActive="active">
+          <span class="nav-text">Advanced Search</span>
+        </a>
+        <button class="icon-button info-button" (click)="toggleInfoMenu()" aria-label="Info Menu">
+          <span class="icon-wrapper">
+            <img src="assets/icons/info.svg" alt="Info icon" class="custom-icon">
+          </span>
         </button>
+        <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
+          <div class="menu-items">
+            <button disabled class="menu-item">
+              <span>About PalmTraits 1.0</span>
+            </button>
+            <button disabled class="menu-item">
+              <span>References</span>
+            </button>
+            <button disabled class="menu-item">
+              <span>Credits</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <!-- Mobile menu button -->
+      <button class="icon-button mobile-menu-button" (click)="toggleMenu()">
+        <span class="icon-wrapper">
+          <img *ngIf="!isMenuOpen" src="assets/icons/menu.svg" alt="Menu icon" class="custom-icon">
+          <img *ngIf="isMenuOpen" src="assets/icons/close.svg" alt="Close icon" class="custom-icon">
+        </span>
+      </button>
     </div>
-</mat-toolbar>
-
-<!-- Mobile navigation menu -->
-<div class="mobile-nav" [class.open]="isMenuOpen">
-    <nav>
-        <a mat-button routerLink="/palms" routerLinkActive="active" (click)="toggleMenu()">
-            <mat-icon>format_list_bulleted</mat-icon>
-            <span>Browse Palms</span>
+  </header>
+  <!-- Mobile navigation menu -->
+  <div class="mobile-nav" [class.open]="isMenuOpen">
+    <div class="mobile-nav-container">
+      <nav class="mobile-nav-links">
+        <a class="mobile-nav-link" routerLink="/palms" routerLinkActive="active" (click)="toggleMenu()">
+          <span class="icon-wrapper mobile-nav-icon">
+            <img src="assets/icons/format_list_bulleted.svg" alt="Browse icon" class="custom-icon">
+          </span>
+          <span class="mobile-nav-text">Browse Palms</span>
         </a>
-        <a mat-button routerLink="/palms/search" routerLinkActive="active" (click)="toggleMenu()">
-            <mat-icon>search</mat-icon>
-            <span>Advanced Search</span>
+        <a class="mobile-nav-link" routerLink="/palms/search" routerLinkActive="active" (click)="toggleMenu()">
+          <span class="icon-wrapper mobile-nav-icon">
+            <img src="assets/icons/search.svg" alt="Search icon" class="custom-icon">
+          </span>
+          <span class="mobile-nav-text">Advanced Search</span>
         </a>
-        <a mat-button disabled>
-            <mat-icon>info</mat-icon>
-            <span>About PalmTraits 1.0</span>
+        <a class="mobile-nav-link disabled">
+          <span class="icon-wrapper mobile-nav-icon">
+            <img src="assets/icons/info.svg" alt="Info icon" class="custom-icon">
+          </span>
+          <span class="mobile-nav-text">About PalmTraits 1.0</span>
         </a>
-        <a mat-button disabled>
-            <mat-icon>menu_book</mat-icon>
-            <span>References</span>
+        <a class="mobile-nav-link disabled">
+          <span class="icon-wrapper mobile-nav-icon">
+            <img src="assets/icons/menu_book.svg" alt="Book icon" class="custom-icon">
+          </span>
+          <span class="mobile-nav-text">References</span>
         </a>
-        <a mat-button disabled>
-            <mat-icon>people</mat-icon>
-            <span>Credits</span>
+        <a class="mobile-nav-link disabled">
+          <span class="icon-wrapper mobile-nav-icon">
+            <img src="assets/icons/people.svg" alt="People icon" class="custom-icon">
+          </span>
+          <span class="mobile-nav-text">Credits</span>
         </a>
-    </nav>
-</div>
+      </nav>
+    </div>
+  </div>

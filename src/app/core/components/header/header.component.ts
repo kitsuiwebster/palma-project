@@ -1,12 +1,7 @@
 // src/app/core/components/header/header.component.ts
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
-import { MatMenu, MatMenuItem } from '@angular/material/menu';
-import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
@@ -16,19 +11,36 @@ import { MatMenuTrigger } from '@angular/material/menu';
   imports: [
     CommonModule,
     RouterLink,
-    RouterLinkActive,
-    MatToolbar,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatMenuTrigger,
+    RouterLinkActive
   ],
 })
 export class HeaderComponent {
   isMenuOpen = false;
+  isInfoMenuOpen = false;
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) {
+      this.isInfoMenuOpen = false;
+    }
+  }
+
+  toggleInfoMenu(): void {
+    this.isInfoMenuOpen = !this.isInfoMenuOpen;
+  }
+
+  // Fermer le menu info si on clique ailleurs
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const infoButton = document.querySelector('.info-button');
+    const infoMenu = document.querySelector('.info-menu');
+    
+    if (this.isInfoMenuOpen && 
+        infoButton && 
+        infoMenu && 
+        !infoButton.contains(event.target as Node) && 
+        !infoMenu.contains(event.target as Node)) {
+      this.isInfoMenuOpen = false;
+    }
   }
 }

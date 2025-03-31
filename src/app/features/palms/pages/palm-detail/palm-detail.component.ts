@@ -6,11 +6,6 @@ import { DataService } from '../../../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { ConservationClassPipe } from '../../../../shared/pipes/conservation-class.pipe';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatDivider } from '@angular/material/divider';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { PalmTrait } from '../../../../core/models/palm-trait.model';
 
 @Component({
@@ -21,14 +16,7 @@ import { PalmTrait } from '../../../../core/models/palm-trait.model';
   imports: [
     ConservationClassPipe,
     RouterModule,
-    CommonModule,
-    MatIcon,
-    MatButton,
-    MatIconButton,
-    MatProgressSpinner,
-    MatDivider,
-    MatTabGroup,
-    MatTab,
+    CommonModule
   ],
 })
 export class PalmDetailComponent implements OnInit {
@@ -36,6 +24,7 @@ export class PalmDetailComponent implements OnInit {
   loading = true;
   error = false;
   notFound = false;
+  activeTab = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,6 +72,10 @@ export class PalmDetailComponent implements OnInit {
         content: `Learn about ${speciesName}, a palm species from the ${genus} genus native to ${distribution}.`,
       });
     });
+  }
+
+  setActiveTab(index: number): void {
+    this.activeTab = index;
   }
 
   // Méthodes utilitaires pour accéder aux propriétés du palmier de manière sécurisée

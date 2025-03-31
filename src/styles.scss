@@ -1,34 +1,31 @@
-/* src/styles.scss - Minimaliste et élégant */
+/* src/styles.scss */
 
-// Palette de couleurs
-$primary-color: #4caf50;   // Vert principal
-$primary-light: #e8f5e9;   // Vert clair pour fond
-$primary-dark: #1b5e20;    // Vert foncé pour accentuation
+$primary-color: #a5eca7;
+$primary-light: #e8f5e9;
+$primary-dark: #2b7446;
 
-$accent-color: #ffc107;    // Ambre pour accents
-$accent-light: #fff8e1;    // Ambre clair
-$accent-dark: #ff6f00;     // Ambre foncé
+$accent-color: #ffc107;
+$accent-light: #fff8e1;
+$accent-dark: #ff6f00;
 
-$warn-color: #f44336;      // Rouge pour alertes et erreurs
-$text-dark: rgba(0, 0, 0, 0.87);  // Texte principal
-$text-secondary: rgba(0, 0, 0, 0.6); // Texte secondaire
-$text-light: white;        // Texte clair
-$background-light: #f5f5f5; // Arrière-plan clair
-$background-dark: #e0e0e0;  // Arrière-plan foncé
+$warn-color: #f44336;
+$text-dark: rgba(0, 0, 0, 0.87);
+$text-secondary: rgba(0, 0, 0, 0.6);
+$text-light: white;
+$background-light: #f5f5f5;
+$background-dark: #e0e0e0;
 
-// Typographie de base
-$font-primary: 'Roboto', 'Helvetica Neue', sans-serif;
-$font-secondary: 'Georgia', serif;
+$font-primary: "Roboto", "Helvetica Neue", sans-serif;
+$font-secondary: "Georgia", serif;
 
-// Variables de layout
 $border-radius: 4px;
 $spacing-unit: 8px;
 $transition-standard: all 0.3s ease;
 $box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
 $box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
 
-// Reset et styles de base
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: $font-primary;
@@ -37,7 +34,6 @@ html, body {
   line-height: 1.5;
 }
 
-// Classes utilitaires de base qui seront utilisées partout
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -48,7 +44,6 @@ html, body {
   width: 100%;
 }
 
-// Conservation status colors
 .status-endangered {
   background-color: $warn-color;
   color: $text-light;

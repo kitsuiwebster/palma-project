@@ -1,27 +1,33 @@
 <!-- src/app/features/palms/pages/palm-detail/palm-detail.component.html -->
 <div class="palm-detail-container">
     <div *ngIf="loading" class="loading-spinner">
-      <mat-spinner></mat-spinner>
+      <div class="custom-spinner"></div>
       <p>Loading palm information...</p>
     </div>
   
     <div *ngIf="error" class="error-message">
-      <mat-icon color="warn">error</mat-icon>
+      <span class="icon-wrapper">
+        <img src="assets/icons/error.svg" alt="Error icon" class="custom-icon">
+      </span>
       <p>Failed to load palm data. Please try again later.</p>
-      <button mat-raised-button color="primary" routerLink="/palms">Back to Palm List</button>
+      <button class="custom-button primary-button" routerLink="/palms">Back to Palm List</button>
     </div>
   
     <div *ngIf="notFound" class="not-found">
-      <mat-icon>search_off</mat-icon>
+      <span class="icon-wrapper">
+        <img src="assets/icons/search_off.svg" alt="Not found icon" class="custom-icon">
+      </span>
       <h2>Palm Not Found</h2>
       <p>Sorry, we couldn't find information about this palm species.</p>
-      <button mat-raised-button color="primary" routerLink="/palms">Back to Palm List</button>
+      <button class="custom-button primary-button" routerLink="/palms">Back to Palm List</button>
     </div>
   
     <ng-container *ngIf="!loading && !error && !notFound && (palm$ | async) as palm">
       <div class="palm-header">
-        <button mat-icon-button routerLink="/palms">
-          <mat-icon>arrow_back</mat-icon>
+        <button class="icon-button" routerLink="/palms">
+          <span class="icon-wrapper">
+            <img src="assets/icons/arrow_back.svg" alt="Back icon" class="custom-icon">
+          </span>
         </button>
         <div class="header-content">
           <h1>{{getSpeciesName(palm)}}</h1>
@@ -37,12 +43,18 @@
           <img [src]="palm.image_url || 'assets/images/palm-default.jpg'" [alt]="getSpeciesName(palm)" class="palm-image">
         </div>
   
-        <mat-divider></mat-divider>
+        <div class="custom-divider"></div>
   
-        <mat-tab-group animationDuration="0ms">
-          <!-- Characteristics Tab -->
-          <mat-tab label="Characteristics">
-            <div class="tab-content">
+        <div class="custom-tabs">
+          <div class="tabs-header">
+            <button class="tab-button" [class.active]="activeTab === 0" (click)="setActiveTab(0)">Characteristics</button>
+            <button class="tab-button" [class.active]="activeTab === 1" (click)="setActiveTab(1)">Distribution</button>
+            <button class="tab-button" [class.active]="activeTab === 2" (click)="setActiveTab(2)">Photos</button>
+          </div>
+  
+          <div class="tab-content" [ngClass]="'tab-' + activeTab">
+            <!-- Characteristics Tab -->
+            <div *ngIf="activeTab === 0" class="tab-panel">
               <div class="info-grid">
                 <div class="info-card">
                   <h3>Taxonomy</h3>
@@ -81,24 +93,20 @@
                 </div>
               </div>
             </div>
-          </mat-tab>
   
-          <!-- Distribution Tab -->
-          <mat-tab label="Distribution">
-            <div class="tab-content">
+            <!-- Distribution Tab -->
+            <div *ngIf="activeTab === 1" class="tab-panel">
               <p>Information about the native regions and distribution of {{getSpeciesName(palm)}}.</p>
               <p>{{palm.distribution}}</p>
             </div>
-          </mat-tab>
   
-          <!-- Photos Tab -->
-          <mat-tab label="Photos">
-            <div class="tab-content">
+            <!-- Photos Tab -->
+            <div *ngIf="activeTab === 2" class="tab-panel">
               <p>Photos of {{getSpeciesName(palm)}} will be displayed here.</p>
               <!-- Photo gallery will go here -->
             </div>
-          </mat-tab>
-        </mat-tab-group>
+          </div>
+        </div>
       </div>
     </ng-container>
   </div>
