@@ -10,7 +10,7 @@
       <div class="spacer"></div>
       <!-- Navigation for desktop -->
       <nav class="desktop-nav">
-        <a class="nav-link" routerLink="/palms" routerLinkActive="active">
+        <a class="nav-link" routerLink="/palms" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <span class="nav-text">Browse Palms</span>
         </a>
         <a class="nav-link" routerLink="/palms/search" routerLinkActive="active">
@@ -18,7 +18,7 @@
         </a>
         <button class="icon-button info-button" (click)="toggleInfoMenu()" aria-label="Info Menu">
           <span class="icon-wrapper">
-            <img src="assets/icons/info.svg" alt="Info icon" class="custom-icon">
+            <img src="assets/icons/info.png" alt="Info icon" class="custom-icon">
           </span>
         </button>
         <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
@@ -28,9 +28,6 @@
             </button>
             <button disabled class="menu-item">
               <span>References</span>
-            </button>
-            <button disabled class="menu-item">
-              <span>Credits</span>
             </button>
           </div>
         </div>
@@ -53,6 +50,12 @@
             <img src="assets/icons/search.png" alt="Search icon" class="custom-icon">
           </span>
           <span class="mobile-nav-text">Advanced Search</span>
+        </a>
+        <a class="mobile-nav-link" routerLink="/palms" routerLinkActive="active" (click)="toggleMenu()">
+          <span class="icon-wrapper mobile-nav-icon">
+            <img src="assets/icons/palm.png" alt="Palm icon" class="custom-icon">
+          </span>
+          <span class="mobile-nav-text">Browse Palms</span>
         </a>
         <a class="mobile-nav-link disabled">
           <span class="icon-wrapper mobile-nav-icon">

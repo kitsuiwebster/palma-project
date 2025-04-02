@@ -1,0 +1,316 @@
+@import '../../../../../styles.scss';
+
+.palm-list-container {
+  padding: $spacing-unit * 4 0;
+  
+  @media (max-width: 768px) {
+    padding: $spacing-unit * 2 0;
+  }
+}
+
+.palm-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-unit * 4;
+  flex-wrap: wrap;
+  gap: $spacing-unit * 2;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin: 0;
+    color: $primary-dark;
+    background: linear-gradient(135deg, $primary-dark, $accent-dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+    position: relative;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, $primary-color, $accent-color);
+      border-radius: 3px;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+  
+  app-search-bar {
+    flex: 1;
+    max-width: 480px;
+    
+    @media (max-width: 768px) {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.view-toggles {
+  display: flex;
+  gap: $spacing-unit;
+  background-color: rgba($primary-color, 0.1);
+  border-radius: 24px;
+  padding: 4px;
+  border: 1px solid rgba($primary-color, 0.15);
+  align-self: flex-start;
+  
+  @media (max-width: 768px) {
+    align-self: center;
+    margin: $spacing-unit 0;
+  }
+  
+  button {
+    width: 44px;
+    height: 44px;
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &.active {
+      background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
+      box-shadow: 0 4px 10px rgba($primary-color, 0.25);
+      
+      .custom-icon {
+        transform: scale(1.1); /* Légèrement plus grande quand active */
+      }
+    }
+    
+    &:hover:not(.active) {
+      background: rgba($primary-color, 0.2);
+    }
+    
+    .icon-wrapper {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .custom-icon {
+      width: 30px;
+      height: 30px;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-unit * 8 0;
+  
+  mat-spinner {
+    margin-bottom: $spacing-unit * 2;
+  }
+  
+  p {
+    color: $text-secondary;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-unit * 8 0;
+  text-align: center;
+  background-color: rgba($warn-color, 0.05);
+  border-radius: $border-radius;
+  margin: $spacing-unit * 3 0;
+  
+  .icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-unit * 2;
+    background-color: rgba($warn-color, 0.1);
+    border-radius: 50%;
+    padding: $spacing-unit;
+  }
+  
+  .custom-icon {
+    width: 32px;
+    height: 32px;
+    filter: invert(32%) sepia(93%) saturate(1352%) hue-rotate(336deg) brightness(119%) contrast(119%);
+  }
+  
+  p {
+    color: $text-secondary;
+    font-size: 1.1rem;
+    margin-bottom: $spacing-unit * 3;
+    max-width: 500px;
+  }
+  
+  button {
+    min-width: 120px;
+  }
+}
+
+.palm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: $spacing-unit * 3;
+  margin-bottom: $spacing-unit * 4;
+  
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: $spacing-unit * 2;
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-unit * 4;
+  
+  ::ng-deep .mat-paginator {
+    background: transparent;
+    border-radius: $border-radius;
+    
+    .mat-paginator-container {
+      min-height: unset;
+      padding: $spacing-unit $spacing-unit * 2;
+      background-color: white;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
+    }
+    
+    .mat-paginator-range-label {
+      margin: 0 $spacing-unit * 3;
+      color: $text-secondary;
+    }
+    
+    .mat-paginator-navigation-previous,
+    .mat-paginator-navigation-next,
+    .mat-paginator-navigation-first,
+    .mat-paginator-navigation-last {
+      border-radius: 50%;
+      
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+      }
+    }
+  }
+}
+
+.palm-list-by-genus {
+  margin-top: $spacing-unit * 2;
+  
+  ::ng-deep .mat-expansion-panel {
+    margin-bottom: $spacing-unit;
+    border-radius: $border-radius !important;
+    box-shadow: $box-shadow-light !important;
+    border: 1px solid rgba($primary-color, 0.1);
+    overflow: hidden;
+    
+    &:not(.mat-expanded) {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $box-shadow-medium !important;
+      }
+    }
+    
+    .mat-expansion-panel-header {
+      height: 64px;
+      padding: 0 $spacing-unit * 3;
+      
+      &:hover {
+        background-color: rgba($primary-color, 0.05);
+      }
+    }
+    
+    .mat-expansion-panel-header-title {
+      color: $primary-dark;
+      font-size: 1.1rem;
+      font-weight: 600;
+      
+      .count {
+        margin-left: $spacing-unit;
+        color: $text-secondary;
+        font-weight: normal;
+        font-size: 0.95rem;
+      }
+    }
+    
+    .mat-expansion-indicator::after {
+      color: $primary-color;
+    }
+    
+    .mat-expansion-panel-body {
+      padding: $spacing-unit * 2;
+    }
+  }
+  
+  ::ng-deep .mat-nav-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $spacing-unit;
+    padding: 0;
+    
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+    
+    .mat-list-item {
+      height: auto;
+      border-radius: $border-radius;
+      transition: all 0.3s ease;
+      margin: 2px 0;
+      
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+        
+        .mat-list-item-content {
+          padding-left: $spacing-unit * 3;
+        }
+      }
+      
+      .mat-list-item-content {
+        padding: $spacing-unit $spacing-unit * 2;
+        transition: all 0.3s ease;
+        color: $text-secondary;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// Animation pour les éléments qui apparaissent
+.palm-grid app-palm-card {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@for $i from 1 through 20 {
+  .palm-grid app-palm-card:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.05}s;
+  }
+}
