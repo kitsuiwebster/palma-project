@@ -137,14 +137,17 @@ export class DataService {
   }
 
   // Dans DataService
-  getPaginatedPalms(page: number, pageSize: number): Observable<PalmTrait[]> {
-    return this.getAllPalms().pipe(
-      map((palms) => {
-        const startIndex = page * pageSize;
-        return palms.slice(startIndex, startIndex + pageSize);
-      })
-    );
-  }
+getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> {
+  console.log(`Getting palms for page ${page} with size ${pageSize}`);
+  return this.getAllPalms().pipe(
+    map((palms) => {
+      // Assurer que pageSize est au moins 20
+      const actualPageSize = Math.max(pageSize, 20);
+      const startIndex = page * actualPageSize;
+      return palms.slice(startIndex, startIndex + actualPageSize);
+    })
+  );
+}
 
   // Méthode pour obtenir le nombre total de palmiers
   getTotalPalmsCount(): Observable<number> {

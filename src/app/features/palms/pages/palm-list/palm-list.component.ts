@@ -1,7 +1,7 @@
 // src/app/features/palms/pages/palm-list/palm-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { DataService } from '../../../../core/services/data.service';
 import { PalmTrait } from '../../../../core/models/palm-trait.model';
 import { SearchBarComponent } from '../../../../shared/components/search-bar/search-bar.component';
@@ -9,11 +9,7 @@ import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-
 import { RouterModule } from '@angular/router';
 import { SlugifyPipe } from '../../../../shared/pipes/slugify.pipe';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
-import {
-  MatButton,
-  MatIconButton,
-} from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {
   MatExpansionPanel,
@@ -23,7 +19,7 @@ import {
 import { MatNavList, MatListItem } from '@angular/material/list';
 import { MatExpansionPanelTitle } from '@angular/material/expansion';
 import { SortPipe } from '../../../../shared/pipes/sort.pipe';
-import { MatPaginator } from '@angular/material/paginator';
+import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
 
 @Component({
   selector: 'app-palm-list',
@@ -36,7 +32,6 @@ import { MatPaginator } from '@angular/material/paginator';
     RouterModule,
     SlugifyPipe,
     CommonModule,
-    MatButton,
     MatIconButton,
     MatProgressSpinner,
     MatAccordion,
@@ -46,7 +41,7 @@ import { MatPaginator } from '@angular/material/paginator';
     MatListItem,
     MatExpansionPanelTitle,
     SortPipe,
-    MatPaginator,
+    PaginatorComponent,
   ],
 })
 export class PalmListComponent implements OnInit {
@@ -54,9 +49,9 @@ export class PalmListComponent implements OnInit {
   palmsByGenus$!: Observable<{ [genus: string]: PalmTrait[] }>;
   
   // Propriétés pour la pagination
-  palms: PalmTrait[] = []; // Remplace palms$
+  palms: PalmTrait[] = [];
   currentPage = 0;
-  pageSize = 20;
+  pageSize = 20; // Assurez-vous que c'est bien 20 ici
   totalItems = 0;
   pageSizeOptions = [10, 20, 50, 100];
   
@@ -70,6 +65,8 @@ export class PalmListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("PalmListComponent initialized");
+    console.log("Initial pageSize:", this.pageSize);
+    
     // Charger le nombre total d'éléments
     this.loadTotalCount();
     // Charger la première page
@@ -95,7 +92,7 @@ export class PalmListComponent implements OnInit {
     
     this.dataService.getPaginatedPalms(this.currentPage, this.pageSize).subscribe({
       next: (palms) => {
-        console.log(`Page loaded with ${palms.length} palms`);
+        console.log(`Page loaded with ${palms.length} palms of ${this.pageSize} requested`);
         this.palms = palms;
         this.loading = false;
       },
@@ -120,9 +117,10 @@ export class PalmListComponent implements OnInit {
   }
 
   onPageChange(event: any): void {
-    console.log("Page event:", event);
+    console.log("Page event received:", event);
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
+    console.log(`Changing to page ${this.currentPage}, size ${this.pageSize}`);
     this.loadCurrentPage();
   }
 
@@ -139,4 +137,17 @@ export class PalmListComponent implements OnInit {
   getGenusCount(palms: PalmTrait[]): number {
     return palms?.length || 0;
   }
+
+  // Ajouter cette méthode dans palm-list.component.ts
+changePageSize(event: Event): void {
+  const selectElement = event.target as HTMLSelectElement;
+  const newPageSize = Number(selectElement.value);
+  console.log('Changing page size to:', newPageSize);
+  
+  this.pageSize = newPageSize;
+  this.currentPage = 0; // Retour à la première page
+  
+  // Recharger les données avec la nouvelle taille
+  this.loadCurrentPage();
+}
 }

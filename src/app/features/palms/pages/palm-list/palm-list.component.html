@@ -1,69 +1,72 @@
 <!-- src/app/features/palms/pages/palm-list/palm-list.component.html -->
 <div class="palm-list-container">
-    <div class="palm-list-header">
-      <h1>Palma</h1>
-      <app-search-bar></app-search-bar>
-      <div class="view-toggles">
-        <button mat-icon-button [class.active]="viewMode === 'grid'" (click)="toggleView('grid')">
-          <span class="icon-wrapper">
-            <img src="assets/icons/grid.png" alt="Grid view" class="custom-icon">
-          </span>
-        </button>
-        <button mat-icon-button [class.active]="viewMode === 'list'" (click)="toggleView('list')">
-          <span class="icon-wrapper">
-            <img src="assets/icons/list.png" alt="List view" class="custom-icon">
-          </span>
-        </button>
-      </div>
+  <div class="palm-list-header">
+    <app-search-bar></app-search-bar>
+    <div class="view-toggles">
+      <button mat-icon-button [class.active]="viewMode === 'grid'" (click)="toggleView('grid')">
+        <span class="icon-wrapper">
+          <img src="assets/icons/grid.png" alt="Grid view" class="custom-icon">
+        </span>
+      </button>
+      <button mat-icon-button [class.active]="viewMode === 'list'" (click)="toggleView('list')">
+        <span class="icon-wrapper">
+          <img src="assets/icons/list.png" alt="List view" class="custom-icon">
+        </span>
+      </button>
     </div>
-    <div *ngIf="loading" class="loading-spinner">
-      <mat-spinner></mat-spinner>
-      <p>Loading palm database...</p>
-    </div>
-    <div *ngIf="error" class="error-message">
-      <span class="icon-wrapper">
-        <img src="assets/icons/error.svg" alt="Error" class="custom-icon">
-      </span>
-      <p>Failed to load palm data. Please try again later.</p>
-      <button mat-raised-button color="primary" (click)="loadCurrentPage()">Retry</button>
-    </div>
-    <ng-container *ngIf="!loading && !error">
-      <!-- Grid View avec pagination -->
-      <div *ngIf="viewMode === 'grid'">
-        <div class="palm-grid">
-          <app-palm-card *ngFor="let palm of palms" [palm]="palm"></app-palm-card>
-        </div>
-        <!-- Contrôles de pagination -->
-        <div class="pagination-controls">
-          <mat-paginator
-            [length]="totalItems"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [pageIndex]="currentPage"
-            (page)="onPageChange($event)"
-            aria-label="Select page">
-          </mat-paginator>
-        </div>
-      </div>
-      <!-- List View by Genus -->
-      <div *ngIf="viewMode === 'list'" class="palm-list-by-genus">
-        <ng-container *ngIf="(palmsByGenus$ | async) as palmsByGenus">
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let genus of (Object.keys(palmsByGenus) | sort)">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{genus}} <span class="count">({{getGenusCount(palmsByGenus[genus])}})</span>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-nav-list>
-                <a mat-list-item *ngFor="let palm of palmsByGenus[genus]"
-                  [routerLink]="['/palms', getSpeciesName(palm) | slugify]">
-                  {{getSpeciesName(palm)}}
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </ng-container>
-      </div>
-    </ng-container>
   </div>
+  
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+    <p>Loading palm database...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-message">
+    <span class="icon-wrapper">
+      <img src="assets/icons/error.svg" alt="Error" class="custom-icon">
+    </span>
+    <p>Failed to load palm data. Please try again later.</p>
+    <button mat-raised-button color="primary" (click)="loadCurrentPage()">Retry</button>
+  </div>
+  
+  <ng-container *ngIf="!loading && !error">
+    <!-- Grid View avec pagination -->
+    <div *ngIf="viewMode === 'grid'">
+      <div class="palm-grid">
+        <app-palm-card *ngFor="let palm of palms" [palm]="palm"></app-palm-card>
+      </div>
+      
+      <!-- Contrôles de pagination personnalisés -->
+      <div class="pagination-controls">
+        <app-paginator
+          [length]="totalItems"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageIndex]="currentPage"
+          (page)="onPageChange($event)">
+        </app-paginator>
+      </div>
+    </div>
+    
+    <!-- List View by Genus -->
+    <div *ngIf="viewMode === 'list'" class="palm-list-by-genus">
+      <ng-container *ngIf="(palmsByGenus$ | async) as palmsByGenus">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let genus of (Object.keys(palmsByGenus) | sort)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{genus}} <span class="count">({{getGenusCount(palmsByGenus[genus])}})</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <a mat-list-item *ngFor="let palm of palmsByGenus[genus]"
+                [routerLink]="['/palms', getSpeciesName(palm) | slugify]">
+                {{getSpeciesName(palm)}}
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

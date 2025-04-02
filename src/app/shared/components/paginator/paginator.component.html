@@ -1,0 +1,57 @@
+<div class="paginator">
+  <div class="paginator-controls">
+    <div class="page-size-selector">
+      <span class="items-per-page-label">Items per page:</span>
+      <select class="page-size-select" (change)="changePageSize($event)">
+        <option [value]="10">10</option>
+        <option [value]="20" selected>20</option>
+        <option [value]="50">50</option>
+        <option [value]="100">100</option>
+      </select>
+    </div>
+    <div class="range-label">
+      {{ rangeLabel }}
+    </div>
+    <div class="page-navigation">
+      <button
+        class="nav-button first"
+        (click)="changePage(0)"
+        [disabled]="pageIndex === 0"
+        *ngIf="showFirstLastButtons">
+        <span class="nav-icon">«</span>
+      </button>
+      <button
+        class="nav-button prev"
+        (click)="changePage(pageIndex - 1)"
+        [disabled]="pageIndex === 0"
+        *ngIf="showPrevNextButtons">
+        <span class="nav-icon">‹</span>
+      </button>
+      <div class="page-numbers">
+        <button
+          *ngFor="let page of pages"
+          class="page-number"
+          [class.active]="page === pageIndex"
+          [class.ellipsis]="page === -1"
+          [disabled]="page === -1"
+          (click)="changePage(page)">
+          {{ page === -1 ? '...' : page + 1 }}
+        </button>
+      </div>
+      <button
+        class="nav-button next"
+        (click)="changePage(pageIndex + 1)"
+        [disabled]="pageIndex === totalPages - 1"
+        *ngIf="showPrevNextButtons">
+        <span class="nav-icon">›</span>
+      </button>
+      <button
+        class="nav-button last"
+        (click)="changePage(totalPages - 1)"
+        [disabled]="pageIndex === totalPages - 1"
+        *ngIf="showFirstLastButtons">
+        <span class="nav-icon">»</span>
+      </button>
+    </div>
+  </div>
+</div>
