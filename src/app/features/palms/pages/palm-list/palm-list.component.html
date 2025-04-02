@@ -76,7 +76,7 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-nav-list>
-              <a mat-list-item *ngFor="let palm of palmsByGenus[genus]"
+              <a class="palm-item" mat-list-item *ngFor="let palm of palmsByGenus[genus]"
                 [routerLink]="['/palms', getSpeciesName(palm) | slugify]">
                 {{getSpeciesName(palm)}}
               </a>
