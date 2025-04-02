@@ -1,7 +1,10 @@
 // src/app/core/services/palm.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, map, of, shareReplay } from 'rxjs';
-import { DataService, PalmTrait } from './data.service';
+
+import { DataService } from './data.service';
+import { PalmTrait } from '../models/palm-trait.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +23,15 @@ export class PalmService {
   getGenera(): Observable<string[]> {
     if (!this.cachedGenera$) {
       this.cachedGenera$ = this.dataService.getAllPalms().pipe(
-        map(palms => [...new Set(palms.map(p => p.genus))].sort()),
+        map(palms => [...new Set(
+          palms.map(p => p.genus).filter((g): g is string => !!g)
+        )].sort()),
         shareReplay(1)
       );
     }
     return this.cachedGenera$;
   }
+  
 
   /**
    * Get a list of all unique habitats
@@ -33,12 +39,16 @@ export class PalmService {
   getHabitats(): Observable<string[]> {
     if (!this.cachedHabitats$) {
       this.cachedHabitats$ = this.dataService.getAllPalms().pipe(
-        map(palms => [...new Set(palms.map(p => p.habitat).filter(h => h !== 'Unknown'))].sort()),
+        map(palms => [...new Set(
+          palms.map(p => p.habitat)
+            .filter((h): h is string => !!h && h !== 'Unknown')
+        )].sort()),
         shareReplay(1)
       );
     }
     return this.cachedHabitats$;
   }
+  
 
   /**
    * Get a list of all unique conservation statuses
@@ -46,15 +56,16 @@ export class PalmService {
   getConservationStatuses(): Observable<string[]> {
     if (!this.cachedConservationStatuses$) {
       this.cachedConservationStatuses$ = this.dataService.getAllPalms().pipe(
-        map(palms => [...new Set(palms.map(p => p.conservation_status))]
-          .filter(s => s !== 'Unknown')
-          .sort()
-        ),
+        map(palms => [...new Set(
+          palms.map(p => p.conservation_status)
+            .filter((s): s is string => !!s && s !== 'Unknown')
+        )].sort()),
         shareReplay(1)
       );
     }
     return this.cachedConservationStatuses$;
   }
+  
 
   /**
    * Get a list of all unique regions
@@ -63,9 +74,10 @@ export class PalmService {
     if (!this.cachedRegions$) {
       this.cachedRegions$ = this.dataService.getAllPalms().pipe(
         map(palms => {
-          const allRegions = palms.flatMap(p => 
-            p.distribution.split(',').map(r => r.trim())
-          );
+          const allRegions = palms
+            .map(p => p.distribution)
+            .filter((d): d is string => !!d)
+            .flatMap(d => d.split(',').map(r => r.trim()));
           return [...new Set(allRegions)].filter(r => r !== 'Unknown').sort();
         }),
         shareReplay(1)
@@ -73,6 +85,7 @@ export class PalmService {
     }
     return this.cachedRegions$;
   }
+  
 
   /**
    * Get highest palm height in the dataset
@@ -124,26 +137,28 @@ export class PalmService {
         
         if (criteria.query) {
           const searchQuery = criteria.query.toLowerCase();
-          results = results.filter(palm => 
-            palm.species.toLowerCase().includes(searchQuery) || 
-            palm.genus.toLowerCase().includes(searchQuery) ||
-            palm.tribe.toLowerCase().includes(searchQuery) ||
-            palm.distribution.toLowerCase().includes(searchQuery) ||
-            palm.habitat.toLowerCase().includes(searchQuery) ||
-            (palm.description && palm.description.toLowerCase().includes(searchQuery))
+          results = results.filter(palm =>
+            (palm.species?.toLowerCase().includes(searchQuery)) ||
+            (palm.genus?.toLowerCase().includes(searchQuery)) ||
+            (palm.tribe?.toLowerCase().includes(searchQuery)) ||
+            (palm.distribution?.toLowerCase().includes(searchQuery)) ||
+            (palm.habitat?.toLowerCase().includes(searchQuery)) ||
+            (palm.description?.toLowerCase().includes(searchQuery))
           );
         }
+        
+        
         
         if (criteria.genus) {
           results = results.filter(palm => palm.genus === criteria.genus);
         }
         
         if (criteria.habitat) {
-          results = results.filter(palm => palm.habitat.includes(criteria.habitat || ''));
+          results = results.filter(palm => palm.habitat?.includes(criteria.habitat || ''));
         }
         
         if (criteria.region) {
-          results = results.filter(palm => palm.distribution.includes(criteria.region || ''));
+          results = results.filter(palm => palm.distribution?.includes(criteria.region || ''));
         }
         
         if (criteria.conservationStatus) {

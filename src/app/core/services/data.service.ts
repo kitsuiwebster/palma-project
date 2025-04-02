@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { PalmTrait } from '../models/palm-trait.model';
 
+
+
 @Injectable({
   providedIn: 'root',
 })

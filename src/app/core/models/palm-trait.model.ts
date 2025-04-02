@@ -49,4 +49,6 @@ export interface PalmTrait {
   species?: string; // Alias pour SpecName
   tribe?: string; // Alias pour PalmTribe
   height_max_m?: number; // Alias pour MaxStemHeight_m
+
+  description?: string;
 }
