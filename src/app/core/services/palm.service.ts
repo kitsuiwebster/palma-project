@@ -12,7 +12,6 @@ import { PalmTrait } from '../models/palm-trait.model';
 export class PalmService {
   private cachedGenera$: Observable<string[]> | null = null;
   private cachedHabitats$: Observable<string[]> | null = null;
-  private cachedConservationStatuses$: Observable<string[]> | null = null;
   private cachedRegions$: Observable<string[]> | null = null;
 
   constructor(private dataService: DataService) {}
@@ -50,22 +49,6 @@ export class PalmService {
   }
   
 
-  /**
-   * Get a list of all unique conservation statuses
-   */
-  getConservationStatuses(): Observable<string[]> {
-    if (!this.cachedConservationStatuses$) {
-      this.cachedConservationStatuses$ = this.dataService.getAllPalms().pipe(
-        map(palms => [...new Set(
-          palms.map(p => p.conservation_status)
-            .filter((s): s is string => !!s && s !== 'Unknown')
-        )].sort()),
-        shareReplay(1)
-      );
-    }
-    return this.cachedConservationStatuses$;
-  }
-  
 
   /**
    * Get a list of all unique regions
@@ -102,24 +85,6 @@ export class PalmService {
   }
 
   /**
-   * Get palms by conservation status
-   */
-  getPalmsByConservationStatus(): Observable<{[status: string]: PalmTrait[]}> {
-    return this.dataService.getAllPalms().pipe(
-      map(palms => {
-        return palms.reduce((acc, palm) => {
-          const status = palm.conservation_status || 'Unknown';
-          if (!acc[status]) {
-            acc[status] = [];
-          }
-          acc[status].push(palm);
-          return acc;
-        }, {} as {[status: string]: PalmTrait[]});
-      })
-    );
-  }
-
-  /**
    * Filter palms by multiple criteria
    */
   filterPalms(criteria: {
@@ -127,7 +92,6 @@ export class PalmService {
     genus?: string;
     habitat?: string;
     region?: string;
-    conservationStatus?: string;
     heightMin?: number | null;
     heightMax?: number | null;
   }): Observable<PalmTrait[]> {
@@ -160,10 +124,7 @@ export class PalmService {
         if (criteria.region) {
           results = results.filter(palm => palm.distribution?.includes(criteria.region || ''));
         }
-        
-        if (criteria.conservationStatus) {
-          results = results.filter(palm => palm.conservation_status === criteria.conservationStatus);
-        }
+
         
         if (criteria.heightMin !== null && criteria.heightMin !== undefined) {
           results = results.filter(palm => (palm.height_max_m || 0) >= (criteria.heightMin || 0));
@@ -202,18 +163,6 @@ export class PalmService {
         let safeCount = 0;
         let unknownCount = 0;
         
-        palms.forEach(palm => {
-          const status = (palm.conservation_status || '').toLowerCase();
-          if (status.includes('extinct') || status.includes('endangered') || status.includes('critically')) {
-            endangeredCount++;
-          } else if (status.includes('vulnerable') || status.includes('near threatened')) {
-            vulnerableCount++;
-          } else if (status.includes('concern') || status.includes('safe')) {
-            safeCount++;
-          } else {
-            unknownCount++;
-          }
-        });
         
         return {
           totalSpecies: palms.length,

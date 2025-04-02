@@ -40,7 +40,6 @@ export interface PalmTrait {
   // Propriétés complémentaires utilisées dans l'interface
   // Ces propriétés seront calculées à partir des données du dataset
   image_url?: string;
-  conservation_status?: string;
   distribution?: string;
   habitat?: string;
 

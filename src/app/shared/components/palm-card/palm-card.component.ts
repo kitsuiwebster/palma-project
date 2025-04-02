@@ -46,19 +46,6 @@ export class PalmCardComponent implements OnInit {
   ngOnInit() {
   }
   
-  getConservationStatusClass(): string {
-    if (!this.palm?.conservation_status) return 'status-unknown';
-    const status = this.palm.conservation_status.toLowerCase();
-    if (status.includes('endangered') || status.includes('critical')) {
-      return 'status-endangered';
-    } else if (status.includes('vulnerable')) {
-      return 'status-vulnerable';
-    } else if (status.includes('concern') || status.includes('safe')) {
-      return 'status-safe';
-    } else {
-      return 'status-unknown';
-    }
-  }
   
   // Méthodes pour obtenir des valeurs sécurisées avec des valeurs par défaut
   getSpecies(): string {

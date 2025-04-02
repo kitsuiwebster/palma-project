@@ -32,9 +32,7 @@
         <div class="header-content">
           <h1>{{getSpeciesName(palm)}}</h1>
           <p class="scientific-name">{{getGenus(palm)}} | {{getTribe(palm)}} | {{getSubfamily(palm)}}</p>
-          <div class="conservation-status" [ngClass]="getConservationStatus(palm) | conservationClass">
-            {{getConservationStatus(palm)}}
-          </div>
+
         </div>
       </div>
   

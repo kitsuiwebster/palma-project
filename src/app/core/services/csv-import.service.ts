@@ -67,7 +67,6 @@ export class CsvImportService {
         distribution: this.generateDistribution(obj),
         habitat: obj.UnderstoreyCanopy || 'Unknown',
         image_url: `assets/images/palms/${this.slugify(obj.SpecName)}.jpg`,
-        conservation_status: this.determineConservationStatus(obj)
       });
     }
     
@@ -82,13 +81,6 @@ export class CsvImportService {
     return 'Global distribution';
   }
   
-  /**
-   * Détermine un statut de conservation basé sur d'autres attributs
-   */
-  private determineConservationStatus(palm: any): string {
-    // Logique d'exemple - pourrait être basée sur d'autres attributs
-    return 'Status unknown';
-  }
   
   /**
    * Convertit un texte en format slug pour les URLs

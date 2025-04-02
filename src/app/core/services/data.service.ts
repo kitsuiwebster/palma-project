@@ -292,7 +292,6 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
       distribution: this.getDistribution(palm),
       habitat: this.getHabitat(palm),
       image_url: this.getImageUrl(palm),
-      conservation_status: this.getConservationStatus(palm),
     };
   }
 
@@ -326,13 +325,6 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
     return `assets/images/palms/${speciesSlug}.jpg`;
   }
 
-  private getConservationStatus(palm: any): string {
-    // Logique basée sur les propriétés disponibles dans vos données
-    if (palm.Conspicuousness === 'cryptic') {
-      return 'Rare';
-    }
-    return 'Common';
-  }
 
   // Méthode utilitaire pour créer un slug à partir d'une chaîne
   private slugify(text: string): string {

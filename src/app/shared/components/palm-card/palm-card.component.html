@@ -2,9 +2,7 @@
 <mat-card class="palm-card" [routerLink]="['/palms', getSpecies() | slugify]">
     <div class="card-image-container">
       <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image">
-      <div class="conservation-status" [ngClass]="getConservationStatusClass()">
-        {{palm.conservation_status || 'Status unknown'}}
-      </div>
+
     </div>
     <mat-card-header>
       <mat-card-title-group>

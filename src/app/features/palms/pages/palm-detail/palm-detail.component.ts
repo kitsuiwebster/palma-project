@@ -4,7 +4,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, of, switchMap, catchError } from 'rxjs';
 import { DataService } from '../../../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
-import { ConservationClassPipe } from '../../../../shared/pipes/conservation-class.pipe';
 import { CommonModule } from '@angular/common';
 import { PalmTrait } from '../../../../core/models/palm-trait.model';
 
@@ -14,7 +13,6 @@ import { PalmTrait } from '../../../../core/models/palm-trait.model';
   styleUrls: ['./palm-detail.component.scss'],
   standalone: true,
   imports: [
-    ConservationClassPipe,
     RouterModule,
     CommonModule
   ],
@@ -149,14 +147,4 @@ export class PalmDetailComponent implements OnInit {
     return !!palm?.MaxLeafNumber || !!palm?.Max_Blade_Length_m || !!palm?.Max_Rachis_Length_m;
   }
 
-  getConservationStatus(palm: PalmTrait): string {
-    if (palm?.conservation_status) {
-      return palm.conservation_status;
-    }
-    // Logique basée sur les données disponibles
-    if (palm?.Conspicuousness === 'cryptic') {
-      return 'Rare';
-    }
-    return 'Status unknown';
-  }
 }
