@@ -2,11 +2,6 @@
   publish = "dist/palmier/browser"
   command = "yarn build:prod"
 
-[[plugins]]
-  package = "@netlify/angular-runtime"
-  [plugins.inputs]
-  skip = true
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
