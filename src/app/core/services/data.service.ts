@@ -125,7 +125,7 @@ searchPalms(term: string): Observable<PalmTrait[]> {
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score) // Tri par score décroissant
         .map(item => item.palm)
-        .slice(0, 10); // Limiter à 10 résultats
+        .slice(0, 30); 
       
       console.log(`Found ${results.length} results for "${term}"`);
       if (results.length > 0) {
