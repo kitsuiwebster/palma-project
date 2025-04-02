@@ -1,4 +1,3 @@
-<!-- src/app/features/palms/pages/palm-list/palm-list.component.html -->
 <div class="palm-list-container">
   <div class="palm-list-header">
     <app-search-bar></app-search-bar>
@@ -12,6 +11,19 @@
         <span class="icon-wrapper">
           <img src="assets/icons/list.png" alt="List view" class="custom-icon">
         </span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Bannière de résultats de recherche -->
+  <div *ngIf="filteredPalms" class="search-results-banner">
+    <div class="search-info">
+      <span class="search-count">{{filteredPalms.length}} results found</span>
+      <button mat-button class="clear-search" (click)="clearSearchResults()">
+        <span class="icon-wrapper">
+          <img src="assets/icons/cross.png" alt="Clear" class="custom-icon">
+        </span>
+        Clear search
       </button>
     </div>
   </div>
@@ -36,8 +48,13 @@
         <app-palm-card *ngFor="let palm of palms" [palm]="palm"></app-palm-card>
       </div>
       
+      <!-- Message si aucun résultat -->
+      <div *ngIf="palms.length === 0" class="no-results-message">
+        <p>No palms matching your criteria.</p>
+      </div>
+      
       <!-- Contrôles de pagination personnalisés -->
-      <div class="pagination-controls">
+      <div style="max-width: 100%;" class="pagination-controls" *ngIf="palms.length > 0">
         <app-paginator
           [length]="totalItems"
           [pageSize]="pageSize"
@@ -50,7 +67,7 @@
     
     <!-- List View by Genus -->
     <div *ngIf="viewMode === 'list'" class="palm-list-by-genus">
-      <ng-container *ngIf="(palmsByGenus$ | async) as palmsByGenus">
+      <ng-container *ngIf="(filteredPalmsByGenus$ || palmsByGenus$ | async) as palmsByGenus">
         <mat-accordion>
           <mat-expansion-panel *ngFor="let genus of (Object.keys(palmsByGenus) | sort)">
             <mat-expansion-panel-header>

@@ -319,3 +319,85 @@
     animation-delay: #{$i * 0.05}s;
   }
 }
+
+
+
+
+
+
+// Ajouter ces styles à la fin du fichier palm-list.component.scss
+
+.search-results-banner {
+    background: linear-gradient(135deg, rgba($primary-color, 0.07), rgba($primary-color, 0.12));
+    border-radius: $border-radius;
+    padding: $spacing-unit * 2;
+    margin-bottom: $spacing-unit * 3;
+    box-shadow: $box-shadow-light;
+    animation: fadeIn 0.3s ease-out forwards;
+    border-left: 4px solid $primary-color;
+    
+    .search-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-unit;
+      }
+      
+      .search-count {
+        font-weight: 600;
+        color: $primary-dark;
+        font-size: 1.05rem;
+      }
+      
+      .clear-search {
+        display: flex;
+        align-items: center;
+        color: $text-secondary;
+        transition: $transition-standard;
+        padding: $spacing-unit $spacing-unit * 2;
+        border-radius: 20px;
+        
+        &:hover {
+          background-color: rgba($primary-color, 0.1);
+          color: $primary-dark;
+        }
+        
+        .icon-wrapper {
+          width: 18px;
+          height: 18px;
+          margin-right: 8px;
+          
+          .custom-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+  
+  .no-results-message {
+    text-align: center;
+    padding: $spacing-unit * 6 0;
+    color: $text-secondary;
+    
+    p {
+      font-size: 1.1rem;
+      margin-bottom: $spacing-unit;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
