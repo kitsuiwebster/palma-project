@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/palmier/browser",
+            "outputPath": "dist/palmier",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
