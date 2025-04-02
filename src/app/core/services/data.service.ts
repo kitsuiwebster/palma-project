@@ -54,32 +54,88 @@ export class DataService {
   }
 
   // Fonction pour rechercher des palmiers par terme
-  searchPalms(term: string): Observable<PalmTrait[]> {
-    return this.getAllPalms().pipe(
-      map((palms) => {
-        const searchTerm = term.toLowerCase().trim();
-        return palms
-          .filter((palm) => {
-            // Rechercher dans différents champs pertinents
-            return (
-              (palm.SpecName &&
-                palm.SpecName.toLowerCase().includes(searchTerm)) ||
-              (palm.accGenus &&
-                palm.accGenus.toLowerCase().includes(searchTerm)) ||
-              (palm.species &&
-                palm.species.toLowerCase().includes(searchTerm)) ||
-              (palm.genus && palm.genus.toLowerCase().includes(searchTerm)) ||
-              (palm.PalmTribe &&
-                palm.PalmTribe.toLowerCase().includes(searchTerm)) ||
-              (palm.tribe && palm.tribe.toLowerCase().includes(searchTerm)) ||
-              (palm.PalmSubfamily &&
-                palm.PalmSubfamily.toLowerCase().includes(searchTerm))
-            );
-          })
-          .slice(0, 10); // Limiter à 10 résultats pour la performance
-      })
-    );
-  }
+  // Méthode searchPalms corrigée pour DataService
+
+searchPalms(term: string): Observable<PalmTrait[]> {
+  console.log('Searching palms with term:', term);
+  
+  return this.getAllPalms().pipe(
+    tap(all => console.log(`Searching through ${all.length} total palms`)),
+    map((palms) => {
+      const searchTerm = term.toLowerCase().trim();
+      
+      // Fonction de score pour ordonner les résultats
+      const getScore = (palm: PalmTrait): number => {
+        let score = 0;
+        
+        // Correspondance exacte au début du genre
+        if (palm.genus?.toLowerCase().startsWith(searchTerm)) {
+          score += 100;
+        }
+        // Correspondance exacte au début de l'espèce
+        else if (palm.species?.toLowerCase().startsWith(searchTerm)) {
+          score += 90;
+        }
+        // Correspondance exacte au début du nom de genre accepté
+        else if (palm.accGenus?.toLowerCase().startsWith(searchTerm)) {
+          score += 100;
+        }
+        // Correspondance exacte au début du nom d'espèce accepté
+        else if (palm.SpecName?.toLowerCase().startsWith(searchTerm)) {
+          score += 90;
+        }
+        
+        // Correspondance n'importe où dans le genre
+        if (palm.genus?.toLowerCase().includes(searchTerm)) {
+          score += 50;
+        }
+        // Correspondance n'importe où dans l'espèce
+        else if (palm.species?.toLowerCase().includes(searchTerm)) {
+          score += 40;
+        }
+        // Correspondance n'importe où dans le nom de genre accepté
+        else if (palm.accGenus?.toLowerCase().includes(searchTerm)) {
+          score += 50;
+        }
+        // Correspondance n'importe où dans le nom d'espèce accepté
+        else if (palm.SpecName?.toLowerCase().includes(searchTerm)) {
+          score += 40;
+        }
+        
+        // Correspondance n'importe où dans tribu 
+        if (palm.tribe?.toLowerCase().includes(searchTerm) || 
+            palm.PalmTribe?.toLowerCase().includes(searchTerm)) {
+          score += 20;
+        }
+        
+        // Correspondance n'importe où dans sous-famille
+        if (palm.PalmSubfamily?.toLowerCase().includes(searchTerm)) {
+          score += 10;
+        }
+        
+        return score;
+      };
+
+      // Filtrer les palmiers et ne retenir que ceux avec un score > 0
+      const results = palms
+        .map(palm => ({
+          palm,
+          score: getScore(palm)
+        }))
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score) // Tri par score décroissant
+        .map(item => item.palm)
+        .slice(0, 10); // Limiter à 10 résultats
+      
+      console.log(`Found ${results.length} results for "${term}"`);
+      if (results.length > 0) {
+        console.log('First few results:', results.slice(0, 3).map(p => p.genus + ' ' + p.species));
+      }
+      
+      return results;
+    })
+  );
+}
 
   // Fonction pour récupérer un palmier par son nom d'espèce exact
   getPalmBySpecies(speciesName: string): Observable<PalmTrait | null> {

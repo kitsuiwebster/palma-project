@@ -1994,7 +1994,7 @@ Orania palindan	Orania	palindan	Oranieae	Arecoideae	0	0	1	1	0	0	30	40	canopy	15	
 Orania paraguanensis	Orania	paraguanensis	Oranieae	Arecoideae	0	0	1	1	0	0	20	30	canopy		4			4.3	3.6	5	4.3	3.6	5	large	globose	yellowish green	green	cryptic
 Orania parva	Orania	parva	Oranieae	Arecoideae	0	0	1	1	0	0	4	8	understorey		2.04			1.3			1.3			small	globose			
 Orania ravaka	Orania	ravaka	Oranieae	Arecoideae	0	0	1	1	0	0	20	20	canopy	8	4.5	3.21	1.34	6.2	5	7.4	3.5	4	5	large	ovoid	yellow or pale brown	"yellow; brown"	conspicuous
-Orania regalis	Orania	regalis	Oranieae	Arecoideae	0	0	1	1	0	0	11	25	canopy	10	4.2			6.25	4.5	8	6.25	4.5	8	large		bright reddish orange 	orange	conspicuous
+Orania regalis	Orania	regalis	Oranieae	Arecoideae	0	0	1	1	0	0	11	25	canopy	10	4.2			6.25	4.5	8	6.25	4.5	8	large		bright reddish orangeï¿½	orange	conspicuous
 Orania subdisticha	Orania	subdisticha	Oranieae	Arecoideae	0	0	1	1	0	0								4			4			large		red	red	conspicuous
 Orania sylvicola	Orania	sylvicola	Oranieae	Arecoideae	0	0	1	1	0	0	20	25	canopy	20	4.5	3.5		4.5	4	5	3.75	3.5	5	large	globose	"yellowish brown; greenish yellow to yellow"	"brown; yellow"	cryptic
 Orania tabubilensis	Orania	tabubilensis	Oranieae	Arecoideae	0	0	1	1	0	0								2			2			small		orange?	orange	conspicuous
@@ -2049,7 +2049,7 @@ Phytelephas seemannii	Phytelephas	seemannii	Phytelepheae	Ceroxyloideae	0	0	1	1	0
 Phytelephas tenuicaulis	Phytelephas	tenuicaulis	Phytelepheae	Ceroxyloideae	0	0	1	0	0	0	7	10	canopy	20	7.76	5.5	2.36	7.5	6	9				large	ovoid	brown	brown	cryptic
 Phytelephas tumacana	Phytelephas	tumacana	Phytelepheae	Ceroxyloideae	0	0	1	1	0	0	5	20	understorey	15	6	5		7.5	7	8	12.5	10	15	large		brown	brown	cryptic
 Pigafetta elata	Pigafetta	elata	Calameae	Calamoideae	0	0	1	1	0	1	40	40	canopy		3		0.75	0.9			0.7			small		light brown scales	brown	cryptic
-Pigafetta filaris	Pigafetta	filaris	Calameae	Calamoideae	0	0	1	1	0	1	25	45	canopy	20	6	6		1	0.8	1.2	0.65	0.6	0.7	small	globose	imbricate yellow to orange scales 	"yellow; orange"	conspicuous
+Pigafetta filaris	Pigafetta	filaris	Calameae	Calamoideae	0	0	1	1	0	1	25	45	canopy	20	6	6		1	0.8	1.2	0.65	0.6	0.7	small	globose	imbricate yellow to orange scalesï¿½	"yellow; orange"	conspicuous
 Pinanga acaulis	Pinanga	acaulis	Areceae	Arecoideae	0	1	0	1	0	0	0.1	0	understorey		0.9	0.9	0.22	1.2			0.7			small				
 Pinanga acuminata	Pinanga	acuminata	Areceae	Arecoideae	0	0	1	0	0	0	5	2	understorey		0.7	0.7		1.5			0.7			small		red	red	conspicuous
 Pinanga adangensis	Pinanga	adangensis	Areceae	Arecoideae	0	0	1	0	0	0	8	5	canopy	6	2	2		1.55	1.3	1.8	1.05	0.9	1.2	small	ovoid	purple-black	"purple; black"	cryptic
@@ -2207,10 +2207,10 @@ Plectocomia pygmaea	Plectocomia	pygmaea	Calameae	Calamoideae	1	0	0		0	1		1	canop
 Plectocomiopsis corneri	Plectocomiopsis	corneri	Calameae	Calamoideae	1	0	0	0	0	1	25	3.5	canopy		3		0.1	2.5			2.75	2.5	3	small	ovoid	pale bright orangey-brown scales	brown	cryptic
 Plectocomiopsis geminiflora	Plectocomiopsis	geminiflora	Calameae	Calamoideae	1	0	0	0	0	1	50	6	canopy	22	3.9	3.9	0.15	2.75	2.5	3	3.25	3	3.5	small	globose	"brown; pale greenish to chestnut brown"	brown	cryptic
 Plectocomiopsis mira	Plectocomiopsis	mira	Calameae	Calamoideae	1	0	0	0	0	1	40	3.5	canopy		2.75		0.17	2.5			3			small	globose	bright orangey-brown	brown	cryptic
-Plectocomiopsis songthanhensis	Plectocomiopsis	songthanhensis	Calameae	Calamoideae	1	0	0	0	0	1	30	1.7	canopy			0.87	0.02	1.8			1.6			small	globose	brownish–green	brown	cryptic
+Plectocomiopsis songthanhensis	Plectocomiopsis	songthanhensis	Calameae	Calamoideae	1	0	0	0	0	1	30	1.7	canopy			0.87	0.02	1.8			1.6			small	globose	brownishï¿½green	brown	cryptic
 Plectocomiopsis triquetra	Plectocomiopsis	triquetra	Calameae	Calamoideae	1	0	0	0	0	1	40	2	canopy		2.2		0.22	2.5			3			small	ovoid	bright orangey-brown	brown	cryptic
 Plectocomiopsis wrayi	Plectocomiopsis	wrayi	Calameae	Calamoideae	1	0	0	0	0	1	30	4	canopy		2	1.5	0.55	2.7			3			small		brown	brown	cryptic
-Podococcus acaulis	Podococcus	acaulis	Podococceae	Arecoideae	0	1	0	0	0	0	0		understorey		5			2.5	2	3	0.75	0.5	1	small	ovoid	purplish brown 	brown	cryptic
+Podococcus acaulis	Podococcus	acaulis	Podococceae	Arecoideae	0	1	0	0	0	0	0		understorey		5			2.5	2	3	0.75	0.5	1	small	ovoid	purplish brownï¿½	brown	cryptic
 Podococcus barteri	Podococcus	barteri	Podococceae	Arecoideae	0	0	1	1	0	0	2	2.5	understorey	9	2	0.54		2.5	2	3	0.6	0.6	0.8	small		"orange-red; brown"	"orange; red; brown"	conspicuous
 Pogonotium divaricatum	Pogonotium	divaricatum	Calameae	Calamoideae	2	0	2	1	0	1	4	2	understorey		1.2			1.55	1.4	1.7	1.7			small		dull red-brown	brown	cryptic
 Pogonotium moorei	Pogonotium	moorei	Calameae	Calamoideae	0	0	1	1	0	1	2	1.8	understorey		1.1			1.3			0.9			small		pinkish-brown	brown	cryptic

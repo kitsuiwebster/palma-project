@@ -1,5 +1,4 @@
-// src/app/shared/components/search-bar/search-bar.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -47,22 +46,47 @@ export class SearchBarComponent implements OnInit {
   searchResults$: Observable<PalmTrait[]>;
   private searchTerms = new Subject<string>();
   loading = false;
+  resultsVisible = false; // Pour suivre l'état d'affichage des résultats
 
-  constructor(private dataService: DataService, private router: Router) {
+  constructor(
+    private dataService: DataService, 
+    private router: Router,
+    private elementRef: ElementRef // Ajout de l'injection ElementRef
+  ) {
     this.searchResults$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       filter((term) => term.length > 2),
       tap(() => (this.loading = true)),
       switchMap((term) => this.dataService.searchPalms(term)),
-      tap(() => (this.loading = false))
+      tap(() => {
+        this.loading = false;
+        this.resultsVisible = true; // Afficher les résultats après chargement
+      })
     );
+  }
+
+  // Détecte les clics en dehors du composant
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.searchControl.setValue(''); // Efface la recherche
+      this.resultsVisible = false; // Cache les résultats
+    }
+  }
+
+  // Empêche la propagation des clics à l'intérieur de la zone de résultats
+  onResultsClick(event: Event) {
+    event.stopPropagation();
   }
 
   ngOnInit(): void {
     this.searchControl.valueChanges.subscribe((term) => {
       if (term) {
         this.searchTerms.next(term);
+        this.resultsVisible = true;
+      } else {
+        this.resultsVisible = false;
       }
     });
   }
@@ -85,6 +109,7 @@ export class SearchBarComponent implements OnInit {
     const speciesSlug = this.slugify(speciesName);
     this.router.navigate(['/palms', speciesSlug]);
     this.searchControl.setValue('');
+    this.resultsVisible = false;
   }
 
   // Obtenir le nom d'espèce pour l'affichage

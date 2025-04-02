@@ -1,33 +1,34 @@
-<!-- src/app/shared/components/search-bar/search-bar.component.html -->
-<div class="search-bar-container">
+<div class="search-bar-container" [class.results-open]="resultsVisible">
     <form (ngSubmit)="onSearchSubmit()">
-        <mat-form-field appearance="outline" class="search-input">
-            <span matPrefix class="icon-wrapper">
-                <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
-            </span>
-            <input matInput [formControl]="searchControl" placeholder="Search palms by name, genus, or tribe..."
-                autocomplete="off">
-            <mat-spinner *ngIf="loading" matSuffix diameter="20"></mat-spinner>
-            <button *ngIf="!loading && searchControl.value" mat-icon-button matSuffix type="button"
-                (click)="searchControl.setValue('')">
-                <span class="icon-wrapper">
-                    <img src="assets/icons/close.svg" alt="Clear" class="custom-icon">
-                </span>
-            </button>
-        </mat-form-field>
+      <mat-form-field appearance="outline" class="search-input">
+        <span matPrefix class="icon-wrapper">
+          <img src="assets/icons/search.png" alt="Search" class="custom-icon">
+        </span>
+        <input matInput [formControl]="searchControl" placeholder="Search palms by name, genus, or tribe..."
+        autocomplete="off">
+        <mat-spinner *ngIf="loading" matSuffix diameter="20"></mat-spinner>
+        <button *ngIf="!loading && searchControl.value" mat-icon-button matSuffix type="button"
+        (click)="searchControl.setValue('')">
+          <span class="icon-wrapper">
+            <img src="assets/icons/cross.png" alt="Clear" class="custom-icon">
+          </span>
+        </button>
+      </mat-form-field>
     </form>
-    <div *ngIf="searchControl.value && (searchResults$ | async) as results" class="search-results">
-        <mat-list *ngIf="results.length > 0">
-            <mat-list-item *ngFor="let palm of results" (click)="goToPalmDetail(palm)">
-                <span matListItemIcon class="icon-wrapper">
-                    <img src="assets/icons/eco.svg" alt="Palm" class="custom-icon">
-                </span>
-                <div matListItemTitle>{{getSpeciesName(palm)}}</div>s
-                <div matListItemLine>{{getGenusName(palm)}}</div>
-            </mat-list-item>
-        </mat-list>
-        <div *ngIf="results.length === 0 && !loading" class="no-results">
-            <p>No palms matching your search criteria.</p>
-        </div>
+    <div *ngIf="searchControl.value && (searchResults$ | async) as results" 
+         class="search-results"
+         (click)="onResultsClick($event)">
+      <mat-list *ngIf="results.length > 0">
+        <mat-list-item *ngFor="let palm of results" (click)="goToPalmDetail(palm)">
+          <span matListItemIcon class="icon-wrapper">
+            <img src="assets/icons/eco.svg" alt="Palm" class="custom-icon">
+          </span>
+          <div matListItemTitle>{{getSpeciesName(palm)}}</div>
+          <div matListItemLine>{{getGenusName(palm)}}</div>
+        </mat-list-item>
+      </mat-list>
+      <div *ngIf="results.length === 0 && !loading" class="no-results">
+        <p>No palms matching your search criteria.</p>
+      </div>
     </div>
-</div>
+  </div>

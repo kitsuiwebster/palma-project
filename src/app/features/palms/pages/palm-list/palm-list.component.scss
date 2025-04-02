@@ -14,11 +14,11 @@
   justify-content: space-between;
   margin-bottom: $spacing-unit * 4;
   flex-wrap: wrap;
-  gap: $spacing-unit * 2;
   
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
+    gap: $spacing-unit * 2;
   }
   
   h1 {
@@ -51,11 +51,12 @@
   
   app-search-bar {
     flex: 1;
-    max-width: 480px;
+    max-width: calc(100% - 60px); // Ajusté pour laisser l'espace aux toggles
     
     @media (max-width: 768px) {
       max-width: 100%;
       width: 100%;
+      margin-bottom: $spacing-unit;
     }
   }
 }
@@ -67,11 +68,14 @@
   border-radius: 24px;
   padding: 4px;
   border: 1px solid rgba($primary-color, 0.15);
-  align-self: flex-start;
+  align-self: center;
+  margin-left: 10px; // Ajoute un espace à gauche des toggles
+  flex-shrink: 0; // Empêche le rétrécissement des toggles
   
   @media (max-width: 768px) {
     align-self: center;
-    margin: $spacing-unit 0;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   button {
@@ -106,13 +110,14 @@
     }
     
     .custom-icon {
-      width: 30px;
-      height: 30px;
+      width: 24px; // Taille réduite pour un meilleur alignement
+      height: 24px;
       transition: all 0.3s ease;
     }
   }
 }
 
+/* Reste du CSS inchangé */
 .loading-spinner {
   display: flex;
   flex-direction: column;
