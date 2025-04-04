@@ -310,11 +310,6 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
         ? 'Forest understory'
         : 'Forest canopy';
     }
-    if (palm.Conspicuousness) {
-      return palm.Conspicuousness === 'conspicuous'
-        ? 'Open habitat'
-        : 'Hidden habitat';
-    }
     return 'Habitat information not available';
   }
 
