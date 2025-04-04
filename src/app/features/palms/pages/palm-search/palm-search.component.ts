@@ -1,5 +1,6 @@
 // src/app/features/palms/pages/palm-search/palm-search.component.ts
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from '../../../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
@@ -47,6 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 
 export class PalmSearchComponent implements OnInit {
+  allResults$!: Observable<PalmTrait[]>;
   searchResults$: Observable<PalmTrait[]>;
   loading = true;
   searchForm: FormGroup;
@@ -78,7 +80,8 @@ export class PalmSearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private searchService: SearchService
   ) {
     this.searchForm = this.fb.group({
       query: [''],
@@ -121,13 +124,13 @@ export class PalmSearchComponent implements OnInit {
       this.searchForm.patchValue({ query });
 
       // Apply other filters from URL if they exist
-      if (params.has('genus')) 
+      if (params.has('genus'))
         this.searchForm.patchValue({ genus: params.get('genus') });
-      if (params.has('tribe')) 
+      if (params.has('tribe'))
         this.searchForm.patchValue({ tribe: params.get('tribe') });
-      if (params.has('subfamily')) 
+      if (params.has('subfamily'))
         this.searchForm.patchValue({ subfamily: params.get('subfamily') });
-      if (params.has('stemType')) 
+      if (params.has('stemType'))
         this.searchForm.patchValue({ stemType: params.get('stemType') });
       if (params.has('stemProperty'))
         this.searchForm.patchValue({ stemProperty: params.get('stemProperty') });
@@ -141,6 +144,16 @@ export class PalmSearchComponent implements OnInit {
         this.searchForm.patchValue({ heightMin: Number(params.get('heightMin')) });
       if (params.has('heightMax'))
         this.searchForm.patchValue({ heightMax: Number(params.get('heightMax')) });
+
+      // Recherche complète sans limite, stockée dans allResults$
+      if (query && query.trim().length > 0) {
+        this.allResults$ = this.dataService.searchPalms(query, null);
+        this.allResults$.subscribe(results => {
+          this.searchService.updateSearchResults(results);
+        });
+      } else {
+        this.allResults$ = this.dataService.getAllPalms();
+      }
     });
 
     // Subscribe to form changes and search results

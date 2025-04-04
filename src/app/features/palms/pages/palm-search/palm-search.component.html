@@ -133,7 +133,7 @@
         </div>
 
         <div *ngIf="!loading" class="palm-grid">
-            <app-palm-card *ngFor="let palm of (searchResults$ | async)" [palm]="palm"></app-palm-card>
+            <app-palm-card *ngFor="let palm of (allResults$ | async)" [palm]="palm"></app-palm-card>
         </div>
     </div>
 </div>

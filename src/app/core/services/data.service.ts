@@ -56,7 +56,7 @@ export class DataService {
   // Fonction pour rechercher des palmiers par terme
   // Méthode searchPalms corrigée pour DataService
 
-searchPalms(term: string): Observable<PalmTrait[]> {
+searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
   console.log('Searching palms with term:', term);
   
   return this.getAllPalms().pipe(
@@ -102,8 +102,8 @@ searchPalms(term: string): Observable<PalmTrait[]> {
           score += 40;
         }
         
-        // Correspondance n'importe où dans tribu 
-        if (palm.tribe?.toLowerCase().includes(searchTerm) || 
+        // Correspondance n'importe où dans tribu
+        if (palm.tribe?.toLowerCase().includes(searchTerm) ||
             palm.PalmTribe?.toLowerCase().includes(searchTerm)) {
           score += 20;
         }
@@ -117,15 +117,14 @@ searchPalms(term: string): Observable<PalmTrait[]> {
       };
 
       // Filtrer les palmiers et ne retenir que ceux avec un score > 0
-      const results = palms
+      let results = palms
         .map(palm => ({
           palm,
           score: getScore(palm)
         }))
         .filter(item => item.score > 0)
         .sort((a, b) => b.score - a.score) // Tri par score décroissant
-        .map(item => item.palm)
-        .slice(0, 30); 
+        .map(item => item.palm);
       
       console.log(`Found ${results.length} results for "${term}"`);
       if (results.length > 0) {
