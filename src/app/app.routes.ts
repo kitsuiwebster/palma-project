@@ -25,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'palmtrait',
-    loadComponent: () => import('./pages/palmtrait/palmtrait.component').then(c => c.PalmtraitComponent)
+    loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
   },
   {
     path: 'photos-credits',

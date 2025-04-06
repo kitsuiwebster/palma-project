@@ -1,29 +1,13 @@
-// src/app/features/palms/pages/palm-search/palm-search.component.ts
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
 import { map, debounceTime, tap, shareReplay, switchMap } from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
-import {
-  MatButton,
-  MatIconButton,
-} from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import {
-  MatFormField,
-  MatLabel,
-  MatSuffix,
-} from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
-import { MatOption } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-palm-search',
@@ -34,19 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     PalmCardComponent,
     RouterModule,
-    MatButton,
-    MatIconButton,
-    MatProgressSpinner,
-    MatFormField,
-    MatLabel,
-    MatSuffix,
-    MatInput,
-    MatSelect,
-    MatOption,
     ReactiveFormsModule
   ],
 })
-
 export class PalmSearchComponent implements OnInit {
   allResults$!: Observable<PalmTrait[]>;
   searchResults$: Observable<PalmTrait[]>;
@@ -54,7 +28,12 @@ export class PalmSearchComponent implements OnInit {
   searchForm: FormGroup;
   searchQuery = '';
   totalResults = 0;
-
+  
+  // Pagination properties
+  currentPage = 0;
+  pageSize = 20;
+  pageSizeOptions = [20, 50, 100];
+  
   // Filter options
   genera: string[] = [];
   habitats: string[] = [];
@@ -124,6 +103,14 @@ export class PalmSearchComponent implements OnInit {
         this.searchQuery = query;
         this.searchForm.patchValue({ query });
 
+        // Get pagination params from URL
+        if (params.has('page')) {
+          this.currentPage = Number(params.get('page')) || 0;
+        }
+        if (params.has('pageSize')) {
+          this.pageSize = Number(params.get('pageSize')) || 20;
+        }
+
         // Apply other filters from URL if they exist
         if (params.has('genus'))
           this.searchForm.patchValue({ genus: params.get('genus') });
@@ -169,6 +156,7 @@ export class PalmSearchComponent implements OnInit {
     ).subscribe(results => {
       // Mettre à jour allResults$ avec les résultats
       this.allResults$ = of(results);
+      this.totalResults = results.length;
     });
 
     // Subscribe to form changes and search results
@@ -289,6 +277,11 @@ export class PalmSearchComponent implements OnInit {
     if (formValues.heightMin) queryParams.heightMin = formValues.heightMin;
     if (formValues.heightMax) queryParams.heightMax = formValues.heightMax;
 
+    // Reset to first page when searching
+    this.currentPage = 0;
+    queryParams['page'] = this.currentPage;
+    queryParams['pageSize'] = this.pageSize;
+
     // Navigate with updated query params
     this.router.navigate(['/palms/search'], { queryParams });
   }
@@ -307,9 +300,90 @@ export class PalmSearchComponent implements OnInit {
       heightMax: null,
     });
 
-    // Keep only the search query
+    // Keep only the search query and pagination
     this.router.navigate(['/palms/search'], {
-      queryParams: { q: this.searchForm.value.query },
+      queryParams: { 
+        q: this.searchForm.value.query,
+        'page': this.currentPage,
+        'pageSize': this.pageSize
+      },
     });
+  }
+
+  // Pagination helper methods
+  onPageSizeChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.pageSize = Number(select.value);
+    this.goToPage(0); // Reset to first page
+  }
+
+  goToPage(page: number): void {
+    if (page < 0 || page >= this.getTotalPages() || page === this.currentPage) {
+      return;
+    }
+    
+    this.currentPage = page;
+    
+    // Update route with new pagination
+    const queryParams: Record<string, any> = { ...this.route.snapshot.queryParams };
+    queryParams['page'] = this.currentPage;
+    queryParams['pageSize'] = this.pageSize;
+    
+    this.router.navigate(['/palms/search'], { queryParams });
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.totalResults / this.pageSize);
+  }
+
+  getPageRange(): number[] {
+    const totalPages = this.getTotalPages();
+    
+    if (totalPages <= 7) {
+      // If less than 7 pages, show all
+      return Array.from({ length: totalPages }, (_, i) => i);
+    }
+    
+    // Always include first, last, current, and pages adjacent to current
+    const pages: number[] = [];
+    
+    // Add first page
+    pages.push(0);
+    
+    if (this.currentPage > 1) {
+      // Add ellipsis if there's a gap
+      if (this.currentPage > 2) {
+        pages.push(-1); // -1 represents ellipsis
+      }
+      // Add page before current
+      pages.push(this.currentPage - 1);
+    }
+    
+    // Add current page if not first or last
+    if (this.currentPage > 0 && this.currentPage < totalPages - 1) {
+      pages.push(this.currentPage);
+    }
+    
+    if (this.currentPage < totalPages - 2) {
+      // Add page after current
+      pages.push(this.currentPage + 1);
+      
+      // Add ellipsis if there's a gap
+      if (this.currentPage < totalPages - 3) {
+        pages.push(-1); // -1 represents ellipsis
+      }
+    }
+    
+    // Add last page if not already included
+    if (totalPages > 1) {
+      pages.push(totalPages - 1);
+    }
+    
+    return pages;
+  }
+
+  // Helper function for pagination range label
+  min(a: number, b: number): number {
+    return Math.min(a, b);
   }
 }

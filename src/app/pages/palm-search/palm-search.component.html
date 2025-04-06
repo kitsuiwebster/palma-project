@@ -1,19 +1,20 @@
-<!-- src/app/features/palms/pages/palm-search/palm-search.component.html -->
 <div class="search-container">
     <div class="search-header">
         <h1>Search Palms</h1>
 
         <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
             <div class="search-input-container">
-                <mat-form-field appearance="outline" class="search-input">
-                    <mat-label>Search palms...</mat-label>
-                    <input matInput formControlName="query" placeholder="Enter palm name, genus, tribe...">
-                    <button mat-icon-button matSuffix type="submit" aria-label="Search">
+                <div class="search-input">
+                    <span class="icon-wrapper">
+                        <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
+                    </span>
+                    <input formControlName="query" placeholder="Enter palm name, genus, tribe...">
+                    <button type="submit" aria-label="Search">
                         <span class="icon-wrapper">
                             <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
                         </span>
                     </button>
-                </mat-form-field>
+                </div>
             </div>
 
             <div class="filter-panel">
@@ -21,96 +22,94 @@
 
                 <div class="filters-grid">
                     <!-- Taxonomic Filters -->
-                    <mat-form-field appearance="outline">
-                        <mat-label>Genus</mat-label>
-                        <mat-select formControlName="genus">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let g of genera" [value]="g">{{g}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="genus">Genus</label>
+                        <select id="genus" formControlName="genus">
+                            <option value="">Any</option>
+                            <option *ngFor="let g of genera" [value]="g">{{g}}</option>
+                        </select>
+                    </div>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Tribe</mat-label>
-                        <mat-select formControlName="tribe">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let t of palmTribes" [value]="t">{{t}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="tribe">Tribe</label>
+                        <select id="tribe" formControlName="tribe">
+                            <option value="">Any</option>
+                            <option *ngFor="let t of palmTribes" [value]="t">{{t}}</option>
+                        </select>
+                    </div>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Subfamily</mat-label>
-                        <mat-select formControlName="subfamily">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let s of palmSubfamilies" [value]="s">{{s}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="subfamily">Subfamily</label>
+                        <select id="subfamily" formControlName="subfamily">
+                            <option value="">Any</option>
+                            <option *ngFor="let s of palmSubfamilies" [value]="s">{{s}}</option>
+                        </select>
+                    </div>
 
                     <!-- Physical Characteristics -->
-                    <mat-form-field appearance="outline">
-                        <mat-label>Stem Type</mat-label>
-                        <mat-select formControlName="stemType">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let type of stemTypes"
-                                [value]="type.value">{{type.displayName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="stemType">Stem Type</label>
+                        <select id="stemType" formControlName="stemType">
+                            <option value="">Any</option>
+                            <option *ngFor="let type of stemTypes" [value]="type.value">{{type.displayName}}</option>
+                        </select>
+                    </div>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Stem Property</mat-label>
-                        <mat-select formControlName="stemProperty">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let prop of stemProperties"
-                                [value]="prop.value">{{prop.displayName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="stemProperty">Stem Property</label>
+                        <select id="stemProperty" formControlName="stemProperty">
+                            <option value="">Any</option>
+                            <option *ngFor="let prop of stemProperties" [value]="prop.value">{{prop.displayName}}</option>
+                        </select>
+                    </div>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Canopy Type</mat-label>
-                        <mat-select formControlName="understoreyCanopy">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let h of habitats" [value]="h">{{h}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="understoreyCanopy">Canopy Type</label>
+                        <select id="understoreyCanopy" formControlName="understoreyCanopy">
+                            <option value="">Any</option>
+                            <option *ngFor="let h of habitats" [value]="h">{{h}}</option>
+                        </select>
+                    </div>
 
                     <!-- Fruit Characteristics -->
-                    <mat-form-field appearance="outline">
-                        <mat-label>Fruit Size</mat-label>
-                        <mat-select formControlName="fruitSize">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let size of fruitSizes" [value]="size">{{size}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="fruitSize">Fruit Size</label>
+                        <select id="fruitSize" formControlName="fruitSize">
+                            <option value="">Any</option>
+                            <option *ngFor="let size of fruitSizes" [value]="size">{{size}}</option>
+                        </select>
+                    </div>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Conspicuousness</mat-label>
-                        <mat-select formControlName="conspicuousness">
-                            <mat-option value="">Any</mat-option>
-                            <mat-option *ngFor="let c of conspicuousness" [value]="c">{{c}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <div class="select-container">
+                        <label for="conspicuousness">Conspicuousness</label>
+                        <select id="conspicuousness" formControlName="conspicuousness">
+                            <option value="">Any</option>
+                            <option *ngFor="let c of conspicuousness" [value]="c">{{c}}</option>
+                        </select>
+                    </div>
 
                     <!-- Height Range -->
                     <div class="height-range">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Min Height (m)</mat-label>
-                            <input matInput type="number" formControlName="heightMin" min="0">
-                        </mat-form-field>
+                        <div class="select-container">
+                            <label for="heightMin">Min Height (m)</label>
+                            <input id="heightMin" type="number" formControlName="heightMin" min="0">
+                        </div>
 
-                        <mat-form-field appearance="outline">
-                            <mat-label>Max Height (m)</mat-label>
-                            <input matInput type="number" formControlName="heightMax" min="0">
-                        </mat-form-field>
+                        <div class="select-container">
+                            <label for="heightMax">Max Height (m)</label>
+                            <input id="heightMax" type="number" formControlName="heightMax" min="0">
+                        </div>
                     </div>
                 </div>
 
                 <div class="filter-actions">
-                    <button mat-stroked-button type="button" (click)="clearFilters()">
+                    <button type="button" class="clear-button" (click)="clearFilters()">
                         <span class="icon-wrapper">
                             <img src="assets/icons/filter_alt_off.svg" alt="Clear filters" class="custom-icon">
                         </span>
                         Clear Filters
                     </button>
-                    <button mat-raised-button color="primary" type="submit">
+                    <button type="submit" class="search-button">
                         <span class="icon-wrapper">
                             <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
                         </span>
@@ -121,6 +120,19 @@
         </form>
     </div>
 
+    <!-- Search Results Banner (affiche le nombre de résultats) -->
+    <div *ngIf="searchQuery" class="search-results-banner">
+        <div class="search-info">
+            <span class="search-count">{{totalResults}} results found</span>
+            <button class="clear-search" (click)="clearFilters()">
+                <span class="icon-wrapper">
+                    <img src="assets/icons/close.svg" alt="Clear" class="custom-icon">
+                </span>
+                Clear search
+            </button>
+        </div>
+    </div>
+
     <div class="search-results">
         <div class="results-header">
             <h2 *ngIf="totalResults > 0">{{totalResults}} results</h2>
@@ -128,12 +140,68 @@
         </div>
 
         <div *ngIf="loading" class="loading-spinner">
-            <mat-spinner diameter="40"></mat-spinner>
+            <div class="spinner"></div>
             <p>Searching palm database...</p>
         </div>
 
         <div *ngIf="!loading" class="palm-grid">
             <app-palm-card *ngFor="let palm of (allResults$ | async)" [palm]="palm"></app-palm-card>
+        </div>
+
+        <!-- Pagination (version personnalisée) -->
+        <div *ngIf="!loading && totalResults > 0" class="paginator">
+            <div class="paginator-controls">
+                <div class="page-size-selector">
+                    <span class="items-per-page-label">Items per page:</span>
+                    <select class="page-size-select" (change)="onPageSizeChange($event)">
+                        <option [value]="20" selected>20</option>
+                        <option [value]="50">50</option>
+                        <option [value]="100">100</option>
+                    </select>
+                </div>
+                <div class="range-label">
+                    {{(currentPage * pageSize) + 1}} - {{min((currentPage + 1) * pageSize, totalResults)}} of {{totalResults}}
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-button first" (click)="goToPage(0)" [disabled]="currentPage === 0">
+                        <span class="nav-icon">«</span>
+                    </button>
+                    <button class="nav-button prev" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 0">
+                        <span class="nav-icon">‹</span>
+                    </button>
+                    
+                    <div class="page-numbers">
+                        <ng-container *ngFor="let page of getPageRange()">
+                            <button 
+                                class="page-number" 
+                                [class.active]="page === currentPage"
+                                [class.ellipsis]="page === -1"
+                                [disabled]="page === -1"
+                                (click)="goToPage(page)">
+                                {{ page === -1 ? '...' : page + 1 }}
+                            </button>
+                        </ng-container>
+                    </div>
+                    
+                    <button 
+                        class="nav-button next" 
+                        (click)="goToPage(currentPage + 1)" 
+                        [disabled]="currentPage === getTotalPages() - 1">
+                        <span class="nav-icon">›</span>
+                    </button>
+                    <button 
+                        class="nav-button last" 
+                        (click)="goToPage(getTotalPages() - 1)" 
+                        [disabled]="currentPage === getTotalPages() - 1">
+                        <span class="nav-icon">»</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message quand aucun résultat -->
+        <div *ngIf="!loading && totalResults === 0" class="no-results-message">
+            <p>No palms matching your search criteria.</p>
         </div>
     </div>
 </div>
