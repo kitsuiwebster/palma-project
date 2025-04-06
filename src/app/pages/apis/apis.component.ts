@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './apis.component.html',
-  styles: ``
+  styleUrl: './apis.component.scss'
 })
 export class ApisComponent {
 

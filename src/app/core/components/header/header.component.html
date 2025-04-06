@@ -24,15 +24,15 @@
         </button>
         <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
           <div class="menu-items">
-            <button disabled class="menu-item">
+            <a class="menu-item" routerLink="/palmtrait" (click)="toggleInfoMenu()">
               <span>About PalmTraits 1.0</span>
-            </button>
-            <button disabled class="menu-item">
+            </a>
+            <a class="menu-item" routerLink="/apis" (click)="toggleInfoMenu()">
               <span>About APIs</span>
-            </button>
-            <button disabled class="menu-item">
+            </a>
+            <a class="menu-item" routerLink="/photos-credits" (click)="toggleInfoMenu()">
               <span>Photograph Credits</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -63,19 +63,19 @@
         </span>
         <span class="mobile-nav-text">Browse Palms</span>
       </a>
-      <a class="mobile-nav-link disabled">
+      <a class="mobile-nav-link" routerLink="/palmtrait" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
           <img src="assets/icons/mindmap.png" alt="Info icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">About PalmTraits 1.0</span>
       </a>
-      <a class="mobile-nav-link disabled">
+      <a class="mobile-nav-link" routerLink="/apis" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
           <img src="assets/icons/ref.png" alt="API icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">About APIs</span>
       </a>
-      <a class="mobile-nav-link disabled">
+      <a class="mobile-nav-link" routerLink="/photos-credits" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
           <img src="assets/icons/ref.png" alt="Photo icon" class="custom-icon">
         </span>

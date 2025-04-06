@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './photos-credits.component.html',
-  styles: ``
+  styleUrl: './photos-credits.component.scss'
 })
 export class PhotosCreditsComponent {
 

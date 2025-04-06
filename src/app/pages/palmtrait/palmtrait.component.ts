@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './palmtrait.component.html',
-  styles: ``
+  styleUrl: './palmtrait.component.scss'
 })
 export class PalmtraitComponent {
 

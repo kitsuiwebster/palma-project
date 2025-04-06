@@ -24,6 +24,18 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'palmtrait',
+    loadComponent: () => import('./pages/palmtrait/palmtrait.component').then(c => c.PalmtraitComponent)
+  },
+  {
+    path: 'apis',
+    loadComponent: () => import('./pages/apis/apis.component').then(c => c.ApisComponent)
+  },
+  {
+    path: 'photos-credits',
+    loadComponent: () => import('./pages/photos-credits/photos-credits.component').then(c => c.PhotosCreditsComponent)
+  },
+  {
     path: '**',
     redirectTo: 'palms'
   }

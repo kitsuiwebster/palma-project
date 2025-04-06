@@ -1,0 +1,4 @@
+SpecName	accGenus	accSpecies	PalmTribe	PalmSubfamily	Climbing	Acaulescent	Erect	StemSolitary	StemArmed	LeavesArmed	MaxStemHeight_m	MaxStemDia_cm	UnderstoreyCanopy	MaxLeafNumber	Max_Blade_Length_m	Max_Rachis_Length_m	Max_Petiole_length_m	AverageFruitLength_cm	MinFruitLength_cm	MaxFruitLength_cm	AverageFruitWidth_cm	MinFruitWidth_cm	MaxFruitWidth_cm	FruitSizeCategorical	FruitShape	FruitColorDescription	MainFruitColors	Conspicuousness
+Acanthophoenix crinita	Acanthophoenix	crinita	Areceae	Arecoideae	0	0	1	1	1	1	10	20	canopy	15	2.3			0.65	0.6	0.7	0.5			small		black	black	cryptic
+Acanthophoenix rousselii	Acanthophoenix	rousselii	Areceae	Arecoideae	0	0	1	1	1	1	25	30	canopy		3			2			0.8			small	ovoid	black	black	cryptic
+Acanthophoenix rubra	Acanthophoenix	rubra	Areceae	Arecoideae	0	0	1	1	1	1	15	18	canopy	20	3.1	3		1			0.7			small	ovoid	black	black	cryptic
