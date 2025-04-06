@@ -1,17 +1,14 @@
 <div class="search-container">
     <div class="search-header">
-        <h1>Search Palms</h1>
+        <h1>Advanced Search</h1>
 
         <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
             <div class="search-input-container">
                 <div class="search-input">
-                    <span class="icon-wrapper">
-                        <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
-                    </span>
                     <input formControlName="query" placeholder="Enter palm name, genus, tribe...">
                     <button type="submit" aria-label="Search">
                         <span class="icon-wrapper">
-                            <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
+                            <img src="assets/icons/search.png" alt="Search" class="custom-icon">
                         </span>
                     </button>
                 </div>
@@ -22,7 +19,7 @@
 
                 <div class="filters-grid">
                     <!-- Taxonomic Filters -->
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="genus">Genus</label>
                         <select id="genus" formControlName="genus">
                             <option value="">Any</option>
@@ -30,7 +27,7 @@
                         </select>
                     </div>
 
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="tribe">Tribe</label>
                         <select id="tribe" formControlName="tribe">
                             <option value="">Any</option>
@@ -38,7 +35,7 @@
                         </select>
                     </div>
 
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="subfamily">Subfamily</label>
                         <select id="subfamily" formControlName="subfamily">
                             <option value="">Any</option>
@@ -47,7 +44,7 @@
                     </div>
 
                     <!-- Physical Characteristics -->
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="stemType">Stem Type</label>
                         <select id="stemType" formControlName="stemType">
                             <option value="">Any</option>
@@ -55,7 +52,7 @@
                         </select>
                     </div>
 
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="stemProperty">Stem Property</label>
                         <select id="stemProperty" formControlName="stemProperty">
                             <option value="">Any</option>
@@ -63,7 +60,7 @@
                         </select>
                     </div>
 
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="understoreyCanopy">Canopy Type</label>
                         <select id="understoreyCanopy" formControlName="understoreyCanopy">
                             <option value="">Any</option>
@@ -72,7 +69,7 @@
                     </div>
 
                     <!-- Fruit Characteristics -->
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="fruitSize">Fruit Size</label>
                         <select id="fruitSize" formControlName="fruitSize">
                             <option value="">Any</option>
@@ -80,7 +77,7 @@
                         </select>
                     </div>
 
-                    <div class="select-container">
+                    <div class="select-container dropdown-container">
                         <label for="conspicuousness">Conspicuousness</label>
                         <select id="conspicuousness" formControlName="conspicuousness">
                             <option value="">Any</option>
@@ -90,12 +87,12 @@
 
                     <!-- Height Range -->
                     <div class="height-range">
-                        <div class="select-container">
+                        <div class="select-container number-input-container">
                             <label for="heightMin">Min Height (m)</label>
                             <input id="heightMin" type="number" formControlName="heightMin" min="0">
                         </div>
 
-                        <div class="select-container">
+                        <div class="select-container number-input-container">
                             <label for="heightMax">Max Height (m)</label>
                             <input id="heightMax" type="number" formControlName="heightMax" min="0">
                         </div>
@@ -105,13 +102,13 @@
                 <div class="filter-actions">
                     <button type="button" class="clear-button" (click)="clearFilters()">
                         <span class="icon-wrapper">
-                            <img src="assets/icons/filter_alt_off.svg" alt="Clear filters" class="custom-icon">
+                            <img src="assets/icons/clear.png" alt="Clear filters" class="custom-icon">
                         </span>
                         Clear Filters
                     </button>
                     <button type="submit" class="search-button">
                         <span class="icon-wrapper">
-                            <img src="assets/icons/search.svg" alt="Search" class="custom-icon">
+                            <img src="assets/icons/search.png" alt="Search" class="custom-icon">
                         </span>
                         Search
                     </button>
@@ -126,7 +123,7 @@
             <span class="search-count">{{totalResults}} results found</span>
             <button class="clear-search" (click)="clearFilters()">
                 <span class="icon-wrapper">
-                    <img src="assets/icons/close.svg" alt="Clear" class="custom-icon">
+                    <img src="assets/icons/cross.png" alt="Clear" class="custom-icon">
                 </span>
                 Clear search
             </button>
