@@ -1,13 +1,13 @@
 // src/app/features/palms/pages/palm-search/palm-search.component.ts
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../../../../core/services/search.service';
+import { SearchService } from '../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
 import { map, debounceTime, tap, shareReplay, switchMap } from 'rxjs/operators';
-import { DataService } from '../../../../core/services/data.service';
-import { PalmTrait } from '../../../../core/models/palm-trait.model';
-import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
+import { DataService } from '../../core/services/data.service';
+import { PalmTrait } from '../../core/models/palm-trait.model';
+import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
 import {
   MatButton,
   MatIconButton,

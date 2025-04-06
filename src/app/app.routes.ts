@@ -11,15 +11,15 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/palms/pages/palm-list/palm-list.component').then(c => c.PalmListComponent)
+        loadComponent: () => import('./pages/palm-list/palm-list.component').then(c => c.PalmListComponent)
       },
       {
         path: 'search',
-        loadComponent: () => import('./features/palms/pages/palm-search/palm-search.component').then(c => c.PalmSearchComponent)
+        loadComponent: () => import('./pages/palm-search/palm-search.component').then(c => c.PalmSearchComponent)
       },
       {
         path: ':species',
-        loadComponent: () => import('./features/palms/pages/palm-detail/palm-detail.component').then(c => c.PalmDetailComponent)
+        loadComponent: () => import('./pages/palm-detail/palm-detail.component').then(c => c.PalmDetailComponent)
       }
     ]
   },

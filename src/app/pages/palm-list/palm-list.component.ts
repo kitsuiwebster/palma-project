@@ -2,13 +2,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { DataService } from '../../../../core/services/data.service';
-import { SearchService } from '../../../../core/services/search.service'; // Importer le service
-import { PalmTrait } from '../../../../core/models/palm-trait.model';
-import { SearchBarComponent } from '../../../../shared/components/search-bar/search-bar.component';
-import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
+import { DataService } from '../../core/services/data.service';
+import { SearchService } from '../../core/services/search.service'; // Importer le service
+import { PalmTrait } from '../../core/models/palm-trait.model';
+import { SearchBarComponent } from '../../shared/components/search-bar/search-bar.component';
+import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
 import { RouterModule } from '@angular/router';
-import { SlugifyPipe } from '../../../../shared/pipes/slugify.pipe';
+import { SlugifyPipe } from '../../shared/pipes/slugify.pipe';
 import { CommonModule } from '@angular/common';
 import { MatIconButton, MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -19,8 +19,8 @@ import {
 } from '@angular/material/expansion';
 import { MatNavList, MatListItem } from '@angular/material/list';
 import { MatExpansionPanelTitle } from '@angular/material/expansion';
-import { SortPipe } from '../../../../shared/pipes/sort.pipe';
-import { PaginatorComponent } from '../../../../shared/components/paginator/paginator.component';
+import { SortPipe } from '../../shared/pipes/sort.pipe';
+import { PaginatorComponent } from '../../shared/components/paginator/paginator.component';
 
 @Component({
   selector: 'app-palm-list',

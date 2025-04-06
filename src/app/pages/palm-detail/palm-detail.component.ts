@@ -2,10 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, of, switchMap, catchError } from 'rxjs';
-import { DataService } from '../../../../core/services/data.service';
+import { DataService } from '../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { PalmTrait } from '../../../../core/models/palm-trait.model';
+import { PalmTrait } from '../../core/models/palm-trait.model';
 
 @Component({
   selector: 'app-palm-detail',
