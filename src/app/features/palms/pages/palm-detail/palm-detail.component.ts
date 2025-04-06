@@ -19,6 +19,7 @@ import { PalmTrait } from '../../../../core/models/palm-trait.model';
 })
 export class PalmDetailComponent implements OnInit {
   palm$: Observable<PalmTrait | null>;
+  palm: PalmTrait | null = null;
   loading = true;
   error = false;
   notFound = false;
@@ -35,10 +36,13 @@ export class PalmDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.palm$ = this.route.paramMap.pipe(
+    // Récupérer les paramètres de l'URL une seule fois au chargement
+    this.route.paramMap.pipe(
       switchMap((params) => {
         const speciesSlug = params.get('species') || '';
         this.loading = true;
+        this.error = false;
+        this.notFound = false;
         
         return this.dataService.getPalmBySlug(speciesSlug).pipe(
           catchError((error) => {
@@ -48,11 +52,13 @@ export class PalmDetailComponent implements OnInit {
             return of(null);
           })
         );
-      })
-    );
-
-    this.palm$.subscribe((palm) => {
+      }),
+      // Ne s'exécute qu'une seule fois puis se termine
+      // pour éviter de réinitialiser l'état de chargement à chaque clic
+    ).subscribe((palm) => {
       this.loading = false;
+      this.palm = palm;
+      
       if (!palm) {
         this.notFound = true;
         this.titleService.setTitle('Palm Not Found - Palm Encyclopedia');
