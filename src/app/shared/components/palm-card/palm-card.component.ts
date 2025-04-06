@@ -43,23 +43,25 @@ export class PalmCardComponent implements OnInit, AfterViewInit {
   // Valeurs par défaut
   defaultImagePath = 'assets/images/no-image.png';
   
-  // Variable pour contrôler l'animation une seule fois
+  // Variable pour contrôler l'animation
   shouldShowAnimation = false;
+  
+  // Utiliser une variable d'instance au lieu d'une variable statique
+  private static animationInitialized = false;
   
   constructor(private cdr: ChangeDetectorRef) {}
   
   ngOnInit() {
-    // Initialiser l'animation à true seulement au premier rendu
-    this.shouldShowAnimation = !PalmCardComponent.initialRenderComplete;
+    // Utiliser un délai aléatoire pour l'animation
+    setTimeout(() => {
+      this.shouldShowAnimation = true;
+      this.cdr.detectChanges();
+    }, Math.random() * 100); // Délai aléatoire entre 0 et 100ms pour créer un effet cascade
   }
   
   ngAfterViewInit() {
-    // Marquer le rendu initial comme terminé après le premier cycle de rendu
-    PalmCardComponent.initialRenderComplete = true;
+    // Rien à faire ici, l'animation est gérée par le setTimeout
   }
-  
-  // Variable statique pour suivre si le rendu initial est terminé
-  private static initialRenderComplete = false;
   
   // Méthodes pour obtenir des valeurs sécurisées avec des valeurs par défaut
   getSpecies(): string {

@@ -4,7 +4,7 @@ import { SearchService } from '../../../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
-import { map, debounceTime, tap, shareReplay } from 'rxjs/operators';
+import { map, debounceTime, tap, shareReplay, switchMap } from 'rxjs/operators';
 import { DataService } from '../../../../core/services/data.service';
 import { PalmTrait } from '../../../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
@@ -101,63 +101,74 @@ export class PalmSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get filter options from data
-    this.dataService.getAllPalms().subscribe((palms) => {
-      // Extract unique values for filter dropdowns
-      this.genera = [...new Set(palms.map((p) => p.accGenus || p.genus).filter(Boolean) as string[])].sort();
+    // Initialiser les résultats avec un observable vide pour éviter les erreurs
+    this.allResults$ = of([]);
+    
+    // Obtenir les options de filtre et initialiser la recherche en une seule opération
+    this.dataService.getAllPalms().pipe(
+      tap((palms) => {
+        // Extract unique values for filter dropdowns
+        this.genera = [...new Set(palms.map((p) => p.accGenus || p.genus).filter(Boolean) as string[])].sort();
+        this.palmTribes = [...new Set(palms.map((p) => p.PalmTribe || p.tribe).filter(Boolean) as string[])].sort();
+        this.palmSubfamilies = [...new Set(palms.map((p) => p.PalmSubfamily).filter(Boolean))].sort();
+        this.habitats = [...new Set(palms.map((p) => p.UnderstoreyCanopy).filter(Boolean))].sort();
+        this.fruitSizes = [...new Set(palms.map((p) => p.FruitSizeCategorical).filter(Boolean))].sort();
+        this.conspicuousness = [...new Set(palms.map((p) => p.Conspicuousness).filter(Boolean))].sort();
+      })
+    ).subscribe();
 
-      this.palmTribes = [...new Set(palms.map((p) => p.PalmTribe || p.tribe).filter(Boolean) as string[])].sort();
-      
-      this.palmSubfamilies = [...new Set(palms.map((p) => p.PalmSubfamily).filter(Boolean))].sort();
-      
-      this.habitats = [...new Set(palms.map((p) => p.UnderstoreyCanopy).filter(Boolean))].sort();
-      
-      this.fruitSizes = [...new Set(palms.map((p) => p.FruitSizeCategorical).filter(Boolean))].sort();
-      
-      this.conspicuousness = [...new Set(palms.map((p) => p.Conspicuousness).filter(Boolean))].sort();
-    });
+    // Initialize search from URL parameters - une seule souscription
+    this.route.queryParamMap.pipe(
+      tap((params) => {
+        const query = params.get('q') || '';
+        this.searchQuery = query;
+        this.searchForm.patchValue({ query });
 
-    // Initialize search from URL parameters
-    this.route.queryParamMap.subscribe((params) => {
-      const query = params.get('q') || '';
-      this.searchQuery = query;
-      this.searchForm.patchValue({ query });
-
-      // Apply other filters from URL if they exist
-      if (params.has('genus'))
-        this.searchForm.patchValue({ genus: params.get('genus') });
-      if (params.has('tribe'))
-        this.searchForm.patchValue({ tribe: params.get('tribe') });
-      if (params.has('subfamily'))
-        this.searchForm.patchValue({ subfamily: params.get('subfamily') });
-      if (params.has('stemType'))
-        this.searchForm.patchValue({ stemType: params.get('stemType') });
-      if (params.has('stemProperty'))
-        this.searchForm.patchValue({ stemProperty: params.get('stemProperty') });
-      if (params.has('understoreyCanopy'))
-        this.searchForm.patchValue({ understoreyCanopy: params.get('understoreyCanopy') });
-      if (params.has('fruitSize'))
-        this.searchForm.patchValue({ fruitSize: params.get('fruitSize') });
-      if (params.has('conspicuousness'))
-        this.searchForm.patchValue({ conspicuousness: params.get('conspicuousness') });
-      if (params.has('heightMin'))
-        this.searchForm.patchValue({ heightMin: Number(params.get('heightMin')) });
-      if (params.has('heightMax'))
-        this.searchForm.patchValue({ heightMax: Number(params.get('heightMax')) });
-
-      // Recherche complète sans limite, stockée dans allResults$
-      if (query && query.trim().length > 0) {
-        this.allResults$ = this.dataService.searchPalms(query, null).pipe(
-          tap(results => {
-            this.searchService.updateSearchResults(results);
-          }),
-          shareReplay(1) // Partager le même résultat avec tous les abonnés
-        );
-      } else {
-        this.allResults$ = this.dataService.getAllPalms().pipe(
-          shareReplay(1) // Partager le même résultat avec tous les abonnés
-        );
-      }
+        // Apply other filters from URL if they exist
+        if (params.has('genus'))
+          this.searchForm.patchValue({ genus: params.get('genus') });
+        if (params.has('tribe'))
+          this.searchForm.patchValue({ tribe: params.get('tribe') });
+        if (params.has('subfamily'))
+          this.searchForm.patchValue({ subfamily: params.get('subfamily') });
+        if (params.has('stemType'))
+          this.searchForm.patchValue({ stemType: params.get('stemType') });
+        if (params.has('stemProperty'))
+          this.searchForm.patchValue({ stemProperty: params.get('stemProperty') });
+        if (params.has('understoreyCanopy'))
+          this.searchForm.patchValue({ understoreyCanopy: params.get('understoreyCanopy') });
+        if (params.has('fruitSize'))
+          this.searchForm.patchValue({ fruitSize: params.get('fruitSize') });
+        if (params.has('conspicuousness'))
+          this.searchForm.patchValue({ conspicuousness: params.get('conspicuousness') });
+        if (params.has('heightMin'))
+          this.searchForm.patchValue({ heightMin: Number(params.get('heightMin')) });
+        if (params.has('heightMax'))
+          this.searchForm.patchValue({ heightMax: Number(params.get('heightMax')) });
+      }),
+      // Utiliser switchMap pour éviter les souscriptions multiples
+      switchMap((params) => {
+        const query = params.get('q') || '';
+        
+        // Recherche complète sans limite, stockée dans allResults$
+        if (query && query.trim().length > 0) {
+          return this.dataService.searchPalms(query, null).pipe(
+            tap(results => {
+              this.searchService.updateSearchResults(results);
+              this.loading = false; // Marquer le chargement comme terminé
+            }),
+            shareReplay(1) // Partager le même résultat avec tous les abonnés
+          );
+        } else {
+          return this.dataService.getAllPalms().pipe(
+            tap(() => this.loading = false), // Marquer le chargement comme terminé
+            shareReplay(1) // Partager le même résultat avec tous les abonnés
+          );
+        }
+      })
+    ).subscribe(results => {
+      // Mettre à jour allResults$ avec les résultats
+      this.allResults$ = of(results);
     });
 
     // Subscribe to form changes and search results
