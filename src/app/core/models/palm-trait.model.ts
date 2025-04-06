@@ -50,4 +50,6 @@ export interface PalmTrait {
   height_max_m?: number; // Alias pour MaxStemHeight_m
 
   description?: string;
+
+  native_region?: string;
 }

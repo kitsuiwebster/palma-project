@@ -10,7 +10,7 @@ import { PalmTrait } from '../models/palm-trait.model';
   providedIn: 'root',
 })
 export class DataService {
-  private dataFilePath = 'assets/data/PalmTraits_1.0.txt';
+  private dataFilePath = 'assets/data/dataset.txt';
   private cachedPalms: PalmTrait[] | null = null;
 
   constructor(private http: HttpClient) {}
@@ -291,6 +291,7 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
       distribution: this.getDistribution(palm),
       habitat: this.getHabitat(palm),
       image_url: this.getImageUrl(palm),
+      native_region: this.getDistribution(palm),
     };
   }
 
@@ -313,10 +314,14 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
   }
 
   private getImageUrl(palm: any): string {
-    // Générer une URL d'image basée sur le nom d'espèce
-    const speciesSlug = this.slugify(palm.SpecName || '');
-    // Chemin vers l'image
-    return `assets/images/palms/${speciesSlug}.jpg`;
+    if (palm.Photos && typeof palm.Photos === 'string' && palm.Photos.trim() !== '') {
+      const urls = palm.Photos.trim().split(/\s+/);
+      if (urls.length > 0 && urls[0].startsWith('http')) {
+        return urls[0];
+      }
+    }
+    // Si aucune URL trouvée dans le dataset, retourner l'image "no image"
+    return 'assets/images/no-image.png';
   }
 
 

@@ -41,7 +41,7 @@ import { RouterLink } from '@angular/router';
 export class PalmCardComponent implements OnInit {
   @Input() palm!: PalmTrait;
   // Valeurs par défaut
-  defaultImagePath = 'assets/images/palm-default.jpg';
+  defaultImagePath = 'assets/images/no-image.png';
   
   ngOnInit() {
   }
@@ -95,5 +95,8 @@ export class PalmCardComponent implements OnInit {
       .replace(/\-\-+/g, '-')
       .replace(/^-+/, '')
       .replace(/-+$/, '');
+  }
+  getNativeRegion(): string {
+    return this.palm?.native_region || 'Unknown region';
   }
 }
