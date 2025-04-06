@@ -305,28 +305,30 @@
   flex-wrap: wrap;
   gap: $spacing-unit * 2;
   margin-top: $spacing-unit * 2;
-  justify-content: flex-start;
+  justify-content: center; /* Center items horizontally */
 
   .photo-container {
-    flex-basis: calc(50% - #{$spacing-unit}); // 2 columns on larger screens
-    flex-grow: 0;
-    flex-shrink: 0;
-    margin-bottom: $spacing-unit;
+    flex-basis: calc(50% - #{$spacing-unit * 2}); /* Two columns with spacing */
     box-sizing: border-box;
+    display: flex;              /* Enable flexbox for vertical centering */
+    justify-content: center;  /* Center horizontally */
+    align-items: center;       /* Center vertically */
+    justify-content: center;
+    padding: $spacing-unit; /* Add some padding around the image */
 
     @media (max-width: 500px) {
-      flex-basis: 100%; // Single column on smaller screens
+      flex-basis: 100%; /* Single column on smaller screens */
+      padding: 0; /* Remove padding on smaller screens */
     }
 
     .gallery-photo {
       width: 100%;
       height: auto;
       max-width: 100%;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: $border-radius;
       box-shadow: $box-shadow-light;
       transition: $transition-standard;
-      display: block;
     }
   }
 }
