@@ -16,19 +16,24 @@
       <a class="nav-link" routerLink="/palms/search" routerLinkActive="active">
         <span class="nav-text">Advanced Search</span>
       </a>
-      <button class="icon-button info-button" (click)="toggleInfoMenu()" aria-label="Info Menu">
-        <span class="icon-wrapper">
-          <img src="assets/icons/info.png" alt="Info icon" class="custom-icon">
-        </span>
-      </button>
-      <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
-        <div class="menu-items">
-          <button disabled class="menu-item">
-            <span>About PalmTraits 1.0</span>
-          </button>
-          <button disabled class="menu-item">
-            <span>References</span>
-          </button>
+      <div class="info-menu-wrapper">
+        <button class="icon-button info-button" (click)="toggleInfoMenu()" aria-label="Info Menu">
+          <span class="icon-wrapper">
+            <img src="assets/icons/info.png" alt="Info icon" class="custom-icon">
+          </span>
+        </button>
+        <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
+          <div class="menu-items">
+            <button disabled class="menu-item">
+              <span>About PalmTraits 1.0</span>
+            </button>
+            <button disabled class="menu-item">
+              <span>About APIs</span>
+            </button>
+            <button disabled class="menu-item">
+              <span>Photograph Credits</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -66,9 +71,15 @@
       </a>
       <a class="mobile-nav-link disabled">
         <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/ref.png" alt="Ref icon" class="custom-icon">
+          <img src="assets/icons/ref.png" alt="API icon" class="custom-icon">
         </span>
-        <span class="mobile-nav-text">References</span>
+        <span class="mobile-nav-text">About APIs</span>
+      </a>
+      <a class="mobile-nav-link disabled">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/ref.png" alt="Photo icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Photograph Credits</span>
       </a>
     </nav>
   </div>

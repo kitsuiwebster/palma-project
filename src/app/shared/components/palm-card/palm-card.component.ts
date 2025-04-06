@@ -1,5 +1,5 @@
 // src/app/shared/components/palm-card/palm-card.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { PalmTrait } from '../../../core/models/palm-trait.model';
 import { CommonModule } from '@angular/common';
 import {
@@ -38,14 +38,28 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
 })
-export class PalmCardComponent implements OnInit {
+export class PalmCardComponent implements OnInit, AfterViewInit {
   @Input() palm!: PalmTrait;
   // Valeurs par défaut
   defaultImagePath = 'assets/images/no-image.png';
   
+  // Variable pour contrôler l'animation une seule fois
+  shouldShowAnimation = false;
+  
+  constructor(private cdr: ChangeDetectorRef) {}
+  
   ngOnInit() {
+    // Initialiser l'animation à true seulement au premier rendu
+    this.shouldShowAnimation = !PalmCardComponent.initialRenderComplete;
   }
   
+  ngAfterViewInit() {
+    // Marquer le rendu initial comme terminé après le premier cycle de rendu
+    PalmCardComponent.initialRenderComplete = true;
+  }
+  
+  // Variable statique pour suivre si le rendu initial est terminé
+  private static initialRenderComplete = false;
   
   // Méthodes pour obtenir des valeurs sécurisées avec des valeurs par défaut
   getSpecies(): string {

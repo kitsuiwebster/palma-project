@@ -4,7 +4,7 @@ import { SearchService } from '../../../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
-import { map, debounceTime } from 'rxjs/operators';
+import { map, debounceTime, tap, shareReplay } from 'rxjs/operators';
 import { DataService } from '../../../../core/services/data.service';
 import { PalmTrait } from '../../../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../../../shared/components/palm-card/palm-card.component';
@@ -147,12 +147,16 @@ export class PalmSearchComponent implements OnInit {
 
       // Recherche complète sans limite, stockée dans allResults$
       if (query && query.trim().length > 0) {
-        this.allResults$ = this.dataService.searchPalms(query, null);
-        this.allResults$.subscribe(results => {
-          this.searchService.updateSearchResults(results);
-        });
+        this.allResults$ = this.dataService.searchPalms(query, null).pipe(
+          tap(results => {
+            this.searchService.updateSearchResults(results);
+          }),
+          shareReplay(1) // Partager le même résultat avec tous les abonnés
+        );
       } else {
-        this.allResults$ = this.dataService.getAllPalms();
+        this.allResults$ = this.dataService.getAllPalms().pipe(
+          shareReplay(1) // Partager le même résultat avec tous les abonnés
+        );
       }
     });
 

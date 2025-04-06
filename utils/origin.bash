@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INPUT_FILE="dataset.txt"
+INPUT_FILE="with_common_names.txt"
 OUTPUT_FILE="with_native.txt"
 DELAY=5 # seconds
 
