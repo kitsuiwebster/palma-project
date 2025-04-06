@@ -149,6 +149,18 @@ export class PalmDetailComponent implements OnInit {
     return !!palm?.FruitSizeCategorical || !!palm?.FruitShape || !!palm?.MainFruitColors;
   }
 
+  getAllPhotoUrls(palm: PalmTrait): string[] {
+    const photosStr = palm?.Photos ?? '';
+    if (typeof photosStr !== 'string' || photosStr.trim() === '') {
+      return [];
+    }
+    const lower = photosStr.toLowerCase();
+    if (lower.includes('noimages')) {
+      return [];
+    }
+    return photosStr.trim().split(/\s+/).filter((url: string) => url.startsWith('http'));
+  }
+
   hasLeafData(palm: PalmTrait): boolean {
     return !!palm?.MaxLeafNumber || !!palm?.Max_Blade_Length_m || !!palm?.Max_Rachis_Length_m;
   }

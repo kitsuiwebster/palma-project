@@ -100,8 +100,16 @@
   
             <!-- Photos Tab -->
             <div *ngIf="activeTab === 2" class="tab-panel">
-              <p>Photos of {{getSpeciesName(palm)}} will be displayed here.</p>
-              <!-- Photo gallery will go here -->
+              <div *ngIf="getAllPhotoUrls(palm).length > 0; else noImages">
+                <div class="photo-gallery">
+                  <div class="photo-container" *ngFor="let url of getAllPhotoUrls(palm)">
+                    <img [src]="url" alt="Palm photo" class="gallery-photo" />
+                  </div>
+                </div>
+              </div>
+              <ng-template #noImages>
+                <p>This palm has no image referenced</p>
+              </ng-template>
             </div>
           </div>
         </div>

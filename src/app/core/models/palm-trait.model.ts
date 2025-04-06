@@ -52,4 +52,6 @@ export interface PalmTrait {
   description?: string;
 
   native_region?: string;
+
+  Photos?: string | null;
 }
