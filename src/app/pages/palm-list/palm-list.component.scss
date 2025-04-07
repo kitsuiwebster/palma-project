@@ -1,8 +1,8 @@
-@import '../../../styles.scss';
+@import "../../../styles.scss";
 
 .palm-list-container {
   padding: $spacing-unit * 4 0;
-  
+
   @media (max-width: 768px) {
     padding: $spacing-unit * 2 0;
   }
@@ -14,13 +14,13 @@
   justify-content: space-between;
   margin-bottom: $spacing-unit * 4;
   flex-wrap: wrap;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
     gap: $spacing-unit * 2;
   }
-  
+
   h1 {
     font-size: 2.4rem;
     font-weight: 800;
@@ -32,7 +32,7 @@
     color: transparent;
     letter-spacing: -0.5px;
     position: relative;
-    
+
     &::after {
       content: "";
       position: absolute;
@@ -43,16 +43,16 @@
       background: linear-gradient(to right, $primary-color, $accent-color);
       border-radius: 3px;
     }
-    
+
     @media (max-width: 768px) {
       font-size: 2rem;
     }
   }
-  
+
   app-search-bar {
     flex: 1;
     max-width: calc(100% - 60px); // Ajusté pour laisser l'espace aux toggles
-    
+
     @media (max-width: 768px) {
       max-width: 100%;
       width: 100%;
@@ -71,13 +71,13 @@
   align-self: center;
   margin-left: 10px; // Ajoute un espace à gauche des toggles
   flex-shrink: 0; // Empêche le rétrécissement des toggles
-  
+
   @media (max-width: 768px) {
     align-self: center;
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   button {
     width: 44px;
     height: 44px;
@@ -87,20 +87,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     &.active {
-      background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
+      background: linear-gradient(
+        135deg,
+        $primary-color,
+        lighten($primary-color, 10%)
+      );
       box-shadow: 0 4px 10px rgba($primary-color, 0.25);
-      
+
       .custom-icon {
         transform: scale(1.1); /* Légèrement plus grande quand active */
       }
     }
-    
+
     &:hover:not(.active) {
       background: rgba($primary-color, 0.2);
     }
-    
+
     .icon-wrapper {
       width: 28px;
       height: 28px;
@@ -108,7 +112,7 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .custom-icon {
       width: 24px; // Taille réduite pour un meilleur alignement
       height: 24px;
@@ -124,14 +128,14 @@
   align-items: center;
   justify-content: center;
   padding: $spacing-unit * 8 0;
-  
+
   mat-spinner {
     width: 100px !important;
     height: 100px !important;
     margin-bottom: $spacing-unit * 2;
     animation: spin 1s linear infinite;
   }
-  
+
   p {
     color: $text-secondary;
     font-size: 1.2rem;
@@ -140,8 +144,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .palm-list-by-genus .mat-list-item {
@@ -175,7 +183,7 @@
   background-color: rgba($warn-color, 0.05);
   border-radius: $border-radius;
   margin: $spacing-unit * 3 0;
-  
+
   .icon-wrapper {
     width: 48px;
     height: 48px;
@@ -187,20 +195,21 @@
     border-radius: 50%;
     padding: $spacing-unit;
   }
-  
+
   .custom-icon {
     width: 32px;
     height: 32px;
-    filter: invert(32%) sepia(93%) saturate(1352%) hue-rotate(336deg) brightness(119%) contrast(119%);
+    filter: invert(32%) sepia(93%) saturate(1352%) hue-rotate(336deg)
+      brightness(119%) contrast(119%);
   }
-  
+
   p {
     color: $text-secondary;
     font-size: 1.1rem;
     margin-bottom: $spacing-unit * 3;
     max-width: 500px;
   }
-  
+
   button {
     min-width: 120px;
   }
@@ -211,7 +220,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: $spacing-unit * 3;
   margin-bottom: $spacing-unit * 4;
-  
+
   @media (max-width: 600px) {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: $spacing-unit * 2;
@@ -222,11 +231,11 @@
   display: flex;
   justify-content: center;
   margin-top: $spacing-unit * 4;
-  
+
   ::ng-deep .mat-paginator {
     background: transparent;
     border-radius: $border-radius;
-    
+
     .mat-paginator-container {
       min-height: unset;
       padding: $spacing-unit $spacing-unit * 2;
@@ -234,18 +243,18 @@
       border-radius: $border-radius;
       box-shadow: $box-shadow-light;
     }
-    
+
     .mat-paginator-range-label {
       margin: 0 $spacing-unit * 3;
       color: $text-secondary;
     }
-    
+
     .mat-paginator-navigation-previous,
     .mat-paginator-navigation-next,
     .mat-paginator-navigation-first,
     .mat-paginator-navigation-last {
       border-radius: 50%;
-      
+
       &:hover {
         background-color: rgba($primary-color, 0.1);
       }
@@ -255,37 +264,37 @@
 
 .palm-list-by-genus {
   margin-top: $spacing-unit * 2;
-  
+
   ::ng-deep .mat-expansion-panel {
     margin-bottom: $spacing-unit;
     border-radius: $border-radius !important;
     box-shadow: $box-shadow-light !important;
     border: 1px solid rgba($primary-color, 0.1);
     overflow: hidden;
-    
+
     &:not(.mat-expanded) {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      
+
       &:hover {
         transform: translateY(-2px);
         box-shadow: $box-shadow-medium !important;
       }
     }
-    
+
     .mat-expansion-panel-header {
       height: 64px;
       padding: 0 $spacing-unit * 3;
-      
+
       &:hover {
         background-color: rgba($primary-color, 0.05);
       }
     }
-    
+
     .mat-expansion-panel-header-title {
       color: $primary-dark;
       font-size: 1.1rem;
       font-weight: 600;
-      
+
       .count {
         margin-left: $spacing-unit;
         color: $text-secondary;
@@ -293,40 +302,40 @@
         font-size: 0.95rem;
       }
     }
-    
+
     .mat-expansion-indicator::after {
       color: $primary-color;
     }
-    
+
     .mat-expansion-panel-body {
       padding: $spacing-unit * 2;
     }
   }
-  
+
   ::ng-deep .mat-nav-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: $spacing-unit;
     padding: 0;
-    
+
     @media (max-width: 600px) {
       grid-template-columns: 1fr;
     }
-    
+
     .mat-list-item {
       height: auto;
       border-radius: $border-radius;
       transition: all 0.3s ease;
       margin: 2px 0;
-      
+
       &:hover {
         background-color: rgba($primary-color, 0.1);
-        
+
         .mat-list-item-content {
           padding-left: $spacing-unit * 3;
         }
       }
-      
+
       .mat-list-item-content {
         padding: $spacing-unit $spacing-unit * 2;
         transition: all 0.3s ease;
@@ -347,45 +356,44 @@
 @for $i from 1 through 20 {
   .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
     transition-delay: #{$i * 0.1}s;
-}
+  }
 
-
-.palm-item:hover {
+  .palm-item:hover {
     text-decoration: underline;
-}
+  }
 
+  // Ajouter ces styles à la fin du fichier palm-list.component.scss
 
-
-
-
-// Ajouter ces styles à la fin du fichier palm-list.component.scss
-
-.search-results-banner {
-    background: linear-gradient(135deg, rgba($primary-color, 0.07), rgba($primary-color, 0.12));
+  .search-results-banner {
+    background: linear-gradient(
+      135deg,
+      rgba($primary-color, 0.07),
+      rgba($primary-color, 0.12)
+    );
     border-radius: $border-radius;
     padding: $spacing-unit * 2;
     margin-bottom: $spacing-unit * 3;
     box-shadow: $box-shadow-light;
     animation: fadeIn 0.3s ease-out forwards;
     border-left: 4px solid $primary-color;
-    
+
     .search-info {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      
+
       @media (max-width: 768px) {
         flex-direction: column;
         align-items: flex-start;
         gap: $spacing-unit;
       }
-      
+
       .search-count {
         font-weight: 600;
         color: $primary-dark;
         font-size: 1.05rem;
       }
-      
+
       .clear-search {
         display: flex;
         align-items: center;
@@ -393,17 +401,17 @@
         transition: $transition-standard;
         padding: $spacing-unit $spacing-unit * 2;
         border-radius: 20px;
-        
+
         &:hover {
           background-color: rgba($primary-color, 0.1);
           color: $primary-dark;
         }
-        
+
         .icon-wrapper {
           width: 18px;
           height: 18px;
           margin-right: 8px;
-          
+
           .custom-icon {
             width: 16px;
             height: 16px;
@@ -412,18 +420,18 @@
       }
     }
   }
-  
+
   .no-results-message {
     text-align: center;
     padding: $spacing-unit * 6 0;
     color: $text-secondary;
-    
+
     p {
       font-size: 1.1rem;
       margin-bottom: $spacing-unit;
     }
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -433,35 +441,118 @@
       opacity: 1;
       transform: translateY(0);
     }
-}
-
-.palm-list-by-genus .mat-list-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-@for $i from 1 through 20 {
-  .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
-    transition-delay: #{$i * 0.1}s;
   }
-}
 
-.palm-list-by-genus .mat-list-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-@for $i from 1 through 20 {
-  .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
-    transition-delay: #{$i * 0.1}s;
+  .palm-list-by-genus .mat-list-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
-}
 
-.palm-list-by-genus .mat-list-item.ng-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-}
+  @for $i from 1 through 20 {
+    .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.1}s;
+    }
+  }
 
+  .palm-list-by-genus .mat-list-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  @for $i from 1 through 20 {
+    .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.1}s;
+    }
+  }
+
+  .palm-list-by-genus .mat-list-item.ng-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .advanced-search-button {
+    margin: 0 2px;
+    padding: 8px 20px;
+    border-radius: 22px;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: $text-secondary;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    margin-left: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 0.9rem;
+    background: rgba($primary-color, 0.1);
+    border: 1px solid rgba($primary-color, 0.15);
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba($primary-color, 0), rgba($primary-color, 0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: $primary-dark;
+      transform: translateY(-1px);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+
+    &.active {
+      background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
+      color: $text-light;
+      box-shadow: 0 4px 10px rgba($primary-color, 0.25);
+    }
+    
+    .icon-wrapper {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    @media (max-width: 768px) {
+      margin: $spacing-unit 0 0 0;
+    }
+  }
+  
+  /* Responsive positioning */
+  .palm-list-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+  
+      .advanced-search-button {
+        width: 100%;
+        margin: $spacing-unit 0 0 0;
+        text-align: center;
+      }
+    }
+  }
 }
