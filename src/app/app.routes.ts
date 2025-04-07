@@ -32,6 +32,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/photos-credits/photos-credits.component').then(c => c.PhotosCreditsComponent)
   },
   {
+    path: 'references',
+    loadComponent: () => import('./pages/references/references.component').then(c => c.ReferencesComponent)
+  },
+  {
     path: '**',
     redirectTo: 'palms'
   }
