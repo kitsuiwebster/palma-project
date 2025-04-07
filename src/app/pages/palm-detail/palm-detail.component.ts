@@ -6,6 +6,8 @@ import { DataService } from '../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { PalmTrait } from '../../core/models/palm-trait.model';
+import { FlagService } from '../../core/services/flag.service';
+import { RegionWithFlagsPipe } from '../../shared/pipes/region-with-flags.pipe';
 
 @Component({
   selector: 'app-palm-detail',
@@ -14,7 +16,8 @@ import { PalmTrait } from '../../core/models/palm-trait.model';
   standalone: true,
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    RegionWithFlagsPipe
   ],
 })
 export class PalmDetailComponent implements OnInit {
@@ -30,7 +33,8 @@ export class PalmDetailComponent implements OnInit {
     private router: Router,
     private dataService: DataService,
     private titleService: Title,
-    private metaService: Meta
+    private metaService: Meta,
+    private flagService: FlagService
   ) {
     this.palm$ = of(null);
   }
@@ -58,6 +62,7 @@ export class PalmDetailComponent implements OnInit {
     ).subscribe((palm) => {
       this.loading = false;
       this.palm = palm;
+      this.updateFlagsForPalm();
       
       if (!palm) {
         this.notFound = true;
@@ -165,4 +170,42 @@ export class PalmDetailComponent implements OnInit {
     return !!palm?.MaxLeafNumber || !!palm?.Max_Blade_Length_m || !!palm?.Max_Rachis_Length_m;
   }
 
+  flagUrls: {[region: string]: string} = {};
+
+  getNativeRegions(palm: PalmTrait): string[] {
+    if (!palm?.native_region) return [];
+    return palm.native_region.split(/[,;]+/).map(r => r.trim());
+  }
+
+  fetchFlag(region: string): void {
+    if (this.flagUrls[region]) return; // already fetched
+    this.flagService.getFlagUrl(region).subscribe(url => {
+      this.flagUrls[region] = url;
+    });
+  }
+
+  getFlagUrl(region: string): string | null {
+    return this.flagUrls[region] || null;
+  }
+
+  fetchAllFlags(palm: PalmTrait): void {
+    this.getNativeRegions(palm).forEach(region => this.fetchFlag(region));
+  }
+
+  // Call this after palm is loaded
+  private updateFlagsForPalm(): void {
+    if (this.palm) {
+      this.fetchAllFlags(this.palm);
+    }
+  }
+
+  // Modify ngOnInit subscription to call updateFlagsForPalm
+  // (this is a patch, not a full replacement)
+
+  // PATCH START
+  // inside subscribe((palm) => { ... })
+  // after: this.palm = palm;
+  // add:
+  // this.updateFlagsForPalm();
+  // PATCH END
 }

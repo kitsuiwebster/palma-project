@@ -297,9 +297,9 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
 
   // Méthodes pour calculer les valeurs manquantes
   private getDistribution(palm: any): string {
-    // Vous pouvez personnaliser ceci avec des informations réelles
-    if (palm.SpecName) {
-      return `Native regions of ${palm.SpecName}`;
+    // Check if NativeRegion exists and is not null or empty
+    if (palm.NativeRegion) {
+      return palm.NativeRegion;
     }
     return 'Distribution information not available';
   }
