@@ -126,13 +126,15 @@
   padding: $spacing-unit * 8 0;
   
   mat-spinner {
+    width: 100px !important;
+    height: 100px !important;
     margin-bottom: $spacing-unit * 2;
   }
   
   p {
     color: $text-secondary;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
 }
 
@@ -309,15 +311,15 @@
 }
 
 // Animation pour les éléments qui apparaissent
-.palm-grid app-palm-card {
+.palm-list-by-genus .mat-list-item {
   opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 @for $i from 1 through 20 {
-  .palm-grid app-palm-card:nth-child(#{$i}) {
-    animation-delay: #{$i * 0.05}s;
-  }
+  .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
+    transition-delay: #{$i * 0.1}s;
 }
 
 
@@ -404,4 +406,23 @@
       opacity: 1;
       transform: translateY(0);
     }
+}
+
+.palm-list-by-genus .mat-list-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+@for $i from 1 through 20 {
+  .palm-list-by-genus .mat-list-item:nth-child(#{$i}) {
+    transition-delay: #{$i * 0.1}s;
   }
+}
+
+.palm-list-by-genus .mat-list-item.ng-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+}
