@@ -18,7 +18,6 @@ import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pi
   imports: [
     RouterModule,
     CommonModule,
-    RegionWithFlagsPipe,
     FormatCommonNamesPipe
   ],
 })

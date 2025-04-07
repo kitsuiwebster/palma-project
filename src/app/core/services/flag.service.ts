@@ -118,7 +118,7 @@ export class FlagService {
   private cleanRegionName(region: string): string {
     let r = region.trim();
     const prefixes = [
-      'Pen.', 'N.', 'E.', 'W.', 'S.', 'NE.', 'NW.', 'SE.', 'SW.', 'C.', 'EC.', 'WC.', 'SC.', 'NC.',
+      'Pen.', 'N.', 'E.', 'W.', 'S.', 'NE.', 'NW.', 'SE.', 'SW.', 'C.', 'EC.', 'EC. & SE.', 'WC.', 'SC.', 'NC.',
       'Central', 'Eastern', 'Western', 'Northern', 'Southern'
     ];
     prefixes.forEach(prefix => {
