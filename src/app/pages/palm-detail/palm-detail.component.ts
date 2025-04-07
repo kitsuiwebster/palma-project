@@ -1,5 +1,6 @@
 // src/app/features/palms/pages/palm-detail/palm-detail.component.ts
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, of, switchMap, catchError } from 'rxjs';
 import { DataService } from '../../core/services/data.service';
@@ -22,6 +23,7 @@ import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pi
   ],
 })
 export class PalmDetailComponent implements OnInit {
+  referencesMap: Record<string, string> = {};
   palm$: Observable<PalmTrait | null>;
   palm: PalmTrait | null = null;
   loading = true;
@@ -35,12 +37,24 @@ export class PalmDetailComponent implements OnInit {
     private dataService: DataService,
     private titleService: Title,
     private metaService: Meta,
-    private flagService: FlagService
+    private flagService: FlagService,
+    private http: HttpClient
   ) {
     this.palm$ = of(null);
   }
 
   ngOnInit(): void {
+    // Load references.txt
+    this.http.get('/assets/data/references.txt', { responseType: 'text' }).subscribe(data => {
+      const lines = data.split('\n').slice(1); // skip header
+      lines.forEach(line => {
+        const [specName, refs] = line.split('\t');
+        if (specName && refs) {
+          this.referencesMap[specName.trim()] = refs.trim().replace(/^"|"$/g, '');
+        }
+      });
+    });
+
     // Récupérer les paramètres de l'URL une seule fois au chargement
     this.route.paramMap.pipe(
       switchMap((params) => {
@@ -58,8 +72,6 @@ export class PalmDetailComponent implements OnInit {
           })
         );
       }),
-      // Ne s'exécute qu'une seule fois puis se termine
-      // pour éviter de réinitialiser l'état de chargement à chaque clic
     ).subscribe((palm) => {
       this.loading = false;
       this.palm = palm;
@@ -83,7 +95,6 @@ export class PalmDetailComponent implements OnInit {
       });
     });
   }
-
   setActiveTab(index: number): void {
     this.activeTab = index;
   }
@@ -209,4 +220,10 @@ export class PalmDetailComponent implements OnInit {
   // add:
   // this.updateFlagsForPalm();
   // PATCH END
+  getReferencesForPalm(): string | null {
+    if (!this.palm) return null;
+    const name = this.palm.SpecName || this.palm.species;
+    if (!name) return null;
+    return this.referencesMap[name.trim()] || null;
+  }
 }
