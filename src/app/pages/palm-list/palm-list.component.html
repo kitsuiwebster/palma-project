@@ -67,7 +67,7 @@
     
     <!-- List View by Genus -->
     <div *ngIf="viewMode === 'list'" class="palm-list-by-genus">
-      <ng-container *ngIf="(filteredPalmsByGenus$ || palmsByGenus$ | async) as palmsByGenus">
+      <ng-container *ngIf="(filteredPalmsByGenus$ || palmsByGenus$ | async) as palmsByGenus; else loadingList">
         <mat-accordion>
           <mat-expansion-panel *ngFor="let genus of (Object.keys(palmsByGenus) | sort)">
             <mat-expansion-panel-header>
@@ -84,6 +84,12 @@
           </mat-expansion-panel>
         </mat-accordion>
       </ng-container>
+      <ng-template #loadingList>
+        <div class="loading-spinner">
+          <mat-spinner></mat-spinner>
+          <p>Loading palm list...</p>
+        </div>
+      </ng-template>
     </div>
   </ng-container>
 </div>
