@@ -54,4 +54,9 @@ export interface PalmTrait {
   native_region?: string;
 
   Photos?: string | null;
+
+  // Common names in three languages
+  CommonNamesFR?: string;
+  CommonNamesSP?: string;
+  CommonNamesEN?: string;
 }

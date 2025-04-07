@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { FlagService } from '../../core/services/flag.service';
 import { RegionWithFlagsPipe } from '../../shared/pipes/region-with-flags.pipe';
+import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pipe';
 
 @Component({
   selector: 'app-palm-detail',
@@ -17,7 +18,8 @@ import { RegionWithFlagsPipe } from '../../shared/pipes/region-with-flags.pipe';
   imports: [
     RouterModule,
     CommonModule,
-    RegionWithFlagsPipe
+    RegionWithFlagsPipe,
+    FormatCommonNamesPipe
   ],
 })
 export class PalmDetailComponent implements OnInit {

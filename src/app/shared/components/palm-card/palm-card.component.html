@@ -42,6 +42,21 @@
       </div>
     </div>
   </mat-card-content>
+
+  <div class="common-names" style="margin: 8px;">
+    <div *ngIf="palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name'" class="common-name-item">
+      <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="vertical-align: middle; margin-right: 4px;">
+      <span>{{ palm.CommonNamesEN | formatCommonNames }}</span>
+    </div>
+    <div *ngIf="palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun'" class="common-name-item">
+      <img src="https://flagcdn.com/w20/fr.png" alt="FR" style="vertical-align: middle; margin-right: 4px;">
+      <span>{{ palm.CommonNamesFR | formatCommonNames }}</span>
+    </div>
+    <div *ngIf="palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común'" class="common-name-item">
+      <img src="https://flagcdn.com/w20/es.png" alt="ES" style="vertical-align: middle; margin-right: 4px;">
+      <span>{{ palm.CommonNamesSP | formatCommonNames }}</span>
+    </div>
+  </div>
   <mat-card-actions>
     <button mat-button color="primary">VIEW DETAILS</button>
   </mat-card-actions>

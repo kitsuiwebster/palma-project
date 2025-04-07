@@ -19,6 +19,7 @@ import { MatButton } from '@angular/material/button';
 import { SlugifyPipe } from '../../pipes/slugify.pipe';
 import { RouterLink } from '@angular/router';
 import { RegionWithFlagsPipe } from '../../pipes/region-with-flags.pipe';
+import { FormatCommonNamesPipe } from '../../pipes/format-common-names.pipe';
 
 @Component({
   selector: 'app-palm-card',
@@ -38,6 +39,7 @@ import { RegionWithFlagsPipe } from '../../pipes/region-with-flags.pipe';
     MatButton,
     SlugifyPipe,
     RouterLink,
+    FormatCommonNamesPipe,
   ],
 })
 export class PalmCardComponent implements OnInit, AfterViewInit {
