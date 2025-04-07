@@ -170,3 +170,23 @@
 .hidden {
   display: none;
 }
+
+.common-names {
+  padding: 0 16px 0;
+  margin-top: 16px;
+  
+  .common-name-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: $text-dark;
+
+    .common-name-flag {
+      width: 20px;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  }
+}
