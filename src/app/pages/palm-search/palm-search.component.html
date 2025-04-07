@@ -118,19 +118,8 @@
     </div>
 
     <!-- Search Results Banner (affiche le nombre de résultats) -->
-    <div *ngIf="searchQuery" class="search-results-banner">
-        <div class="search-info">
-            <span class="search-count">{{totalResults}} results found</span>
-            <button class="clear-search" (click)="clearFilters()">
-                <span class="icon-wrapper">
-                    <img src="assets/icons/cross.png" alt="Clear" class="custom-icon">
-                </span>
-                Clear search
-            </button>
-        </div>
-    </div>
 
-    <div class="search-results">
+    <div *ngIf="searchDone" class="search-results">
         <div class="results-header">
             <h2 *ngIf="totalResults > 0">{{totalResults}} results</h2>
             <h2 *ngIf="totalResults === 0">No palms found</h2>
@@ -169,8 +158,8 @@
                     
                     <div class="page-numbers">
                         <ng-container *ngFor="let page of getPageRange()">
-                            <button 
-                                class="page-number" 
+                            <button
+                                class="page-number"
                                 [class.active]="page === currentPage"
                                 [class.ellipsis]="page === -1"
                                 [disabled]="page === -1"
@@ -180,15 +169,15 @@
                         </ng-container>
                     </div>
                     
-                    <button 
-                        class="nav-button next" 
-                        (click)="goToPage(currentPage + 1)" 
+                    <button
+                        class="nav-button next"
+                        (click)="goToPage(currentPage + 1)"
                         [disabled]="currentPage === getTotalPages() - 1">
                         <span class="nav-icon">›</span>
                     </button>
-                    <button 
-                        class="nav-button last" 
-                        (click)="goToPage(getTotalPages() - 1)" 
+                    <button
+                        class="nav-button last"
+                        (click)="goToPage(getTotalPages() - 1)"
                         [disabled]="currentPage === getTotalPages() - 1">
                         <span class="nav-icon">»</span>
                     </button>

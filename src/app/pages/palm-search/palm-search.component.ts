@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class PalmSearchComponent implements OnInit {
+  searchDone = false;
   allResults$!: Observable<PalmTrait[]>;
   searchResults$: Observable<PalmTrait[]>;
   loading = true;
@@ -77,6 +78,7 @@ export class PalmSearchComponent implements OnInit {
     });
 
     this.searchResults$ = of([]);
+    this.searchDone = false;
   }
 
   ngOnInit(): void {
@@ -143,10 +145,13 @@ export class PalmSearchComponent implements OnInit {
             tap(results => {
               this.searchService.updateSearchResults(results);
               this.loading = false; // Marquer le chargement comme terminé
+              this.totalResults = results ? results.length : 0;
+              this.searchDone = true;
             }),
-            shareReplay(1) // Partager le même résultat avec tous les abonnés
+          shareReplay(1) // Partager le même résultat avec tous les abonnés
           );
         } else {
+          this.searchDone = false;
           return this.dataService.getAllPalms().pipe(
             tap(() => this.loading = false), // Marquer le chargement comme terminé
             shareReplay(1) // Partager le même résultat avec tous les abonnés
