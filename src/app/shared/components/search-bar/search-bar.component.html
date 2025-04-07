@@ -19,16 +19,7 @@
     <div *ngIf="resultsVisible && searchControl.value && (searchResults$ | async) as results" class="search-results"
         (click)="onResultsClick($event)">
 
-        <mat-list *ngIf="results.length > 0">
-            <mat-list-item *ngFor="let palm of results; let i = index" [class.highlighted]="i === 0"
-                (click)="goToPalmDetail(palm)">
-                <span matListItemIcon class="icon-wrapper">
-                    <img src="assets/icons/palm.png" alt="Palm" class="custom-icon">
-                </span>
-                <div matListItemTitle>{{getSpeciesName(palm)}}</div>
-                <div matListItemLine>{{getGenusName(palm)}}</div>
-            </mat-list-item>
-        </mat-list>
+        
         <div *ngIf="results.length === 0 && !loading" class="no-results">
             <p>No palms matching your search criteria.</p>
         </div>
