@@ -11,6 +11,8 @@ import { FlagService } from '../../core/services/flag.service';
 import { RegionWithFlagsPipe } from '../../shared/pipes/region-with-flags.pipe';
 import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pipe';
 
+import { PalmReferencesComponent } from './palm-references.component';
+ 
 @Component({
   selector: 'app-palm-detail',
   templateUrl: './palm-detail.component.html',
@@ -19,7 +21,8 @@ import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pi
   imports: [
     RouterModule,
     CommonModule,
-    FormatCommonNamesPipe
+    FormatCommonNamesPipe,
+    PalmReferencesComponent
   ],
 })
 export class PalmDetailComponent implements OnInit {

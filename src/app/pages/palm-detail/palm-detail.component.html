@@ -47,10 +47,7 @@
           </div>
           <p class="scientific-name">{{getGenus(palm)}} | {{getTribe(palm)}} | {{getSubfamily(palm)}}</p>
 
-          <div *ngIf="getReferencesForPalm()" class="species-references" style="margin-top: 8px;">
-            <strong>References:</strong>
-            <span>{{ getReferencesForPalm() }}</span>
-          </div>
+          <app-palm-references [references]="getReferencesForPalm()"></app-palm-references>
 
         </div>
       </div>
