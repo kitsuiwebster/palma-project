@@ -30,11 +30,16 @@ export class FlagService {
     'Hispaniola': 'https://flagcdn.com/w20/do.png',
     'Caribbean': '',
     'Unknown Native Region': '',
+    'Indo-China': '',
+    'China': 'https://flagcdn.com/w20/cn.png',
   };
 
   constructor(private http: HttpClient) {}
 
   getFlagUrl(regionName: string): Observable<string> {
+    if (regionName.includes('Indo-China')) {
+      return of('');
+    }
     // Split on commas first to get major parts
     const majorParts = regionName.split(',').map(part => part.trim());
     
