@@ -76,7 +76,7 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-nav-list>
-              <a class="palm-item" mat-list-item *ngFor="let palm of palmsByGenus[genus]"
+              <a class="palm-item animate-card" mat-list-item *ngFor="let palm of palmsByGenus[genus]"
                 [routerLink]="['/palms', getSpeciesName(palm) | slugify]">
                 {{getSpeciesName(palm)}}
               </a>
@@ -86,7 +86,9 @@
       </ng-container>
       <ng-template #loadingList>
         <div class="loading-spinner">
-          <mat-spinner></mat-spinner>
+          <div class="spinner-overlay">
+            <div class="spinner"></div>
+          </div>
           <p>Loading palm list...</p>
         </div>
       </ng-template>
