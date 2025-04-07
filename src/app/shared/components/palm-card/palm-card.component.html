@@ -1,8 +1,12 @@
 <!-- src/app/shared/components/palm-card/palm-card.component.html -->
 <mat-card class="palm-card" [class.animate-card]="shouldShowAnimation" [routerLink]="['/palms', getSpecies() | slugify]">
   <div class="card-image-container">
-    <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image">
-
+    <div class="image-wrapper">
+      <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image" (load)="imageLoaded = true" [class.hidden]="!imageLoaded">
+      <div class="spinner-overlay" *ngIf="!imageLoaded">
+        <div class="spinner"></div>
+      </div>
+    </div>
   </div>
   <mat-card-header>
     <mat-card-title-group>

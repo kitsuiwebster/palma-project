@@ -41,6 +41,7 @@ import { RegionWithFlagsPipe } from '../../pipes/region-with-flags.pipe';
   ],
 })
 export class PalmCardComponent implements OnInit, AfterViewInit {
+  imageLoaded = false;
   @Input() palm!: PalmTrait;
   // Valeurs par défaut
   defaultImagePath = 'assets/images/no-image.png';
