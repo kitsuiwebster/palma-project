@@ -1,5 +1,5 @@
 // src/app/features/palms/pages/palm-list/palm-list.component.ts
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
@@ -47,6 +47,7 @@ import { PaginatorComponent } from '../../shared/components/paginator/paginator.
   ],
 })
 export class PalmListComponent implements OnInit, OnDestroy {
+  @ViewChild('listTop') listTop!: ElementRef;
   // Les observables pour les données
   palmsByGenus$!: Observable<{ [genus: string]: PalmTrait[] }>;
   
@@ -193,6 +194,9 @@ export class PalmListComponent implements OnInit, OnDestroy {
     this.pageSize = event.pageSize;
     console.log(`Changing to page ${this.currentPage}, size ${this.pageSize}`);
     this.updateDisplayedPalms(); // Utiliser la nouvelle méthode
+    if (this.listTop) {
+      this.listTop.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   toggleView(mode: string): void {
