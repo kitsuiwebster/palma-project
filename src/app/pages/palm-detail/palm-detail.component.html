@@ -47,7 +47,7 @@
           </div>
           <p class="scientific-name">{{getGenus(palm)}} | {{getTribe(palm)}} | {{getSubfamily(palm)}}</p>
 
-          <app-palm-references [references]="getReferencesForPalm()"></app-palm-references>
+          <span *ngIf="getReferencesForPalm() as refs">References: {{ refs }}</span>
 
         </div>
       </div>
