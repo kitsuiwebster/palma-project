@@ -135,8 +135,8 @@
             <p>Searching palm database...</p>
         </div>
 
-        <div *ngIf="!loading && searchQuery && totalResults > 0" class="palm-grid">
-            <app-palm-card *ngFor="let palm of (allResults$ | async)" [palm]="palm"></app-palm-card>
+        <div *ngIf="!loading && totalResults > 0" class="palm-grid">
+            <app-palm-card *ngFor="let palm of (searchResults$ | async)" [palm]="palm"></app-palm-card>
         </div>
 
         <!-- Pagination (version personnalisée) -->
