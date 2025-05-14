@@ -142,7 +142,7 @@ The dataset is available in multiple formats:
 - JSON (JavaScript Object Notation)
 - Plain text
 
-All available for download from the [Palma Encyclopedia Website](https://palma-encyclopedia.com/data) in the `Dataset` section, or directly onthis repository.
+All available for download from the [Palma Encyclopedia Website](https://palma-encyclopedia.com/data) in the `Dataset` section, or directly on this repository.
 
 ---
 
@@ -151,7 +151,7 @@ All available for download from the [Palma Encyclopedia Website](https://palma-e
 If you use this dataset in your research, please cite:
 
 ```
-PalmTraits 1.0: A global database of palm functional traits, based on PalmTraits 1.0 and enhanced with GBIF, 
+Palma-1.0: A global database of palm functional traits, based on PalmTraits 1.0 and enhanced with GBIF, 
 iNaturalist and POWO data (2025). Encyclopedia of Palms Project.
 ```
 
@@ -163,7 +163,7 @@ This dataset is made available under the Creative Commons Attribution-NonCommerc
 
 ---
 
-## Contributors
+## Contributor(s)
 
 - [ Raphaël MARTIN ](https://kitsuiwebster.com)
 
