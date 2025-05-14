@@ -3,8 +3,9 @@
     <!-- Section Header -->
     <div class="palm-data-header">
       <h1>Palms Data</h1>
-      <p class="subtitle">Comprehensive exploration of PalmTraits 1.0 dataset enriched with GBIF, iNaturalist and POWO</p>
-      
+      <p class="subtitle">Comprehensive exploration of Palma-1.0, including PalmTraits 1.0 dataset enriched with GBIF,
+        iNaturalist, Wikimedia-Commons and POWO</p>
+
       <!-- Global Statistics -->
       <div class="stats-overview">
         <div class="stat-card fade-delay-1">
@@ -18,7 +19,7 @@
             <span class="stat-label">Species</span>
           </div>
         </div>
-        
+
         <div class="stat-card fade-delay-2">
           <div class="stat-icon">
             <div class="icon-wrapper">
@@ -30,7 +31,7 @@
             <span class="stat-label">Genera</span>
           </div>
         </div>
-        
+
         <div class="stat-card fade-delay-3">
           <div class="stat-icon">
             <div class="icon-wrapper">
@@ -44,42 +45,42 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Navigation Tabs -->
     <div class="data-tabs">
-      <button class="tab-button active" (click)="switchTab('overview')">
+      <button class="tab-button" [class.active]="activeTab === 'overview'" (click)="switchTab('overview')">
         <div class="icon-wrapper">
           <img src="assets/icons/overview.png" alt="Overview" class="custom-icon">
         </div>
         Overview
       </button>
-      <button class="tab-button" (click)="switchTab('dataset')">
+      <button class="tab-button" [class.active]="activeTab === 'dataset'" (click)="switchTab('dataset')">
         <div class="icon-wrapper">
           <img src="assets/icons/mindmap.png" alt="Dataset" class="custom-icon">
         </div>
         Dataset
       </button>
-      <button class="tab-button" (click)="switchTab('methodology')">
+      <button class="tab-button" [class.active]="activeTab === 'methodology'" (click)="switchTab('methodology')">
         <div class="icon-wrapper">
           <img src="assets/icons/backlog.png" alt="Methodology" class="custom-icon">
         </div>
         Methodology
       </button>
-      <button class="tab-button" (click)="switchTab('references')">
+      <button class="tab-button" [class.active]="activeTab === 'references'" (click)="switchTab('references')">
         <div class="icon-wrapper">
           <img src="assets/icons/ref.png" alt="References" class="custom-icon">
         </div>
         References
       </button>
     </div>
-    
+
     <!-- Overview Tab -->
     <div class="tab-content" *ngIf="activeTab === 'overview'">
       <div class="overview-cards">
         <!-- Card 1: Geographic Distribution -->
         <div class="data-card">
           <div class="card-header">
-            <h3>Geographic Distribution</h3>
+            <h3>Native Zones</h3>
             <div class="card-actions">
               <button class="btn-outline btn-sm">
                 <div class="icon-wrapper">
@@ -110,7 +111,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Card 2: Key Traits -->
         <div class="data-card">
           <div class="card-header">
@@ -126,79 +127,73 @@
             </div>
           </div>
         </div>
-        
-        <!-- Card 3: Conservation -->
+
+        <!-- Card 3: Fruit Characteristics -->
         <div class="data-card">
           <div class="card-header">
-            <h3>Conservation Status</h3>
+            <h3>Fruit Characteristics</h3>
           </div>
           <div class="card-content">
             <div class="conservation-stats">
               <div class="stat-item">
                 <div class="stat-circle endangered">
-                  <span class="percent">18%</span>
+                  <span class="percent">35%</span>
                 </div>
-                <span class="status-badge status-endangered">Endangered</span>
+                <span class="status-badge status-endangered">Small Fruits</span>
               </div>
               <div class="stat-item">
                 <div class="stat-circle vulnerable">
-                  <span class="percent">23%</span>
+                  <span class="percent">40%</span>
                 </div>
-                <span class="status-badge status-vulnerable">Vulnerable</span>
+                <span class="status-badge status-vulnerable">Medium Fruits</span>
               </div>
               <div class="stat-item">
                 <div class="stat-circle safe">
-                  <span class="percent">42%</span>
+                  <span class="percent">25%</span>
                 </div>
-                <span class="status-badge status-safe">Least Concern</span>
-              </div>
-              <div class="stat-item">
-                <div class="stat-circle unknown">
-                  <span class="percent">17%</span>
-                </div>
-                <span class="status-badge status-unknown">Data Deficient</span>
+                <span class="status-badge status-safe">Large Fruits</span>
               </div>
             </div>
-            <p class="conservation-note">Source: IUCN Red List and local assessments</p>
+            <p class="conservation-note">Source: Analysis of PalmTraits 1.0 dataset</p>
           </div>
         </div>
       </div>
-      
+
       <!-- Dataset Summary -->
       <div class="dataset-summary">
-        <h3>About PalmTraits 1.0 Dataset</h3>
+        <h3>About Palma-1.0 Dataset</h3>
         <p>
-          PalmTraits 1.0 is a comprehensive dataset on the world's palms, 
-          enriched with information from GBIF, iNaturalist, and POWO. It documents 
-          the diversity, distribution, and ecological characteristics of palms, an 
+          PalmTraits 1.0 is a comprehensive dataset on the world's palms,
+          enriched with information from GBIF, iNaturalist, and POWO. It documents
+          the diversity, distribution, and ecological characteristics of palms, an
           essential botanical family in tropical and subtropical ecosystems.
         </p>
         <div class="dataset-highlights">
           <div class="highlight-card">
             <div class="icon-wrapper">
-              <img src="assets/icons/ecology.png" alt="Ecology" class="custom-icon">
+              <img src="assets/icons/location.png" alt="Location" class="custom-icon">
             </div>
-            <h4>Ecological Traits</h4>
-            <p>Data on habitats, climate preferences, and ecological interactions.</p>
+            <h4>Native Zones</h4>
+            <p>Mapping of natural ranges.</p>
           </div>
           <div class="highlight-card">
             <div class="icon-wrapper">
-              <img src="assets/icons/morphology.png" alt="Morphology" class="custom-icon">
+              <img src="assets/icons/dna.png" alt="Taxonomy" class="custom-icon">
+            </div>
+            <h4>Taxonomy</h4>
+            <p>Details on species, genera, tribes, and subfamilies.</p>
+          </div>
+          <div class="highlight-card">
+            <div class="icon-wrapper">
+              <img src="assets/icons/palm.png" alt="Morphology" class="custom-icon">
             </div>
             <h4>Morphological Traits</h4>
             <p>Details on size, leaf structure, flowers, and fruits.</p>
           </div>
-          <div class="highlight-card">
-            <div class="icon-wrapper">
-              <img src="assets/icons/distribution.png" alt="Distribution" class="custom-icon">
-            </div>
-            <h4>Distribution</h4>
-            <p>Mapping of natural ranges and introduction zones.</p>
-          </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Dataset Tab -->
     <div class="tab-content" *ngIf="activeTab === 'dataset'">
       <div class="dataset-section">
@@ -206,103 +201,343 @@
           <h2>Dataset Structure</h2>
           <p>Detailed exploration of variables and their distribution in PalmTraits 1.0</p>
         </div>
-        
+
+        <div class="dataset-overview">
+          <p>
+            Palma-1.0 contains comprehensive data on over 2,500 palm species across 181 genera.
+            The dataset combines morphological traits, taxonomic classification, geographic distribution,
+            and detailed fruit characteristics. This database has been enhanced with information from
+            GBIF, iNaturalist, and POWO (Plants of the World Online).
+          </p>
+        </div>
+
         <div class="dataset-variables">
-          <div class="variable-group">
-            <h3>Taxonomy</h3>
-            <div class="variables-list">
+          <!-- Taxonomy Group -->
+          <div class="variable-group" [class.expanded]="expandedGroups.taxonomy">
+            <div class="group-header" (click)="toggleGroup('taxonomy', $event)">
+              <div class="header-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/dna.png" alt="Taxonomy" class="custom-icon">
+                </div>
+              </div>
+              <h3>Taxonomy</h3>
+              <div class="expand-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/expand.png"
+                    alt="Expand" class="custom-icon">
+                </div>
+              </div>
+            </div>
+            <div class="variables-list" *ngIf="expandedGroups.taxonomy">
               <div class="variable-item">
-                <span class="variable-name">Species</span>
+                <span class="variable-name">SpecName</span>
                 <span class="variable-description">Complete scientific name of the species</span>
+                <div class="variable-example">Example: <span class="example-value">Acanthophoenix crinita</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Genus</span>
+                <span class="variable-name">accGenus</span>
                 <span class="variable-description">Taxonomic genus</span>
+                <div class="variable-example">Example: <span class="example-value">Acanthophoenix</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Tribe</span>
+                <span class="variable-name">accSpecies</span>
+                <span class="variable-description">Species epithet</span>
+                <div class="variable-example">Example: <span class="example-value">crinita</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">PalmTribe</span>
                 <span class="variable-description">Taxonomic tribe</span>
+                <div class="variable-example">Example: <span class="example-value">Areceae</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Subfamily</span>
+                <span class="variable-name">PalmSubfamily</span>
                 <span class="variable-description">Subfamily within Arecaceae</span>
+                <div class="variable-example">Example: <span class="example-value">Arecoideae</span></div>
               </div>
             </div>
           </div>
-          
-          <div class="variable-group">
-            <h3>Ecology</h3>
-            <div class="variables-list">
+
+          <!-- Geographic Group -->
+          <div class="variable-group" [class.expanded]="expandedGroups.geography">
+            <div class="group-header" (click)="toggleGroup('geography', $event)">
+              <div class="header-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/location.png" alt="Geography" class="custom-icon">
+                </div>
+              </div>
+              <h3>Native Zone & Common Names</h3>
+              <div class="expand-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/expand.png"
+                    alt="Expand" class="custom-icon">
+                </div>
+              </div>
+            </div>
+            <div class="variables-list" *ngIf="expandedGroups.geography">
               <div class="variable-item">
-                <span class="variable-name">Habitat_type</span>
-                <span class="variable-description">Main habitat type</span>
+                <span class="variable-name">NativeRegion</span>
+                <span class="variable-description">Primary native geographic region</span>
+                <div class="variable-example">Example: <span class="example-value">EC. & SE. Réunion</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Climate_zone</span>
-                <span class="variable-description">Main climate zone</span>
+                <span class="variable-name">CommonNamesEN</span>
+                <span class="variable-description">Common names in English</span>
+                <div class="variable-example">Example: <span class="example-value">Everglades palm, paurotis palm</span>
+                </div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Elevation_min</span>
-                <span class="variable-description">Minimum elevation (m)</span>
+                <span class="variable-name">CommonNamesFR</span>
+                <span class="variable-description">Common names in French</span>
+                <div class="variable-example">Example: <span class="example-value">Palmiste rouge, Palmiste boure</span>
+                </div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Elevation_max</span>
-                <span class="variable-description">Maximum elevation (m)</span>
+                <span class="variable-name">CommonNamesSP</span>
+                <span class="variable-description">Common names in Spanish</span>
+                <div class="variable-example">Example: <span class="example-value">tasiste</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">Photos</span>
+                <span class="variable-description">URLs to species photographs</span>
+                <div class="variable-example">Example: <span class="example-value">[URL links to images]</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">PhotoReferences</span>
+                <span class="variable-description">Attribution for photographs</span>
+                <div class="variable-example">Example: <span class="example-value">(c) Aurélien Bour, some rights
+                    reserved (CC BY-NC)</span></div>
               </div>
             </div>
           </div>
-          
-          <div class="variable-group">
-            <h3>Morphology</h3>
-            <div class="variables-list">
+
+          <!-- Growth & Habit Group -->
+          <div class="variable-group" [class.expanded]="expandedGroups.growth">
+            <div class="group-header" (click)="toggleGroup('growth', $event)">
+              <div class="header-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/palm.png" alt="Growth" class="custom-icon">
+                </div>
+              </div>
+              <h3>Growth & Habit</h3>
+              <div class="expand-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/expand.png"
+                    alt="Expand" class="custom-icon">
+                </div>
+              </div>
+            </div>
+            <div class="variables-list" *ngIf="expandedGroups.growth">
               <div class="variable-item">
-                <span class="variable-name">Growth_form</span>
-                <span class="variable-description">Main growth form</span>
+                <span class="variable-name">Climbing</span>
+                <span class="variable-description">Climbing growth habit (0/1)</span>
+                <div class="variable-example">Example: <span class="example-value">0</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Stem_type</span>
-                <span class="variable-description">Trunk/stem type</span>
+                <span class="variable-name">Acaulescent</span>
+                <span class="variable-description">Without an above-ground stem (0/1)</span>
+                <div class="variable-example">Example: <span class="example-value">0</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Max_height</span>
+                <span class="variable-name">Erect</span>
+                <span class="variable-description">Upright growth pattern (0/1)</span>
+                <div class="variable-example">Example: <span class="example-value">1</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">StemSolitary</span>
+                <span class="variable-description">Single stem vs. clustering (0/1)</span>
+                <div class="variable-example">Example: <span class="example-value">1</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">StemArmed</span>
+                <span class="variable-description">Presence of spines on stem (0/1)</span>
+                <div class="variable-example">Example: <span class="example-value">1</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">MaxStemHeight_m</span>
                 <span class="variable-description">Maximum height (m)</span>
+                <div class="variable-example">Example: <span class="example-value">15</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Leaf_type</span>
-                <span class="variable-description">Leaf type</span>
+                <span class="variable-name">MaxStemDia_cm</span>
+                <span class="variable-description">Maximum stem diameter (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">20</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">UnderstoreyCanopy</span>
+                <span class="variable-description">Growth position in forest structure</span>
+                <div class="variable-example">Example: <span class="example-value">canopy</span></div>
               </div>
             </div>
           </div>
-          
-          <div class="variable-group">
-            <h3>Reproduction</h3>
-            <div class="variables-list">
+
+          <!-- Leaf Characteristics Group -->
+          <div class="variable-group" [class.expanded]="expandedGroups.leaves">
+            <div class="group-header" (click)="toggleGroup('leaves', $event)">
+              <div class="header-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/leaf.png" alt="Leaves" class="custom-icon">
+                </div>
+              </div>
+              <h3>Leaf Characteristics</h3>
+              <div class="expand-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/expand.png"
+                    alt="Expand" class="custom-icon">
+                </div>
+              </div>
+            </div>
+            <div class="variables-list" *ngIf="expandedGroups.leaves">
               <div class="variable-item">
-                <span class="variable-name">Reproductive_mode</span>
-                <span class="variable-description">Dominant reproduction mode</span>
+                <span class="variable-name">LeavesArmed</span>
+                <span class="variable-description">Presence of spines on leaves (0/1)</span>
+                <div class="variable-example">Example: <span class="example-value">1</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Pollination_mode</span>
-                <span class="variable-description">Main pollination mode</span>
+                <span class="variable-name">MaxLeafNumber</span>
+                <span class="variable-description">Maximum number of leaves</span>
+                <div class="variable-example">Example: <span class="example-value">15</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Fruit_type</span>
-                <span class="variable-description">Fruit type</span>
+                <span class="variable-name">Max_Blade_Length_m</span>
+                <span class="variable-description">Maximum leaf blade length (m)</span>
+                <div class="variable-example">Example: <span class="example-value">2.3</span></div>
               </div>
               <div class="variable-item">
-                <span class="variable-name">Fruit_color</span>
-                <span class="variable-description">Dominant color of ripe fruit</span>
+                <span class="variable-name">Max_Rachis_Length_m</span>
+                <span class="variable-description">Maximum rachis length (m)</span>
+                <div class="variable-example">Example: <span class="example-value">3</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">Max_Petiole_length_m</span>
+                <span class="variable-description">Maximum petiole length (m)</span>
+                <div class="variable-example">Example: <span class="example-value">0.65</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fruit Characteristics Group -->
+          <div class="variable-group" [class.expanded]="expandedGroups.fruits">
+            <div class="group-header" (click)="toggleGroup('fruits', $event)">
+              <div class="header-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/fruit.png" alt="Fruits" class="custom-icon">
+                </div>
+              </div>
+              <h3>Fruit Characteristics</h3>
+              <div class="expand-icon">
+                <div class="icon-wrapper">
+                  <img src="assets/icons/expand.png"
+                    alt="Expand" class="custom-icon">
+                </div>
+              </div>
+            </div>
+            <div class="variables-list" *ngIf="expandedGroups.fruits">
+              <div class="variable-item">
+                <span class="variable-name">AverageFruitLength_cm</span>
+                <span class="variable-description">Average fruit length (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">0.65</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">MinFruitLength_cm</span>
+                <span class="variable-description">Minimum fruit length (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">0.6</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">MaxFruitLength_cm</span>
+                <span class="variable-description">Maximum fruit length (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">0.7</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">AverageFruitWidth_cm</span>
+                <span class="variable-description">Average fruit width (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">0.5</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">MinFruitWidth_cm</span>
+                <span class="variable-description">Minimum fruit width (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">0.5</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">MaxFruitWidth_cm</span>
+                <span class="variable-description">Maximum fruit width (cm)</span>
+                <div class="variable-example">Example: <span class="example-value">0.9</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">FruitSizeCategorical</span>
+                <span class="variable-description">Categorical fruit size (small/medium/large)</span>
+                <div class="variable-example">Example: <span class="example-value">small</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">FruitShape</span>
+                <span class="variable-description">Fruit shape description</span>
+                <div class="variable-example">Example: <span class="example-value">ovoid</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">FruitColorDescription</span>
+                <span class="variable-description">Detailed description of fruit colors</span>
+                <div class="variable-example">Example: <span class="example-value">black</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">MainFruitColors</span>
+                <span class="variable-description">Dominant colors of ripe fruit</span>
+                <div class="variable-example">Example: <span class="example-value">black</span></div>
+              </div>
+              <div class="variable-item">
+                <span class="variable-name">Conspicuousness</span>
+                <span class="variable-description">How visible the fruit is (cryptic/conspicuous)</span>
+                <div class="variable-example">Example: <span class="example-value">cryptic</span></div>
               </div>
             </div>
           </div>
         </div>
-        
+
+        <div class="dataset-stats">
+          <div class="stats-card">
+            <div class="stat-icon">
+              <div class="icon-wrapper">
+                <img src="assets/icons/weight.png" alt="Records" class="custom-icon">
+              </div>
+            </div>
+            <div class="stat-content">
+              <h4>Dataset Size</h4>
+              <div class="stat-value">2,557 Species Records</div>
+              <p class="stat-details">Complete morphological data for over 2,500 palm species</p>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <div class="stat-icon">
+              <div class="icon-wrapper">
+                <img src="assets/icons/chart.png" alt="Variables" class="custom-icon">
+              </div>
+            </div>
+            <div class="stat-content">
+              <h4>Data Variables</h4>
+              <div class="stat-value">45+ Variables</div>
+              <p class="stat-details">Covering taxonomy, morphology, geography, and fruit characteristics</p>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <div class="stat-icon">
+              <div class="icon-wrapper">
+                <img src="assets/icons/geography.png" alt="Coverage" class="custom-icon">
+              </div>
+            </div>
+            <div class="stat-content">
+              <h4>Geographic Coverage</h4>
+              <div class="stat-value">120+ Countries</div>
+              <p class="stat-details">Global distribution across tropical and subtropical regions</p>
+            </div>
+          </div>
+        </div>
+
         <div class="api-sources">
           <h3>Additional Data Sources</h3>
           <div class="api-cards">
             <div class="api-card">
               <div class="api-logo">
-                <img src="assets/logos/gbif-logo.png" alt="GBIF Logo">
+                <img src="assets/icons/apis/gbif.png" alt="GBIF Logo" class="api-logo-image">
               </div>
               <div class="api-info">
                 <h4>GBIF</h4>
@@ -310,10 +545,10 @@
                 <span class="data-count">+1.8M observations</span>
               </div>
             </div>
-            
+
             <div class="api-card">
               <div class="api-logo">
-                <img src="assets/logos/inaturalist-logo.png" alt="iNaturalist Logo">
+                <img src="assets/icons/apis/inaturalist.jpg" alt="iNaturalist Logo" class="api-logo-image">
               </div>
               <div class="api-info">
                 <h4>iNaturalist</h4>
@@ -321,10 +556,10 @@
                 <span class="data-count">+250K observations</span>
               </div>
             </div>
-            
+
             <div class="api-card">
               <div class="api-logo">
-                <img src="assets/logos/powo-logo.png" alt="POWO Logo">
+                <img src="assets/icons/apis/powo.png" alt="POWO Logo" class="api-logo-image">
               </div>
               <div class="api-info">
                 <h4>POWO</h4>
@@ -332,11 +567,48 @@
                 <span class="data-count">Official taxonomy</span>
               </div>
             </div>
+
+            <div class="api-card">
+              <div class="api-logo">
+                <img src="assets/icons/apis/wikimedia-commons.png" alt="Wikimedia Commons Logo" class="api-logo-image">
+              </div>
+              <div class="api-info">
+                <h4>Wikimedia Commons</h4>
+                <p>Free media repository with CC-licensed palm images</p>
+                <span class="data-count">+95M free media files</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dataset-download">
+          <h3>Download Dataset</h3>
+          <p>The Palma-1.0 dataset is available for scientific research and education purposes, subject to proper
+            citation.</p>
+          <div class="download-options">
+            <button class="btn-outline">
+              <div class="icon-wrapper">
+                <img src="assets/icons/csv.png" alt="CSV" class="custom-icon">
+              </div>
+              CSV Format
+            </button>
+            <button class="btn-outline">
+              <div class="icon-wrapper">
+                <img src="assets/icons/txt.png" alt="Text" class="custom-icon">
+              </div>
+              Text Format
+            </button>
+            <button class="btn-outline">
+              <div class="icon-wrapper">
+                <img src="assets/icons/json.png" alt="JSON" class="custom-icon">
+              </div>
+              JSON Format
+            </button>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Methodology Tab -->
     <div class="tab-content" *ngIf="activeTab === 'methodology'">
       <div class="methodology-section">
@@ -344,86 +616,86 @@
           <h2>Methodology</h2>
           <p>Approach used for collecting and analyzing palm data</p>
         </div>
-        
+
         <div class="method-steps">
           <div class="method-step">
             <div class="step-number">1</div>
             <div class="step-content">
               <h3>Data Collection</h3>
               <p>
-                Primary data comes from the PalmTraits 1.0 dataset, a compilation of scientific 
-                research on world palms. This information was enriched with API queries to 
-                GBIF, iNaturalist, and POWO platforms to obtain updated occurrence and 
+                Primary data comes from the PalmTraits 1.0 dataset, a compilation of scientific
+                research on world palms. This information was enriched with API queries to
+                GBIF, iNaturalist, and POWO platforms to obtain updated occurrence and
                 taxonomic data.
               </p>
             </div>
           </div>
-          
+
           <div class="method-step">
             <div class="step-number">2</div>
             <div class="step-content">
               <h3>Taxonomic Harmonization</h3>
               <p>
-                We used the reference taxonomy from Plants of the World Online (POWO) 
-                as a standard to harmonize species names and resolve synonymies. 
-                This process eliminated duplications and ensured the consistency of 
+                We used the reference taxonomy from Plants of the World Online (POWO)
+                as a standard to harmonize species names and resolve synonymies.
+                This process eliminated duplications and ensured the consistency of
                 taxonomic data.
               </p>
             </div>
           </div>
-          
+
           <div class="method-step">
             <div class="step-number">3</div>
             <div class="step-content">
               <h3>Validation and Cleaning</h3>
               <p>
-                The collected data was subjected to a rigorous validation process 
-                to identify and correct outliers, inconsistencies, or missing values. 
-                Records with major inconsistencies were manually verified using 
+                The collected data was subjected to a rigorous validation process
+                to identify and correct outliers, inconsistencies, or missing values.
+                Records with major inconsistencies were manually verified using
                 scientific literature.
               </p>
             </div>
           </div>
-          
+
           <div class="method-step">
             <div class="step-number">4</div>
             <div class="step-content">
               <h3>Geospatial Enrichment</h3>
               <p>
-                Occurrence data was enriched with environmental information 
-                extracted from global geospatial layers, including bioclimatic, 
-                topographic, and land cover variables, to better characterize 
+                Occurrence data was enriched with environmental information
+                extracted from global geospatial layers, including bioclimatic,
+                topographic, and land cover variables, to better characterize
                 the ecological niches of species.
               </p>
             </div>
           </div>
-          
+
           <div class="method-step">
             <div class="step-number">5</div>
             <div class="step-content">
               <h3>Analysis and Visualization</h3>
               <p>
-                Statistical methods and data visualization were applied to 
-                explore distribution patterns, phylogenetic relationships, and 
-                functional traits of palms. The results were compiled in this 
+                Statistical methods and data visualization were applied to
+                explore distribution patterns, phylogenetic relationships, and
+                functional traits of palms. The results were compiled in this
                 interactive interface to facilitate data exploration.
               </p>
             </div>
           </div>
         </div>
-        
+
         <div class="data-usage">
           <h3>Data Usage</h3>
           <div class="usage-info">
             <p>
-              This compiled dataset is made available for scientific research, education, and 
-              conservation. Users are encouraged to cite the original data sources 
+              This compiled dataset is made available for scientific research, education, and
+              conservation. Users are encouraged to cite the original data sources
               when using them in their work.
             </p>
             <div class="citation-box">
               <h4>Suggested citation:</h4>
               <p class="citation">
-                "PalmTraits 1.0: A global database of palm functional traits enhanced with GBIF, 
+                "PalmTraits 1.0: A global database of palm functional traits enhanced with GBIF,
                 iNaturalist and POWO data (2025). Encyclopedia of Palms Project."
               </p>
               <button class="btn-outline btn-sm copy-btn">
@@ -437,7 +709,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- References Tab -->
     <div class="tab-content" *ngIf="activeTab === 'references'">
       <div class="references-section">
@@ -445,7 +717,7 @@
           <h2>Bibliographic References</h2>
           <p>Compilation of scientific sources used for PalmTraits 1.0</p>
         </div>
-        
+
         <div class="search-filter">
           <div class="search-box">
             <div class="icon-wrapper">
@@ -453,19 +725,21 @@
             </div>
             <input type="text" placeholder="Search references..." class="search-input">
           </div>
-          
+
           <div class="filter-buttons">
             <button class="filter-btn active">All</button>
             <button class="filter-btn">Taxonomy</button>
-            <button class="filter-btn">Ecology</button>
-            <button class="filter-btn">Conservation</button>
+            <button class="filter-btn">Morphology</button>
+            <button class="filter-btn">Native Zones</button>
           </div>
         </div>
-        
+
         <div class="references-list">
           <!-- This section will be dynamically generated with your references -->
           <div class="reference-item">
-            <p class="reference-text">Aliaga-Rossel, E. & Moraes R., M. (2014) Mamíferos consumidores de frutas y semillas de la chonta (Astrocaryum gratum, Arecaceae) en bosques submontanos y aluviales de Bolivia. Ecología en Bolivia 49: 98-103.</p>
+            <p class="reference-text">Aliaga-Rossel, E. & Moraes R., M. (2014) Mamíferos consumidores de frutas y
+              semillas de la chonta (Astrocaryum gratum, Arecaceae) en bosques submontanos y aluviales de Bolivia.
+              Ecología en Bolivia 49: 98-103.</p>
             <div class="reference-actions">
               <button class="action-btn">
                 <div class="icon-wrapper">
@@ -479,7 +753,7 @@
               </button>
             </div>
           </div>
-          
+
           <div class="reference-item">
             <p class="reference-text">Bacon, C. D. & Baker, W. J. (2011): Saribus resurrected. Palms 55: 109-116.</p>
             <div class="reference-actions">
@@ -495,9 +769,10 @@
               </button>
             </div>
           </div>
-          
+
           <div class="reference-item">
-            <p class="reference-text">Balick, M. J., Anderson, A. B. & de Medeiros-Costa, J. T. (1987): Hybridization in the babassu palm complex. II. Attalea compta × Orbignya oleifera (Palmae). Brittonia 39: 26-36.</p>
+            <p class="reference-text">Balick, M. J., Anderson, A. B. & de Medeiros-Costa, J. T. (1987): Hybridization in
+              the babassu palm complex. II. Attalea compta × Orbignya oleifera (Palmae). Brittonia 39: 26-36.</p>
             <div class="reference-actions">
               <button class="action-btn">
                 <div class="icon-wrapper">
@@ -511,7 +786,7 @@
               </button>
             </div>
           </div>
-          
+
           <!-- Add more references here -->
           <div class="references-pagination">
             <button class="pagination-btn prev-btn">
@@ -519,7 +794,7 @@
                 <img src="assets/icons/chevron-left.png" alt="Previous" class="custom-icon">
               </div>
             </button>
-            
+
             <div class="page-numbers">
               <button class="page-number active">1</button>
               <button class="page-number">2</button>
@@ -527,7 +802,7 @@
               <span class="page-separator">...</span>
               <button class="page-number">12</button>
             </div>
-            
+
             <button class="pagination-btn next-btn">
               <div class="icon-wrapper">
                 <img src="assets/icons/chevron-right.png" alt="Next" class="custom-icon">
@@ -535,7 +810,7 @@
             </button>
           </div>
         </div>
-        
+
         <div class="export-references">
           <h3>Export References</h3>
           <div class="export-options">
