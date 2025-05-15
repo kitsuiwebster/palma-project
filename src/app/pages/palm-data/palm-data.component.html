@@ -72,6 +72,12 @@
         </div>
         References
       </button>
+      <button class="tab-button" [class.active]="activeTab === 'photos'" (click)="switchTab('photos')">
+        <div class="icon-wrapper">
+          <img src="assets/icons/camera.png" alt="Photo Credits" class="custom-icon">
+        </div>
+        Photo Credits
+      </button>
     </div>
 
     <!-- Overview Tab -->
@@ -702,6 +708,13 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Photos Credits Tab -->
+    <div class="tab-content" *ngIf="activeTab === 'photos'">
+      <div class="photos-section">
+        <app-photos-credits></app-photos-credits>
       </div>
     </div>
 
