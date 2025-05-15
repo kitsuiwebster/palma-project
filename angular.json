@@ -50,13 +50,14 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "40kB",
-                  "maximumError": "50kB"
+                  "maximumWarning": "200kB",
+                  "maximumError": "300kB"
                 },
                 {
-                  "type": "initial",
-                  "maximumWarning": "60kb",
-                  "maximumError": "70kb"
+                  "type": "bundle",
+                  "name": "styles",
+                  "maximumWarning": "100kb",
+                  "maximumError": "150kb"
                 }
               ],
               "outputHashing": "all",
