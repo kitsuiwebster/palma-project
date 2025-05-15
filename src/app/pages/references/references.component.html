@@ -1,1 +1,90 @@
-<p>references works!</p>
+<!-- References Tab Content -->
+<div class="references-section">
+    <div class="section-header">
+        <h2>Bibliographic References</h2>
+        <p>Comprehensive scientific sources used for PalmTraits 1.0 database development and analysis</p>
+    </div>
+
+    <div class="search-filter">
+        <div class="search-box">
+            <div class="icon-wrapper">
+                <img src="assets/icons/search.png" alt="Search" class="custom-icon">
+            </div>
+            <input type="text" placeholder="Search all content..." class="search-input" [(ngModel)]="searchText"
+                (input)="search()">
+            <button *ngIf="searchText" class="clear-btn" (click)="clearSearch()">
+                <div class="icon-wrapper">
+                    <img src="assets/icons/x.png" alt="Clear" class="custom-icon">
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    <div class="search-results" *ngIf="showingSearchResults">
+        <div class="results-header">
+            <h3>Search Results</h3>
+            <span class="results-count">{{ searchResults.length }} results found</span>
+        </div>
+
+        <div class="results-list" *ngIf="searchResults.length > 0">
+            <div class="result-item" *ngFor="let result of searchResults" [ngClass]="result.type">
+                <div class="result-content">
+                    <span class="result-badge">{{ result.type === 'trait' ? 'Trait' : 'Reference' }}</span>
+                    <p>{{ result.content }}</p>
+                </div>
+                <div class="result-actions">
+                    <button class="action-btn" title="View source" (click)="openSourceLink()">
+                        <div class="icon-wrapper">
+                            <img src="assets/icons/link.png" alt="Link" class="custom-icon">
+                        </div>
+                    </button>
+                    <button class="action-btn" title="Copy to clipboard" (click)="copyText(result.content)">
+                        <div class="icon-wrapper">
+                            <img src="assets/icons/cp.png" alt="Copy" class="custom-icon">
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="no-results" *ngIf="searchResults.length === 0">
+            <p>No results found matching your criteria. Try adjusting your search terms.</p>
+        </div>
+    </div>
+
+    <!-- Traits Data (shown when not searching) -->
+    <div class="dataset-overview" *ngIf="!showingSearchResults">
+        <h3>PalmTraits Dataset Overview</h3>
+        <div class="source-link">
+            <a href="javascript:void(0)" (click)="openSourceLink()">View full dataset at Dryad</a>
+        </div>
+        <div class="traits-content">
+            <p *ngFor="let trait of traits">{{ trait }}</p>
+        </div>
+    </div>
+
+    <!-- References List (shown when not searching) -->
+    <div class="references-list" *ngIf="!showingSearchResults">
+        <div class="references-header">
+            <h3>Bibliographic References</h3>
+            <span class="references-count">{{ references.length }} citations</span>
+        </div>
+
+        <div class="reference-item" *ngFor="let reference of references">
+            <p class="reference-text">{{ reference }}</p>
+            <div class="reference-actions">
+                <button class="action-btn" title="View source" (click)="openSourceLink()">
+                    <div class="icon-wrapper">
+                        <img src="assets/icons/link.png" alt="Link" class="custom-icon">
+                    </div>
+                </button>
+                <button class="action-btn" title="Copy reference" (click)="copyText(reference)">
+                    <div class="icon-wrapper">
+                        <img src="assets/icons/cp.png" alt="Copy" class="custom-icon">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
