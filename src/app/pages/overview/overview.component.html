@@ -1,5 +1,10 @@
 <!-- Overview Tab Content -->
 <div class="overview-cards">
+    <!-- Map Container - Full Width -->
+    <div class="map-container">
+        <app-palm-map></app-palm-map>
+    </div>
+
     <!-- Card 1: Geographic Distribution -->
     <div class="data-card">
         <div class="card-header">
@@ -14,22 +19,22 @@
             </div>
         </div>
         <div class="card-content">
-            <div class="map-placeholder">
-                <!-- Map visualization will be placed here -->
-                <img src="assets/images/palm-distribution-map.png" alt="Palm distribution map">
-            </div>
             <div class="map-legend">
                 <div class="legend-item">
-                    <span class="color-dot" style="background-color: #4CAF50;"></span>
+                    <span class="color-dot" style="background-color: #006400;"></span>
                     <span>High concentration (>100 species)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="color-dot" style="background-color: #8BC34A;"></span>
+                    <span class="color-dot" style="background-color: #32CD32;"></span>
                     <span>Medium concentration (50-100 species)</span>
                 </div>
                 <div class="legend-item">
-                    <span class="color-dot" style="background-color: #CDDC39;"></span>
-                    <span>Low concentration (<50 species)</span>
+                    <span class="color-dot" style="background-color: #ADFF2F;"></span>
+                    <span>Low concentration (10-50 species)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-dot" style="background-color: #FFFFE0;"></span>
+                    <span>Very low concentration (<10 species)</span>
                 </div>
             </div>
         </div>

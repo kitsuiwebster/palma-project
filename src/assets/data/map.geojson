@@ -1,0 +1,209 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Amazon Rainforest",
+                "speciesCount": 120
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -70,
+                            -10
+                        ],
+                        [
+                            -50,
+                            -10
+                        ],
+                        [
+                            -50,
+                            5
+                        ],
+                        [
+                            -70,
+                            5
+                        ],
+                        [
+                            -70,
+                            -10
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Southeast Asia",
+                "speciesCount": 95
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            95,
+                            0
+                        ],
+                        [
+                            120,
+                            0
+                        ],
+                        [
+                            120,
+                            20
+                        ],
+                        [
+                            95,
+                            20
+                        ],
+                        [
+                            95,
+                            0
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Central Africa",
+                "speciesCount": 85
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            10,
+                            -5
+                        ],
+                        [
+                            30,
+                            -5
+                        ],
+                        [
+                            30,
+                            10
+                        ],
+                        [
+                            10,
+                            10
+                        ],
+                        [
+                            10,
+                            -5
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Madagascar",
+                "speciesCount": 110
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            43,
+                            -25
+                        ],
+                        [
+                            50,
+                            -25
+                        ],
+                        [
+                            50,
+                            -12
+                        ],
+                        [
+                            43,
+                            -12
+                        ],
+                        [
+                            43,
+                            -25
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Caribbean",
+                "speciesCount": 45
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -85,
+                            15
+                        ],
+                        [
+                            -60,
+                            15
+                        ],
+                        [
+                            -60,
+                            25
+                        ],
+                        [
+                            -85,
+                            25
+                        ],
+                        [
+                            -85,
+                            15
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Australia/Pacific",
+                "speciesCount": 30
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            140,
+                            -30
+                        ],
+                        [
+                            170,
+                            -30
+                        ],
+                        [
+                            170,
+                            -10
+                        ],
+                        [
+                            140,
+                            -10
+                        ],
+                        [
+                            140,
+                            -30
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}
