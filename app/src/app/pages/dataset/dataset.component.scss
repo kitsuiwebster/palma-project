@@ -1173,3 +1173,19 @@
     }
   }
 }
+
+.header-icon,
+.citation-icon,
+.stat-icon,
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-icon {
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
