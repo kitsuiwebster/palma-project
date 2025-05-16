@@ -56,7 +56,7 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
   }
 
   private loadGeoJson(): void {
-    fetch('assets/palms.geojson')
+    fetch('assets/data/map.geojson')
       .then((res) => res.json())
       .then((data) => {
         const geoLayer = L.geoJSON(data, {
