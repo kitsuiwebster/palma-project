@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Define a type for the expandedGroups keys
 type GroupKey = 'taxonomy' | 'geography' | 'growth' | 'leaves' | 'fruits';
 
 @Component({
@@ -9,7 +8,7 @@ type GroupKey = 'taxonomy' | 'geography' | 'growth' | 'leaves' | 'fruits';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './dataset.component.html',
-  styleUrl: './dataset.component.scss'
+  styleUrl: './dataset.component.scss',
 })
 export class DatasetComponent {
   expandedGroups: Record<GroupKey, boolean> = {
