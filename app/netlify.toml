@@ -1,5 +1,5 @@
 [build]
-  publish = "dist/palmier/browser"
+  publish = "app/dist/palmier/browser"
   command = "yarn build:prod"
 
 [[redirects]]
