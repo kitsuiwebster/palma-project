@@ -54,8 +54,6 @@ export class DataService {
   }
 
   // Fonction pour rechercher des palmiers par terme
-  // Méthode searchPalms corrigée pour DataService
-
 searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
   console.log('Searching palms with term:', term);
   
@@ -113,6 +111,77 @@ searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
           score += 10;
         }
         
+        // NOUVELLE FONCTIONNALITÉ: Recherche dans les noms communs
+        
+        // Nom commun français
+        if (palm.CommonNamesFR) {
+          const commonNamesFR = palm.CommonNamesFR.toLowerCase();
+          
+          // Diviser les noms communs qui sont séparés par des virgules ou des espaces
+          const frenchNames = commonNamesFR.split(/,\s*|\s+/);
+          
+          for (const name of frenchNames) {
+            if (name.startsWith(searchTerm)) {
+              score += 80; // Score élevé pour une correspondance exacte au début
+              break;
+            } else if (name.includes(searchTerm)) {
+              score += 30; // Score moyen pour une correspondance partielle
+              break;
+            }
+          }
+          
+          // Recherche globale dans la chaîne complète des noms communs
+          if (commonNamesFR.includes(searchTerm)) {
+            score += 20;
+          }
+        }
+        
+        // Nom commun espagnol
+        if (palm.CommonNamesSP) {
+          const commonNamesSP = palm.CommonNamesSP.toLowerCase();
+          
+          // Diviser les noms communs qui sont séparés par des virgules ou des espaces
+          const spanishNames = commonNamesSP.split(/,\s*|\s+/);
+          
+          for (const name of spanishNames) {
+            if (name.startsWith(searchTerm)) {
+              score += 80;
+              break;
+            } else if (name.includes(searchTerm)) {
+              score += 30;
+              break;
+            }
+          }
+          
+          // Recherche globale dans la chaîne complète des noms communs
+          if (commonNamesSP.includes(searchTerm)) {
+            score += 20;
+          }
+        }
+        
+        // Nom commun anglais
+        if (palm.CommonNamesEN) {
+          const commonNamesEN = palm.CommonNamesEN.toLowerCase();
+          
+          // Diviser les noms communs qui sont séparés par des virgules ou des espaces
+          const englishNames = commonNamesEN.split(/,\s*|\s+/);
+          
+          for (const name of englishNames) {
+            if (name.startsWith(searchTerm)) {
+              score += 80;
+              break;
+            } else if (name.includes(searchTerm)) {
+              score += 30;
+              break;
+            }
+          }
+          
+          // Recherche globale dans la chaîne complète des noms communs
+          if (commonNamesEN.includes(searchTerm)) {
+            score += 20;
+          }
+        }
+        
         return score;
       };
 
@@ -129,6 +198,11 @@ searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
       console.log(`Found ${results.length} results for "${term}"`);
       if (results.length > 0) {
         console.log('First few results:', results.slice(0, 3).map(p => p.genus + ' ' + p.species));
+      }
+      
+      // Limiter le nombre de résultats si demandé
+      if (limit && results.length > limit) {
+        results = results.slice(0, limit);
       }
       
       return results;
