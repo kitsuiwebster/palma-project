@@ -17,17 +17,12 @@
         <span class="nav-text">Palms Data</span>
       </a>
       <div class="info-menu-wrapper">
-        <button class="icon-button info-button" (click)="toggleInfoMenu()" aria-label="Info Menu">
-          <span class="icon-wrapper">
-            <img src="assets/icons/info.png" alt="Info icon" class="custom-icon">
-          </span>
-        </button>
         <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
           <div class="menu-items">
-            <a class="menu-item" routerLink="/photos-credits" (click)="toggleInfoMenu()">
+            <a class="menu-item" routerLink="/photos-credits" (click)="closeInfoMenu()">
               <span>Photograph Credits</span>
             </a>
-            <a class="menu-item" routerLink="/references" (click)="toggleInfoMenu()">
+            <a class="menu-item" routerLink="/references" (click)="closeInfoMenu()">
               <span>References</span>
             </a>
           </div>

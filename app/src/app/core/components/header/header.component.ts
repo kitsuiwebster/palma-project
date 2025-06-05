@@ -29,6 +29,10 @@ export class HeaderComponent {
     this.isInfoMenuOpen = !this.isInfoMenuOpen;
   }
 
+  closeInfoMenu(): void {
+    this.isInfoMenuOpen = false;
+  }
+
   // Fermer le menu info si on clique ailleurs
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
