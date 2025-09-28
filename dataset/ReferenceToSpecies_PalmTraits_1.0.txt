@@ -163,7 +163,7 @@ Astrocaryum rodriguesii	"AAU Herbarium; Lorenzi 2010; Kew Herbarium"
 Astrocaryum sciophilum	"Henderson 2002; Henderson et al. 1995; Kew Herbarium; Lorenzi 2010; Kew Herbarium"
 Astrocaryum scopatum	
 Astrocaryum sociale	"Kew Herbarium; Lorenzi 2010"
-Astrocaryum standleyanum	"AAU Herbarium; Borchsenius et al. 1998; Galeano and Bernal 2010; Henderson 2002; Henderson et al. 1995; Regina Schönfeldter unpubl."
+Astrocaryum standleyanum	"AAU Herbarium; Borchsenius et al. 1998; Galeano and Bernal 2010; Henderson 2002; Henderson et al. 1995; Regina SchÃ¶nfeldter unpubl."
 Astrocaryum triandrum	"AAU Herbarium; Galeano and Bernal 2010; Henderson 2002; Henderson et al. 1995; Kew Herbarium"
 Astrocaryum tucuma	Tradewindsfruit
 Astrocaryum ulei	"AAU Herbarium; Lorenzi 2010"
@@ -1597,11 +1597,11 @@ Hydriastele valida	"AAU Herbarium; Kew Herbarium; Palmpedia"
 Hydriastele variabilis	Petoe et al. 2018
 Hydriastele vitiensis	Kew Herbarium
 Hydriastele wendlandiana	"Dowe 2010; Petoe et al. 2018"
-Hyophorbe amaricaulis	"Henderson 2002; Moore and Guého 1984; Palmpedia"
-Hyophorbe indica	"AAU Herbarium; Henderson 2002; Kew Herbarium; Moore and Guého 1984; Palmpedia"
-Hyophorbe lagenicaulis	"AAU Herbarium; Henderson 2002; Moore and Guého 1984; Palmpedia"
-Hyophorbe vaughanii	"Henderson 2002; Moore and Guého 1984; Kew Herbarium"
-Hyophorbe verschaffeltii	"Henderson 2002; Kew Herbarium; Moore and Guého 1984"
+Hyophorbe amaricaulis	"Henderson 2002; Moore and GuÃ©ho 1984; Palmpedia"
+Hyophorbe indica	"AAU Herbarium; Henderson 2002; Kew Herbarium; Moore and GuÃ©ho 1984; Palmpedia"
+Hyophorbe lagenicaulis	"AAU Herbarium; Henderson 2002; Moore and GuÃ©ho 1984; Palmpedia"
+Hyophorbe vaughanii	"Henderson 2002; Moore and GuÃ©ho 1984; Kew Herbarium"
+Hyophorbe verschaffeltii	"Henderson 2002; Kew Herbarium; Moore and GuÃ©ho 1984"
 Hyospathe elegans	"AAU Herbarium; Borchsenius et al. 1998; Henderson 2002; Henderson et al. 1995; Skov and Balslev 1989; Henderson 2004"
 Hyospathe frontinensis	"Galeano and Bernal 2010; Henderson 2004"
 Hyospathe macrorhachis	"AAU Herbarium; Borchsenius et al. 1998; Henderson et al. 1995; Henderson 2004"
@@ -1706,9 +1706,9 @@ Lanonia gracilis	Palmpedia
 Lanonia hainanensis	Palmpedia
 Lanonia hexasepala	Palmpedia
 Lanonia magalonii	Palmpedia
-Latania loddigesii	"Henderson 2002; Kew Herbarium; Moore and Guého 1984; Palmpedia"
-Latania lontaroides	"Henderson 2002; Kew Herbarium; Moore and Guého 1984; Palmpedia"
-Latania verschaffeltii	"Henderson 2002; Moore and Guého 1984; Palmpedia"
+Latania loddigesii	"Henderson 2002; Kew Herbarium; Moore and GuÃ©ho 1984; Palmpedia"
+Latania lontaroides	"Henderson 2002; Kew Herbarium; Moore and GuÃ©ho 1984; Palmpedia"
+Latania verschaffeltii	"Henderson 2002; Moore and GuÃ©ho 1984; Palmpedia"
 Lemurophoenix halleuxii	"Dransfield and Beentje 1995; Essig 2008; Henderson 2002"
 Leopoldinia piassaba	"Henderson 2002; Henderson et al. 1995; Kew Herbarium; Lorenzi 2010"
 Leopoldinia pulchra	"Henderson 2002; Henderson et al. 1995; Kew Herbarium; Lorenzi 2010"

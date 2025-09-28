@@ -134,4 +134,8 @@ Plantillustrations (http://www.plantillustrations.org/)
 Tradewindsfruit (http://www.tradewindsfruit.com/)	
 Palma Encyclopedia (https://www.palma-encyclopedia.com)
 Aarhus University Herbarium	
-Kew Royal Botanic Gardens Herbarium	
+Kew Royal Botanic Gardens Herbarium
+GBIF API (https://api.gbif.org/)	
+iNaturalist API (https://api.inaturalist.org/)	
+Wikimedia Commons API (https://commons.wikimedia.org/w/api.php)	
+Kew POWO API (https://powo.science.kew.org/api/)	
