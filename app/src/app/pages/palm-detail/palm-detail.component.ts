@@ -10,6 +10,7 @@ import { PalmTrait } from '../../core/models/palm-trait.model';
 import { FlagService } from '../../core/services/flag.service';
 import { RegionWithFlagsPipe } from '../../shared/pipes/region-with-flags.pipe';
 import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pipe';
+import { ImageLightboxComponent } from '../../shared/components/image-lightbox/image-lightbox.component';
 
 @Component({
   selector: 'app-palm-detail',
@@ -20,6 +21,7 @@ import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pi
     RouterModule,
     CommonModule,
     FormatCommonNamesPipe,
+    ImageLightboxComponent,
   ],
 })
 export class PalmDetailComponent implements OnInit {
@@ -30,6 +32,11 @@ export class PalmDetailComponent implements OnInit {
   error = false;
   notFound = false;
   activeTab = 0;
+
+  // Lightbox properties
+  showLightbox = false;
+  currentImageUrl = '';
+  currentSpeciesName = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -186,7 +193,37 @@ export class PalmDetailComponent implements OnInit {
 
   getNativeRegions(palm: PalmTrait): string[] {
     if (!palm?.native_region) return [];
-    return palm.native_region.split(/[,;]+/).map(r => r.trim());
+    // Remove parentheses content
+    let native = palm.native_region.replace(/\([^)]*\)/g, '').trim();
+    let result: string[] = [];
+    // If " to " is present, split into left and right parts
+    if (native.toLowerCase().includes(" to ")) {
+      // Left: before last " to " ; Right: after last " to "
+      const idx = native.toLowerCase().lastIndexOf(" to ");
+      const left = native.substring(0, idx).trim();
+      const right = native.substring(idx + 4).trim();
+      // For left, take the last token if separated by comma or semicolon
+      const leftTokens = left.split(/[,;]+/).map(p => p.trim()).filter(p => p);
+      if(leftTokens.length) {
+        result.push(leftTokens[leftTokens.length - 1]);
+      }
+      // For right, split by "and" or "&"
+      let parts = right.split(/\s+(?:and|&)\s+/i).map(p => p.trim()).filter(p => p);
+      parts.forEach(part => {
+        // If the part contains "&", choose the longer segment
+        if (part.includes("&")) {
+          const subParts = part.split(/\s*&\s*/).map(s => s.trim()).filter(s => s);
+          subParts.sort((a, b) => b.length - a.length);
+          result.push(subParts[0]);
+        } else {
+          result.push(part);
+        }
+      });
+    } else {
+      // If no "to" exists, split by commas, semicolons, "and", or "&"
+      result = native.split(/\s*(?:,|;|and|&)\s*/i).map(p => p.trim()).filter(p => p);
+    }
+    return result;
   }
 
   fetchFlag(region: string): void {
@@ -225,5 +262,22 @@ export class PalmDetailComponent implements OnInit {
     const name = this.palm.SpecName || this.palm.species;
     if (!name) return null;
     return this.referencesMap[name.trim()] || null;
+  }
+
+  // Lightbox methods
+  openLightbox(imageUrl: string, speciesName: string) {
+    this.currentImageUrl = imageUrl;
+    this.currentSpeciesName = speciesName;
+    this.showLightbox = true;
+    // Prevent body scroll when lightbox is open
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeLightbox() {
+    this.showLightbox = false;
+    this.currentImageUrl = '';
+    this.currentSpeciesName = '';
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
   }
 }

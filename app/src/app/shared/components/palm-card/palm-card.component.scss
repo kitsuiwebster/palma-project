@@ -125,14 +125,7 @@
   transform: translateY(0);
 }
 
-.flag-img {
-  width: 20px;
-  height: auto;
-  vertical-align: middle;
-  margin-right: 4px;
-  margin-left: 2px;
-  margin-bottom: 2px;
-}
+// Flag styles moved to global styles.scss for consistency
 
 .image-wrapper {
   position: relative;
@@ -182,11 +175,6 @@
     font-size: 0.95rem;
     color: $text-dark;
 
-    .common-name-flag {
-      width: 20px;
-      height: auto;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
+    // common-name-flag styles moved to global styles.scss
   }
 }

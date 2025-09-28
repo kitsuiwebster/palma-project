@@ -33,15 +33,15 @@
           <h1>{{getSpeciesName(palm)}}</h1>
           <div class="common-names" style="margin: 8px 0;">
             <div *ngIf="palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name'" class="common-name-item">
-              <img src="https://flagcdn.com/w20/gb.png" alt="EN" style="vertical-align: middle; margin-right: 4px; margin-bottom: 4px;">
+              <img src="https://flagcdn.com/w20/gb.png" alt="EN" class="common-name-flag">
               <span>{{ palm.CommonNamesEN | formatCommonNames }}</span>
             </div>
             <div *ngIf="palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun'" class="common-name-item">
-              <img src="https://flagcdn.com/w20/fr.png" alt="FR" style="vertical-align: middle; margin-right: 4px; margin-bottom: 4px;">
+              <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="common-name-flag">
               <span>{{ palm.CommonNamesFR | formatCommonNames }}</span>
             </div>
             <div *ngIf="palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común'" class="common-name-item">
-              <img src="https://flagcdn.com/w20/es.png" alt="ES" style="vertical-align: middle; margin-right: 4px; margin-bottom: 4px;">
+              <img src="https://flagcdn.com/w20/es.png" alt="ES" class="common-name-flag">
               <span>{{ palm.CommonNamesSP | formatCommonNames }}</span>
             </div>
           </div>
@@ -53,8 +53,14 @@
       </div>
   
       <div class="palm-content">
-        <div class="palm-image-container">
-          <img [src]="palm.image_url || 'assets/images/palm-default.jpg'" [alt]="getSpeciesName(palm)" class="palm-image">
+        <div class="palm-image-container" (click)="openLightbox(palm.image_url || 'assets/images/palm-default.jpg', getSpeciesName(palm))">
+          <img [src]="palm.image_url || 'assets/images/palm-default.jpg'" [alt]="getSpeciesName(palm)" class="palm-image clickable-image">
+          <div class="image-overlay">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>View full size</span>
+          </div>
         </div>
   
         <div class="custom-divider"></div>
@@ -115,7 +121,7 @@
                 <span *ngFor="let region of getNativeRegions(palm)" class="region-item">
                   <img *ngIf="getFlagUrl(region)" [src]="getFlagUrl(region)" alt="{{region}} flag" class="flag-img" />
                   <span *ngIf="!getFlagUrl(region)" class="flag-placeholder"> </span>
-                  {{region}}
+                  {{region}}&nbsp;
                 </span>
               </div>
             </div>
@@ -124,8 +130,13 @@
             <div *ngIf="activeTab === 2" class="tab-panel">
               <div *ngIf="getAllPhotoUrls(palm).length > 0; else noImages">
                 <div class="photo-gallery">
-                  <div class="photo-container" *ngFor="let url of getAllPhotoUrls(palm)">
-                    <img [src]="url" alt="Palm photo" class="gallery-photo" />
+                  <div class="photo-container" *ngFor="let url of getAllPhotoUrls(palm)" (click)="openLightbox(url, getSpeciesName(palm))">
+                    <img [src]="url" alt="Palm photo" class="gallery-photo clickable-image" />
+                    <div class="gallery-overlay">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -137,4 +148,12 @@
         </div>
       </div>
     </ng-container>
+
+    <!-- Image Lightbox -->
+    <app-image-lightbox 
+      [imageUrl]="currentImageUrl"
+      [speciesName]="currentSpeciesName"
+      [isVisible]="showLightbox"
+      (close)="closeLightbox()">
+    </app-image-lightbox>
   </div>

@@ -25,7 +25,7 @@
           <span *ngFor="let region of getNativeRegions()" class="region-item">
             <img *ngIf="getFlagUrl(region)" [src]="getFlagUrl(region)" alt="{{region}} flag" class="flag-img"/>
             <span *ngIf="!getFlagUrl(region)" class="flag-placeholder"></span>
-            <span class="region-text">{{ region }}</span>
+            <span class="region-text">{{ region }}&nbsp;</span>
           </span>
         </span>
       </div>
