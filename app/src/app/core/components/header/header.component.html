@@ -16,13 +16,16 @@
       <a class="nav-link" routerLink="/data" routerLinkActive="active">
         <span class="nav-text">Palms Data</span>
       </a>
+      <a class="nav-link" routerLink="/about" routerLinkActive="active">
+        <span class="nav-text">About</span>
+      </a>
       <div class="info-menu-wrapper">
         <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
           <div class="menu-items">
-            <a class="menu-item" routerLink="/photos-credits" (click)="closeInfoMenu()">
+            <a class="menu-item" routerLink="/data/photo-credits" (click)="closeInfoMenu()">
               <span>Photograph Credits</span>
             </a>
-            <a class="menu-item" routerLink="/references" (click)="closeInfoMenu()">
+            <a class="menu-item" routerLink="/data/references" (click)="closeInfoMenu()">
               <span>References</span>
             </a>
           </div>
@@ -61,15 +64,21 @@
         </span>
         <span class="mobile-nav-text">Palms Data</span>
       </a>
-      <a class="mobile-nav-link" routerLink="/photos-credits" routerLinkActive="active" (click)="toggleMenu()">
+      <a class="mobile-nav-link" routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/info.png" alt="About icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">About</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/data/photo-credits" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
           <img src="assets/icons/camera.png" alt="Photo icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">Photograph Credits</span>
       </a>
-      <a class="mobile-nav-link" routerLink="/references" routerLinkActive="active" (click)="toggleMenu()">
+      <a class="mobile-nav-link" routerLink="/data/references" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/info.png" alt="References icon" class="custom-icon">
+          <img src="assets/icons/mindmap.png" alt="References icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">References</span>
       </a>

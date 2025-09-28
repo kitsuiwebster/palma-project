@@ -25,19 +25,48 @@ export const routes: Routes = [
   },
   {
     path: 'data',
-    loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+      },
+      {
+        path: 'overview',
+        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+      },
+      {
+        path: 'dataset',
+        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+      },
+      {
+        path: 'methodology',
+        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+      },
+      {
+        path: 'references',
+        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+      },
+      {
+        path: 'photo-credits',
+        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+      }
+    ]
   },
   {
-    path: 'photos-credits',
-    loadComponent: () => import('./pages/photos-credits/photos-credits.component').then(c => c.PhotosCreditsComponent)
-  },
-  {
-    path: 'references',
-    loadComponent: () => import('./pages/references/references.component').then(c => c.ReferencesComponent)
+    path: 'about',
+    loadComponent: () => import('./pages/about/about.component').then(c => c.AboutComponent)
   },
   {
     path: 'privacy',
     loadComponent: () => import('./pages/privacy/privacy.component').then(c => c.PrivacyComponent)
+  },
+  {
+    path: 'photos-credits',
+    redirectTo: 'data/photo-credits'
+  },
+  {
+    path: 'references',
+    redirectTo: 'data/references'
   },
   {
     path: '**',
