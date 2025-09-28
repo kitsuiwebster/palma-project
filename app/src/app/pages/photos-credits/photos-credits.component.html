@@ -71,7 +71,7 @@
             <span class="clear-filter" (click)="searchInput.value = ''; searchTerm = ''; filterCredits();">✕</span>
           </div>
         </div>
-        <button class="btn-outline" (click)="exportToCSV()" *ngIf="filteredCredits.length > 0">
+        <button class="btn-outline export-button" (click)="exportToCSV()" *ngIf="filteredCredits.length > 0">
           <div class="icon-wrapper">
             <img src="assets/icons/dl.png" alt="Export" class="custom-icon">
           </div>

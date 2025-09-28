@@ -1,43 +1,138 @@
 <!-- src/app/core/components/footer/footer.component.html -->
 <footer class="footer">
     <div class="container footer-content">
+        <!-- Project Info Section -->
+        <div class="footer-section project-info">
+            <div class="footer-logo">
+                <h3>Palma Encyclopedia</h3>
+                <p class="tagline">Comprehensive Palm Tree Database</p>
+            </div>
+            <p class="description">
+                Explore over 2,500 palm species with detailed morphological traits, distribution data, and scientific references. Contributing to botanical research and biodiversity understanding.
+            </p>
+            <div class="footer-stats">
+                <div class="stat-item">
+                    <span class="stat-number">2,557</span>
+                    <span class="stat-label">Species</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">181</span>
+                    <span class="stat-label">Genera</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">120+</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links Section -->
         <div class="footer-section">
-            <h3>Navigation</h3>
+            <h3>Explore</h3>
             <nav class="footer-nav">
                 <a routerLink="/palms">Browse Palms</a>
                 <a routerLink="/palms/search">Advanced Search</a>
                 <a routerLink="/data/overview">Overview</a>
                 <a routerLink="/data/dataset">Dataset</a>
                 <a routerLink="/data/methodology">Methodology</a>
+            </nav>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <nav class="footer-nav">
                 <a routerLink="/data/references">References</a>
                 <a routerLink="/data/photo-credits">Photo Credits</a>
                 <a routerLink="/about">About</a>
+                <a routerLink="/privacy">Privacy Policy</a>
+                <a href="https://github.com/kitsuiwebster/palma-project" target="_blank" rel="noopener noreferrer">
+                    GitHub Repository
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 13V19C18 19.5523 17.5523 20 17 20H5C4.44772 20 4 19.5523 4 19V7C4 6.44772 4.44772 6 5 6H11M15 3H21V9M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
             </nav>
         </div>
+
+        <!-- Contact & Social Section -->
         <div class="footer-section">
-            <h3>Palm Wisdom</h3>
-            <div class="quote-container">
-                <p class="quote">
-                    "The palm tree grows slowly, but when it stands, it stands for centuries."
-                    <span class="quote-author">— African Proverb</span>
+            <h3>Connect</h3>
+            <div class="contact-info">
+                <p class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4L3 11L10 14M20 4L13 21L10 14M20 4L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Project by <a href="https://kitsuiwebster.com" target="_blank" rel="noopener noreferrer">&#64;kitsuiwebster</a>
                 </p>
-                <p class="quote">
-                    "Be like the date palm: the more it is oppressed by the weight, the more it rises."
-                    <span class="quote-author">— Ali ibn Abi Talib</span>
+                <p class="contact-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 19C4 19 4 16 2 16M22 19V13.1321C22 12.5828 21.4142 12.4243 21.0947 12.8321L18 16.5M22 19C22 19.5523 21.5523 20 21 20H13C12.4477 20 12 19.5523 12 19V13C12 12.4477 12.4477 12 13 12H21C21.5523 12 22 12.4477 22 13V19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Open Source & Research
                 </p>
-                <p class="quote">
-                    "Even the palm tree, in the desert, needs water."
-                    <span class="quote-author">— Paulo Coelho</span>
-                </p>
+            </div>
+            <div class="quotes-carousel">
+                <div class="quote-item active">
+                    <p class="quote">
+                        "The coconut palm is the tree of life, providing shelter, food, and sustenance."
+                        <span class="quote-author">— Polynesian Proverb</span>
+                    </p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote">
+                        "The palm teaches us patience and strength."
+                        <span class="quote-author">— André Gide</span>
+                    </p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote">
+                        "The palm tree grows slowly, but when it stands, it stands for centuries."
+                        <span class="quote-author">— African Proverb</span>
+                    </p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote">
+                        "Be like the date palm: the more it is oppressed by the weight, the more it rises."
+                        <span class="quote-author">— Ali ibn Abi Talib</span>
+                    </p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote">
+                        "Even the palm tree, in the desert, needs water."
+                        <span class="quote-author">— Paulo Coelho</span>
+                    </p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote">
+                        "Under the shade of a palm tree, wisdom grows as deep as its roots."
+                        <span class="quote-author">— Arabian Saying</span>
+                    </p>
+                </div>
+                <div class="quote-item">
+                    <p class="quote">
+                        "The palm speaks of victory, but its roots speak of endurance."
+                        <span class="quote-author">— Mediterranean Proverb</span>
+                    </p>
+                </div>
+                <div class="quote-indicators">
+                    <button class="indicator active" (click)="setCurrentQuote(0)"></button>
+                    <button class="indicator" (click)="setCurrentQuote(1)"></button>
+                    <button class="indicator" (click)="setCurrentQuote(2)"></button>
+                    <button class="indicator" (click)="setCurrentQuote(3)"></button>
+                    <button class="indicator" (click)="setCurrentQuote(4)"></button>
+                    <button class="indicator" (click)="setCurrentQuote(5)"></button>
+                    <button class="indicator" (click)="setCurrentQuote(6)"></button>
+                </div>
             </div>
         </div>
     </div>
+    
     <div class="footer-bottom">
         <div class="container">
-            <p>© {{ currentYear }} Palma Encyclopedia - <a href="https://kitsuiwebster.com" target="_blank" rel="noopener noreferrer">&#64;kitsuiwebster</a></p>
-            <p>
-                <a routerLink="/privacy">Privacy Policy</a>
-            </p>
+            <div class="footer-bottom-content">
+                <p class="copyright">© {{ currentYear }} Palma Encyclopedia. All rights reserved.</p>
+            </div>
         </div>
     </div>
 </footer>
