@@ -88,6 +88,8 @@ Keim, A. P. & Dransfield, J. (2012): A monograph of the genus Orania (Arecaceae:
 Kiew, R. 1977. Taxonomy, ecology and biology of sago palms in Malaysia and Sarawak. In Sago-76. Proc. 1st International Sago Symposium, Kuching, Malaysia 5-7 July 1976 (K. Tan, ed.), pp. 147-154.	
 Kumagai, L. & Hanazaki, N. (2013): Ethnobotanical and ethnoecological study of Butia catarinensis Noblick & Lorenzi: contributions to the conservation of an endangered area in southern Brazil. Acta Botanica Brasilica 27: 13-20.	
 Lorenzi, H. (2010): Brazilian Flora Arecaceae (Palms). Instituto Plantarum, Nova Odessa, Brasil.	
+Martin, R. (2025). Palma-1.0: A global palm dataset.
+Martin, R. (2025). Palma Encyclopedia: A web platform for Arecaceae systematics. https://palma-encyclopedia.com
 McClatchey, W.C. 1999. Phylogenetic analysis of morphological characters of Metroxylon section Coelococcus (Palmae) and resulting implications for studies of other Calamoideae genera. Mem. New York Bot. Gard., 83, 285-306 	
 Mogea, J. P. (1991): Indonesia: palm utilization and conservation. In: D. Johnson (ed.), Palms for human needs in Asia, A.A. Balkema, Rotterdam, pp. 37-73.	
 Moore, H.E. (1957): Synopses of various genera of Arecoideae: Veitchia. Gentes Herbarum 8: 483-536.	
@@ -130,5 +132,6 @@ Fairchild Tropical Garden Herbarium (http://www.virtualherbarium.org/)
 Wikipedia (https://en.wikipedia.org/wiki/Main_Page)	
 Plantillustrations (http://www.plantillustrations.org/)	
 Tradewindsfruit (http://www.tradewindsfruit.com/)	
+Palma Encyclopedia (https://www.palma-encyclopedia.com)
 Aarhus University Herbarium	
 Kew Royal Botanic Gardens Herbarium	
