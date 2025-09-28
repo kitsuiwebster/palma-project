@@ -276,6 +276,171 @@
   }
 }
 
+// Extra small screens
+@media (max-width: 480px) {
+  .about-container {
+    padding: 15px 10px;
+  }
+  
+  .about-content {
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .creator-section {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-header {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-image .profile-photo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .profile-info {
+    h2 {
+      font-size: 1.3rem;
+    }
+    
+    .title {
+      font-size: 1rem;
+    }
+    
+    .location {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .story-section {
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+  }
+  
+  .project-vision {
+    padding: 20px;
+    margin-bottom: 20px;
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .vision-content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .goal-item {
+    padding: 12px;
+    gap: 10px;
+    
+    .goal-icon {
+      font-size: 1.3rem;
+    }
+    
+    span:last-child {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .contact-section {
+    padding: 20px;
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      
+      &.collaboration-note {
+        font-size: 0.9rem;
+        margin-top: 16px;
+      }
+    }
+  }
+  
+  .contact-link {
+    padding: 10px 16px;
+    max-width: 100%;
+    font-size: 0.9rem;
+    
+    .contact-icon {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Very small screens
+@media (max-width: 320px) {
+  .about-container {
+    padding: 10px 8px;
+  }
+  
+  .about-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .creator-section {
+    padding: 16px;
+  }
+  
+  .profile-info h2 {
+    font-size: 1.2rem;
+  }
+  
+  .story-section {
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.95rem;
+    }
+  }
+  
+  .project-vision {
+    padding: 16px;
+    
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+  
+  .vision-content p {
+    font-size: 0.95rem;
+  }
+  
+  .contact-section {
+    padding: 16px;
+    
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.95rem;
+    }
+  }
+}
+
 // Animation classes
 @keyframes fadeInUp {
   from {

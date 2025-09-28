@@ -133,6 +133,157 @@ h1 {
   }
 }
 
+// Extra small screens
+@media (max-width: 480px) {
+  .privacy-container {
+    padding: 15px 10px;
+  }
+  
+  .privacy-content {
+    padding: 20px;
+    border-radius: 6px;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+  }
+  
+  .last-updated {
+    padding: 12px;
+    margin-bottom: 25px;
+    
+    p {
+      font-size: 0.9em;
+    }
+  }
+  
+  .privacy-section {
+    margin-bottom: 30px;
+    
+    h2 {
+      font-size: 1.25em;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+    }
+    
+    h3 {
+      font-size: 1.05em;
+      margin: 16px 0 8px 0;
+    }
+    
+    p {
+      margin-bottom: 12px;
+      font-size: 0.95em;
+      text-align: left;
+    }
+    
+    ul {
+      margin: 12px 0;
+      padding-left: 20px;
+      
+      li {
+        margin-bottom: 6px;
+        font-size: 0.95em;
+      }
+    }
+  }
+  
+  .contact-info {
+    padding: 16px;
+    margin: 16px 0;
+    
+    p {
+      margin: 4px 0;
+      font-size: 0.95em;
+    }
+  }
+  
+  .policy-footer {
+    margin-top: 30px;
+    padding: 20px;
+    
+    p {
+      font-size: 0.9em;
+    }
+  }
+}
+
+// Very small screens
+@media (max-width: 320px) {
+  .privacy-container {
+    padding: 10px 8px;
+  }
+  
+  .privacy-content {
+    padding: 16px;
+  }
+  
+  h1 {
+    font-size: 1.6em;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+  
+  .last-updated {
+    padding: 10px;
+    margin-bottom: 20px;
+    
+    p {
+      font-size: 0.85em;
+    }
+  }
+  
+  .privacy-section {
+    margin-bottom: 25px;
+    
+    h2 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    
+    h3 {
+      font-size: 1em;
+      margin: 14px 0 6px 0;
+    }
+    
+    p {
+      margin-bottom: 10px;
+      font-size: 0.9em;
+    }
+    
+    ul {
+      margin: 10px 0;
+      padding-left: 16px;
+      
+      li {
+        margin-bottom: 4px;
+        font-size: 0.9em;
+      }
+    }
+  }
+  
+  .contact-info {
+    padding: 12px;
+    margin: 12px 0;
+    
+    p {
+      margin: 3px 0;
+      font-size: 0.9em;
+    }
+  }
+  
+  .policy-footer {
+    margin-top: 25px;
+    padding: 16px;
+    
+    p {
+      font-size: 0.85em;
+    }
+  }
+}
+
 // Print styles
 @media print {
   .privacy-container {

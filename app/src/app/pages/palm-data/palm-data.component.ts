@@ -50,6 +50,11 @@ export class PalmDataComponent implements OnInit, OnDestroy {
         // Default route /data
         this.activeTab = 'overview';
       }
+      
+      // Scroll to top when route changes
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
     });
   }
 
@@ -68,5 +73,10 @@ export class PalmDataComponent implements OnInit, OnDestroy {
       'photos': '/data/photo-credits'
     };
     this.router.navigate([routeMap[tab]]);
+    
+    // Scroll to top after tab switch
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 150);
   }
 }
