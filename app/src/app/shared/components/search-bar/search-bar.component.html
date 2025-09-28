@@ -19,6 +19,21 @@
     <div *ngIf="resultsVisible && searchControl.value && (searchResults$ | async) as results" class="search-results"
         (click)="onResultsClick($event)">
 
+        <!-- Display search results -->
+        <div *ngIf="results.length > 0" class="results-list">
+            <div *ngFor="let palm of results.slice(0, 8)" class="result-item" (click)="goToPalmDetail(palm)">
+                <div class="result-content">
+                    <h4 class="species-name">{{ getSpeciesName(palm) }}</h4>
+                    <p class="genus-name">{{ getGenusName(palm) }}</p>
+                    <p *ngIf="palm.NativeRegion" class="region">{{ palm.NativeRegion }}</p>
+                </div>
+            </div>
+            
+            <!-- Show more results indicator -->
+            <div *ngIf="results.length > 8" class="more-results" (click)="onSearchSubmit()">
+                <p>View all {{ results.length }} results →</p>
+            </div>
+        </div>
         
         <div *ngIf="results.length === 0 && !loading" class="no-results">
             <p>No palms matching your search criteria.</p>

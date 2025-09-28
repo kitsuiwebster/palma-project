@@ -8,6 +8,7 @@ export interface PalmTrait {
   accSpecies: string;
   PalmTribe: string;
   PalmSubfamily: string;
+  NativeRegion: string;
 
   // Caractéristiques physiques
   Climbing: number;

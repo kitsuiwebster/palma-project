@@ -3,7 +3,7 @@ import { SearchService } from '../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest, of } from 'rxjs';
-import { map, debounceTime, tap, shareReplay, switchMap, startWith } from 'rxjs/operators';
+import { map, debounceTime, tap, shareReplay, switchMap, startWith, distinctUntilChanged } from 'rxjs/operators';
 import { DataService } from '../../core/services/data.service';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
@@ -24,8 +24,9 @@ import { CommonModule } from '@angular/common';
 export class PalmSearchComponent implements OnInit {
   searchDone = false;
   allPalms: PalmTrait[] = [];
-  allResults$!: Observable<PalmTrait[]>;
-  searchResults$: Observable<PalmTrait[]>;
+  currentSearchResults: PalmTrait[] = []; // Store current search base results
+  searchResults$: Observable<PalmTrait[]> = of([]);
+  paginatedResults$: Observable<PalmTrait[]> = of([]);
   loading = true;
   searchForm: FormGroup;
   searchQuery = '';
@@ -36,13 +37,16 @@ export class PalmSearchComponent implements OnInit {
   pageSize = 20;
   pageSizeOptions = [20, 50, 100];
   
-  // Filter options
+  // Filter options (cached)
   genera: string[] = [];
   habitats: string[] = [];
   palmTribes: string[] = [];
   palmSubfamilies: string[] = [];
   fruitSizes: string[] = [];
   conspicuousness: string[] = [];
+  
+  // Cache for filter options to avoid recomputing
+  private filterOptionsCache: any = null;
   
   // Caractéristiques binaires pour filtrer
   stemTypes = [
@@ -88,13 +92,8 @@ export class PalmSearchComponent implements OnInit {
       tap(palms => {
         this.allPalms = palms;
         
-        // Extract unique values for filter dropdowns
-        this.genera = [...new Set(palms.map((p) => p.accGenus || p.genus).filter(Boolean) as string[])].sort();
-        this.palmTribes = [...new Set(palms.map((p) => p.PalmTribe || p.tribe).filter(Boolean) as string[])].sort();
-        this.palmSubfamilies = [...new Set(palms.map((p) => p.PalmSubfamily).filter(Boolean))].sort();
-        this.habitats = [...new Set(palms.map((p) => p.UnderstoreyCanopy).filter(Boolean))].sort();
-        this.fruitSizes = [...new Set(palms.map((p) => p.FruitSizeCategorical).filter(Boolean))].sort();
-        this.conspicuousness = [...new Set(palms.map((p) => p.Conspicuousness).filter(Boolean))].sort();
+        // Initialize filter options with caching
+        this.initializeFilterOptions();
         
         this.loading = false;
       })
@@ -126,27 +125,16 @@ export class PalmSearchComponent implements OnInit {
           heightMax: params.get('heightMax') ? Number(params.get('heightMax')) : null,
         }, { emitEvent: false });
         
-        // If we have a query parameter, perform the search
-        if (query && query.trim().length > 0) {
-          this.searchDone = true;
-          this.executeSearch();
-        }
+        // No automatic search - user must click Search button
       })
     ).subscribe();
 
-    // Set up search results subscription - this will update whenever form values change
-    this.searchResults$ = this.searchForm.valueChanges.pipe(
-      debounceTime(300),
-      map(formValues => {
-        // Only apply live filtering if search has been done
-        if (this.searchDone) {
-          const filteredResults = this.filterPalms(this.allPalms, formValues);
-          this.totalResults = filteredResults.length;
-          console.log('Live filtering - filtered results count:', this.totalResults);
-          return filteredResults;
-        }
-        return [];
-      })
+    // Set up search results subscription - only shows results after explicit search
+    this.searchResults$ = of([]);
+
+    // Set up paginated results - combines search results with pagination
+    this.paginatedResults$ = this.searchResults$.pipe(
+      map(results => this.getPaginatedResults(results))
     );
   }
 
@@ -158,23 +146,38 @@ export class PalmSearchComponent implements OnInit {
       this.dataService.searchPalms(this.searchForm.value.query, null).pipe(
         tap(results => {
           console.log('Text search results:', results.length);
+          // Store the base search results
+          this.currentSearchResults = results;
           // After getting text search results, apply other filters
           const filteredResults = this.filterPalms(results, this.searchForm.value);
           this.totalResults = filteredResults.length;
+          // Reset to first page for new search
+          this.currentPage = 0;
           console.log('After all filters applied:', this.totalResults);
           this.searchService.updateSearchResults(filteredResults);
-          this.allResults$ = of(filteredResults);
           this.loading = false;
+          // Update search results observable directly
+          this.searchResults$ = of(filteredResults);
+          this.paginatedResults$ = this.searchResults$.pipe(
+            map(results => this.getPaginatedResults(results))
+          );
         })
       ).subscribe();
     } else {
-      // If no text query, just filter the entire dataset
+      // If no text query, use entire dataset as base
+      this.currentSearchResults = this.allPalms;
       const filteredResults = this.filterPalms(this.allPalms, this.searchForm.value);
       this.totalResults = filteredResults.length;
+      // Reset to first page for new search
+      this.currentPage = 0;
       console.log('Filter-only search results count:', this.totalResults);
       this.searchService.updateSearchResults(filteredResults);
-      this.allResults$ = of(filteredResults);
       this.loading = false;
+      // Update search results observable directly
+      this.searchResults$ = of(filteredResults);
+      this.paginatedResults$ = this.searchResults$.pipe(
+        map(results => this.getPaginatedResults(results))
+      );
     }
   }
 
@@ -361,6 +364,11 @@ export class PalmSearchComponent implements OnInit {
     queryParams['pageSize'] = this.pageSize;
 
     this.router.navigate(['/palms/search'], { queryParams });
+
+    // Update pagination display
+    this.paginatedResults$ = this.searchResults$.pipe(
+      map(results => this.getPaginatedResults(results))
+    );
   }
 
   getTotalPages(): number {
@@ -415,5 +423,84 @@ export class PalmSearchComponent implements OnInit {
 
   min(a: number, b: number): number {
     return Math.min(a, b);
+  }
+
+  // Get paginated subset of results
+  private getPaginatedResults(allResults: PalmTrait[]): PalmTrait[] {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return allResults.slice(startIndex, endIndex);
+  }
+
+
+  // Track last form values to detect actual filter changes
+  private lastFormValues: any = {};
+
+  // Check if filters have actually changed (not just pagination)
+  private hasFiltersChanged(currentValues: any): boolean {
+    const filterKeys = ['query', 'genus', 'tribe', 'subfamily', 'stemType', 'stemProperty', 
+                      'understoreyCanopy', 'fruitSize', 'conspicuousness', 'heightMin', 'heightMax'];
+    
+    const hasChanged = filterKeys.some(key => 
+      this.lastFormValues[key] !== currentValues[key]
+    );
+    
+    if (hasChanged) {
+      this.lastFormValues = { ...currentValues };
+    }
+    
+    return hasChanged;
+  }
+
+  // Initialize filter options with caching for better performance
+  private initializeFilterOptions(): void {
+    // Use cache if available
+    if (this.filterOptionsCache) {
+      this.genera = this.filterOptionsCache.genera;
+      this.palmTribes = this.filterOptionsCache.palmTribes;
+      this.palmSubfamilies = this.filterOptionsCache.palmSubfamilies;
+      this.habitats = this.filterOptionsCache.habitats;
+      this.fruitSizes = this.filterOptionsCache.fruitSizes;
+      this.conspicuousness = this.filterOptionsCache.conspicuousness;
+      console.log('Filter options loaded from cache');
+      return;
+    }
+
+    // Extract unique genera
+    this.genera = [...new Set(this.allPalms.map(palm => palm.accGenus || palm.genus).filter(Boolean) as string[])].sort();
+    
+    // Extract unique palm tribes  
+    this.palmTribes = [...new Set(this.allPalms.map(palm => palm.PalmTribe || palm.tribe).filter(Boolean) as string[])].sort();
+    
+    // Extract unique palm subfamilies
+    this.palmSubfamilies = [...new Set(this.allPalms.map(palm => palm.PalmSubfamily).filter(Boolean))].sort();
+    
+    // Extract unique habitats/understory-canopy values
+    this.habitats = [...new Set(this.allPalms.map(palm => palm.UnderstoreyCanopy).filter(Boolean))].sort();
+    
+    // Extract unique fruit sizes
+    this.fruitSizes = [...new Set(this.allPalms.map(palm => palm.FruitSizeCategorical).filter(Boolean))].sort();
+    
+    // Extract unique conspicuousness values
+    this.conspicuousness = [...new Set(this.allPalms.map(palm => palm.Conspicuousness).filter(Boolean))].sort();
+    
+    // Cache the results
+    this.filterOptionsCache = {
+      genera: this.genera,
+      palmTribes: this.palmTribes,
+      palmSubfamilies: this.palmSubfamilies,
+      habitats: this.habitats,
+      fruitSizes: this.fruitSizes,
+      conspicuousness: this.conspicuousness
+    };
+    
+    console.log('Filter options initialized and cached:', {
+      genera: this.genera.length,
+      tribes: this.palmTribes.length,
+      subfamilies: this.palmSubfamilies.length,
+      habitats: this.habitats.length,
+      fruitSizes: this.fruitSizes.length,
+      conspicuousness: this.conspicuousness.length
+    });
   }
 }
