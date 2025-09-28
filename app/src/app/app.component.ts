@@ -4,6 +4,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { CookieConsentComponent } from './shared/components/cookie-consent/cookie-consent.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -11,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterOutlet],
+  imports: [HeaderComponent, FooterComponent, CookieConsentComponent, RouterOutlet],
 })
 export class AppComponent implements OnInit {
   title = 'Palm Encyclopedia';

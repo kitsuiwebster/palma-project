@@ -1,0 +1,174 @@
+<div *ngIf="showBanner$ | async" class="cookie-consent-overlay" [@slideIn]>
+  <div class="cookie-consent-banner">
+    
+    <!-- Simple banner mode -->
+    <div *ngIf="!showAdvanced" class="simple-banner">
+      <div class="banner-content">
+        <div class="banner-icon">
+          🍪
+        </div>
+        <div class="banner-text">
+          <h3>We value your privacy</h3>
+          <p>
+            We use essential cookies to make our site work. With your consent, we may also use non-essential cookies 
+            to improve user experience and analyze website traffic. 
+            <a routerLink="/privacy" class="privacy-link">Read our Privacy Policy</a>
+          </p>
+        </div>
+      </div>
+      
+      <div class="banner-actions">
+        <button type="button" class="btn btn-secondary" (click)="acceptEssentialOnly()">
+          Essential Only
+        </button>
+        <button type="button" class="btn btn-outline" (click)="showAdvancedOptions()">
+          Customize
+        </button>
+        <button type="button" class="btn btn-primary" (click)="acceptAll()">
+          Accept All
+        </button>
+      </div>
+    </div>
+
+    <!-- Advanced options mode -->
+    <div *ngIf="showAdvanced" class="advanced-options">
+      <div class="modal-header">
+        <h3>Cookie Preferences</h3>
+        <button type="button" class="close-btn" (click)="closeAdvanced()" aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="consent-description">
+          <p>
+            We use different types of cookies to optimize your experience on our website. 
+            Please choose which cookies you consent to:
+          </p>
+        </div>
+
+        <div class="cookie-categories">
+          
+          <!-- Essential Cookies -->
+          <div class="cookie-category">
+            <div class="category-header">
+              <div class="toggle-container">
+                <input 
+                  type="checkbox" 
+                  id="essential-cookies" 
+                  [checked]="true" 
+                  disabled
+                  class="cookie-toggle"
+                >
+                <label for="essential-cookies" class="toggle-label required">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="category-info">
+                <h4>Essential Cookies <span class="required-badge">Required</span></h4>
+                <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+              </div>
+            </div>
+            <div class="category-details">
+              <small>Used for: Basic functionality, security, and navigation</small>
+            </div>
+          </div>
+
+          <!-- Analytics Cookies -->
+          <div class="cookie-category">
+            <div class="category-header">
+              <div class="toggle-container">
+                <input 
+                  type="checkbox" 
+                  id="analytics-cookies" 
+                  [(ngModel)]="preferences.analytics"
+                  class="cookie-toggle"
+                >
+                <label for="analytics-cookies" class="toggle-label">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="category-info">
+                <h4>Analytics Cookies</h4>
+                <p>Help us understand how visitors interact with our website by collecting anonymous information.</p>
+              </div>
+            </div>
+            <div class="category-details">
+              <small>Used for: Usage statistics, performance monitoring, site improvements</small>
+            </div>
+          </div>
+
+          <!-- Marketing Cookies -->
+          <div class="cookie-category">
+            <div class="category-header">
+              <div class="toggle-container">
+                <input 
+                  type="checkbox" 
+                  id="marketing-cookies" 
+                  [(ngModel)]="preferences.marketing"
+                  class="cookie-toggle"
+                >
+                <label for="marketing-cookies" class="toggle-label">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="category-info">
+                <h4>Marketing Cookies</h4>
+                <p>Used to track visitors across websites to display relevant and engaging advertisements.</p>
+              </div>
+            </div>
+            <div class="category-details">
+              <small>Used for: Targeted advertising, social media integration</small>
+            </div>
+          </div>
+
+          <!-- Preference Cookies -->
+          <div class="cookie-category">
+            <div class="category-header">
+              <div class="toggle-container">
+                <input 
+                  type="checkbox" 
+                  id="preference-cookies" 
+                  [(ngModel)]="preferences.preferences"
+                  class="cookie-toggle"
+                >
+                <label for="preference-cookies" class="toggle-label">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="category-info">
+                <h4>Preference Cookies</h4>
+                <p>Remember information that changes the way the website behaves based on your preferences.</p>
+              </div>
+            </div>
+            <div class="category-details">
+              <small>Used for: Language preferences, search filters, display settings</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="footer-actions">
+          <button type="button" class="btn btn-secondary" (click)="acceptEssentialOnly()">
+            Essential Only
+          </button>
+          <button type="button" class="btn btn-primary" (click)="saveCustomPreferences()">
+            Save Preferences
+          </button>
+          <button type="button" class="btn btn-success" (click)="acceptAll()">
+            Accept All
+          </button>
+        </div>
+        
+        <div class="footer-links">
+          <a routerLink="/privacy" class="footer-link">Privacy Policy</a>
+          <span class="separator">•</span>
+          <button type="button" class="footer-link btn-link" (click)="resetConsent()">
+            Reset Cookies
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

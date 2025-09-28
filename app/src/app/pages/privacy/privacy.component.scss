@@ -1,0 +1,157 @@
+.privacy-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.privacy-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #2d5016;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 3px solid #66bb6a;
+  padding-bottom: 15px;
+}
+
+.last-updated {
+  text-align: center;
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95em;
+  }
+}
+
+.privacy-section {
+  margin-bottom: 40px;
+  
+  h2 {
+    color: #2d5016;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  h3 {
+    color: #4a4a4a;
+    font-size: 1.2em;
+    margin: 20px 0 10px 0;
+  }
+  
+  p {
+    margin-bottom: 15px;
+    text-align: justify;
+  }
+  
+  ul {
+    margin: 15px 0;
+    padding-left: 30px;
+    
+    li {
+      margin-bottom: 8px;
+      
+      strong {
+        color: #2d5016;
+      }
+    }
+  }
+}
+
+.contact-info {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 6px;
+  border-left: 4px solid #66bb6a;
+  margin: 20px 0;
+  
+  p {
+    margin: 5px 0;
+  }
+  
+  a {
+    color: #2d5016;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.policy-footer {
+  margin-top: 40px;
+  padding: 25px;
+  background: #f0f7f0;
+  border-radius: 6px;
+  border: 1px solid #e0e8e0;
+  
+  p {
+    margin: 0;
+    text-align: center;
+    color: #5a5a5a;
+    font-style: italic;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .privacy-container {
+    padding: 20px 15px;
+  }
+  
+  .privacy-content {
+    padding: 25px;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+  
+  .privacy-section {
+    h2 {
+      font-size: 1.3em;
+    }
+    
+    h3 {
+      font-size: 1.1em;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .privacy-container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .privacy-content {
+    box-shadow: none;
+    border: none;
+  }
+  
+  h1 {
+    color: #000;
+    border-bottom-color: #ccc;
+  }
+  
+  .privacy-section h2 {
+    color: #000;
+    border-bottom-color: #ccc;
+  }
+}

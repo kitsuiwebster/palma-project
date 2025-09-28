@@ -1,6 +1,6 @@
 /* src/styles.scss */
-// Import des polices Google
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+// Import des polices Google (moved to index.html for build optimization)
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
 
 // Palette de couleurs modernisée et tropicale
 $primary-color: #4CAF50; // Vert émeraude plus raffiné 

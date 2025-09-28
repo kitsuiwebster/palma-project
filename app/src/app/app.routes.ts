@@ -36,6 +36,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/references/references.component').then(c => c.ReferencesComponent)
   },
   {
+    path: 'privacy',
+    loadComponent: () => import('./pages/privacy/privacy.component').then(c => c.PrivacyComponent)
+  },
+  {
     path: '**',
     redirectTo: 'palms'
   }
