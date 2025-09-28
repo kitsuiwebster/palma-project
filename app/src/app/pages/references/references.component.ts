@@ -153,8 +153,29 @@ export class ReferencesComponent implements OnInit {
     }, 2000);
   }
   
-  exportReferences(format: string): void {
-    // Logic to export references in different formats
-    this.showToast(`References exported in ${format} format.`);
+  exportTraitsReferences(): void {
+    // Export traits.txt as ReferenceToSpecies_PalmTraits_1.0.txt
+    const content = this.traits.join('\n');
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'ReferenceToSpecies_PalmTraits_1.0.txt';
+    link.click();
+    window.URL.revokeObjectURL(url);
+    this.showToast('Species references exported successfully!');
+  }
+
+  exportAllReferences(): void {
+    // Export references.txt as AllReferences_PalmTraits_1.0.txt
+    const content = this.references.join('\n');
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'AllReferences_PalmTraits_1.0.txt';
+    link.click();
+    window.URL.revokeObjectURL(url);
+    this.showToast('All references exported successfully!');
   }
 }

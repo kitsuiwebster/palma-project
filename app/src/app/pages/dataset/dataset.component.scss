@@ -954,16 +954,16 @@
     overflow: hidden;
     animation: fadeIn 0.8s ease-out;
   
-    /* Side border decoration */
+    /* Left border decoration */
     &::before {
       content: "";
       position: absolute;
-      right: 0;
+      left: 0;
       top: 0;
       width: 6px;
       height: 100%;
       background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: 0 $border-radius $border-radius 0;
+      border-radius: $border-radius 0 0 $border-radius;
     }
   
     /* Background decoration */
@@ -1125,6 +1125,115 @@
             object-fit: contain;
             opacity: 0.7;
           }
+        }
+      }
+    }
+  }
+
+  // Export section styles
+  .export-section {
+    background: white;
+    border-radius: $border-radius * 2;
+    box-shadow: 0 10px 30px rgba($primary-color, 0.1);
+    padding: $spacing-unit * 3;
+    margin: $spacing-unit * 3 0;
+    border: 1px solid rgba($primary-color, 0.08);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, $primary-color, $accent-color);
+      border-radius: $border-radius 0 0 $border-radius;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $primary-dark;
+      margin: 0 0 $spacing-unit 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: $spacing-unit * 2;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .export-buttons {
+      display: flex;
+      gap: $spacing-unit * 2;
+      flex-wrap: wrap;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: $spacing-unit * 1.5;
+      }
+
+      .export-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: $spacing-unit * 1.5 $spacing-unit * 2;
+        background: white;
+        border: 2px solid rgba($primary-color, 0.2);
+        border-radius: $border-radius;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba($primary-dark, 0.08);
+        min-width: 180px;
+        flex: 1;
+
+        &:hover {
+          background: $primary-color;
+          color: white;
+          border-color: $primary-color;
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba($primary-dark, 0.15);
+
+          .icon-wrapper {
+            filter: brightness(0) invert(1);
+          }
+
+          small {
+            color: rgba(255, 255, 255, 0.9);
+          }
+        }
+
+        .icon-wrapper {
+          width: 28px;
+          height: 28px;
+          margin-bottom: $spacing-unit;
+          transition: all 0.3s ease;
+
+          .custom-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        span {
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin-bottom: $spacing-unit * 0.5;
+          color: $primary-dark;
+          transition: color 0.3s ease;
+        }
+
+        small {
+          font-size: 0.8rem;
+          color: $text-secondary;
+          text-align: center;
+          transition: color 0.3s ease;
         }
       }
     }

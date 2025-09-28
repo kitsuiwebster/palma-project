@@ -51,40 +51,48 @@ export class PhotoCreditsService {
       const line = lines[i];
       if (!line.trim()) continue;
       
-      // Extract the genus and species (first two columns)
-      const parts = line.split(' ');
-      if (parts.length < 2) continue;
+      // Split line by tabs to get proper columns
+      const columns = line.split('\t');
+      if (columns.length < 11) continue;
       
-      const genus = parts[0];
-      const species = parts[1];
-      const speciesName = `${genus} ${species}`;
+      const speciesName = columns[0];
+      const photosColumn = columns[9] || '';
+      const photoReferencesColumn = columns[10] || '';
       
-      // Extract all URLs from the Photos column
-      // Look for URLs starting with https://
-      const urlMatches = line.match(/https:\/\/[^\s]+/g) || [];
-      if (urlMatches.length === 0) continue;
+      // Extract photo URLs
+      const photoUrls = photosColumn.split(' ').filter(url => url.trim().startsWith('http'));
+      if (photoUrls.length === 0) continue;
       
-      // Extract photographer information from PhotoReferences column
-      let photographerInfo = 'Unknown';
-      let license = 'Unknown';
+      // Parse photo references - split by (c) pattern but keep (c) in each reference
+      const photoRefs: string[] = [];
+      if (photoReferencesColumn.trim()) {
+        const refParts = photoReferencesColumn.split('(c)').filter(part => part.trim());
+        for (let j = 0; j < refParts.length; j++) {
+          if (j === 0 && !photoReferencesColumn.startsWith('(c)')) {
+            // First part might not start with (c) if it's a continuation
+            photoRefs.push(refParts[j].trim());
+          } else {
+            photoRefs.push('(c)' + refParts[j].trim());
+          }
+        }
+      }
       
-      if (line.includes('(c)')) {
-        const photoRefStart = line.indexOf('(c)');
-        const photoRefSection = line.substring(photoRefStart);
+      // Map photos to references in sequence
+      for (let urlIndex = 0; urlIndex < photoUrls.length; urlIndex++) {
+        const url = photoUrls[urlIndex];
         
-        // Extract photographer
-        photographerInfo = photoRefSection.trim();
+        // Map photo to corresponding reference, or reuse last reference if fewer refs than photos
+        const refIndex = Math.min(urlIndex, photoRefs.length - 1);
+        const photographerInfo = photoRefs[refIndex] || 'Unknown';
         
-        // Extract license - look for patterns like (CC BY-NC)
+        // Extract license from photographer info
+        let license = 'Unknown';
         const licenseMatch = photographerInfo.match(/\((CC [^)]+)\)/);
         if (licenseMatch && licenseMatch[1]) {
           license = licenseMatch[1];
         }
-      }
-      
-      // Create a credit entry for each URL
-      urlMatches.forEach(url => {
-        // Determine the source (iNaturalist or Wikimedia)
+        
+        // Determine the source
         let source: 'iNaturalist' | 'Wikimedia' | 'Other' = 'Other';
         if (url.includes('inaturalist')) {
           source = 'iNaturalist';
@@ -99,7 +107,7 @@ export class PhotoCreditsService {
           license: license,
           source
         });
-      });
+      }
     }
     
     return photoCredits;

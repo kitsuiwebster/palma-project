@@ -70,6 +70,27 @@
             <h3>Bibliographic References</h3>
             <span class="references-count">{{ references.length }} citations</span>
         </div>
+        
+        <!-- Export Buttons -->
+        <div class="export-section">
+            <h4>Export References</h4>
+            <div class="export-buttons">
+                <button class="export-btn" (click)="exportTraitsReferences()">
+                    <div class="icon-wrapper">
+                        <img src="assets/icons/download.png" alt="Download" class="custom-icon">
+                    </div>
+                    <span>Species References</span>
+                    <small>ReferenceToSpecies_PalmTraits_1.0.txt</small>
+                </button>
+                <button class="export-btn" (click)="exportAllReferences()">
+                    <div class="icon-wrapper">
+                        <img src="assets/icons/download.png" alt="Download" class="custom-icon">
+                    </div>
+                    <span>All References</span>
+                    <small>AllReferences_PalmTraits_1.0.txt</small>
+                </button>
+            </div>
+        </div>
 
         <div class="reference-item" *ngFor="let reference of references">
             <p class="reference-text">{{ reference }}</p>

@@ -14,6 +14,59 @@
         </p>
     </div>
 
+    <!-- Dataset Export Section -->
+    <div class="export-section">
+        <h3>Download Dataset</h3>
+        <p>Access the complete PalmTraits 1.0 dataset in multiple formats</p>
+        <div class="export-buttons">
+            <button class="export-btn" (click)="downloadDataset('txt')">
+                <div class="icon-wrapper">
+                    <img src="assets/icons/txt.png" alt="TXT" class="custom-icon">
+                </div>
+                <span>Original Dataset</span>
+                <small>palma_dataset_1.0.txt (TSV format)</small>
+            </button>
+            <button class="export-btn" (click)="downloadDataset('json')">
+                <div class="icon-wrapper">
+                    <img src="assets/icons/json.png" alt="JSON" class="custom-icon">
+                </div>
+                <span>JSON Format</span>
+                <small>palma_dataset_1.0.json (4.4 MB)</small>
+            </button>
+            <button class="export-btn" (click)="downloadDataset('csv')">
+                <div class="icon-wrapper">
+                    <img src="assets/icons/csv.png" alt="CSV" class="custom-icon">
+                </div>
+                <span>CSV Format</span>
+                <small>palma_dataset_1.0.csv (2.1 MB)</small>
+            </button>
+        </div>
+    </div>
+
+    <!-- Repository Section -->
+    <div class="github-repository">
+        <h3>
+            <div class="header-icon">
+                <div class="icon-wrapper">
+                    <img src="assets/icons/github.png" alt="GitHub" class="custom-icon">
+                </div>
+            </div>
+            Open Source Repository
+        </h3>
+        <p>
+            The entire Palma-1.0 dataset and the source code for this application are available on GitHub. 
+            We welcome contributions, issue reports, and feature requests from the community.
+        </p>
+        <div class="repository-links">
+            <a href="https://github.com/kitsuiwebster/palma-project" target="_blank" class="btn-repository">
+                <div class="icon-wrapper">
+                    <img src="assets/icons/mindmap.png" alt="Dataset" class="custom-icon">
+                </div>
+                <span>Dataset Repository</span>
+            </a>
+        </div>
+    </div>
+
     <div class="dataset-variables">
         <!-- Taxonomy Group -->
         <div class="variable-group" [class.expanded]="expandedGroups.taxonomy">
@@ -419,61 +472,6 @@
                     Copy
                 </button>
             </div>
-        </div>
-    </div>
-    
-    <div class="dataset-download">
-        <h3>
-            <div class="header-icon">
-                <div class="icon-wrapper">
-                    <img src="assets/icons/download.png" alt="Download" class="custom-icon">
-                </div>
-            </div>
-            Download Dataset
-        </h3>
-        <p>The Palma-1.0 dataset is available for scientific research and education purposes, subject to proper
-            citation.</p>
-        <div class="download-options">
-            <button class="btn-outline">
-                <div class="icon-wrapper">
-                    <img src="assets/icons/csv.png" alt="CSV" class="custom-icon">
-                </div>
-                CSV Format
-            </button>
-            <button class="btn-outline">
-                <div class="icon-wrapper">
-                    <img src="assets/icons/txt.png" alt="Text" class="custom-icon">
-                </div>
-                Text Format
-            </button>
-            <button class="btn-outline">
-                <div class="icon-wrapper">
-                    <img src="assets/icons/json.png" alt="JSON" class="custom-icon">
-                </div>
-                JSON Format
-            </button>
-        </div>
-    </div>
-    <div class="github-repository">
-        <h3>
-            <div class="header-icon">
-                <div class="icon-wrapper">
-                    <img src="assets/icons/github.png" alt="GitHub" class="custom-icon">
-                </div>
-            </div>
-            Open Source Repository
-        </h3>
-        <p>
-            The entire Palma-1.0 dataset and the source code for this application are available on GitHub. 
-            We welcome contributions, issue reports, and feature requests from the community.
-        </p>
-        <div class="repository-links">
-            <a href="https://github.com/kitsuiwebster/palma-project" target="_blank" class="btn-repository">
-                <div class="icon-wrapper">
-                    <img src="assets/icons/mindmap.png" alt="Dataset" class="custom-icon">
-                </div>
-                <span>Dataset Repository</span>
-            </a>
         </div>
     </div>
 </div>
