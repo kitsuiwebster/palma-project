@@ -8,14 +8,14 @@ Palma-1.0 is a comprehensive exploration of palm species, including the PalmTrai
 
 ## Dataset Overview
 
-Palma-1.0 contains comprehensive data on over 2,500 palm species across 181 genera. The dataset combines morphological traits, taxonomic classification, geographic distribution, and detailed fruit characteristics, enhanced with information from multiple authoritative sources.
+Palma-1.0 contains comprehensive data on **2,557 palm species** across 181 genera. The dataset combines morphological traits, taxonomic classification, geographic distribution, and detailed fruit characteristics, enhanced with information from multiple authoritative sources.
 
 ### Key Statistics
 
-- **2,500+ Species** - Comprehensive coverage of palm biodiversity
+- **2,557 Species** - Comprehensive coverage of palm biodiversity
 - **181 Genera** - Representing the taxonomic breadth of the Arecaceae family
 - **120+ Countries** - Global distribution across tropical and subtropical regions
-- **45+ Variables** - Covering taxonomy, morphology, geography, and fruit characteristics
+- **35 Variables** - Covering taxonomy, morphology, geography, and fruit characteristics
 
 ---
 
@@ -142,7 +142,7 @@ The dataset is available in multiple formats:
 - JSON (JavaScript Object Notation)
 - Plain text
 
-All available for download from the [Palma Encyclopedia Website](https://palma-encyclopedia.com/data) in the `Dataset` section, or directly on this repository.
+All available for download from the [Palma Encyclopedia Website](https://palma-encyclopedia.com/data) in the `Dataset` section, or directly from this repository.
 
 ---
 
@@ -152,7 +152,7 @@ If you use this dataset in your research, please cite:
 
 ```
 Palma-1.0: A global database of palm functional traits, based on PalmTraits 1.0 and enhanced with GBIF, 
-iNaturalist and POWO data (2025). Encyclopedia of Palms Project.
+iNaturalist, Wikimedia Commons and POWO data (2025). Encyclopedia of Palms Project.
 ```
 
 ---
@@ -160,12 +160,6 @@ iNaturalist and POWO data (2025). Encyclopedia of Palms Project.
 ## License
 
 This dataset is made available under the Creative Commons Attribution-NonCommercial 4.0 International License ([CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)).
-
----
-
-## Contributor(s)
-
-- [ Raphaël MARTIN ](https://kitsuiwebster.com)
 
 ---
 

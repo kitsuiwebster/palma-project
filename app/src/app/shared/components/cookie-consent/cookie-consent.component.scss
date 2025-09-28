@@ -425,6 +425,88 @@
   }
 }
 
+// Extra small screens
+@media (max-width: 480px) {
+  .cookie-consent-overlay {
+    padding: 8px;
+  }
+  
+  .simple-banner {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .banner-text {
+    h3 {
+      font-size: 1rem;
+    }
+    
+    p {
+      font-size: 0.85rem;
+    }
+  }
+  
+  .modal-header h3 {
+    font-size: 1.25rem;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  .advanced-options {
+    max-height: 90vh;
+  }
+  
+  .btn {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    min-height: 40px;
+  }
+}
+
+// Very small screens (320px and below)
+@media (max-width: 320px) {
+  .cookie-consent-overlay {
+    padding: 5px;
+  }
+  
+  .simple-banner {
+    padding: 12px;
+  }
+  
+  .banner-text h3 {
+    font-size: 0.95rem;
+  }
+  
+  .banner-text p {
+    font-size: 0.8rem;
+  }
+  
+  .btn {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    min-height: 36px;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 12px 8px;
+  }
+  
+  .category-info h4 {
+    font-size: 1rem;
+  }
+  
+  .category-info p {
+    font-size: 0.85rem;
+  }
+}
+
 // Print styles
 @media print {
   .cookie-consent-overlay {

@@ -34,7 +34,7 @@
                     <p>{{ result.content }}</p>
                 </div>
                 <div class="result-actions">
-                    <button class="action-btn" title="View source" (click)="openSourceLink()">
+                    <button class="action-btn" title="View source" (click)="openSourceLink(result.content)">
                         <div class="icon-wrapper">
                             <img src="assets/icons/link.png" alt="Link" class="custom-icon">
                         </div>
@@ -95,7 +95,7 @@
         <div class="reference-item" *ngFor="let reference of references">
             <p class="reference-text">{{ reference }}</p>
             <div class="reference-actions">
-                <button class="action-btn" title="View source" (click)="openSourceLink()">
+                <button class="action-btn" title="View source" (click)="openSourceLink(reference)">
                     <div class="icon-wrapper">
                         <img src="assets/icons/link.png" alt="Link" class="custom-icon">
                     </div>

@@ -116,8 +116,18 @@ export class ReferencesComponent implements OnInit {
     return 'Other';
   }
   
-  openSourceLink(): void {
-    window.open(this.dataSourceUrl, '_blank');
+  openSourceLink(reference?: string): void {
+    // Check if this is one of the 3 Martin R./Palma Encyclopedia references
+    if (reference && this.isCustomReference(reference)) {
+      window.open('https://github.com/kitsuiwebster/palma-project', '_blank');
+    } else {
+      window.open(this.dataSourceUrl, '_blank');
+    }
+  }
+
+  private isCustomReference(reference: string): boolean {
+    return reference.includes('Martin, R. (2025)') || 
+           reference.includes('Palma Encyclopedia');
   }
   
   copyText(text: string): void {
