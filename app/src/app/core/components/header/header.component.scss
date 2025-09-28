@@ -377,6 +377,12 @@
       margin-right: 16px;
       border-radius: 10px;
       background: rgba($primary-color, 0.15);
+      
+      .custom-icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+      }
     }
 
     .mobile-nav-text {
