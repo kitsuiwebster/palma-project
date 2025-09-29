@@ -119,7 +119,7 @@ export class ReferencesComponent implements OnInit {
   openSourceLink(reference?: string): void {
     // Check if this is one of the 3 Martin R./Palma Encyclopedia references
     if (reference && this.isCustomReference(reference)) {
-      window.open('https://github.com/kitsuiwebster/palma-project', '_blank');
+      window.open('https://huggingface.co/datasets/kitsuiwebster/Palma-1.0', '_blank');
     } else {
       window.open(this.dataSourceUrl, '_blank');
     }
