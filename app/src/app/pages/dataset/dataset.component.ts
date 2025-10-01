@@ -4,6 +4,11 @@ import { HttpClient } from '@angular/common/http';
 
 type GroupKey = 'taxonomy' | 'geography' | 'growth' | 'leaves' | 'fruits';
 
+interface Toast {
+  show: boolean;
+  message: string;
+}
+
 @Component({
   selector: 'app-dataset',
   standalone: true,
@@ -19,6 +24,14 @@ export class DatasetComponent {
     leaves: false,
     fruits: false
   };
+
+  toast: Toast = {
+    show: false,
+    message: ''
+  };
+  private toastTimer: any;
+
+  citationText = 'Palma-1.0: A global database of palm functional traits, based on PalmTraits 1.0 and enhanced with GBIF, iNaturalist, Wikimedia Commons and POWO data (2025). Encyclopedia of Palms Project. Available at: https://huggingface.co/datasets/kitsuiwebster/Palma-1.0';
 
   constructor(private http: HttpClient) {}
 
@@ -77,5 +90,38 @@ export class DatasetComponent {
         alert(`Sorry, the ${format.toUpperCase()} file is not available for download at the moment.`);
       }
     });
+  }
+
+  copyText(text: string): void {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        this.showToast('Copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Could not copy text: ', err);
+        this.showToast('Failed to copy text.');
+      });
+  }
+  
+  showToast(message: string): void {
+    // Clear any existing timer
+    if (this.toastTimer) {
+      clearTimeout(this.toastTimer);
+    }
+    
+    // Show the toast
+    this.toast = {
+      show: true,
+      message: message
+    };
+    
+    // Auto-hide after 2 seconds
+    this.toastTimer = setTimeout(() => {
+      this.toast = {
+        show: false,
+        message: ''
+      };
+      this.toastTimer = null;
+    }, 2000);
   }
 }

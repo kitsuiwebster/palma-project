@@ -465,7 +465,7 @@
                     Palma-1.0: A global database of palm functional traits, based on PalmTraits 1.0 and enhanced with
                     GBIF, iNaturalist, Wikimedia Commons and POWO data (2025). Encyclopedia of Palms Project. Available at: <a href="https://huggingface.co/datasets/kitsuiwebster/Palma-1.0" target="_blank" rel="noopener noreferrer">https://huggingface.co/datasets/kitsuiwebster/Palma-1.0</a>
                 </p>
-                <button class="btn-outline btn-sm copy-btn">
+                <button class="btn-outline btn-sm copy-btn" (click)="copyText(citationText)">
                     <div class="icon-wrapper">
                         <img src="assets/icons/cp.png" alt="Copy" class="custom-icon">
                     </div>
@@ -474,4 +474,9 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" [class.show]="toast.show">
+    {{ toast.message }}
 </div>

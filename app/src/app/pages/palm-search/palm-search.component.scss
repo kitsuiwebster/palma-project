@@ -284,12 +284,13 @@
     
     &.clear-button {
       background: none;
-      border: 1px solid rgba($primary-color, 0.15);
-      color: $text-secondary;
+      border: 1px solid #ff7043;
+      color: #ff7043;
       
       &:hover {
-        background-color: rgba($primary-color, 0.05);
-        color: $primary-dark;
+        background-color: #ff7043;
+        color: white;
+        transform: translateY(-1px);
       }
     }
     
@@ -664,4 +665,14 @@
       height: 24px;
     }
   }
+}
+
+
+// Style for intelligent filter info text
+.filter-info {
+  color: #ff7043;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  font-style: italic;
 }

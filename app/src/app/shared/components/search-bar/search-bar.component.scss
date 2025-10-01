@@ -150,15 +150,19 @@
     }
 
     button {
-      background-color: rgba($primary-color, 0.08);
+      background-color: rgba(255, 112, 67, 0.1);
       border-radius: 50%;
       height: 36px;
       width: 36px;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
       &:hover {
-        background-color: rgba($primary-color, 0.15);
+        background-color: #ff7043;
         transform: rotate(90deg) scale(1.05);
+        
+        .custom-icon {
+          filter: brightness(0) invert(1);
+        }
       }
     }
 
@@ -170,160 +174,6 @@
     }
   }
 
-  // Résultats de recherche
-  .search-results {
-    position: absolute;
-    top: calc(100% + 8px); // Légèrement plus bas pour séparer visuellement
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 16px; // Coins arrondis cohérents avec le design moderne
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba($primary-color, 0.05);
-    z-index: 10;
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 4px;
-    animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    border: none;
-
-    // Scrollbar personnalisée
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgba($primary-light, 0.2);
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba($primary-color, 0.3);
-      border-radius: 10px;
-
-      &:hover {
-        background: rgba($primary-color, 0.5);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-8px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    // Style pour les items de la liste
-    ::ng-deep {
-      .mat-mdc-list {
-        padding: 8px;
-      }
-
-      .mdc-list-item {
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        border-radius: 12px;
-        margin: 4px 0;
-        padding: 12px 16px;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(
-            135deg,
-            rgba($primary-color, 0),
-            rgba($primary-color, 0.1)
-          );
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          z-index: -1;
-        }
-
-        &:last-child {
-          margin-bottom: 4px;
-        }
-
-        &:hover {
-          background-color: rgba($primary-color, 0.05);
-          transform: translateX(5px);
-
-          &::before {
-            opacity: 1;
-          }
-        }
-
-        &:active {
-          background-color: rgba($primary-color, 0.1);
-          transform: scale(0.98);
-        }
-
-        // Titre et sous-titre des résultats
-        .mdc-list-item__primary-text {
-          color: $text-dark;
-          font-weight: 600;
-          font-size: 1.05rem;
-        }
-
-        .mdc-list-item__secondary-text {
-          color: $text-secondary;
-          font-style: italic;
-          font-size: 0.9rem;
-          opacity: 0.85;
-          margin-top: 2px;
-        }
-
-        // Icône dans les résultats
-        .icon-wrapper {
-          background: linear-gradient(
-            135deg,
-            rgba($primary-color, 0.12),
-            rgba($primary-color, 0.22)
-          );
-          border-radius: 50%;
-          width: 42px;
-          height: 42px;
-          margin-right: 18px;
-          box-shadow: 0 3px 8px rgba($primary-color, 0.15);
-
-          .custom-icon {
-            width: 24px;
-            height: 24px;
-            opacity: 0.9;
-          }
-        }
-      }
-    }
-
-    // Message pas de résultats
-    .no-results {
-      padding: 30px 20px;
-      text-align: center;
-      color: $text-secondary;
-      background: linear-gradient(
-        135deg,
-        rgba($primary-light, 0.2),
-        rgba($primary-light, 0.3)
-      );
-      border-radius: 12px;
-      margin: 12px;
-
-      p {
-        margin: 0;
-        font-size: 0.95rem;
-        font-weight: 500;
-      }
-    }
-  }
 }
 
 // Responsive
@@ -355,9 +205,5 @@
       }
     }
 
-    .search-results {
-      max-height: 350px;
-      border-radius: 14px;
-    }
   }
 }

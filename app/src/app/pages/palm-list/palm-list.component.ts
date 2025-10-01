@@ -2,6 +2,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../core/services/data.service';
 import { SearchService } from '../../core/services/search.service'; // Importer le service
 import { PalmTrait } from '../../core/models/palm-trait.model';
@@ -73,7 +74,8 @@ export class PalmListComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private searchService: SearchService // Injecter le service de recherche
+    private searchService: SearchService, // Injecter le service de recherche
+    private route: ActivatedRoute // Injecter ActivatedRoute pour détecter la navigation
   ) {
     // Initialiser la subscription
     this.searchSubscription = new Subscription();
@@ -85,6 +87,18 @@ export class PalmListComponent implements OnInit, OnDestroy {
   initialized all data-bound properties of a directive. */
   ngOnInit(): void {
     console.log("PalmListComponent initialized");
+    
+    // Check if this is a direct navigation to /palms (no search context)
+    this.route.queryParams.subscribe(params => {
+      const hasSearchParams = params['q'] || params['from'] === 'search';
+      const currentUrl = this.route.snapshot.url.join('/');
+      
+      // If no search-related query parameters and we're on the main /palms route, clear any existing search results
+      if (!hasSearchParams && currentUrl === '') { // Empty string means we're at the root of this route (/palms)
+        console.log("Direct navigation to /palms detected - clearing search results");
+        this.searchService.clearSearchResults();
+      }
+    });
     
     // S'abonner aux changements de résultats de recherche
     this.searchSubscription = this.searchService.searchResults$.subscribe(results => {

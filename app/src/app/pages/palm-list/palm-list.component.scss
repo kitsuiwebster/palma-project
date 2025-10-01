@@ -397,14 +397,15 @@
       .clear-search {
         display: flex;
         align-items: center;
-        color: $text-secondary;
+        color: #ff7043;
         transition: $transition-standard;
         padding: $spacing-unit $spacing-unit * 2;
         border-radius: 20px;
+        border: 1px solid #ff7043;
 
         &:hover {
-          background-color: rgba($primary-color, 0.1);
-          color: $primary-dark;
+          background-color: #ff7043;
+          color: white;
         }
 
         .icon-wrapper {
@@ -565,6 +566,10 @@
   color: transparent;
   position: relative;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 
   &::after {
     content: "";

@@ -97,34 +97,86 @@
     align-items: center;
     text-align: center;
 
-    .icon-button {
-      position: relative;
-      background: white;
-      border: none;
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: $box-shadow-light;
-      transition: $transition-standard;
+    // Breadcrumb navigation styles
+    .breadcrumb-nav {
       margin-bottom: $spacing-unit * 2;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: $box-shadow-medium;
-      }
-
-      .icon-wrapper {
+      
+      .breadcrumb {
         display: flex;
         align-items: center;
-        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 12px 20px;
+        background: white;
+        border-radius: 25px;
+        box-shadow: $box-shadow-light;
+        font-size: 0.9rem;
+        transition: $transition-standard;
 
-        .custom-icon {
-          width: 24px;
-          height: 24px;
+        &:hover {
+          box-shadow: $box-shadow-medium;
+        }
+
+        .breadcrumb-item {
+          display: flex;
+          align-items: center;
+
+          a {
+            display: flex;
+            align-items: center;
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: 500;
+            transition: $transition-standard;
+            padding: 4px 8px;
+            border-radius: 4px;
+
+            &:hover {
+              background-color: rgba($primary-color, 0.1);
+              color: $primary-dark;
+            }
+
+            .breadcrumb-icon {
+              width: 16px;
+              height: 16px;
+              margin-right: 6px;
+            }
+          }
+
+          &.current {
+            span {
+              color: $text-secondary;
+              font-weight: 400;
+              font-style: italic;
+            }
+          }
+        }
+
+        .breadcrumb-separator {
+          margin: 0 8px;
+          color: $text-secondary;
+          font-weight: 300;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .breadcrumb {
+          font-size: 0.8rem;
+          padding: 10px 16px;
+
+          .breadcrumb-separator {
+            margin: 0 6px;
+          }
+
+          .breadcrumb-item a {
+            padding: 2px 6px;
+
+            .breadcrumb-icon {
+              width: 14px;
+              height: 14px;
+              margin-right: 4px;
+            }
+          }
         }
       }
     }

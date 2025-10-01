@@ -23,70 +23,94 @@
                 <h2>Refine Results</h2>
 
                 <div class="filters-grid">
-                    <!-- Taxonomic Filters -->
+                    <!-- Taxonomic Filters (Hierarchical order: Subfamily → Tribe → Genus) -->
                     <div class="select-container dropdown-container">
-                        <label for="genus">Genus</label>
-                        <select id="genus" formControlName="genus">
-                            <option value="">Any</option>
-                            <option *ngFor="let g of genera" [value]="g">{{g}}</option>
-                        </select>
-                    </div>
-
-                    <div class="select-container dropdown-container">
-                        <label for="tribe">Tribe</label>
-                        <select id="tribe" formControlName="tribe">
-                            <option value="">Any</option>
-                            <option *ngFor="let t of palmTribes" [value]="t">{{t}}</option>
-                        </select>
-                    </div>
-
-                    <div class="select-container dropdown-container">
-                        <label for="subfamily">Subfamily</label>
+                        <label for="subfamily">
+                            Subfamily
+                            <small *ngIf="availablePalmSubfamilies.length < allPalmSubfamilies.length" class="filter-info">({{availablePalmSubfamilies.length}} available)</small>
+                        </label>
                         <select id="subfamily" formControlName="subfamily">
                             <option value="">Any</option>
-                            <option *ngFor="let s of palmSubfamilies" [value]="s">{{s}}</option>
+                            <option *ngFor="let s of availablePalmSubfamilies" [value]="s">{{s}}</option>
+                        </select>
+                    </div>
+
+                    <div class="select-container dropdown-container">
+                        <label for="tribe">
+                            Tribe
+                            <small *ngIf="availablePalmTribes.length < allPalmTribes.length" class="filter-info">({{availablePalmTribes.length}} available)</small>
+                        </label>
+                        <select id="tribe" formControlName="tribe">
+                            <option value="">Any</option>
+                            <option *ngFor="let t of availablePalmTribes" [value]="t">{{t}}</option>
+                        </select>
+                    </div>
+
+                    <div class="select-container dropdown-container">
+                        <label for="genus">
+                            Genus
+                            <small *ngIf="availableGenera.length < allGenera.length" class="filter-info">({{availableGenera.length}} available)</small>
+                        </label>
+                        <select id="genus" formControlName="genus">
+                            <option value="">Any</option>
+                            <option *ngFor="let g of availableGenera" [value]="g">{{g}}</option>
                         </select>
                     </div>
 
                     <!-- Physical Characteristics -->
                     <div class="select-container dropdown-container">
-                        <label for="stemType">Stem Type</label>
+                        <label for="stemType">
+                            Stem Type
+                            <small *ngIf="availableStemTypes.length < allStemTypes.length" class="filter-info">({{availableStemTypes.length}} available)</small>
+                        </label>
                         <select id="stemType" formControlName="stemType">
                             <option value="">Any</option>
-                            <option *ngFor="let type of stemTypes" [value]="type.value">{{type.displayName}}</option>
+                            <option *ngFor="let type of availableStemTypes" [value]="type.value">{{type.displayName}}</option>
                         </select>
                     </div>
 
                     <div class="select-container dropdown-container">
-                        <label for="stemProperty">Stem Property</label>
+                        <label for="stemProperty">
+                            Stem Property
+                            <small *ngIf="availableStemProperties.length < allStemProperties.length" class="filter-info">({{availableStemProperties.length}} available)</small>
+                        </label>
                         <select id="stemProperty" formControlName="stemProperty">
                             <option value="">Any</option>
-                            <option *ngFor="let prop of stemProperties" [value]="prop.value">{{prop.displayName}}</option>
+                            <option *ngFor="let prop of availableStemProperties" [value]="prop.value">{{prop.displayName}}</option>
                         </select>
                     </div>
 
                     <div class="select-container dropdown-container">
-                        <label for="understoreyCanopy">Canopy Type</label>
+                        <label for="understoreyCanopy">
+                            Canopy Type
+                            <small *ngIf="availableHabitats.length < allHabitats.length" class="filter-info">({{availableHabitats.length}} available)</small>
+                        </label>
                         <select id="understoreyCanopy" formControlName="understoreyCanopy">
                             <option value="">Any</option>
-                            <option *ngFor="let h of habitats" [value]="h">{{h}}</option>
+                            <option *ngFor="let h of availableHabitats" [value]="h">{{h}}</option>
                         </select>
                     </div>
 
                     <!-- Fruit Characteristics -->
                     <div class="select-container dropdown-container">
-                        <label for="fruitSize">Fruit Size</label>
+                        <label for="fruitSize">
+                            Fruit Size
+                            <small *ngIf="availableFruitSizes.length < allFruitSizes.length" class="filter-info">({{availableFruitSizes.length}} available)</small>
+                        </label>
                         <select id="fruitSize" formControlName="fruitSize">
                             <option value="">Any</option>
-                            <option *ngFor="let size of fruitSizes" [value]="size">{{size}}</option>
+                            <option *ngFor="let size of availableFruitSizes" [value]="size">{{size}}</option>
                         </select>
                     </div>
 
                     <div class="select-container dropdown-container">
-                        <label for="conspicuousness">Conspicuousness</label>
+                        <label for="conspicuousness">
+                            Conspicuousness
+                            <small *ngIf="availableConspicuousness.length < allConspicuousness.length" class="filter-info">({{availableConspicuousness.length}} available)</small>
+                        </label>
                         <select id="conspicuousness" formControlName="conspicuousness">
                             <option value="">Any</option>
-                            <option *ngFor="let c of conspicuousness" [value]="c">{{c}}</option>
+                            <option *ngFor="let c of availableConspicuousness" [value]="c">{{c}}</option>
                         </select>
                     </div>
 

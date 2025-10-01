@@ -12,6 +12,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   currentYear = new Date().getFullYear();
   currentQuote = 0;
   private quoteInterval: any;
+  isHovering = false;
 
   ngOnInit() {
     this.startQuoteRotation();
@@ -25,8 +26,10 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   private startQuoteRotation() {
     this.quoteInterval = setInterval(() => {
-      this.currentQuote = (this.currentQuote + 1) % 7;
-      this.updateQuoteDisplay();
+      if (!this.isHovering) {
+        this.currentQuote = (this.currentQuote + 1) % 7;
+        this.updateQuoteDisplay();
+      }
     }, 8000);
   }
 
@@ -46,5 +49,9 @@ export class FooterComponent implements OnInit, OnDestroy {
   setCurrentQuote(index: number) {
     this.currentQuote = index;
     this.updateQuoteDisplay();
+  }
+
+  onQuoteHover(hovering: boolean) {
+    this.isHovering = hovering;
   }
 }

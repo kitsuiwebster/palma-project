@@ -37,29 +37,37 @@ export class PalmSearchComponent implements OnInit {
   pageSize = 20;
   pageSizeOptions = [20, 50, 100];
   
-  // Filter options (cached)
-  genera: string[] = [];
-  habitats: string[] = [];
-  palmTribes: string[] = [];
-  palmSubfamilies: string[] = [];
-  fruitSizes: string[] = [];
-  conspicuousness: string[] = [];
-  
-  // Cache for filter options to avoid recomputing
-  private filterOptionsCache: any = null;
-  
-  // Caractéristiques binaires pour filtrer
-  stemTypes = [
+  // All filter options (master lists)
+  allGenera: string[] = [];
+  allHabitats: string[] = [];
+  allPalmTribes: string[] = [];
+  allPalmSubfamilies: string[] = [];
+  allFruitSizes: string[] = [];
+  allConspicuousness: string[] = [];
+  allStemTypes = [
     { value: 'Climbing', displayName: 'Climbing' },
     { value: 'Acaulescent', displayName: 'Acaulescent' },
     { value: 'Erect', displayName: 'Erect' }
   ];
-  
-  stemProperties = [
+  allStemProperties = [
     { value: 'StemSolitary', displayName: 'Solitary Stem' },
     { value: 'StemArmed', displayName: 'Armed Stem' },
     { value: 'LeavesArmed', displayName: 'Armed Leaves' }
   ];
+
+  // Currently available options (filtered based on current selections)
+  availableGenera: string[] = [];
+  availableHabitats: string[] = [];
+  availablePalmTribes: string[] = [];
+  availablePalmSubfamilies: string[] = [];
+  availableFruitSizes: string[] = [];
+  availableConspicuousness: string[] = [];
+  availableStemTypes = [...this.allStemTypes];
+  availableStemProperties = [...this.allStemProperties];
+  
+  // Cache for filter options to avoid recomputing
+  private filterOptionsCache: any = null;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -94,6 +102,9 @@ export class PalmSearchComponent implements OnInit {
         
         // Initialize filter options with caching
         this.initializeFilterOptions();
+        
+        // Setup intelligent filtering after data is loaded
+        this.setupIntelligentFilters();
         
         this.loading = false;
       })
@@ -456,51 +467,185 @@ export class PalmSearchComponent implements OnInit {
   private initializeFilterOptions(): void {
     // Use cache if available
     if (this.filterOptionsCache) {
-      this.genera = this.filterOptionsCache.genera;
-      this.palmTribes = this.filterOptionsCache.palmTribes;
-      this.palmSubfamilies = this.filterOptionsCache.palmSubfamilies;
-      this.habitats = this.filterOptionsCache.habitats;
-      this.fruitSizes = this.filterOptionsCache.fruitSizes;
-      this.conspicuousness = this.filterOptionsCache.conspicuousness;
+      this.allGenera = this.filterOptionsCache.allGenera;
+      this.allPalmTribes = this.filterOptionsCache.allPalmTribes;
+      this.allPalmSubfamilies = this.filterOptionsCache.allPalmSubfamilies;
+      this.allHabitats = this.filterOptionsCache.allHabitats;
+      this.allFruitSizes = this.filterOptionsCache.allFruitSizes;
+      this.allConspicuousness = this.filterOptionsCache.allConspicuousness;
       console.log('Filter options loaded from cache');
-      return;
+    } else {
+      // Extract all unique options from data
+      this.allGenera = [...new Set(this.allPalms.map(palm => palm.accGenus || palm.genus).filter(Boolean) as string[])].sort();
+      this.allPalmTribes = [...new Set(this.allPalms.map(palm => palm.PalmTribe || palm.tribe).filter(Boolean) as string[])].sort();
+      this.allPalmSubfamilies = [...new Set(this.allPalms.map(palm => palm.PalmSubfamily).filter(Boolean))].sort();
+      this.allHabitats = [...new Set(this.allPalms.map(palm => palm.UnderstoreyCanopy).filter(Boolean))].sort();
+      this.allFruitSizes = [...new Set(this.allPalms.map(palm => palm.FruitSizeCategorical).filter(Boolean))].sort();
+      this.allConspicuousness = [...new Set(this.allPalms.map(palm => palm.Conspicuousness).filter(Boolean))].sort();
+      
+      // Cache the results
+      this.filterOptionsCache = {
+        allGenera: this.allGenera,
+        allPalmTribes: this.allPalmTribes,
+        allPalmSubfamilies: this.allPalmSubfamilies,
+        allHabitats: this.allHabitats,
+        allFruitSizes: this.allFruitSizes,
+        allConspicuousness: this.allConspicuousness
+      };
+      
+      console.log('All filter options initialized and cached:', {
+        genera: this.allGenera.length,
+        tribes: this.allPalmTribes.length,
+        subfamilies: this.allPalmSubfamilies.length,
+        habitats: this.allHabitats.length,
+        fruitSizes: this.allFruitSizes.length,
+        conspicuousness: this.allConspicuousness.length
+      });
     }
 
-    // Extract unique genera
-    this.genera = [...new Set(this.allPalms.map(palm => palm.accGenus || palm.genus).filter(Boolean) as string[])].sort();
-    
-    // Extract unique palm tribes  
-    this.palmTribes = [...new Set(this.allPalms.map(palm => palm.PalmTribe || palm.tribe).filter(Boolean) as string[])].sort();
-    
-    // Extract unique palm subfamilies
-    this.palmSubfamilies = [...new Set(this.allPalms.map(palm => palm.PalmSubfamily).filter(Boolean))].sort();
-    
-    // Extract unique habitats/understory-canopy values
-    this.habitats = [...new Set(this.allPalms.map(palm => palm.UnderstoreyCanopy).filter(Boolean))].sort();
-    
-    // Extract unique fruit sizes
-    this.fruitSizes = [...new Set(this.allPalms.map(palm => palm.FruitSizeCategorical).filter(Boolean))].sort();
-    
-    // Extract unique conspicuousness values
-    this.conspicuousness = [...new Set(this.allPalms.map(palm => palm.Conspicuousness).filter(Boolean))].sort();
-    
-    // Cache the results
-    this.filterOptionsCache = {
-      genera: this.genera,
-      palmTribes: this.palmTribes,
-      palmSubfamilies: this.palmSubfamilies,
-      habitats: this.habitats,
-      fruitSizes: this.fruitSizes,
-      conspicuousness: this.conspicuousness
-    };
-    
-    console.log('Filter options initialized and cached:', {
-      genera: this.genera.length,
-      tribes: this.palmTribes.length,
-      subfamilies: this.palmSubfamilies.length,
-      habitats: this.habitats.length,
-      fruitSizes: this.fruitSizes.length,
-      conspicuousness: this.conspicuousness.length
+    // Initialize available options to all options (no filtering yet)
+    this.resetAvailableOptions();
+  }
+
+  // Reset all available options to full lists (no filtering)
+  private resetAvailableOptions(): void {
+    this.availableGenera = [...this.allGenera];
+    this.availablePalmTribes = [...this.allPalmTribes];
+    this.availablePalmSubfamilies = [...this.allPalmSubfamilies];
+    this.availableHabitats = [...this.allHabitats];
+    this.availableFruitSizes = [...this.allFruitSizes];
+    this.availableConspicuousness = [...this.allConspicuousness];
+    this.availableStemTypes = [...this.allStemTypes];
+    this.availableStemProperties = [...this.allStemProperties];
+  }
+
+  // Get filtered palms based on current form selections
+  private getFilteredPalmsForOptions(): PalmTrait[] {
+    const formValues = this.searchForm.value;
+    let filteredPalms = [...this.allPalms];
+
+    // Apply all current filters to get the subset of palms
+    if (formValues.genus) {
+      filteredPalms = filteredPalms.filter(palm => (palm.accGenus || palm.genus) === formValues.genus);
+    }
+    if (formValues.tribe) {
+      filteredPalms = filteredPalms.filter(palm => (palm.PalmTribe || palm.tribe) === formValues.tribe);
+    }
+    if (formValues.subfamily) {
+      filteredPalms = filteredPalms.filter(palm => palm.PalmSubfamily === formValues.subfamily);
+    }
+    if (formValues.stemType) {
+      if (formValues.stemType === 'Climbing') {
+        filteredPalms = filteredPalms.filter(palm => palm.Climbing === 1);
+      } else if (formValues.stemType === 'Acaulescent') {
+        filteredPalms = filteredPalms.filter(palm => palm.Acaulescent === 1);
+      } else if (formValues.stemType === 'Erect') {
+        filteredPalms = filteredPalms.filter(palm => palm.Erect === 1);
+      }
+    }
+    if (formValues.stemProperty) {
+      filteredPalms = filteredPalms.filter(palm => palm[formValues.stemProperty as keyof PalmTrait] === 1);
+    }
+    if (formValues.understoreyCanopy) {
+      filteredPalms = filteredPalms.filter(palm => palm.UnderstoreyCanopy === formValues.understoreyCanopy);
+    }
+    if (formValues.fruitSize) {
+      filteredPalms = filteredPalms.filter(palm => palm.FruitSizeCategorical === formValues.fruitSize);
+    }
+    if (formValues.conspicuousness) {
+      filteredPalms = filteredPalms.filter(palm => palm.Conspicuousness === formValues.conspicuousness);
+    }
+
+    return filteredPalms;
+  }
+
+  // Update all available options based on current selections
+  private updateAllAvailableOptions(): void {
+    const filteredPalms = this.getFilteredPalmsForOptions();
+    const formValues = this.searchForm.value;
+
+    // Extract available options from filtered palms (excluding the field being filtered)
+    if (!formValues.genus) {
+      this.availableGenera = [...new Set(filteredPalms.map(palm => palm.accGenus || palm.genus).filter(Boolean) as string[])].sort();
+    }
+    if (!formValues.tribe) {
+      this.availablePalmTribes = [...new Set(filteredPalms.map(palm => palm.PalmTribe || palm.tribe).filter(Boolean) as string[])].sort();
+    }
+    if (!formValues.subfamily) {
+      this.availablePalmSubfamilies = [...new Set(filteredPalms.map(palm => palm.PalmSubfamily).filter(Boolean) as string[])].sort();
+    }
+    if (!formValues.understoreyCanopy) {
+      this.availableHabitats = [...new Set(filteredPalms.map(palm => palm.UnderstoreyCanopy).filter(Boolean) as string[])].sort();
+    }
+    if (!formValues.fruitSize) {
+      this.availableFruitSizes = [...new Set(filteredPalms.map(palm => palm.FruitSizeCategorical).filter(Boolean) as string[])].sort();
+    }
+    if (!formValues.conspicuousness) {
+      this.availableConspicuousness = [...new Set(filteredPalms.map(palm => palm.Conspicuousness).filter(Boolean) as string[])].sort();
+    }
+
+    // Update stem types based on filtered palms
+    if (!formValues.stemType) {
+      const availableStemTypeValues: string[] = [];
+      if (filteredPalms.some(palm => palm.Climbing === 1)) availableStemTypeValues.push('Climbing');
+      if (filteredPalms.some(palm => palm.Acaulescent === 1)) availableStemTypeValues.push('Acaulescent');
+      if (filteredPalms.some(palm => palm.Erect === 1)) availableStemTypeValues.push('Erect');
+      this.availableStemTypes = this.allStemTypes.filter(type => availableStemTypeValues.includes(type.value));
+    }
+
+    // Update stem properties based on filtered palms
+    if (!formValues.stemProperty) {
+      const availableStemPropertyValues: string[] = [];
+      if (filteredPalms.some(palm => palm.StemSolitary === 1)) availableStemPropertyValues.push('StemSolitary');
+      if (filteredPalms.some(palm => palm.StemArmed === 1)) availableStemPropertyValues.push('StemArmed');
+      if (filteredPalms.some(palm => palm.LeavesArmed === 1)) availableStemPropertyValues.push('LeavesArmed');
+      this.availableStemProperties = this.allStemProperties.filter(prop => availableStemPropertyValues.includes(prop.value));
+    }
+
+    // Clear selections that are no longer available
+    this.clearUnavailableSelections();
+  }
+
+  // Clear form selections that are no longer available in filtered options
+  private clearUnavailableSelections(): void {
+    const formValues = this.searchForm.value;
+    const updates: any = {};
+
+    if (formValues.genus && !this.availableGenera.includes(formValues.genus)) {
+      updates.genus = '';
+    }
+    if (formValues.tribe && !this.availablePalmTribes.includes(formValues.tribe)) {
+      updates.tribe = '';
+    }
+    if (formValues.subfamily && !this.availablePalmSubfamilies.includes(formValues.subfamily)) {
+      updates.subfamily = '';
+    }
+    if (formValues.stemType && !this.availableStemTypes.some(type => type.value === formValues.stemType)) {
+      updates.stemType = '';
+    }
+    if (formValues.stemProperty && !this.availableStemProperties.some(prop => prop.value === formValues.stemProperty)) {
+      updates.stemProperty = '';
+    }
+    if (formValues.understoreyCanopy && !this.availableHabitats.includes(formValues.understoreyCanopy)) {
+      updates.understoreyCanopy = '';
+    }
+    if (formValues.fruitSize && !this.availableFruitSizes.includes(formValues.fruitSize)) {
+      updates.fruitSize = '';
+    }
+    if (formValues.conspicuousness && !this.availableConspicuousness.includes(formValues.conspicuousness)) {
+      updates.conspicuousness = '';
+    }
+
+    if (Object.keys(updates).length > 0) {
+      this.searchForm.patchValue(updates, { emitEvent: false });
+    }
+  }
+
+  // Setup form value change listeners for intelligent filtering
+  private setupIntelligentFilters(): void {
+    // Listen to any form changes to update available options
+    this.searchForm.valueChanges.subscribe(() => {
+      this.updateAllAvailableOptions();
     });
   }
 }

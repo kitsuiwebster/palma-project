@@ -1,0 +1,33 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">
+        <span class="title-main">Palma Encyclopedia</span>
+        <span class="title-subtitle">A Comprehensive Palm Database</span>
+      </h1>
+      <p class="hero-description">
+        Browse and search through a comprehensive collection of 
+        <strong>{{loading ? '2,500+' : totalSpecies.toLocaleString()}}</strong> 
+        palm species with morphological traits, geographic distribution, 
+        and taxonomic classification data.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/palms" class="btn-primary">
+          <img src="assets/icons/search.png" alt="Browse" class="btn-icon">
+          Browse Species
+        </a>
+        <a routerLink="/data/dataset" class="btn-outline">
+          <img src="assets/icons/chart.png" alt="Dataset" class="btn-icon">
+          Dataset
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="palm-illustration">
+        <img src="assets/icons/palma.png" alt="Palm Tree" class="palm-icon">
+      </div>
+    </div>
+  </div>
+</section>
+
