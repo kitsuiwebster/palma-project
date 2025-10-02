@@ -1,0 +1,57 @@
+# Robots.txt for Palm Encyclopedia (https://palma-encyclopedia.com)
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block access to assets and build files that shouldn't be indexed
+Disallow: /assets/data/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.map$
+
+# Block access to Angular chunks and build artifacts
+Disallow: /chunk-*
+Disallow: /polyfills*
+Disallow: /runtime*
+Disallow: /main*
+Disallow: /vendor*
+
+# Block access to configuration and system files
+Disallow: /.well-known/
+Disallow: /ngsw-worker.js
+Disallow: /ngsw.json
+
+# Allow important pages for SEO
+Allow: /
+Allow: /home
+Allow: /palms
+Allow: /palms/search
+Allow: /palms/browse
+Allow: /palms/detail/*
+Allow: /data
+Allow: /data/overview
+Allow: /data/download
+Allow: /data/glossary
+Allow: /about
+
+# Sitemap location
+Sitemap: https://palma-encyclopedia.com/sitemap.xml
+
+# Cache directives for search engines
+# Request crawlers to be respectful with our palm database
+Crawl-delay: 1

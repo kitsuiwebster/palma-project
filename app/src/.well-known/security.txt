@@ -1,0 +1,36 @@
+Contact: mailto:contact@kitsuiwebster.com
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://palma-encyclopedia.com/pgp-key.asc
+Acknowledgments: https://palma-encyclopedia.com/security-acknowledgments
+Policy: https://palma-encyclopedia.com/security-policy
+Hiring: https://palma-encyclopedia.com/careers
+
+# Security Policy for Palm Encyclopedia
+
+This security.txt file is intended to give security researchers
+information about how to contact us and disclose security vulnerabilities.
+
+# Scope
+This security policy applies to:
+- https://palma-encyclopedia.com and all subdomains
+- The Palm Encyclopedia web application
+- Any APIs and data endpoints
+
+# Reporting Guidelines
+Please report security vulnerabilities via email to contact@kitsuiwebster.com
+Include detailed information about the vulnerability and steps to reproduce.
+
+# Response Time
+We aim to acknowledge receipt of security reports within 72 hours
+and provide an initial assessment within 7 business days.
+
+# Responsible Disclosure
+We request that you:
+- Do not access or modify user data
+- Do not perform denial of service attacks  
+- Do not access systems beyond the minimum necessary to demonstrate the vulnerability
+- Give us reasonable time to fix issues before public disclosure
+
+# Thank You
+We appreciate security researchers who help keep our palm database safe
+and acknowledge responsible disclosure in our security acknowledgments page.
