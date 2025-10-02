@@ -36,18 +36,18 @@ Disallow: /.well-known/
 Disallow: /ngsw-worker.js
 Disallow: /ngsw.json
 
-# Allow important pages for SEO
+# Allow actual pages that exist in the application
 Allow: /
-Allow: /home
 Allow: /palms
 Allow: /palms/search
-Allow: /palms/browse
-Allow: /palms/detail/*
 Allow: /data
 Allow: /data/overview
-Allow: /data/download
-Allow: /data/glossary
+Allow: /data/dataset
+Allow: /data/methodology
+Allow: /data/references
+Allow: /data/photo-credits
 Allow: /about
+Allow: /privacy
 
 # Sitemap location
 Sitemap: https://palma-encyclopedia.com/sitemap.xml
