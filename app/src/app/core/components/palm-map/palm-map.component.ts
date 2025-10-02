@@ -43,6 +43,8 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
     this.map = L.map('map', {
       center: [0, 0],
       zoom: 2,
+      minZoom: 2,
+      maxZoom: 8,
       zoomControl: true,
       attributionControl: true,
       scrollWheelZoom: true
@@ -61,7 +63,7 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
       .then((data) => {
         const geoLayer = L.geoJSON(data, {
           style: (feature: any) => ({
-            fillColor: feature.properties.color || this.getColor(feature.properties.speciesCount),
+            fillColor: feature.properties.color ? feature.properties.color : this.getColor(feature.properties.speciesCount),
             weight: 1,
             opacity: 1,
             color: 'white',
