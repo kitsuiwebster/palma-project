@@ -10,28 +10,29 @@
 
   <!-- Map Container - Full Width -->
   <div class="section-container map-section">
-    <h2 class="section-title">Global Palm Distribution</h2>
+    <h2 class="section-title">Native Palm Species Distribution by Geographic Zone</h2>
     <div class="map-container">
       <app-palm-map></app-palm-map>
     </div>
     
     <!-- Map Legend -->
     <div class="map-legend">
-      <h3>Native Zones</h3>
+      <h3>Species Count per Geographic Zone</h3>
       <div class="legend-grid">
         <div class="legend-item">
-          <span class="color-dot" style="background-color: #2E7D32;"></span>
-          <span>High Density Native Zones</span>
+          <span class="color-dot" style="background-color: #ffff96;"></span>
+          <span>1 species (lowest diversity)</span>
         </div>
         <div class="legend-item">
-          <span class="color-dot" style="background-color: #4CAF50;"></span>
-          <span>Medium Density Native Zones</span>
+          <span class="color-dot" style="background-color: #c5804b;"></span>
+          <span>~150 species (medium diversity)</span>
         </div>
         <div class="legend-item">
-          <span class="color-dot" style="background-color: #8BC34A;"></span>
-          <span>Low Density Native Zones</span>
+          <span class="color-dot" style="background-color: #8b0000;"></span>
+          <span>307 species (highest diversity)</span>
         </div>
       </div>
+      <p class="legend-note">Color intensity reflects the number of native palm species in each geographic zone. Yellow indicates low diversity, red indicates high diversity.</p>
     </div>
   </div>
 

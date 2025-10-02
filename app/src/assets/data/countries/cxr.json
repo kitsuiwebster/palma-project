@@ -1,0 +1,19 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Christmas Island",
+    "code": "CXR"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [105.6, -10.6],
+        [105.8, -10.6],
+        [105.8, -10.4],
+        [105.6, -10.4],
+        [105.6, -10.6]
+      ]
+    ]
+  }
+}

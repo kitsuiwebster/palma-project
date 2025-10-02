@@ -115,6 +115,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.legend-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 15px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
 /* Dataset summary */
 .dataset-summary {
   background-color: #f8f9fa;

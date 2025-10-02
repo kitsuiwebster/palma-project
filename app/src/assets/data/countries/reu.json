@@ -1,0 +1,19 @@
+{
+  "type": "Feature", 
+  "properties": {
+    "name": "Réunion",
+    "code": "REU"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [55.2, -21.4],
+        [55.8, -21.4],
+        [55.8, -20.9],
+        [55.2, -20.9],
+        [55.2, -21.4]
+      ]
+    ]
+  }
+}
