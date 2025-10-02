@@ -13,8 +13,32 @@
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      rgba(76, 175, 80, 0.03) 0%,
+      rgba(129, 199, 132, 0.05) 25%,
+      rgba(46, 125, 50, 0.02) 50%,
+      rgba(76, 175, 80, 0.04) 75%,
+      rgba(129, 199, 132, 0.03) 100%
+    );
+    background-size: 200% 200%;
+    animation: gradientFlow 10s ease-in-out infinite;
+    z-index: 0;
+  }
 
   .hero-content {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 $spacing-unit * 2;
@@ -174,6 +198,22 @@
     color: white;
     transform: translateY(-2px);
     box-shadow: $box-shadow-light;
+  }
+}
+
+// Animation pour l'effet de dégradé fluide
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
   }
 }
 
