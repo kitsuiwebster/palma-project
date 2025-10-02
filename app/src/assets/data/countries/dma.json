@@ -1,0 +1,630 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Dominica",
+    "code": "DMA",
+    "featurecla": "Admin-0 country",
+    "scalerank": 1,
+    "LABELRANK": 5,
+    "SOVEREIGNT": "Dominican Republic",
+    "SOV_A3": "DOM",
+    "ADM0_DIF": 0,
+    "LEVEL": 2,
+    "TYPE": "Sovereign country",
+    "TLC": "1",
+    "ADMIN": "Dominican Republic",
+    "ADM0_A3": "DOM",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "Dominican Republic",
+    "GU_A3": "DOM",
+    "SU_DIF": 0,
+    "SUBUNIT": "Dominican Republic",
+    "SU_A3": "DOM",
+    "BRK_DIFF": 0,
+    "NAME": "Dominican Rep.",
+    "NAME_LONG": "Dominican Republic",
+    "BRK_A3": "DOM",
+    "BRK_NAME": "Dominican Rep.",
+    "BRK_GROUP": null,
+    "ABBREV": "Dom. Rep.",
+    "POSTAL": "DO",
+    "FORMAL_EN": "Dominican Republic",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": "Dominican Republic",
+    "NOTE_ADM0": null,
+    "NOTE_BRK": null,
+    "NAME_SORT": "Dominican Republic",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 5,
+    "MAPCOLOR8": 2,
+    "MAPCOLOR9": 5,
+    "MAPCOLOR13": 7,
+    "POP_EST": 10738958,
+    "POP_RANK": 14,
+    "POP_YEAR": 2019,
+    "GDP_MD": 88941,
+    "GDP_YEAR": 2019,
+    "ECONOMY": "6. Developing region",
+    "INCOME_GRP": "3. Upper middle income",
+    "FIPS_10": "DR",
+    "ISO_A2": "DO",
+    "ISO_A2_EH": "DO",
+    "ISO_A3": "DOM",
+    "ISO_A3_EH": "DOM",
+    "ISO_N3": "214",
+    "ISO_N3_EH": "214",
+    "UN_A3": "214",
+    "WB_A2": "DO",
+    "WB_A3": "DOM",
+    "WOE_ID": 23424800,
+    "WOE_ID_EH": 23424800,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "DOM",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "DOM",
+    "ADM0_A3_US": "DOM",
+    "ADM0_A3_FR": "DOM",
+    "ADM0_A3_RU": "DOM",
+    "ADM0_A3_ES": "DOM",
+    "ADM0_A3_CN": "DOM",
+    "ADM0_A3_TW": "DOM",
+    "ADM0_A3_IN": "DOM",
+    "ADM0_A3_NP": "DOM",
+    "ADM0_A3_PK": "DOM",
+    "ADM0_A3_DE": "DOM",
+    "ADM0_A3_GB": "DOM",
+    "ADM0_A3_BR": "DOM",
+    "ADM0_A3_IL": "DOM",
+    "ADM0_A3_PS": "DOM",
+    "ADM0_A3_SA": "DOM",
+    "ADM0_A3_EG": "DOM",
+    "ADM0_A3_MA": "DOM",
+    "ADM0_A3_PT": "DOM",
+    "ADM0_A3_AR": "DOM",
+    "ADM0_A3_JP": "DOM",
+    "ADM0_A3_KO": "DOM",
+    "ADM0_A3_VN": "DOM",
+    "ADM0_A3_TR": "DOM",
+    "ADM0_A3_ID": "DOM",
+    "ADM0_A3_PL": "DOM",
+    "ADM0_A3_GR": "DOM",
+    "ADM0_A3_IT": "DOM",
+    "ADM0_A3_NL": "DOM",
+    "ADM0_A3_SE": "DOM",
+    "ADM0_A3_BD": "DOM",
+    "ADM0_A3_UA": "DOM",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "North America",
+    "REGION_UN": "Americas",
+    "SUBREGION": "Caribbean",
+    "REGION_WB": "Latin America & Caribbean",
+    "NAME_LEN": 14,
+    "LONG_LEN": 18,
+    "ABBREV_LEN": 9,
+    "TINY": -99,
+    "HOMEPART": 1,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 4.5,
+    "MAX_LABEL": 9.5,
+    "LABEL_X": -70.653998,
+    "LABEL_Y": 19.104137,
+    "NE_ID": 1159320563,
+    "WIKIDATAID": "Q786",
+    "NAME_AR": "جمهورية الدومينيكان",
+    "NAME_BN": "ডোমিনিকান প্রজাতন্ত্র",
+    "NAME_DE": "Dominikanische Republik",
+    "NAME_EN": "Dominican Republic",
+    "NAME_ES": "República Dominicana",
+    "NAME_FA": "جمهوری دومینیکن",
+    "NAME_FR": "République dominicaine",
+    "NAME_EL": "Δομινικανή Δημοκρατία",
+    "NAME_HE": "הרפובליקה הדומיניקנית",
+    "NAME_HI": "डोमिनिकन गणराज्य",
+    "NAME_HU": "Dominikai Köztársaság",
+    "NAME_ID": "Republik Dominika",
+    "NAME_IT": "Repubblica Dominicana",
+    "NAME_JA": "ドミニカ共和国",
+    "NAME_KO": "도미니카 공화국",
+    "NAME_NL": "Dominicaanse Republiek",
+    "NAME_PL": "Dominikana",
+    "NAME_PT": "República Dominicana",
+    "NAME_RU": "Доминиканская Республика",
+    "NAME_SV": "Dominikanska republiken",
+    "NAME_TR": "Dominik Cumhuriyeti",
+    "NAME_UK": "Домініканська Республіка",
+    "NAME_UR": "جمہوریہ ڈومینیکن",
+    "NAME_VI": "Cộng hòa Dominica",
+    "NAME_ZH": "多米尼加",
+    "NAME_ZHT": "多明尼加",
+    "FCLASS_ISO": "Admin-0 country",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 country",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": null,
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -71.768311,
+          18.03916
+        ],
+        [
+          -71.76377,
+          18.203955
+        ],
+        [
+          -71.737256,
+          18.270801
+        ],
+        [
+          -71.761914,
+          18.341309
+        ],
+        [
+          -71.872559,
+          18.416211
+        ],
+        [
+          -71.940381,
+          18.512598
+        ],
+        [
+          -72.000391,
+          18.5979
+        ],
+        [
+          -71.986865,
+          18.610352
+        ],
+        [
+          -71.866504,
+          18.61416
+        ],
+        [
+          -71.824219,
+          18.645508
+        ],
+        [
+          -71.743213,
+          18.73291
+        ],
+        [
+          -71.727051,
+          18.803223
+        ],
+        [
+          -71.733643,
+          18.856396
+        ],
+        [
+          -71.786377,
+          18.92002
+        ],
+        [
+          -71.807129,
+          18.987012
+        ],
+        [
+          -71.742041,
+          19.045508
+        ],
+        [
+          -71.657031,
+          19.130762
+        ],
+        [
+          -71.645312,
+          19.163525
+        ],
+        [
+          -71.647217,
+          19.195947
+        ],
+        [
+          -71.746484,
+          19.28584
+        ],
+        [
+          -71.753174,
+          19.324463
+        ],
+        [
+          -71.706934,
+          19.421973
+        ],
+        [
+          -71.711475,
+          19.486572
+        ],
+        [
+          -71.757422,
+          19.688184
+        ],
+        [
+          -71.779248,
+          19.718164
+        ],
+        [
+          -71.735107,
+          19.735107
+        ],
+        [
+          -71.706055,
+          19.795166
+        ],
+        [
+          -71.667383,
+          19.848633
+        ],
+        [
+          -71.615967,
+          19.877441
+        ],
+        [
+          -71.557764,
+          19.895361
+        ],
+        [
+          -71.441699,
+          19.893994
+        ],
+        [
+          -71.281348,
+          19.847363
+        ],
+        [
+          -71.235937,
+          19.848145
+        ],
+        [
+          -71.081934,
+          19.890479
+        ],
+        [
+          -70.95415,
+          19.913965
+        ],
+        [
+          -70.833887,
+          19.887256
+        ],
+        [
+          -70.785254,
+          19.850879
+        ],
+        [
+          -70.685937,
+          19.793262
+        ],
+        [
+          -70.636182,
+          19.775635
+        ],
+        [
+          -70.479346,
+          19.776953
+        ],
+        [
+          -70.436426,
+          19.77124
+        ],
+        [
+          -70.304736,
+          19.676074
+        ],
+        [
+          -70.193848,
+          19.638037
+        ],
+        [
+          -70.129443,
+          19.636133
+        ],
+        [
+          -70.014062,
+          19.672949
+        ],
+        [
+          -69.956836,
+          19.671875
+        ],
+        [
+          -69.891211,
+          19.589746
+        ],
+        [
+          -69.87832,
+          19.473291
+        ],
+        [
+          -69.823437,
+          19.367139
+        ],
+        [
+          -69.739404,
+          19.299219
+        ],
+        [
+          -69.324951,
+          19.327734
+        ],
+        [
+          -69.232471,
+          19.271826
+        ],
+        [
+          -69.264258,
+          19.225684
+        ],
+        [
+          -69.322754,
+          19.201074
+        ],
+        [
+          -69.519727,
+          19.212012
+        ],
+        [
+          -69.605957,
+          19.206494
+        ],
+        [
+          -69.623242,
+          19.160498
+        ],
+        [
+          -69.623633,
+          19.117822
+        ],
+        [
+          -69.50835,
+          19.107617
+        ],
+        [
+          -69.395264,
+          19.086084
+        ],
+        [
+          -69.280225,
+          19.051904
+        ],
+        [
+          -69.163037,
+          19.028467
+        ],
+        [
+          -69.031299,
+          19.013184
+        ],
+        [
+          -68.901367,
+          18.988477
+        ],
+        [
+          -68.684766,
+          18.904785
+        ],
+        [
+          -68.44541,
+          18.714453
+        ],
+        [
+          -68.381396,
+          18.671143
+        ],
+        [
+          -68.33916,
+          18.611523
+        ],
+        [
+          -68.359277,
+          18.538086
+        ],
+        [
+          -68.444824,
+          18.417725
+        ],
+        [
+          -68.493213,
+          18.379004
+        ],
+        [
+          -68.56377,
+          18.355469
+        ],
+        [
+          -68.612207,
+          18.30625
+        ],
+        [
+          -68.658838,
+          18.222021
+        ],
+        [
+          -68.687402,
+          18.214941
+        ],
+        [
+          -68.720996,
+          18.218408
+        ],
+        [
+          -68.778467,
+          18.266113
+        ],
+        [
+          -68.819531,
+          18.339307
+        ],
+        [
+          -68.934961,
+          18.408008
+        ],
+        [
+          -69.072266,
+          18.399219
+        ],
+        [
+          -69.274512,
+          18.439844
+        ],
+        [
+          -69.396973,
+          18.420117
+        ],
+        [
+          -69.519434,
+          18.415674
+        ],
+        [
+          -69.644727,
+          18.436377
+        ],
+        [
+          -69.770654,
+          18.443555
+        ],
+        [
+          -69.896387,
+          18.417725
+        ],
+        [
+          -70.018311,
+          18.373633
+        ],
+        [
+          -70.06333,
+          18.345654
+        ],
+        [
+          -70.141602,
+          18.2771
+        ],
+        [
+          -70.183105,
+          18.251758
+        ],
+        [
+          -70.479932,
+          18.217285
+        ],
+        [
+          -70.56543,
+          18.267578
+        ],
+        [
+          -70.644678,
+          18.33623
+        ],
+        [
+          -70.758838,
+          18.345605
+        ],
+        [
+          -70.924316,
+          18.29248
+        ],
+        [
+          -71.027832,
+          18.273193
+        ],
+        [
+          -71.069971,
+          18.250342
+        ],
+        [
+          -71.082227,
+          18.224365
+        ],
+        [
+          -71.082617,
+          18.128369
+        ],
+        [
+          -71.106006,
+          18.07002
+        ],
+        [
+          -71.267285,
+          17.849609
+        ],
+        [
+          -71.358301,
+          17.694141
+        ],
+        [
+          -71.395703,
+          17.646094
+        ],
+        [
+          -71.438965,
+          17.635596
+        ],
+        [
+          -71.518359,
+          17.725
+        ],
+        [
+          -71.569043,
+          17.757373
+        ],
+        [
+          -71.631738,
+          17.773633
+        ],
+        [
+          -71.658301,
+          17.821143
+        ],
+        [
+          -71.657227,
+          17.888672
+        ],
+        [
+          -71.67373,
+          17.954102
+        ],
+        [
+          -71.712451,
+          18.005469
+        ],
+        [
+          -71.768311,
+          18.03916
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Tonga",
+    "code": "TON",
+    "featurecla": "Admin-0 country",
+    "scalerank": 3,
+    "LABELRANK": 4,
+    "SOVEREIGNT": "Tonga",
+    "SOV_A3": "TON",
+    "ADM0_DIF": 0,
+    "LEVEL": 2,
+    "TYPE": "Sovereign country",
+    "TLC": "1",
+    "ADMIN": "Tonga",
+    "ADM0_A3": "TON",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "Tonga",
+    "GU_A3": "TON",
+    "SU_DIF": 0,
+    "SUBUNIT": "Tonga",
+    "SU_A3": "TON",
+    "BRK_DIFF": 0,
+    "NAME": "Tonga",
+    "NAME_LONG": "Tonga",
+    "BRK_A3": "TON",
+    "BRK_NAME": "Tonga",
+    "BRK_GROUP": null,
+    "ABBREV": "Tongo",
+    "POSTAL": "TO",
+    "FORMAL_EN": "Kingdom of Tonga",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": "Tonga",
+    "NOTE_ADM0": null,
+    "NOTE_BRK": null,
+    "NAME_SORT": "Tonga",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 2,
+    "MAPCOLOR8": 1,
+    "MAPCOLOR9": 1,
+    "MAPCOLOR13": 8,
+    "POP_EST": 104494,
+    "POP_RANK": 9,
+    "POP_YEAR": 2019,
+    "GDP_MD": 512,
+    "GDP_YEAR": 2019,
+    "ECONOMY": "6. Developing region",
+    "INCOME_GRP": "4. Lower middle income",
+    "FIPS_10": "TN",
+    "ISO_A2": "TO",
+    "ISO_A2_EH": "TO",
+    "ISO_A3": "TON",
+    "ISO_A3_EH": "TON",
+    "ISO_N3": "776",
+    "ISO_N3_EH": "776",
+    "UN_A3": "776",
+    "WB_A2": "TO",
+    "WB_A3": "TON",
+    "WOE_ID": 23424964,
+    "WOE_ID_EH": 23424964,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "TON",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "TON",
+    "ADM0_A3_US": "TON",
+    "ADM0_A3_FR": "TON",
+    "ADM0_A3_RU": "TON",
+    "ADM0_A3_ES": "TON",
+    "ADM0_A3_CN": "TON",
+    "ADM0_A3_TW": "TON",
+    "ADM0_A3_IN": "TON",
+    "ADM0_A3_NP": "TON",
+    "ADM0_A3_PK": "TON",
+    "ADM0_A3_DE": "TON",
+    "ADM0_A3_GB": "TON",
+    "ADM0_A3_BR": "TON",
+    "ADM0_A3_IL": "TON",
+    "ADM0_A3_PS": "TON",
+    "ADM0_A3_SA": "TON",
+    "ADM0_A3_EG": "TON",
+    "ADM0_A3_MA": "TON",
+    "ADM0_A3_PT": "TON",
+    "ADM0_A3_AR": "TON",
+    "ADM0_A3_JP": "TON",
+    "ADM0_A3_KO": "TON",
+    "ADM0_A3_VN": "TON",
+    "ADM0_A3_TR": "TON",
+    "ADM0_A3_ID": "TON",
+    "ADM0_A3_PL": "TON",
+    "ADM0_A3_GR": "TON",
+    "ADM0_A3_IT": "TON",
+    "ADM0_A3_NL": "TON",
+    "ADM0_A3_SE": "TON",
+    "ADM0_A3_BD": "TON",
+    "ADM0_A3_UA": "TON",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "Oceania",
+    "REGION_UN": "Oceania",
+    "SUBREGION": "Polynesia",
+    "REGION_WB": "East Asia & Pacific",
+    "NAME_LEN": 5,
+    "LONG_LEN": 5,
+    "ABBREV_LEN": 5,
+    "TINY": 3,
+    "HOMEPART": 1,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 4,
+    "MAX_LABEL": 9,
+    "LABEL_X": -175.163014,
+    "LABEL_Y": -21.210026,
+    "NE_ID": 1159321319,
+    "WIKIDATAID": "Q678",
+    "NAME_AR": "تونغا",
+    "NAME_BN": "টোঙ্গা",
+    "NAME_DE": "Tonga",
+    "NAME_EN": "Tonga",
+    "NAME_ES": "Tonga",
+    "NAME_FA": "تونگا",
+    "NAME_FR": "Tonga",
+    "NAME_EL": "Τόνγκα",
+    "NAME_HE": "טונגה",
+    "NAME_HI": "टोंगा",
+    "NAME_HU": "Tonga",
+    "NAME_ID": "Tonga",
+    "NAME_IT": "Tonga",
+    "NAME_JA": "トンガ",
+    "NAME_KO": "통가",
+    "NAME_NL": "Tonga",
+    "NAME_PL": "Tonga",
+    "NAME_PT": "Tonga",
+    "NAME_RU": "Тонга",
+    "NAME_SV": "Tonga",
+    "NAME_TR": "Tonga",
+    "NAME_UK": "Тонга",
+    "NAME_UR": "ٹونگا",
+    "NAME_VI": "Tonga",
+    "NAME_ZH": "汤加",
+    "NAME_ZHT": "東加",
+    "FCLASS_ISO": "Admin-0 country",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 country",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": null,
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -175.161914,
+            -21.169336
+          ],
+          [
+            -175.147656,
+            -21.169434
+          ],
+          [
+            -175.131934,
+            -21.139746
+          ],
+          [
+            -175.078174,
+            -21.129004
+          ],
+          [
+            -175.084082,
+            -21.160742
+          ],
+          [
+            -175.156592,
+            -21.263672
+          ],
+          [
+            -175.202344,
+            -21.223438
+          ],
+          [
+            -175.335449,
+            -21.157715
+          ],
+          [
+            -175.362354,
+            -21.106836
+          ],
+          [
+            -175.318066,
+            -21.068262
+          ],
+          [
+            -175.322607,
+            -21.099316
+          ],
+          [
+            -175.300439,
+            -21.113379
+          ],
+          [
+            -175.225391,
+            -21.11875
+          ],
+          [
+            -175.158008,
+            -21.146484
+          ],
+          [
+            -175.199756,
+            -21.155664
+          ],
+          [
+            -175.161914,
+            -21.169336
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            -173.953516,
+            -18.639355
+          ],
+          [
+            -173.991309,
+            -18.698633
+          ],
+          [
+            -174.009326,
+            -18.697754
+          ],
+          [
+            -174.053125,
+            -18.663379
+          ],
+          [
+            -174.069141,
+            -18.640234
+          ],
+          [
+            -174.002441,
+            -18.570703
+          ],
+          [
+            -173.968066,
+            -18.565332
+          ],
+          [
+            -173.921875,
+            -18.588574
+          ],
+          [
+            -173.923975,
+            -18.608496
+          ],
+          [
+            -173.953516,
+            -18.639355
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            -174.913135,
+            -21.300488
+          ],
+          [
+            -174.918652,
+            -21.450586
+          ],
+          [
+            -174.967529,
+            -21.381738
+          ],
+          [
+            -174.972949,
+            -21.349805
+          ],
+          [
+            -174.923486,
+            -21.303418
+          ],
+          [
+            -174.913135,
+            -21.300488
+          ]
+        ]
+      ]
+    ]
+  }
+}

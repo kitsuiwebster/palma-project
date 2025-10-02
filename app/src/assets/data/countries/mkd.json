@@ -1,0 +1,506 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "North Macedonia",
+    "code": "MKD",
+    "featurecla": "Admin-0 country",
+    "scalerank": 1,
+    "LABELRANK": 6,
+    "SOVEREIGNT": "North Macedonia",
+    "SOV_A3": "MKD",
+    "ADM0_DIF": 0,
+    "LEVEL": 2,
+    "TYPE": "Sovereign country",
+    "TLC": "1",
+    "ADMIN": "North Macedonia",
+    "ADM0_A3": "MKD",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "North Macedonia",
+    "GU_A3": "MKD",
+    "SU_DIF": 0,
+    "SUBUNIT": "North Macedonia",
+    "SU_A3": "MKD",
+    "BRK_DIFF": 0,
+    "NAME": "North Macedonia",
+    "NAME_LONG": "North Macedonia",
+    "BRK_A3": "MKD",
+    "BRK_NAME": "North Macedonia",
+    "BRK_GROUP": null,
+    "ABBREV": "N. Mac.",
+    "POSTAL": "NM",
+    "FORMAL_EN": "Republic of North Macedonia",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": "North Macedonia",
+    "NOTE_ADM0": null,
+    "NOTE_BRK": null,
+    "NAME_SORT": "North Macedonia",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 5,
+    "MAPCOLOR8": 3,
+    "MAPCOLOR9": 7,
+    "MAPCOLOR13": 3,
+    "POP_EST": 2083459,
+    "POP_RANK": 12,
+    "POP_YEAR": 2019,
+    "GDP_MD": 12547,
+    "GDP_YEAR": 2019,
+    "ECONOMY": "6. Developing region",
+    "INCOME_GRP": "3. Upper middle income",
+    "FIPS_10": "MK",
+    "ISO_A2": "MK",
+    "ISO_A2_EH": "MK",
+    "ISO_A3": "MKD",
+    "ISO_A3_EH": "MKD",
+    "ISO_N3": "807",
+    "ISO_N3_EH": "807",
+    "UN_A3": "807",
+    "WB_A2": "MK",
+    "WB_A3": "MKD",
+    "WOE_ID": 23424890,
+    "WOE_ID_EH": 23424890,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "MKD",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "MKD",
+    "ADM0_A3_US": "MKD",
+    "ADM0_A3_FR": "MKD",
+    "ADM0_A3_RU": "MKD",
+    "ADM0_A3_ES": "MKD",
+    "ADM0_A3_CN": "MKD",
+    "ADM0_A3_TW": "MKD",
+    "ADM0_A3_IN": "MKD",
+    "ADM0_A3_NP": "MKD",
+    "ADM0_A3_PK": "MKD",
+    "ADM0_A3_DE": "MKD",
+    "ADM0_A3_GB": "MKD",
+    "ADM0_A3_BR": "MKD",
+    "ADM0_A3_IL": "MKD",
+    "ADM0_A3_PS": "MKD",
+    "ADM0_A3_SA": "MKD",
+    "ADM0_A3_EG": "MKD",
+    "ADM0_A3_MA": "MKD",
+    "ADM0_A3_PT": "MKD",
+    "ADM0_A3_AR": "MKD",
+    "ADM0_A3_JP": "MKD",
+    "ADM0_A3_KO": "MKD",
+    "ADM0_A3_VN": "MKD",
+    "ADM0_A3_TR": "MKD",
+    "ADM0_A3_ID": "MKD",
+    "ADM0_A3_PL": "MKD",
+    "ADM0_A3_GR": "MKD",
+    "ADM0_A3_IT": "MKD",
+    "ADM0_A3_NL": "MKD",
+    "ADM0_A3_SE": "MKD",
+    "ADM0_A3_BD": "MKD",
+    "ADM0_A3_UA": "MKD",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "Europe",
+    "REGION_UN": "Europe",
+    "SUBREGION": "Southern Europe",
+    "REGION_WB": "Europe & Central Asia",
+    "NAME_LEN": 15,
+    "LONG_LEN": 15,
+    "ABBREV_LEN": 7,
+    "TINY": -99,
+    "HOMEPART": 1,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 5,
+    "MAX_LABEL": 10,
+    "LABEL_X": 21.555839,
+    "LABEL_Y": 41.558223,
+    "NE_ID": 1159321061,
+    "WIKIDATAID": "Q221",
+    "NAME_AR": "مقدونيا الشمالية",
+    "NAME_BN": "উত্তর মেসিডোনিয়া",
+    "NAME_DE": "Nordmazedonien",
+    "NAME_EN": "North Macedonia",
+    "NAME_ES": "Macedonia del Norte",
+    "NAME_FA": "مقدونیه شمالی",
+    "NAME_FR": "Macédoine du Nord",
+    "NAME_EL": "Βόρεια Μακεδονία",
+    "NAME_HE": "מקדוניה הצפונית",
+    "NAME_HI": "उत्तर मैसिडोनिया",
+    "NAME_HU": "Észak-Macedónia",
+    "NAME_ID": "Republik Makedonia Utara",
+    "NAME_IT": "Macedonia del Nord",
+    "NAME_JA": "北マケドニア",
+    "NAME_KO": "북마케도니아",
+    "NAME_NL": "Noord-Macedonië",
+    "NAME_PL": "Macedonia Północna",
+    "NAME_PT": "Macedónia do Norte",
+    "NAME_RU": "Северная Македония",
+    "NAME_SV": "Nordmakedonien",
+    "NAME_TR": "Kuzey Makedonya",
+    "NAME_UK": "Північна Македонія",
+    "NAME_UR": "شمالی مقدونیہ",
+    "NAME_VI": "Bắc Macedonia",
+    "NAME_ZH": "北马其顿",
+    "NAME_ZHT": "北馬其頓",
+    "FCLASS_ISO": "Admin-0 country",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 country",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": null,
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          21.5625,
+          42.24751
+        ],
+        [
+          21.618262,
+          42.242139
+        ],
+        [
+          21.739258,
+          42.267725
+        ],
+        [
+          21.814648,
+          42.303125
+        ],
+        [
+          21.853027,
+          42.308398
+        ],
+        [
+          21.904102,
+          42.32207
+        ],
+        [
+          21.977539,
+          42.320068
+        ],
+        [
+          22.052051,
+          42.304639
+        ],
+        [
+          22.14668,
+          42.325
+        ],
+        [
+          22.239746,
+          42.358154
+        ],
+        [
+          22.277051,
+          42.349854
+        ],
+        [
+          22.317383,
+          42.321729
+        ],
+        [
+          22.344043,
+          42.313965
+        ],
+        [
+          22.498242,
+          42.165088
+        ],
+        [
+          22.582715,
+          42.104834
+        ],
+        [
+          22.682324,
+          42.059131
+        ],
+        [
+          22.796094,
+          42.025684
+        ],
+        [
+          22.836816,
+          41.993604
+        ],
+        [
+          22.90918,
+          41.835205
+        ],
+        [
+          22.943945,
+          41.775098
+        ],
+        [
+          22.991992,
+          41.757178
+        ],
+        [
+          23.003613,
+          41.739844
+        ],
+        [
+          23.005664,
+          41.716943
+        ],
+        [
+          22.951465,
+          41.605615
+        ],
+        [
+          22.929688,
+          41.356104
+        ],
+        [
+          22.916016,
+          41.336279
+        ],
+        [
+          22.859277,
+          41.337354
+        ],
+        [
+          22.783887,
+          41.331982
+        ],
+        [
+          22.755078,
+          41.312744
+        ],
+        [
+          22.724805,
+          41.178516
+        ],
+        [
+          22.603613,
+          41.140186
+        ],
+        [
+          22.493555,
+          41.118506
+        ],
+        [
+          22.400781,
+          41.123389
+        ],
+        [
+          22.237695,
+          41.155176
+        ],
+        [
+          22.184473,
+          41.158643
+        ],
+        [
+          22.138867,
+          41.140527
+        ],
+        [
+          21.993359,
+          41.130957
+        ],
+        [
+          21.929492,
+          41.107422
+        ],
+        [
+          21.779492,
+          40.950439
+        ],
+        [
+          21.627539,
+          40.896338
+        ],
+        [
+          21.575781,
+          40.868945
+        ],
+        [
+          21.459668,
+          40.903613
+        ],
+        [
+          21.404102,
+          40.907178
+        ],
+        [
+          21.32373,
+          40.867139
+        ],
+        [
+          21.147559,
+          40.863135
+        ],
+        [
+          21.1,
+          40.856152
+        ],
+        [
+          20.964258,
+          40.849902
+        ],
+        [
+          20.958594,
+          40.871533
+        ],
+        [
+          20.933496,
+          40.903125
+        ],
+        [
+          20.870215,
+          40.91792
+        ],
+        [
+          20.74082,
+          40.905273
+        ],
+        [
+          20.709277,
+          40.928369
+        ],
+        [
+          20.656055,
+          41.06167
+        ],
+        [
+          20.614453,
+          41.083057
+        ],
+        [
+          20.567871,
+          41.127832
+        ],
+        [
+          20.488965,
+          41.272607
+        ],
+        [
+          20.487012,
+          41.336084
+        ],
+        [
+          20.492383,
+          41.391406
+        ],
+        [
+          20.448633,
+          41.521289
+        ],
+        [
+          20.475586,
+          41.554102
+        ],
+        [
+          20.516211,
+          41.574756
+        ],
+        [
+          20.516602,
+          41.627051
+        ],
+        [
+          20.505176,
+          41.706494
+        ],
+        [
+          20.553125,
+          41.862354
+        ],
+        [
+          20.566211,
+          41.873682
+        ],
+        [
+          20.578516,
+          41.866211
+        ],
+        [
+          20.694922,
+          41.853809
+        ],
+        [
+          20.725,
+          41.873535
+        ],
+        [
+          20.744141,
+          41.904297
+        ],
+        [
+          20.750391,
+          42.018359
+        ],
+        [
+          20.778125,
+          42.071045
+        ],
+        [
+          21.059766,
+          42.171289
+        ],
+        [
+          21.14248,
+          42.175
+        ],
+        [
+          21.206055,
+          42.128955
+        ],
+        [
+          21.256348,
+          42.099512
+        ],
+        [
+          21.286621,
+          42.100391
+        ],
+        [
+          21.297559,
+          42.130078
+        ],
+        [
+          21.331738,
+          42.187158
+        ],
+        [
+          21.389551,
+          42.219824
+        ],
+        [
+          21.56084,
+          42.247656
+        ],
+        [
+          21.5625,
+          42.24751
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Palau",
+    "code": "PLW",
+    "featurecla": "Admin-0 country",
+    "scalerank": 4,
+    "LABELRANK": 6,
+    "SOVEREIGNT": "Palau",
+    "SOV_A3": "PLW",
+    "ADM0_DIF": 0,
+    "LEVEL": 2,
+    "TYPE": "Sovereign country",
+    "TLC": "1",
+    "ADMIN": "Palau",
+    "ADM0_A3": "PLW",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "Palau",
+    "GU_A3": "PLW",
+    "SU_DIF": 0,
+    "SUBUNIT": "Palau",
+    "SU_A3": "PLW",
+    "BRK_DIFF": 0,
+    "NAME": "Palau",
+    "NAME_LONG": "Palau",
+    "BRK_A3": "PLW",
+    "BRK_NAME": "Palau",
+    "BRK_GROUP": null,
+    "ABBREV": "Palau",
+    "POSTAL": "PW",
+    "FORMAL_EN": "Republic of Palau",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": "Palau",
+    "NOTE_ADM0": null,
+    "NOTE_BRK": null,
+    "NAME_SORT": "Palau",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 2,
+    "MAPCOLOR8": 5,
+    "MAPCOLOR9": 1,
+    "MAPCOLOR13": 12,
+    "POP_EST": 18008,
+    "POP_RANK": 6,
+    "POP_YEAR": 2019,
+    "GDP_MD": 268,
+    "GDP_YEAR": 2019,
+    "ECONOMY": "6. Developing region",
+    "INCOME_GRP": "3. Upper middle income",
+    "FIPS_10": "PS",
+    "ISO_A2": "PW",
+    "ISO_A2_EH": "PW",
+    "ISO_A3": "PLW",
+    "ISO_A3_EH": "PLW",
+    "ISO_N3": "585",
+    "ISO_N3_EH": "585",
+    "UN_A3": "585",
+    "WB_A2": "PW",
+    "WB_A3": "PLW",
+    "WOE_ID": 23424927,
+    "WOE_ID_EH": 23424927,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "PLW",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "PLW",
+    "ADM0_A3_US": "PLW",
+    "ADM0_A3_FR": "PLW",
+    "ADM0_A3_RU": "PLW",
+    "ADM0_A3_ES": "PLW",
+    "ADM0_A3_CN": "PLW",
+    "ADM0_A3_TW": "PLW",
+    "ADM0_A3_IN": "PLW",
+    "ADM0_A3_NP": "PLW",
+    "ADM0_A3_PK": "PLW",
+    "ADM0_A3_DE": "PLW",
+    "ADM0_A3_GB": "PLW",
+    "ADM0_A3_BR": "PLW",
+    "ADM0_A3_IL": "PLW",
+    "ADM0_A3_PS": "PLW",
+    "ADM0_A3_SA": "PLW",
+    "ADM0_A3_EG": "PLW",
+    "ADM0_A3_MA": "PLW",
+    "ADM0_A3_PT": "PLW",
+    "ADM0_A3_AR": "PLW",
+    "ADM0_A3_JP": "PLW",
+    "ADM0_A3_KO": "PLW",
+    "ADM0_A3_VN": "PLW",
+    "ADM0_A3_TR": "PLW",
+    "ADM0_A3_ID": "PLW",
+    "ADM0_A3_PL": "PLW",
+    "ADM0_A3_GR": "PLW",
+    "ADM0_A3_IT": "PLW",
+    "ADM0_A3_NL": "PLW",
+    "ADM0_A3_SE": "PLW",
+    "ADM0_A3_BD": "PLW",
+    "ADM0_A3_UA": "PLW",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "Oceania",
+    "REGION_UN": "Oceania",
+    "SUBREGION": "Micronesia",
+    "REGION_WB": "East Asia & Pacific",
+    "NAME_LEN": 5,
+    "LONG_LEN": 5,
+    "ABBREV_LEN": 5,
+    "TINY": 2,
+    "HOMEPART": 1,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 5,
+    "MAX_LABEL": 10,
+    "LABEL_X": 134.580157,
+    "LABEL_Y": 7.518252,
+    "NE_ID": 1159321171,
+    "WIKIDATAID": "Q695",
+    "NAME_AR": "بالاو",
+    "NAME_BN": "পালাউ",
+    "NAME_DE": "Palau",
+    "NAME_EN": "Palau",
+    "NAME_ES": "Palaos",
+    "NAME_FA": "پالائو",
+    "NAME_FR": "Palaos",
+    "NAME_EL": "Παλάου",
+    "NAME_HE": "פלאו",
+    "NAME_HI": "पलाउ",
+    "NAME_HU": "Palau",
+    "NAME_ID": "Palau",
+    "NAME_IT": "Palau",
+    "NAME_JA": "パラオ",
+    "NAME_KO": "팔라우",
+    "NAME_NL": "Palau",
+    "NAME_PL": "Palau",
+    "NAME_PT": "Palau",
+    "NAME_RU": "Палау",
+    "NAME_SV": "Palau",
+    "NAME_TR": "Palau",
+    "NAME_UK": "Республіка Палау",
+    "NAME_UR": "پلاؤ",
+    "NAME_VI": "Palau",
+    "NAME_ZH": "帕劳",
+    "NAME_ZHT": "帛琉",
+    "FCLASS_ISO": "Admin-0 country",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 country",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": null,
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            131.172363,
+            3.026221
+          ],
+          [
+            131.149609,
+            3.021875
+          ],
+          [
+            131.134961,
+            3.025244
+          ],
+          [
+            131.136719,
+            3.039453
+          ],
+          [
+            131.151563,
+            3.054102
+          ],
+          [
+            131.172363,
+            3.060596
+          ],
+          [
+            131.187891,
+            3.055615
+          ],
+          [
+            131.186328,
+            3.04209
+          ],
+          [
+            131.172363,
+            3.026221
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            134.59541,
+            7.382031
+          ],
+          [
+            134.534668,
+            7.360645
+          ],
+          [
+            134.50625,
+            7.437109
+          ],
+          [
+            134.515723,
+            7.525781
+          ],
+          [
+            134.555957,
+            7.593945
+          ],
+          [
+            134.599707,
+            7.615771
+          ],
+          [
+            134.608691,
+            7.623584
+          ],
+          [
+            134.651172,
+            7.712109
+          ],
+          [
+            134.65957,
+            7.663281
+          ],
+          [
+            134.632715,
+            7.501318
+          ],
+          [
+            134.598242,
+            7.438281
+          ],
+          [
+            134.59541,
+            7.382031
+          ]
+        ]
+      ]
+    ]
+  }
+}

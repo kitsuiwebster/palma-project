@@ -1,0 +1,440 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "South Georgia",
+    "code": "SGS",
+    "featurecla": "Admin-0 country",
+    "scalerank": 3,
+    "LABELRANK": 4,
+    "SOVEREIGNT": "United Kingdom",
+    "SOV_A3": "GB1",
+    "ADM0_DIF": 1,
+    "LEVEL": 2,
+    "TYPE": "Dependency",
+    "TLC": "1",
+    "ADMIN": "South Georgia and the Islands",
+    "ADM0_A3": "SGS",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "South Georgia and the Islands",
+    "GU_A3": "SGS",
+    "SU_DIF": 0,
+    "SUBUNIT": "South Georgia and the Islands",
+    "SU_A3": "SGS",
+    "BRK_DIFF": 0,
+    "NAME": "S. Geo. and the Is.",
+    "NAME_LONG": "South Georgia and the Islands",
+    "BRK_A3": "SGS",
+    "BRK_NAME": "S. Geo. and the Is.",
+    "BRK_GROUP": null,
+    "ABBREV": "S.G. & Is.",
+    "POSTAL": "GS",
+    "FORMAL_EN": "South Georgia and the Islands",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": null,
+    "NOTE_ADM0": "U.K.",
+    "NOTE_BRK": null,
+    "NAME_SORT": "South Georgia and the Islands",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 6,
+    "MAPCOLOR8": 6,
+    "MAPCOLOR9": 6,
+    "MAPCOLOR13": 3,
+    "POP_EST": 30,
+    "POP_RANK": 1,
+    "POP_YEAR": 2017,
+    "GDP_MD": 0,
+    "GDP_YEAR": 2016,
+    "ECONOMY": "7. Least developed region",
+    "INCOME_GRP": "5. Low income",
+    "FIPS_10": "SX",
+    "ISO_A2": "GS",
+    "ISO_A2_EH": "GS",
+    "ISO_A3": "SGS",
+    "ISO_A3_EH": "SGS",
+    "ISO_N3": "239",
+    "ISO_N3_EH": "239",
+    "UN_A3": "-099",
+    "WB_A2": "-99",
+    "WB_A3": "-99",
+    "WOE_ID": 23424955,
+    "WOE_ID_EH": 23424955,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "SGS",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "SGS",
+    "ADM0_A3_US": "SGS",
+    "ADM0_A3_FR": "SGS",
+    "ADM0_A3_RU": "SGS",
+    "ADM0_A3_ES": "SGS",
+    "ADM0_A3_CN": "SGS",
+    "ADM0_A3_TW": "SGS",
+    "ADM0_A3_IN": "SGS",
+    "ADM0_A3_NP": "SGS",
+    "ADM0_A3_PK": "SGS",
+    "ADM0_A3_DE": "SGS",
+    "ADM0_A3_GB": "SGS",
+    "ADM0_A3_BR": "SGS",
+    "ADM0_A3_IL": "SGS",
+    "ADM0_A3_PS": "SGS",
+    "ADM0_A3_SA": "SGS",
+    "ADM0_A3_EG": "SGS",
+    "ADM0_A3_MA": "SGS",
+    "ADM0_A3_PT": "SGS",
+    "ADM0_A3_AR": "SGS",
+    "ADM0_A3_JP": "SGS",
+    "ADM0_A3_KO": "SGS",
+    "ADM0_A3_VN": "SGS",
+    "ADM0_A3_TR": "SGS",
+    "ADM0_A3_ID": "SGS",
+    "ADM0_A3_PL": "SGS",
+    "ADM0_A3_GR": "SGS",
+    "ADM0_A3_IT": "SGS",
+    "ADM0_A3_NL": "SGS",
+    "ADM0_A3_SE": "SGS",
+    "ADM0_A3_BD": "SGS",
+    "ADM0_A3_UA": "SGS",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "Seven seas (open ocean)",
+    "REGION_UN": "Americas",
+    "SUBREGION": "Seven seas (open ocean)",
+    "REGION_WB": "Antarctica",
+    "NAME_LEN": 19,
+    "LONG_LEN": 29,
+    "ABBREV_LEN": 10,
+    "TINY": 3,
+    "HOMEPART": -99,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 5,
+    "MAX_LABEL": 9,
+    "LABEL_X": -31.063179,
+    "LABEL_Y": -55.683402,
+    "NE_ID": 1159320731,
+    "WIKIDATAID": "Q35086",
+    "NAME_AR": "جورجيا الجنوبية وجزر ساندويتش الجنوبية",
+    "NAME_BN": "দক্ষিণ জর্জিয়া ও দক্ষিণ স্যন্ডউইচ দ্বীপপুঞ্জ",
+    "NAME_DE": "Südgeorgien und die Südlichen Sandwichinseln",
+    "NAME_EN": "South Georgia and the South Sandwich Islands",
+    "NAME_ES": "Islas Georgias del Sur y Sandwich del Sur",
+    "NAME_FA": "جزایر جورجیای جنوبی و ساندویچ جنوبی",
+    "NAME_FR": "Géorgie du Sud-et-les Îles Sandwich du Sud",
+    "NAME_EL": "Νήσοι Νότια Γεωργία και Νότιες Σάντουιτς",
+    "NAME_HE": "איי ג'ורג'יה הדרומית ואיי סנדוויץ' הדרומיים",
+    "NAME_HI": "दक्षिण जॉर्जिया एवं दक्षिण सैंडविच द्वीप समूह",
+    "NAME_HU": "Déli-Georgia és Déli-Sandwich-szigetek",
+    "NAME_ID": "Georgia Selatan dan Kepulauan Sandwich Selatan",
+    "NAME_IT": "Georgia del Sud e isole Sandwich meridionali",
+    "NAME_JA": "サウスジョージア・サウスサンドウィッチ諸島",
+    "NAME_KO": "사우스조지아 사우스샌드위치 제도",
+    "NAME_NL": "Zuid-Georgia en de Zuidelijke Sandwicheilanden",
+    "NAME_PL": "Georgia Południowa i Sandwich Południowy",
+    "NAME_PT": "Ilhas Geórgia do Sul e Sandwich do Sul",
+    "NAME_RU": "Южная Георгия и Южные Сандвичевы острова",
+    "NAME_SV": "Sydgeorgien och Sydsandwichöarna",
+    "NAME_TR": "Güney Georgia ve Güney Sandwich Adaları",
+    "NAME_UK": "Південна Джорджія та Південні Сандвічеві острови",
+    "NAME_UR": "جنوبی جارجیا و جزائر جنوبی سینڈوچ",
+    "NAME_VI": "Nam Georgia và Quần đảo Nam Sandwich",
+    "NAME_ZH": "南乔治亚和南桑威奇群岛",
+    "NAME_ZHT": "南喬治亞與南桑威奇",
+    "FCLASS_ISO": "Admin-0 dependency",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 dependency",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": "Unrecognized",
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            -26.264111,
+            -58.435156
+          ],
+          [
+            -26.259863,
+            -58.492285
+          ],
+          [
+            -26.415332,
+            -58.439844
+          ],
+          [
+            -26.451025,
+            -58.415332
+          ],
+          [
+            -26.401221,
+            -58.383203
+          ],
+          [
+            -26.303467,
+            -58.382227
+          ],
+          [
+            -26.279395,
+            -58.401758
+          ],
+          [
+            -26.264111,
+            -58.435156
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            -37.10332,
+            -54.065625
+          ],
+          [
+            -37.006055,
+            -54.114258
+          ],
+          [
+            -36.928906,
+            -54.081152
+          ],
+          [
+            -36.848926,
+            -54.085059
+          ],
+          [
+            -36.805176,
+            -54.101465
+          ],
+          [
+            -36.760059,
+            -54.107715
+          ],
+          [
+            -36.703809,
+            -54.108105
+          ],
+          [
+            -36.606885,
+            -54.189844
+          ],
+          [
+            -36.647412,
+            -54.262305
+          ],
+          [
+            -36.541016,
+            -54.248047
+          ],
+          [
+            -36.448633,
+            -54.308398
+          ],
+          [
+            -36.406738,
+            -54.30332
+          ],
+          [
+            -36.38584,
+            -54.278906
+          ],
+          [
+            -36.326465,
+            -54.251172
+          ],
+          [
+            -36.285254,
+            -54.288672
+          ],
+          [
+            -36.235645,
+            -54.360449
+          ],
+          [
+            -36.172607,
+            -54.382227
+          ],
+          [
+            -36.116895,
+            -54.458301
+          ],
+          [
+            -36.073145,
+            -54.554102
+          ],
+          [
+            -36.033105,
+            -54.567676
+          ],
+          [
+            -35.964648,
+            -54.568066
+          ],
+          [
+            -35.895312,
+            -54.554785
+          ],
+          [
+            -35.921533,
+            -54.6375
+          ],
+          [
+            -35.913281,
+            -54.71084
+          ],
+          [
+            -35.798584,
+            -54.763477
+          ],
+          [
+            -35.866943,
+            -54.792383
+          ],
+          [
+            -35.938916,
+            -54.834277
+          ],
+          [
+            -36.085498,
+            -54.866797
+          ],
+          [
+            -36.123633,
+            -54.85293
+          ],
+          [
+            -36.251709,
+            -54.779883
+          ],
+          [
+            -36.311475,
+            -54.69375
+          ],
+          [
+            -36.445752,
+            -54.570703
+          ],
+          [
+            -36.47207,
+            -54.534473
+          ],
+          [
+            -36.506543,
+            -54.51123
+          ],
+          [
+            -36.628125,
+            -54.496094
+          ],
+          [
+            -36.734961,
+            -54.466602
+          ],
+          [
+            -36.823877,
+            -54.404297
+          ],
+          [
+            -36.851709,
+            -54.366016
+          ],
+          [
+            -36.885986,
+            -54.339453
+          ],
+          [
+            -37.006738,
+            -54.340918
+          ],
+          [
+            -37.082812,
+            -54.311523
+          ],
+          [
+            -37.158105,
+            -54.271484
+          ],
+          [
+            -37.497656,
+            -54.155859
+          ],
+          [
+            -37.630908,
+            -54.16748
+          ],
+          [
+            -37.692285,
+            -54.134766
+          ],
+          [
+            -37.689014,
+            -54.076758
+          ],
+          [
+            -37.618848,
+            -54.04209
+          ],
+          [
+            -37.912793,
+            -54.028906
+          ],
+          [
+            -38.017432,
+            -54.008008
+          ],
+          [
+            -37.945508,
+            -53.995605
+          ],
+          [
+            -37.53584,
+            -53.99375
+          ],
+          [
+            -37.382227,
+            -53.984082
+          ],
+          [
+            -37.36875,
+            -54.00918
+          ],
+          [
+            -37.232812,
+            -54.060547
+          ],
+          [
+            -37.10332,
+            -54.065625
+          ]
+        ]
+      ]
+    ]
+  }
+}

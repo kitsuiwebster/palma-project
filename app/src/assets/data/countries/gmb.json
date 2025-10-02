@@ -1,0 +1,474 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Gambia",
+    "code": "GMB",
+    "featurecla": "Admin-0 country",
+    "scalerank": 1,
+    "LABELRANK": 6,
+    "SOVEREIGNT": "Gambia",
+    "SOV_A3": "GMB",
+    "ADM0_DIF": 0,
+    "LEVEL": 2,
+    "TYPE": "Sovereign country",
+    "TLC": "1",
+    "ADMIN": "Gambia",
+    "ADM0_A3": "GMB",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "Gambia",
+    "GU_A3": "GMB",
+    "SU_DIF": 0,
+    "SUBUNIT": "Gambia",
+    "SU_A3": "GMB",
+    "BRK_DIFF": 0,
+    "NAME": "Gambia",
+    "NAME_LONG": "The Gambia",
+    "BRK_A3": "GMB",
+    "BRK_NAME": "Gambia",
+    "BRK_GROUP": null,
+    "ABBREV": "Gambia",
+    "POSTAL": "GM",
+    "FORMAL_EN": "Republic of the Gambia",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": "Gambia, The",
+    "NOTE_ADM0": null,
+    "NOTE_BRK": null,
+    "NAME_SORT": "Gambia, The",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 1,
+    "MAPCOLOR8": 4,
+    "MAPCOLOR9": 1,
+    "MAPCOLOR13": 8,
+    "POP_EST": 2347706,
+    "POP_RANK": 12,
+    "POP_YEAR": 2019,
+    "GDP_MD": 1826,
+    "GDP_YEAR": 2019,
+    "ECONOMY": "7. Least developed region",
+    "INCOME_GRP": "5. Low income",
+    "FIPS_10": "GA",
+    "ISO_A2": "GM",
+    "ISO_A2_EH": "GM",
+    "ISO_A3": "GMB",
+    "ISO_A3_EH": "GMB",
+    "ISO_N3": "270",
+    "ISO_N3_EH": "270",
+    "UN_A3": "270",
+    "WB_A2": "GM",
+    "WB_A3": "GMB",
+    "WOE_ID": 23424821,
+    "WOE_ID_EH": 23424821,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "GMB",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "GMB",
+    "ADM0_A3_US": "GMB",
+    "ADM0_A3_FR": "GMB",
+    "ADM0_A3_RU": "GMB",
+    "ADM0_A3_ES": "GMB",
+    "ADM0_A3_CN": "GMB",
+    "ADM0_A3_TW": "GMB",
+    "ADM0_A3_IN": "GMB",
+    "ADM0_A3_NP": "GMB",
+    "ADM0_A3_PK": "GMB",
+    "ADM0_A3_DE": "GMB",
+    "ADM0_A3_GB": "GMB",
+    "ADM0_A3_BR": "GMB",
+    "ADM0_A3_IL": "GMB",
+    "ADM0_A3_PS": "GMB",
+    "ADM0_A3_SA": "GMB",
+    "ADM0_A3_EG": "GMB",
+    "ADM0_A3_MA": "GMB",
+    "ADM0_A3_PT": "GMB",
+    "ADM0_A3_AR": "GMB",
+    "ADM0_A3_JP": "GMB",
+    "ADM0_A3_KO": "GMB",
+    "ADM0_A3_VN": "GMB",
+    "ADM0_A3_TR": "GMB",
+    "ADM0_A3_ID": "GMB",
+    "ADM0_A3_PL": "GMB",
+    "ADM0_A3_GR": "GMB",
+    "ADM0_A3_IT": "GMB",
+    "ADM0_A3_NL": "GMB",
+    "ADM0_A3_SE": "GMB",
+    "ADM0_A3_BD": "GMB",
+    "ADM0_A3_UA": "GMB",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "Africa",
+    "REGION_UN": "Africa",
+    "SUBREGION": "Western Africa",
+    "REGION_WB": "Sub-Saharan Africa",
+    "NAME_LEN": 6,
+    "LONG_LEN": 10,
+    "ABBREV_LEN": 6,
+    "TINY": -99,
+    "HOMEPART": 1,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 5,
+    "MAX_LABEL": 10,
+    "LABEL_X": -14.998318,
+    "LABEL_Y": 13.641721,
+    "NE_ID": 1159320797,
+    "WIKIDATAID": "Q1005",
+    "NAME_AR": "غامبيا",
+    "NAME_BN": "গাম্বিয়া",
+    "NAME_DE": "Gambia",
+    "NAME_EN": "The Gambia",
+    "NAME_ES": "Gambia",
+    "NAME_FA": "گامبیا",
+    "NAME_FR": "Gambie",
+    "NAME_EL": "Γκάμπια",
+    "NAME_HE": "גמביה",
+    "NAME_HI": "गाम्बिया",
+    "NAME_HU": "Gambia",
+    "NAME_ID": "Gambia",
+    "NAME_IT": "Gambia",
+    "NAME_JA": "ガンビア",
+    "NAME_KO": "감비아",
+    "NAME_NL": "Gambia",
+    "NAME_PL": "Gambia",
+    "NAME_PT": "Gâmbia",
+    "NAME_RU": "Гамбия",
+    "NAME_SV": "Gambia",
+    "NAME_TR": "Gambiya",
+    "NAME_UK": "Гамбія",
+    "NAME_UR": "گیمبیا",
+    "NAME_VI": "Gambia",
+    "NAME_ZH": "冈比亚",
+    "NAME_ZHT": "甘比亞",
+    "FCLASS_ISO": "Admin-0 country",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 country",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": null,
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -16.562305,
+          13.587305
+        ],
+        [
+          -16.30874,
+          13.596875
+        ],
+        [
+          -16.001611,
+          13.592773
+        ],
+        [
+          -15.667187,
+          13.588281
+        ],
+        [
+          -15.509668,
+          13.58623
+        ],
+        [
+          -15.426855,
+          13.727002
+        ],
+        [
+          -15.269531,
+          13.789111
+        ],
+        [
+          -15.10835,
+          13.812109
+        ],
+        [
+          -15.024463,
+          13.806006
+        ],
+        [
+          -14.935791,
+          13.785205
+        ],
+        [
+          -14.766016,
+          13.669092
+        ],
+        [
+          -14.660156,
+          13.642627
+        ],
+        [
+          -14.57085,
+          13.616162
+        ],
+        [
+          -14.506982,
+          13.559717
+        ],
+        [
+          -14.405469,
+          13.503711
+        ],
+        [
+          -14.325537,
+          13.488574
+        ],
+        [
+          -14.278027,
+          13.497168
+        ],
+        [
+          -14.199023,
+          13.51875
+        ],
+        [
+          -14.146973,
+          13.536133
+        ],
+        [
+          -13.977393,
+          13.543457
+        ],
+        [
+          -13.852832,
+          13.478564
+        ],
+        [
+          -13.826709,
+          13.407812
+        ],
+        [
+          -13.84751,
+          13.335303
+        ],
+        [
+          -14.014893,
+          13.296387
+        ],
+        [
+          -14.246777,
+          13.23584
+        ],
+        [
+          -14.438574,
+          13.268896
+        ],
+        [
+          -14.671924,
+          13.351709
+        ],
+        [
+          -14.808252,
+          13.411133
+        ],
+        [
+          -14.865039,
+          13.434863
+        ],
+        [
+          -14.950293,
+          13.472607
+        ],
+        [
+          -15.024609,
+          13.51333
+        ],
+        [
+          -15.096387,
+          13.539648
+        ],
+        [
+          -15.151123,
+          13.556494
+        ],
+        [
+          -15.191602,
+          13.535254
+        ],
+        [
+          -15.212109,
+          13.485059
+        ],
+        [
+          -15.244531,
+          13.429102
+        ],
+        [
+          -15.28623,
+          13.395996
+        ],
+        [
+          -15.481836,
+          13.376367
+        ],
+        [
+          -15.657324,
+          13.355811
+        ],
+        [
+          -15.751562,
+          13.338379
+        ],
+        [
+          -15.814404,
+          13.325146
+        ],
+        [
+          -15.834277,
+          13.156445
+        ],
+        [
+          -16.033057,
+          13.15835
+        ],
+        [
+          -16.22832,
+          13.160303
+        ],
+        [
+          -16.430859,
+          13.157324
+        ],
+        [
+          -16.648779,
+          13.15415
+        ],
+        [
+          -16.704541,
+          13.119727
+        ],
+        [
+          -16.76333,
+          13.06416
+        ],
+        [
+          -16.769336,
+          13.148486
+        ],
+        [
+          -16.824805,
+          13.341064
+        ],
+        [
+          -16.750391,
+          13.425391
+        ],
+        [
+          -16.669336,
+          13.475
+        ],
+        [
+          -16.614795,
+          13.435303
+        ],
+        [
+          -16.59834,
+          13.356836
+        ],
+        [
+          -16.556445,
+          13.303223
+        ],
+        [
+          -16.413379,
+          13.269727
+        ],
+        [
+          -16.27168,
+          13.293799
+        ],
+        [
+          -16.185059,
+          13.282715
+        ],
+        [
+          -16.187891,
+          13.326172
+        ],
+        [
+          -16.158398,
+          13.384033
+        ],
+        [
+          -15.986426,
+          13.408838
+        ],
+        [
+          -15.804492,
+          13.425391
+        ],
+        [
+          -15.617676,
+          13.460107
+        ],
+        [
+          -15.471289,
+          13.458643
+        ],
+        [
+          -15.42749,
+          13.468359
+        ],
+        [
+          -15.438135,
+          13.483203
+        ],
+        [
+          -15.569531,
+          13.499854
+        ],
+        [
+          -15.849902,
+          13.459961
+        ],
+        [
+          -16.135449,
+          13.448242
+        ],
+        [
+          -16.351807,
+          13.343359
+        ],
+        [
+          -16.440527,
+          13.353174
+        ],
+        [
+          -16.530078,
+          13.457959
+        ],
+        [
+          -16.562305,
+          13.587305
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,490 @@
+{
+  "type": "Feature",
+  "properties": {
+    "name": "Lesotho",
+    "code": "LSO",
+    "featurecla": "Admin-0 country",
+    "scalerank": 1,
+    "LABELRANK": 6,
+    "SOVEREIGNT": "Lesotho",
+    "SOV_A3": "LSO",
+    "ADM0_DIF": 0,
+    "LEVEL": 2,
+    "TYPE": "Sovereign country",
+    "TLC": "1",
+    "ADMIN": "Lesotho",
+    "ADM0_A3": "LSO",
+    "GEOU_DIF": 0,
+    "GEOUNIT": "Lesotho",
+    "GU_A3": "LSO",
+    "SU_DIF": 0,
+    "SUBUNIT": "Lesotho",
+    "SU_A3": "LSO",
+    "BRK_DIFF": 0,
+    "NAME": "Lesotho",
+    "NAME_LONG": "Lesotho",
+    "BRK_A3": "LSO",
+    "BRK_NAME": "Lesotho",
+    "BRK_GROUP": null,
+    "ABBREV": "Les.",
+    "POSTAL": "LS",
+    "FORMAL_EN": "Kingdom of Lesotho",
+    "FORMAL_FR": null,
+    "NAME_CIAWF": "Lesotho",
+    "NOTE_ADM0": null,
+    "NOTE_BRK": null,
+    "NAME_SORT": "Lesotho",
+    "NAME_ALT": null,
+    "MAPCOLOR7": 1,
+    "MAPCOLOR8": 5,
+    "MAPCOLOR9": 2,
+    "MAPCOLOR13": 8,
+    "POP_EST": 2125268,
+    "POP_RANK": 12,
+    "POP_YEAR": 2019,
+    "GDP_MD": 2376,
+    "GDP_YEAR": 2019,
+    "ECONOMY": "7. Least developed region",
+    "INCOME_GRP": "4. Lower middle income",
+    "FIPS_10": "LT",
+    "ISO_A2": "LS",
+    "ISO_A2_EH": "LS",
+    "ISO_A3": "LSO",
+    "ISO_A3_EH": "LSO",
+    "ISO_N3": "426",
+    "ISO_N3_EH": "426",
+    "UN_A3": "426",
+    "WB_A2": "LS",
+    "WB_A3": "LSO",
+    "WOE_ID": 23424880,
+    "WOE_ID_EH": 23424880,
+    "WOE_NOTE": "Exact WOE match as country",
+    "ADM0_ISO": "LSO",
+    "ADM0_DIFF": null,
+    "ADM0_TLC": "LSO",
+    "ADM0_A3_US": "LSO",
+    "ADM0_A3_FR": "LSO",
+    "ADM0_A3_RU": "LSO",
+    "ADM0_A3_ES": "LSO",
+    "ADM0_A3_CN": "LSO",
+    "ADM0_A3_TW": "LSO",
+    "ADM0_A3_IN": "LSO",
+    "ADM0_A3_NP": "LSO",
+    "ADM0_A3_PK": "LSO",
+    "ADM0_A3_DE": "LSO",
+    "ADM0_A3_GB": "LSO",
+    "ADM0_A3_BR": "LSO",
+    "ADM0_A3_IL": "LSO",
+    "ADM0_A3_PS": "LSO",
+    "ADM0_A3_SA": "LSO",
+    "ADM0_A3_EG": "LSO",
+    "ADM0_A3_MA": "LSO",
+    "ADM0_A3_PT": "LSO",
+    "ADM0_A3_AR": "LSO",
+    "ADM0_A3_JP": "LSO",
+    "ADM0_A3_KO": "LSO",
+    "ADM0_A3_VN": "LSO",
+    "ADM0_A3_TR": "LSO",
+    "ADM0_A3_ID": "LSO",
+    "ADM0_A3_PL": "LSO",
+    "ADM0_A3_GR": "LSO",
+    "ADM0_A3_IT": "LSO",
+    "ADM0_A3_NL": "LSO",
+    "ADM0_A3_SE": "LSO",
+    "ADM0_A3_BD": "LSO",
+    "ADM0_A3_UA": "LSO",
+    "ADM0_A3_UN": -99,
+    "ADM0_A3_WB": -99,
+    "CONTINENT": "Africa",
+    "REGION_UN": "Africa",
+    "SUBREGION": "Southern Africa",
+    "REGION_WB": "Sub-Saharan Africa",
+    "NAME_LEN": 7,
+    "LONG_LEN": 7,
+    "ABBREV_LEN": 4,
+    "TINY": -99,
+    "HOMEPART": 1,
+    "MIN_ZOOM": 0,
+    "MIN_LABEL": 4,
+    "MAX_LABEL": 9,
+    "LABEL_X": 28.246639,
+    "LABEL_Y": -29.480158,
+    "NE_ID": 1159321027,
+    "WIKIDATAID": "Q1013",
+    "NAME_AR": "ليسوتو",
+    "NAME_BN": "লেসোথো",
+    "NAME_DE": "Lesotho",
+    "NAME_EN": "Lesotho",
+    "NAME_ES": "Lesoto",
+    "NAME_FA": "لسوتو",
+    "NAME_FR": "Lesotho",
+    "NAME_EL": "Λεσότο",
+    "NAME_HE": "לסוטו",
+    "NAME_HI": "लेसोथो",
+    "NAME_HU": "Lesotho",
+    "NAME_ID": "Lesotho",
+    "NAME_IT": "Lesotho",
+    "NAME_JA": "レソト",
+    "NAME_KO": "레소토",
+    "NAME_NL": "Lesotho",
+    "NAME_PL": "Lesotho",
+    "NAME_PT": "Lesoto",
+    "NAME_RU": "Лесото",
+    "NAME_SV": "Lesotho",
+    "NAME_TR": "Lesotho",
+    "NAME_UK": "Лесото",
+    "NAME_UR": "لیسوتھو",
+    "NAME_VI": "Lesotho",
+    "NAME_ZH": "莱索托",
+    "NAME_ZHT": "賴索托",
+    "FCLASS_ISO": "Admin-0 country",
+    "TLC_DIFF": null,
+    "FCLASS_TLC": "Admin-0 country",
+    "FCLASS_US": null,
+    "FCLASS_FR": null,
+    "FCLASS_RU": null,
+    "FCLASS_ES": null,
+    "FCLASS_CN": null,
+    "FCLASS_TW": null,
+    "FCLASS_IN": null,
+    "FCLASS_NP": null,
+    "FCLASS_PK": null,
+    "FCLASS_DE": null,
+    "FCLASS_GB": null,
+    "FCLASS_BR": null,
+    "FCLASS_IL": null,
+    "FCLASS_PS": null,
+    "FCLASS_SA": null,
+    "FCLASS_EG": null,
+    "FCLASS_MA": null,
+    "FCLASS_PT": null,
+    "FCLASS_AR": null,
+    "FCLASS_JP": null,
+    "FCLASS_KO": null,
+    "FCLASS_VN": null,
+    "FCLASS_TR": null,
+    "FCLASS_ID": null,
+    "FCLASS_PL": null,
+    "FCLASS_GR": null,
+    "FCLASS_IT": null,
+    "FCLASS_NL": null,
+    "FCLASS_SE": null,
+    "FCLASS_BD": null,
+    "FCLASS_UA": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          28.736914,
+          -30.101953
+        ],
+        [
+          28.646875,
+          -30.126563
+        ],
+        [
+          28.634375,
+          -30.128711
+        ],
+        [
+          28.57666,
+          -30.123047
+        ],
+        [
+          28.499609,
+          -30.128906
+        ],
+        [
+          28.439063,
+          -30.14248
+        ],
+        [
+          28.39209,
+          -30.147559
+        ],
+        [
+          28.31543,
+          -30.218457
+        ],
+        [
+          28.176172,
+          -30.409863
+        ],
+        [
+          28.139063,
+          -30.449902
+        ],
+        [
+          28.128711,
+          -30.525098
+        ],
+        [
+          28.096387,
+          -30.58457
+        ],
+        [
+          28.056836,
+          -30.631055
+        ],
+        [
+          28.018164,
+          -30.642285
+        ],
+        [
+          27.901855,
+          -30.623828
+        ],
+        [
+          27.753125,
+          -30.6
+        ],
+        [
+          27.666602,
+          -30.542285
+        ],
+        [
+          27.589648,
+          -30.466406
+        ],
+        [
+          27.549023,
+          -30.41123
+        ],
+        [
+          27.506543,
+          -30.380957
+        ],
+        [
+          27.491992,
+          -30.363965
+        ],
+        [
+          27.431445,
+          -30.338477
+        ],
+        [
+          27.408594,
+          -30.325293
+        ],
+        [
+          27.388477,
+          -30.315918
+        ],
+        [
+          27.364063,
+          -30.279199
+        ],
+        [
+          27.349707,
+          -30.247363
+        ],
+        [
+          27.355371,
+          -30.158594
+        ],
+        [
+          27.312695,
+          -30.105664
+        ],
+        [
+          27.239746,
+          -30.015332
+        ],
+        [
+          27.193555,
+          -29.941309
+        ],
+        [
+          27.130469,
+          -29.840234
+        ],
+        [
+          27.091797,
+          -29.753711
+        ],
+        [
+          27.051758,
+          -29.664062
+        ],
+        [
+          27.056934,
+          -29.625586
+        ],
+        [
+          27.095215,
+          -29.599316
+        ],
+        [
+          27.207422,
+          -29.554199
+        ],
+        [
+          27.294531,
+          -29.519336
+        ],
+        [
+          27.356836,
+          -29.455273
+        ],
+        [
+          27.424902,
+          -29.360059
+        ],
+        [
+          27.458008,
+          -29.302734
+        ],
+        [
+          27.491016,
+          -29.276563
+        ],
+        [
+          27.527148,
+          -29.236133
+        ],
+        [
+          27.590234,
+          -29.146484
+        ],
+        [
+          27.660449,
+          -29.046973
+        ],
+        [
+          27.735547,
+          -28.940039
+        ],
+        [
+          27.830371,
+          -28.909082
+        ],
+        [
+          27.959863,
+          -28.87334
+        ],
+        [
+          28.084375,
+          -28.77998
+        ],
+        [
+          28.232617,
+          -28.70127
+        ],
+        [
+          28.471875,
+          -28.61582
+        ],
+        [
+          28.583398,
+          -28.594141
+        ],
+        [
+          28.625781,
+          -28.581738
+        ],
+        [
+          28.652637,
+          -28.597852
+        ],
+        [
+          28.681152,
+          -28.646777
+        ],
+        [
+          28.721777,
+          -28.687695
+        ],
+        [
+          28.816211,
+          -28.758887
+        ],
+        [
+          28.85625,
+          -28.776074
+        ],
+        [
+          28.953711,
+          -28.881445
+        ],
+        [
+          29.058008,
+          -28.953711
+        ],
+        [
+          29.178027,
+          -29.036914
+        ],
+        [
+          29.259766,
+          -29.07832
+        ],
+        [
+          29.301367,
+          -29.089844
+        ],
+        [
+          29.335938,
+          -29.163672
+        ],
+        [
+          29.370898,
+          -29.218457
+        ],
+        [
+          29.390723,
+          -29.269727
+        ],
+        [
+          29.386719,
+          -29.319727
+        ],
+        [
+          29.348828,
+          -29.441992
+        ],
+        [
+          29.293555,
+          -29.566895
+        ],
+        [
+          29.249219,
+          -29.618848
+        ],
+        [
+          29.195117,
+          -29.65166
+        ],
+        [
+          29.142188,
+          -29.700977
+        ],
+        [
+          29.121973,
+          -29.801172
+        ],
+        [
+          29.098047,
+          -29.919043
+        ],
+        [
+          29.029004,
+          -29.967578
+        ],
+        [
+          28.975293,
+          -29.999414
+        ],
+        [
+          28.901074,
+          -30.038477
+        ],
+        [
+          28.736914,
+          -30.101953
+        ]
+      ]
+    ]
+  }
+}

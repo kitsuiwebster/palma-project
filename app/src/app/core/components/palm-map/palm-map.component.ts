@@ -61,15 +61,18 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
       .then((data) => {
         const geoLayer = L.geoJSON(data, {
           style: (feature: any) => ({
-            fillColor: this.getColor(feature.properties.speciesCount),
+            fillColor: feature.properties.color || this.getColor(feature.properties.speciesCount),
             weight: 1,
             opacity: 1,
             color: 'white',
-            fillOpacity: 0.6,
+            fillOpacity: 0.7,
           }),
           onEachFeature: (feature, layer) => {
+            const densityInfo = feature.properties.densityZone 
+              ? `<br/>Zone: ${feature.properties.densityZone}`
+              : '';
             layer.bindPopup(
-              `<strong>${feature.properties.name}</strong><br/>Species: ${feature.properties.speciesCount}`
+              `<strong>${feature.properties.name}</strong><br/>Species: ${feature.properties.speciesCount}${densityInfo}`
             );
           },
         });
