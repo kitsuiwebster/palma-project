@@ -168,6 +168,9 @@
       [imageUrl]="currentImageUrl"
       [speciesName]="currentSpeciesName"
       [isVisible]="showLightbox"
-      (close)="closeLightbox()">
+      [imageUrls]="allImageUrls"
+      [currentIndex]="currentImageIndex"
+      (close)="closeLightbox()"
+      (indexChange)="onImageIndexChange($event)">
     </app-image-lightbox>
   </div>

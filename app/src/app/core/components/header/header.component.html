@@ -45,12 +45,6 @@
 <div class="mobile-nav" [class.open]="isMenuOpen">
   <div class="mobile-nav-container">
     <nav class="mobile-nav-links">
-      <a class="mobile-nav-link" routerLink="/palms/search" routerLinkActive="active" (click)="toggleMenu()">
-        <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/search.png" alt="Search icon" class="custom-icon">
-        </span>
-        <span class="mobile-nav-text">Advanced Search</span>
-      </a>
       <a class="mobile-nav-link" routerLink="/palms" routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
@@ -58,41 +52,23 @@
         </span>
         <span class="mobile-nav-text">Browse Palms</span>
       </a>
+      <a class="mobile-nav-link" routerLink="/palms/search" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/search.png" alt="Search icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Advanced Search</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/data" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/chart.png" alt="Palms Data icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Palms Data</span>
+      </a>
       <a class="mobile-nav-link" routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">
           <img src="assets/icons/info.png" alt="About icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">About</span>
-      </a>
-      <a class="mobile-nav-link" routerLink="/data/photo-credits" routerLinkActive="active" (click)="toggleMenu()">
-        <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/camera.png" alt="Photo icon" class="custom-icon">
-        </span>
-        <span class="mobile-nav-text">Photograph Credits</span>
-      </a>
-      <a class="mobile-nav-link" routerLink="/data/references" routerLinkActive="active" (click)="toggleMenu()">
-        <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/mindmap.png" alt="References icon" class="custom-icon">
-        </span>
-        <span class="mobile-nav-text">References</span>
-      </a>
-      <a class="mobile-nav-link" routerLink="/data/overview" routerLinkActive="active" (click)="toggleMenu()">
-        <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/overview.png" alt="Overview icon" class="custom-icon">
-        </span>
-        <span class="mobile-nav-text">Overview</span>
-      </a>
-      <a class="mobile-nav-link" routerLink="/data/dataset" routerLinkActive="active" (click)="toggleMenu()">
-        <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/chart.png" alt="Dataset icon" class="custom-icon">
-        </span>
-        <span class="mobile-nav-text">Dataset</span>
-      </a>
-      <a class="mobile-nav-link" routerLink="/data/methodology" routerLinkActive="active" (click)="toggleMenu()">
-        <span class="icon-wrapper mobile-nav-icon">
-          <img src="assets/icons/rule.png" alt="Methodology icon" class="custom-icon">
-        </span>
-        <span class="mobile-nav-text">Methodology</span>
       </a>
       <a class="mobile-nav-link" routerLink="/privacy" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">

@@ -37,6 +37,8 @@ export class PalmDetailComponent implements OnInit {
   showLightbox = false;
   currentImageUrl = '';
   currentSpeciesName = '';
+  allImageUrls: string[] = [];
+  currentImageIndex = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -268,9 +270,26 @@ export class PalmDetailComponent implements OnInit {
   openLightbox(imageUrl: string, speciesName: string) {
     this.currentImageUrl = imageUrl;
     this.currentSpeciesName = speciesName;
+    
+    // Get all images for this palm and find current index
+    if (this.palm) {
+      this.allImageUrls = this.getAllPhotoUrls(this.palm);
+      this.currentImageIndex = this.allImageUrls.findIndex(url => url === imageUrl);
+      if (this.currentImageIndex === -1) {
+        this.currentImageIndex = 0;
+      }
+    }
+    
     this.showLightbox = true;
     // Prevent body scroll when lightbox is open
     document.body.style.overflow = 'hidden';
+  }
+
+  onImageIndexChange(newIndex: number) {
+    this.currentImageIndex = newIndex;
+    if (this.allImageUrls[newIndex]) {
+      this.currentImageUrl = this.allImageUrls[newIndex];
+    }
   }
 
   closeLightbox() {

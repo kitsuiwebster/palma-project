@@ -99,6 +99,95 @@
   }
 }
 
+.image-loader {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: white;
+  z-index: 10;
+  
+  span {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+  z-index: 10;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (max-width: 768px) {
+    width: 44px;
+    height: 44px;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.nav-button-prev {
+  left: 20px;
+  
+  @media (max-width: 768px) {
+    left: 10px;
+  }
+}
+
+.nav-button-next {
+  right: 20px;
+  
+  @media (max-width: 768px) {
+    right: 10px;
+  }
+}
+
 .lightbox-image {
   max-width: 90vw;
   max-height: calc(85vh - 120px);
@@ -107,7 +196,11 @@
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  &.loading {
+    opacity: 0;
+  }
   
   @media (max-width: 768px) {
     max-width: 95vw;
@@ -155,6 +248,18 @@
   @media (max-width: 768px) {
     font-size: 1rem;
     text-align: center;
+  }
+}
+
+.image-counter {
+  font-size: 0.9rem;
+  color: $text-secondary;
+  font-weight: 500;
+  margin-bottom: 8px;
+  
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 0.85rem;
   }
 }
 

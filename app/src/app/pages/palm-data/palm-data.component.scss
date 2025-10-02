@@ -9,6 +9,11 @@
     padding: $spacing-unit * 2 0;
   }
 
+  @media (max-width: 480px) {
+    padding: $spacing-unit * 1.5 0;
+  }
+}
+
   /* Styles pour la section dataset */
   .dataset-section {
     .section-header {
@@ -1179,6 +1184,13 @@
 
     @media (max-width: 768px) {
       gap: $spacing-unit * 2;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (max-width: 480px) {
+      gap: $spacing-unit * 1.5;
+      margin-top: $spacing-unit * 3;
     }
   }
 
@@ -1192,6 +1204,21 @@
     min-width: 220px;
     transition: $transition-standard;
     border: 1px solid rgba($primary-color, 0.05);
+
+    @media (max-width: 768px) {
+      min-width: 280px;
+      width: 100%;
+      max-width: 400px;
+      justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+      min-width: 0;
+      padding: $spacing-unit * 2;
+      flex-direction: column;
+      text-align: center;
+      gap: $spacing-unit;
+    }
 
     &:hover {
       transform: translateY(-5px);
@@ -1299,7 +1326,7 @@
     @media (max-width: 480px) {
       padding: $spacing-unit * 0.5;
       gap: $spacing-unit * 0.25;
-      margin: 0 (-$spacing-unit) $spacing-unit * 2;
+      margin: 0 0 $spacing-unit * 2;
     }
 
     .tab-button {
@@ -1639,6 +1666,7 @@
       }
     }
   }
+
   .icon-button {
     position: relative;
     background: white;
@@ -1670,7 +1698,6 @@
       }
     }
   }
-}
 
 /* Styles for Photo Credits Tab */
 .photos-section {

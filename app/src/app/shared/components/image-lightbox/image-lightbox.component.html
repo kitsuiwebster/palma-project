@@ -13,16 +13,46 @@
 
     <!-- Main Image -->
     <div class="image-container">
-      <img [src]="imageUrl" 
+      <!-- Loading Spinner -->
+      <div *ngIf="imageLoading" class="image-loader">
+        <div class="spinner"></div>
+        <span>Loading image...</span>
+      </div>
+      
+      <img [src]="currentImageUrl" 
            [alt]="speciesName + ' photo'" 
            class="lightbox-image"
-           (error)="onClose()">
+           [class.loading]="imageLoading"
+           (load)="onImageLoad()"
+           (error)="onImageError()">
+      
+      <!-- Navigation Buttons -->
+      <button *ngIf="canNavigatePrevious" 
+              class="nav-button nav-button-prev" 
+              (click)="previousImage()"
+              aria-label="Previous image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      
+      <button *ngIf="canNavigateNext" 
+              class="nav-button nav-button-next" 
+              (click)="nextImage()"
+              aria-label="Next image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
     <!-- Image Info Bar -->
     <div class="image-info">
       <div class="image-details">
         <h3 class="species-title">{{ speciesName }}</h3>
+        <div *ngIf="imageUrls.length > 1" class="image-counter">
+          {{ currentIndex + 1 }} / {{ imageUrls.length }}
+        </div>
         
         <!-- Photo Credit Information -->
         <div *ngIf="photoCredit; else noCredit" class="credit-info">
