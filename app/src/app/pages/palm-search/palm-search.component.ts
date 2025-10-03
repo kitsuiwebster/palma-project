@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SearchService } from '../../core/services/search.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { DataService } from '../../core/services/data.service';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
 import { CommonModule } from '@angular/common';
+import { RegionCodesService } from '../../core/services/region-codes.service';
 
 @Component({
   selector: 'app-palm-search',
@@ -44,6 +45,7 @@ export class PalmSearchComponent implements OnInit {
   allPalmSubfamilies: string[] = [];
   allFruitSizes: string[] = [];
   allConspicuousness: string[] = [];
+  allRegions: Array<{code: string, name: string}> = [];
   allStemTypes = [
     { value: 'Climbing', displayName: 'Climbing' },
     { value: 'Acaulescent', displayName: 'Acaulescent' },
@@ -62,6 +64,7 @@ export class PalmSearchComponent implements OnInit {
   availablePalmSubfamilies: string[] = [];
   availableFruitSizes: string[] = [];
   availableConspicuousness: string[] = [];
+  availableRegions: Array<{code: string, name: string}> = [];
   availableStemTypes = [...this.allStemTypes];
   availableStemProperties = [...this.allStemProperties];
   
@@ -74,7 +77,9 @@ export class PalmSearchComponent implements OnInit {
     private router: Router,
     private dataService: DataService,
     private fb: FormBuilder,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private regionCodesService: RegionCodesService,
+    private cdr: ChangeDetectorRef
   ) {
     this.searchForm = this.fb.group({
       query: [''],
@@ -87,7 +92,8 @@ export class PalmSearchComponent implements OnInit {
       stemProperty: [''],
       understoreyCanopy: [''],
       fruitSize: [''],
-      conspicuousness: ['']
+      conspicuousness: [''],
+      nativeRegion: ['']
     });
 
     this.searchResults$ = of([]);
@@ -132,6 +138,7 @@ export class PalmSearchComponent implements OnInit {
           understoreyCanopy: params.get('understoreyCanopy') || '',
           fruitSize: params.get('fruitSize') || '',
           conspicuousness: params.get('conspicuousness') || '',
+          nativeRegion: params.get('nativeRegion') || '',
           heightMin: params.get('heightMin') ? Number(params.get('heightMin')) : null,
           heightMax: params.get('heightMax') ? Number(params.get('heightMax')) : null,
         }, { emitEvent: false });
@@ -201,6 +208,7 @@ export class PalmSearchComponent implements OnInit {
     const understoreyCanopy = formValues.understoreyCanopy || '';
     const fruitSize = formValues.fruitSize || '';
     const conspicuousness = formValues.conspicuousness || '';
+    const nativeRegion = formValues.nativeRegion || '';
     const heightMin = formValues.heightMin !== null ? Number(formValues.heightMin) : null;
     const heightMax = formValues.heightMax !== null ? Number(formValues.heightMax) : null;
 
@@ -271,6 +279,16 @@ export class PalmSearchComponent implements OnInit {
       console.log('After conspicuousness filter:', results.length);
     }
 
+    if (nativeRegion) {
+      console.log('Filtering by nativeRegion:', nativeRegion);
+      results = results.filter((palm: PalmTrait) => {
+        const palmNativeRegion = palm.NativeRegion || '';
+        // Check if the selected region code is present in the palm's native regions
+        return new RegExp(`\\b${nativeRegion}\\b`).test(palmNativeRegion);
+      });
+      console.log('After nativeRegion filter:', results.length);
+    }
+
     if (heightMin !== null) {
       console.log('Filtering by heightMin:', heightMin);
       results = results.filter((palm: PalmTrait) => {
@@ -293,6 +311,11 @@ export class PalmSearchComponent implements OnInit {
     return results;
   }
 
+  // TrackBy function for regions dropdown
+  trackByRegionCode(index: number, region: {code: string, name: string}): string {
+    return region.code;
+  }
+
   onSearch(): void {
     const formValues = this.searchForm.value;
     const queryParams: any = {
@@ -310,6 +333,7 @@ export class PalmSearchComponent implements OnInit {
     if (formValues.understoreyCanopy) queryParams.understoreyCanopy = formValues.understoreyCanopy;
     if (formValues.fruitSize) queryParams.fruitSize = formValues.fruitSize;
     if (formValues.conspicuousness) queryParams.conspicuousness = formValues.conspicuousness;
+    if (formValues.nativeRegion) queryParams.nativeRegion = formValues.nativeRegion;
     if (formValues.heightMin) queryParams.heightMin = formValues.heightMin;
     if (formValues.heightMax) queryParams.heightMax = formValues.heightMax;
 
@@ -473,6 +497,7 @@ export class PalmSearchComponent implements OnInit {
       this.allHabitats = this.filterOptionsCache.allHabitats;
       this.allFruitSizes = this.filterOptionsCache.allFruitSizes;
       this.allConspicuousness = this.filterOptionsCache.allConspicuousness;
+      this.allRegions = this.filterOptionsCache.allRegions;
       console.log('Filter options loaded from cache');
     } else {
       // Extract all unique options from data
@@ -483,6 +508,9 @@ export class PalmSearchComponent implements OnInit {
       this.allFruitSizes = [...new Set(this.allPalms.map(palm => palm.FruitSizeCategorical).filter(Boolean))].sort();
       this.allConspicuousness = [...new Set(this.allPalms.map(palm => palm.Conspicuousness).filter(Boolean))].sort();
       
+      // Extract all unique region codes from native regions
+      this.initializeRegionsSync();
+      
       // Cache the results
       this.filterOptionsCache = {
         allGenera: this.allGenera,
@@ -490,7 +518,8 @@ export class PalmSearchComponent implements OnInit {
         allPalmSubfamilies: this.allPalmSubfamilies,
         allHabitats: this.allHabitats,
         allFruitSizes: this.allFruitSizes,
-        allConspicuousness: this.allConspicuousness
+        allConspicuousness: this.allConspicuousness,
+        allRegions: this.allRegions
       };
       
       console.log('All filter options initialized and cached:', {
@@ -507,6 +536,61 @@ export class PalmSearchComponent implements OnInit {
     this.resetAvailableOptions();
   }
 
+  // Initialize regions from region codes service (sync version)
+  private initializeRegionsSync(): void {
+    // Get all unique region codes from native regions
+    const allRegionCodes = new Set<string>();
+    
+    this.allPalms.forEach(palm => {
+      const nativeRegion = palm.NativeRegion || '';
+      // Extract region codes (2-3 letter codes)
+      const codes = nativeRegion.match(/\b[A-Z]{2,3}\b/g) || [];
+      codes.forEach(code => allRegionCodes.add(code));
+    });
+
+    // Initialize with region codes first, names will be loaded later
+    this.allRegions = Array.from(allRegionCodes)
+      .map(code => ({ code, name: code })) // Temporary: use code as name
+      .sort((a, b) => a.code.localeCompare(b.code));
+    
+    console.log('initializeRegionsSync: Found', this.allRegions.length, 'regions');
+    console.log('First 5 regions:', this.allRegions.slice(0, 5));
+    
+    // Load region names asynchronously
+    this.loadRegionNames();
+  }
+
+  // Load region names asynchronously and update the display
+  private async loadRegionNames(): Promise<void> {
+    const regions: Array<{code: string, name: string}> = [];
+    
+    for (const region of this.allRegions) {
+      try {
+        if (await this.regionCodesService.hasRegionCode(region.code)) {
+          const name = await this.regionCodesService.getRegionName(region.code);
+          regions.push({ code: region.code, name });
+        } else {
+          regions.push({ code: region.code, name: region.code });
+        }
+      } catch (error) {
+        console.warn(`Error loading name for region ${region.code}:`, error);
+        regions.push({ code: region.code, name: region.code });
+      }
+    }
+    
+    this.allRegions = regions.sort((a, b) => a.name.localeCompare(b.name));
+    this.availableRegions = [...this.allRegions];
+    
+    // Update cache if it exists
+    if (this.filterOptionsCache) {
+      this.filterOptionsCache.allRegions = this.allRegions;
+    }
+    
+    // Trigger change detection to update the UI
+    this.cdr.detectChanges();
+    console.log('Regions loaded:', this.allRegions.length);
+  }
+
   // Reset all available options to full lists (no filtering)
   private resetAvailableOptions(): void {
     this.availableGenera = [...this.allGenera];
@@ -515,6 +599,7 @@ export class PalmSearchComponent implements OnInit {
     this.availableHabitats = [...this.allHabitats];
     this.availableFruitSizes = [...this.allFruitSizes];
     this.availableConspicuousness = [...this.allConspicuousness];
+    this.availableRegions = [...this.allRegions];
     this.availableStemTypes = [...this.allStemTypes];
     this.availableStemProperties = [...this.allStemProperties];
   }

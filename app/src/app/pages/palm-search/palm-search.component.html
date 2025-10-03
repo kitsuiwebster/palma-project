@@ -114,6 +114,18 @@
                         </select>
                     </div>
 
+                    <!-- Native Region -->
+                    <div class="select-container dropdown-container">
+                        <label for="nativeRegion">
+                            Native Region ({{availableRegions.length}} regions)
+                            <small *ngIf="availableRegions.length < allRegions.length" class="filter-info">({{availableRegions.length}} available)</small>
+                        </label>
+                        <select id="nativeRegion" formControlName="nativeRegion">
+                            <option value="">Any</option>
+                            <option *ngFor="let region of availableRegions; trackBy: trackByRegionCode" [value]="region.code">{{region.name}}</option>
+                        </select>
+                    </div>
+
                     <!-- Height Range -->
                     <div class="height-range">
                         <div class="select-container number-input-container">
