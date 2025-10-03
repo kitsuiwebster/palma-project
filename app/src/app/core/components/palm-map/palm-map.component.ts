@@ -193,22 +193,21 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
           bruneiLayer.addTo(this.map);
         }
 
-        // Fit bounds to all data
+        // Fit bounds to world view
         try {
-          const bounds = L.latLngBounds([[-10, 95], [10, 125]]);  // Southeast Asia bounds
-          this.map.fitBounds(bounds, { padding: [20, 20] });
+          this.map.setView([0, 0], 2);  // World center view
         } catch (e) {
-          console.warn('Could not fit to bounds:', e);
+          console.warn('Could not set view:', e);
         }
       });
   }
 
   private getColor(speciesCount: number): string {
-    if (speciesCount > 250) return '#660000'; // very dark red (Borneo level)
-    if (speciesCount > 150) return '#8B0000'; // dark red (high diversity)
-    if (speciesCount > 100) return '#A52A2A'; // brown red (very high)
-    if (speciesCount > 50) return '#CD5C5C'; // indian red (high)
-    if (speciesCount > 10) return '#F4A460'; // sandy brown (medium)
-    return '#FFFFE0'; // pale yellow (low)
+    if (speciesCount > 150) return '#660000'; // very dark red (150+ species)
+    if (speciesCount > 100) return '#A52A2A'; // brown red (101-150)
+    if (speciesCount > 50) return '#CD5C5C'; // indian red (51-100)
+    if (speciesCount > 10) return '#F4A460'; // sandy brown (11-50)
+    if (speciesCount > 5) return '#FFF8DC'; // cornsilk (6-10)
+    return '#FFFFE0'; // pale yellow (1-5)
   }
 }
