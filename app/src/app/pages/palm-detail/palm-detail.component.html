@@ -131,13 +131,15 @@
             <!-- Distribution Tab -->
             <div *ngIf="activeTab === 1" class="tab-panel">
               <p>Information about the native regions and distribution of {{getSpeciesName(palm)}}:</p>
-              <div class="region-flags">
-                <span *ngFor="let region of getNativeRegions(palm)" class="region-item">
-                  <img *ngIf="getFlagUrl(region)" [src]="getFlagUrl(region)" alt="{{region}} flag" class="flag-img" />
-                  <span *ngIf="!getFlagUrl(region)" class="flag-placeholder"> </span>
-                  {{region}}&nbsp;
-                </span>
-              </div>
+              
+              <!-- Species-specific map -->
+              <app-species-map 
+                [nativeRegions]="getNativeRegion()"
+                [speciesName]="getSpeciesName(palm)">
+              </app-species-map>
+              
+              <!-- Region flags and details -->
+              <div class="region-flags" [innerHTML]="nativeRegionDisplay || 'Loading...'"></div>
             </div>
   
             <!-- Gallery Tab -->

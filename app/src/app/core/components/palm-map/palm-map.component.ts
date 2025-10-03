@@ -106,9 +106,18 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
             const densityInfo = feature.properties.densityZone 
               ? `<br/>Zone: ${feature.properties.densityZone}`
               : '';
-            layer.bindPopup(
-              `<strong>${feature.properties.name}</strong><br/>Species: ${feature.properties.speciesCount}${densityInfo}`
-            );
+            
+            // Enhanced popup with subdivision info for grouped countries
+            let popupContent = `<strong>${feature.properties.name}</strong><br/>Species: ${feature.properties.speciesCount}${densityInfo}`;
+            
+            if (feature.properties.subdivisions && feature.properties.subdivisions.length > 1) {
+              popupContent += '<br/><br/><strong>Subdivisions:</strong><br/>';
+              feature.properties.subdivisions.forEach((sub: any) => {
+                popupContent += `• ${sub.name}: ${sub.species} species<br/>`;
+              });
+            }
+            
+            layer.bindPopup(popupContent);
           },
         });
         

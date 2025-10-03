@@ -131,8 +131,12 @@
             <div class="variables-list" *ngIf="expandedGroups.geography">
                 <div class="variable-item">
                     <span class="variable-name">NativeRegion</span>
-                    <span class="variable-description">Primary native geographic region</span>
-                    <div class="variable-example">Example: <span class="example-value">EC. & SE. Réunion</span></div>
+                    <span class="variable-description">Primary native geographic regions using ISO-style country codes</span>
+                    <div class="variable-example">Example: <span class="example-value">REU, MAU</span> (Réunion, Mauritius)</div>
+                    <div class="variable-note">
+                        <strong>Note:</strong> Uses standardized 3-letter country codes for consistent representation. 
+                        The interface displays full country names with flags for better readability.
+                    </div>
                 </div>
                 <div class="variable-item">
                     <span class="variable-name">CommonNamesEN</span>

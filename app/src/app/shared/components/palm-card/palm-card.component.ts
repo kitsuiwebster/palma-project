@@ -1,6 +1,6 @@
 // src/app/shared/components/palm-card/palm-card.component.ts
 import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { FlagService } from '../../../core/services/flag.service';
+import { RegionCodesService } from '../../../core/services/region-codes.service';
 import { PalmTrait } from '../../../core/models/palm-trait.model';
 import { CommonModule } from '@angular/common';
 import {
@@ -54,7 +54,7 @@ export class PalmCardComponent implements OnInit, AfterViewInit {
   // Utiliser une variable d'instance au lieu d'une variable statique
   private static animationInitialized = false;
   
-  constructor(private cdr: ChangeDetectorRef, private flagService: FlagService) {}
+  constructor(private cdr: ChangeDetectorRef, private regionCodesService: RegionCodesService) {}
   
   
   ngAfterViewInit() {
@@ -111,59 +111,20 @@ export class PalmCardComponent implements OnInit, AfterViewInit {
       .replace(/-+$/, '');
   }
   getNativeRegion(): string {
-    return this.palm?.native_region || 'Unknown region';
+    // Use the new format with region codes
+    return this.palm?.NativeRegion || this.palm?.native_region || 'Unknown region';
   }
 
-  flagUrls: {[region: string]: string} = {};
+  nativeRegionDisplay: string = '';
 
-  getNativeRegions(): string[] {
-    if (!this.palm?.native_region) return [];
-    // Remove parentheses content
-    let native = this.palm.native_region.replace(/\([^)]*\)/g, '').trim();
-    let result: string[] = [];
-    // If " to " is present, split into left and right parts
-    if (native.toLowerCase().includes(" to ")) {
-      // Left: before last " to " ; Right: after last " to "
-      const idx = native.toLowerCase().lastIndexOf(" to ");
-      const left = native.substring(0, idx).trim();
-      const right = native.substring(idx + 4).trim();
-      // For left, take the last token if separated by comma or semicolon
-      const leftTokens = left.split(/[,;]+/).map(p => p.trim()).filter(p => p);
-      if(leftTokens.length) {
-        result.push(leftTokens[leftTokens.length - 1]);
-      }
-      // For right, split by "and" or "&"
-      let parts = right.split(/\s+(?:and|&)\s+/i).map(p => p.trim()).filter(p => p);
-      parts.forEach(part => {
-        // If the part contains "&", choose the longer segment
-        if (part.includes("&")) {
-          const subParts = part.split(/\s*&\s*/).map(s => s.trim()).filter(s => s);
-          subParts.sort((a, b) => b.length - a.length);
-          result.push(subParts[0]);
-        } else {
-          result.push(part);
-        }
-      });
+  async loadNativeRegionDisplay(): Promise<void> {
+    const nativeRegion = this.getNativeRegion();
+    if (nativeRegion && nativeRegion !== 'Unknown region') {
+      this.nativeRegionDisplay = await this.regionCodesService.convertCodesToDisplayLimited(nativeRegion, true, 5);
+      this.cdr.detectChanges();
     } else {
-      // If no "to" exists, split by commas, semicolons, "and", or "&"
-      result = native.split(/\s*(?:,|;|and|&)\s*/i).map(p => p.trim()).filter(p => p);
+      this.nativeRegionDisplay = nativeRegion;
     }
-    return result;
-  }
-
-  fetchFlag(region: string): void {
-    if (this.flagUrls[region]) return;
-    this.flagService.getFlagUrl(region).subscribe(url => {
-      this.flagUrls[region] = url;
-    });
-  }
-
-  getFlagUrl(region: string): string | null {
-    return this.flagUrls[region] || null;
-  }
-
-  fetchAllFlags(): void {
-    this.getNativeRegions().forEach(region => this.fetchFlag(region));
   }
 
   ngOnInit() {
@@ -171,6 +132,6 @@ export class PalmCardComponent implements OnInit, AfterViewInit {
       this.shouldShowAnimation = true;
       this.cdr.detectChanges();
     }, Math.random() * 100);
-    this.fetchAllFlags();
+    this.loadNativeRegionDisplay();
   }
 }

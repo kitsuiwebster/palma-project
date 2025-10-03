@@ -178,3 +178,34 @@
     // common-name-flag styles moved to global styles.scss
   }
 }
+
+// Region display styles
+.region-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .region-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: $text-secondary;
+    line-height: 1.3;
+
+    .flag-img {
+      width: 16px;
+      height: 12px;
+      margin-right: 6px;
+      border-radius: 2px;
+      object-fit: cover;
+    }
+  }
+}
+
+.region-more {
+  font-size: 0.8rem;
+  color: lighten($text-secondary, 15%);
+  font-style: italic;
+  margin-top: 4px;
+  padding-left: 2px;
+}

@@ -7,10 +7,10 @@ import { DataService } from '../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { PalmTrait } from '../../core/models/palm-trait.model';
-import { FlagService } from '../../core/services/flag.service';
-import { RegionWithFlagsPipe } from '../../shared/pipes/region-with-flags.pipe';
+import { RegionCodesService } from '../../core/services/region-codes.service';
 import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pipe';
 import { ImageLightboxComponent } from '../../shared/components/image-lightbox/image-lightbox.component';
+import { SpeciesMapComponent } from '../../shared/components/species-map/species-map.component';
 
 @Component({
   selector: 'app-palm-detail',
@@ -22,6 +22,7 @@ import { ImageLightboxComponent } from '../../shared/components/image-lightbox/i
     CommonModule,
     FormatCommonNamesPipe,
     ImageLightboxComponent,
+    SpeciesMapComponent,
   ],
 })
 export class PalmDetailComponent implements OnInit {
@@ -46,7 +47,7 @@ export class PalmDetailComponent implements OnInit {
     private dataService: DataService,
     private titleService: Title,
     private metaService: Meta,
-    private flagService: FlagService,
+    private regionCodesService: RegionCodesService,
     private http: HttpClient
   ) {
     this.palm$ = of(null);
@@ -102,6 +103,11 @@ export class PalmDetailComponent implements OnInit {
         name: 'description',
         content: `Learn about ${speciesName}, a palm species from the ${genus} genus native to ${distribution}.`,
       });
+      
+      // Scroll to top when new species loads
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
     });
   }
   setActiveTab(index: number): void {
@@ -191,62 +197,27 @@ export class PalmDetailComponent implements OnInit {
     return !!palm?.MaxLeafNumber || !!palm?.Max_Blade_Length_m || !!palm?.Max_Rachis_Length_m;
   }
 
-  flagUrls: {[region: string]: string} = {};
+  nativeRegionDisplay: string = '';
 
-  getNativeRegions(palm: PalmTrait): string[] {
-    if (!palm?.native_region) return [];
-    // Remove parentheses content
-    let native = palm.native_region.replace(/\([^)]*\)/g, '').trim();
-    let result: string[] = [];
-    // If " to " is present, split into left and right parts
-    if (native.toLowerCase().includes(" to ")) {
-      // Left: before last " to " ; Right: after last " to "
-      const idx = native.toLowerCase().lastIndexOf(" to ");
-      const left = native.substring(0, idx).trim();
-      const right = native.substring(idx + 4).trim();
-      // For left, take the last token if separated by comma or semicolon
-      const leftTokens = left.split(/[,;]+/).map(p => p.trim()).filter(p => p);
-      if(leftTokens.length) {
-        result.push(leftTokens[leftTokens.length - 1]);
-      }
-      // For right, split by "and" or "&"
-      let parts = right.split(/\s+(?:and|&)\s+/i).map(p => p.trim()).filter(p => p);
-      parts.forEach(part => {
-        // If the part contains "&", choose the longer segment
-        if (part.includes("&")) {
-          const subParts = part.split(/\s*&\s*/).map(s => s.trim()).filter(s => s);
-          subParts.sort((a, b) => b.length - a.length);
-          result.push(subParts[0]);
-        } else {
-          result.push(part);
-        }
-      });
+  getNativeRegion(): string {
+    // Use the new format with region codes
+    return this.palm?.NativeRegion || this.palm?.native_region || 'Unknown region';
+  }
+
+  async loadNativeRegionDisplay(): Promise<void> {
+    const nativeRegion = this.getNativeRegion();
+    if (nativeRegion && nativeRegion !== 'Unknown region') {
+      // For detail page, show all regions (no limit) as there's more space
+      this.nativeRegionDisplay = await this.regionCodesService.convertCodesToDisplay(nativeRegion, true);
     } else {
-      // If no "to" exists, split by commas, semicolons, "and", or "&"
-      result = native.split(/\s*(?:,|;|and|&)\s*/i).map(p => p.trim()).filter(p => p);
+      this.nativeRegionDisplay = nativeRegion;
     }
-    return result;
-  }
-
-  fetchFlag(region: string): void {
-    if (this.flagUrls[region]) return; // already fetched
-    this.flagService.getFlagUrl(region).subscribe(url => {
-      this.flagUrls[region] = url;
-    });
-  }
-
-  getFlagUrl(region: string): string | null {
-    return this.flagUrls[region] || null;
-  }
-
-  fetchAllFlags(palm: PalmTrait): void {
-    this.getNativeRegions(palm).forEach(region => this.fetchFlag(region));
   }
 
   // Call this after palm is loaded
   private updateFlagsForPalm(): void {
     if (this.palm) {
-      this.fetchAllFlags(this.palm);
+      this.loadNativeRegionDisplay();
     }
   }
 

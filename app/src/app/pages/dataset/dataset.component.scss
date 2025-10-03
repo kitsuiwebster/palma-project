@@ -346,6 +346,27 @@
         margin-left: 4px;
       }
     }
+
+    .variable-note {
+      font-size: 0.8rem;
+      color: $text-secondary;
+      background: linear-gradient(
+        to right,
+        rgba($accent-color, 0.05),
+        rgba($primary-color, 0.05)
+      );
+      padding: $spacing-unit $spacing-unit * 1.5;
+      border-radius: $border-radius;
+      border-left: 3px solid rgba($accent-color, 0.3);
+      margin-left: $spacing-unit;
+      margin-top: $spacing-unit;
+      line-height: 1.5;
+
+      strong {
+        color: $accent-dark;
+        font-weight: 600;
+      }
+    }
   }
 
   .dataset-stats {

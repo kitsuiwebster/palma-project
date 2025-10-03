@@ -21,13 +21,7 @@
         <span class="icon-wrapper">
           <img src="assets/icons/location.png" alt="Native Region" class="custom-icon">
         </span>
-        <span class="region-flags">
-          <span *ngFor="let region of getNativeRegions()" class="region-item">
-            <img *ngIf="getFlagUrl(region)" [src]="getFlagUrl(region)" alt="{{region}} flag" class="flag-img"/>
-            <span *ngIf="!getFlagUrl(region)" class="flag-placeholder"></span>
-            <span class="region-text">{{ region }}&nbsp;</span>
-          </span>
-        </span>
+        <span class="region-flags" [innerHTML]="nativeRegionDisplay || 'Loading...'"></span>
       </div>
       <div class="info-item">
         <span class="icon-wrapper">
