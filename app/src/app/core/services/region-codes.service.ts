@@ -223,8 +223,7 @@ export class RegionCodesService {
     // Christmas Island regions
     'XMS': ['AUS'], // Christmas Island (Australian territory)
     
-    // Caroline Islands regions (both codes point to same place)
-    'CLC': ['FSM'], // Caroline Islands
+    // Caroline Islands regions
     'CRL': ['FSM'], // Caroline Islands
   };
 
@@ -258,7 +257,6 @@ export class RegionCodesService {
     'NZN': 'North Island',
     'NZS': 'South Island', 
     'XMS': 'Christmas Island',
-    'CLC': 'Caroline Islands',
     'CRL': 'Caroline Islands',
   };
 

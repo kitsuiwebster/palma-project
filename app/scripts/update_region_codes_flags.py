@@ -46,7 +46,6 @@ def get_flag_url(code, name):
         'CHH': 'cn',  # China South Central
         'CHS': 'cn',  # China South
         'CHT': 'cn',  # China Tibet
-        'CLC': 'fm',  # Caroline Islands
         'CLM': 'co',  # Colombia
         'CMN': 'cm',  # Cameroon
         'CNY': 'es',  # Canary Islands (Spain)

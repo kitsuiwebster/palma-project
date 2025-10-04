@@ -1,1 +1,0 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Cape Province","locationCode":"CPI","speciesCount":1,"densityZone":"Very Low Density","color":"#ffff96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[18.0,-34.0],[18.0,-33.0],[19.0,-33.0],[19.0,-34.0],[18.0,-34.0]]]}}]}

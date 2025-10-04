@@ -1,0 +1,43 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Caroline Islands",
+                "locationCode": "CRL",
+                "speciesCount": 11,
+                "densityZone": "Very Low Density",
+                "color": "#fff2aa",
+                "isPalmZone": true
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            150.0,
+                            7.0
+                        ],
+                        [
+                            150.0,
+                            8.0
+                        ],
+                        [
+                            151.0,
+                            8.0
+                        ],
+                        [
+                            151.0,
+                            7.0
+                        ],
+                        [
+                            150.0,
+                            7.0
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

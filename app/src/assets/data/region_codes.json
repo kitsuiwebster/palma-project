@@ -163,9 +163,9 @@
     "name": "China",
     "flag": "https://flagcdn.com/w20/cn.png"
   },
-  "CLC": {
-    "name": "Caroline Islands",
-    "flag": "https://flagcdn.com/w20/fm.png"
+  "CHL": {
+    "name": "Chile",
+    "flag": "https://flagcdn.com/w20/cl.png"
   },
   "CLM": {
     "name": "Colombia",
@@ -194,10 +194,6 @@
   "COS": {
     "name": "Costa Rica",
     "flag": "https://flagcdn.com/w20/cr.png"
-  },
-  "CPI": {
-    "name": "Cape Province",
-    "flag": "https://flagcdn.com/w20/za.png"
   },
   "CPP": {
     "name": "Chagos Archipelago",
