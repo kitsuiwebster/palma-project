@@ -89,41 +89,148 @@
           <div class="tab-content" [ngClass]="'tab-' + activeTab">
             <!-- Characteristics Tab -->
             <div *ngIf="activeTab === 0" class="tab-panel">
-              <div class="info-grid">
-                <div class="info-card">
-                  <h3>Taxonomy</h3>
-                  <p><strong>Genus:</strong> {{getGenus(palm)}}</p>
-                  <p><strong>Species:</strong> {{getSpeciesName(palm)}}</p>
-                  <p><strong>Tribe:</strong> {{getTribe(palm)}}</p>
-                  <p><strong>Subfamily:</strong> {{getSubfamily(palm)}}</p>
+              <div class="modern-info-grid">
+                <!-- Taxonomy Card -->
+                <div class="modern-card taxonomy-card">
+                  <div class="card-header">
+                    <div class="icon-badge taxonomy-icon">
+                      <img src="assets/icons/taxonomy.png" alt="Taxonomy" class="icon-img">
+                    </div>
+                    <h3>Taxonomy</h3>
+                  </div>
+                  <div class="info-items">
+                    <div class="info-row">
+                      <span class="label">Genus</span>
+                      <span class="value genus-badge">{{getGenus(palm)}}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="label">Species</span>
+                      <span class="value species-badge">{{getSpeciesName(palm)}}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="label">Tribe</span>
+                      <span class="value">{{getTribe(palm)}}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="label">Subfamily</span>
+                      <span class="value">{{getSubfamily(palm)}}</span>
+                    </div>
+                  </div>
                 </div>
   
-                <div class="info-card">
-                  <h3>Physical Characteristics</h3>
-                  <p><strong>Height:</strong> {{getHeight(palm)}}</p>
-                  <p><strong>Stem Diameter:</strong> {{getStemDiameter(palm)}}</p>
-                  <p><strong>Habitat:</strong> {{getHabitat(palm)}}</p>
-                  <p><strong>Stem Type:</strong> {{getStemType(palm).join(', ')}}</p>
-                  <p *ngIf="getStemProperties(palm).length > 0">
-                    <strong>Stem Properties:</strong> {{getStemProperties(palm).join(', ')}}
-                  </p>
+                <!-- Physical Characteristics Card -->
+                <div class="modern-card physical-card">
+                  <div class="card-header">
+                    <div class="icon-badge physical-icon">
+                      <img src="assets/icons/traits.png" alt="Physical Traits" class="icon-img">
+                    </div>
+                    <h3>Physical Traits</h3>
+                  </div>
+                  <div class="info-items">
+                    <div class="info-row highlight">
+                      <span class="label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Height
+                      </span>
+                      <span class="value height-badge">{{getHeight(palm)}}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                          <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Stem Diameter
+                      </span>
+                      <span class="value">{{getStemDiameter(palm)}}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10 3H6a2 2 0 0 0-2 2v14c0 5.5 6 3 6 3s6 2.5 6-3V5a2 2 0 0 0-2-2h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <rect x="10" y="1" width="4" height="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Habitat
+                      </span>
+                      <span class="value habitat-badge">{{getHabitat(palm)}}</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="label">Stem Type</span>
+                      <div class="value">
+                        <span *ngFor="let type of getStemType(palm); let last = last" class="stem-tag">
+                          {{type}}<span *ngIf="!last">, </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div *ngIf="getStemProperties(palm).length > 0" class="info-row">
+                      <span class="label">Stem Properties</span>
+                      <div class="value">
+                        <span *ngFor="let prop of getStemProperties(palm); let last = last" class="property-tag">
+                          {{prop}}<span *ngIf="!last">, </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
   
-                <div *ngIf="hasLeafData(palm)" class="info-card">
-                  <h3>Leaves</h3>
-                  <p>{{getLeafInfo(palm)}}</p>
-                  <p *ngIf="palm.Max_Blade_Length_m"><strong>Max Blade Length:</strong> {{palm.Max_Blade_Length_m}} m</p>
-                  <p *ngIf="palm.Max_Rachis_Length_m"><strong>Max Rachis Length:</strong> {{palm.Max_Rachis_Length_m}} m</p>
-                  <p *ngIf="palm.Max_Petiole_length_m"><strong>Max Petiole Length:</strong> {{palm.Max_Petiole_length_m}} m</p>
+                <!-- Leaves Card -->
+                <div *ngIf="hasLeafData(palm)" class="modern-card leaves-card">
+                  <div class="card-header">
+                    <div class="icon-badge leaves-icon">
+                      <img src="assets/icons/leaves.png" alt="Leaves" class="icon-img">
+                    </div>
+                    <h3>Leaves</h3>
+                  </div>
+                  <div class="info-items">
+                    <div class="info-description">{{getLeafInfo(palm)}}</div>
+                    <div *ngIf="palm.Max_Blade_Length_m" class="measurement-row">
+                      <span class="measure-label">Max Blade Length</span>
+                      <span class="measure-value">{{palm.Max_Blade_Length_m}} m</span>
+                    </div>
+                    <div *ngIf="palm.Max_Rachis_Length_m" class="measurement-row">
+                      <span class="measure-label">Max Rachis Length</span>
+                      <span class="measure-value">{{palm.Max_Rachis_Length_m}} m</span>
+                    </div>
+                    <div *ngIf="palm.Max_Petiole_length_m" class="measurement-row">
+                      <span class="measure-label">Max Petiole Length</span>
+                      <span class="measure-value">{{palm.Max_Petiole_length_m}} m</span>
+                    </div>
+                  </div>
                 </div>
   
-                <div *ngIf="hasFruitData(palm)" class="info-card">
-                  <h3>Fruits</h3>
-                  <p>{{getFruitInfo(palm)}}</p>
-                  <p *ngIf="palm.AverageFruitLength_cm"><strong>Average Fruit Length:</strong> {{palm.AverageFruitLength_cm}} cm</p>
-                  <p *ngIf="palm.AverageFruitWidth_cm"><strong>Average Fruit Width:</strong> {{palm.AverageFruitWidth_cm}} cm</p>
-                  <p *ngIf="palm.FruitColorDescription"><strong>Color Description:</strong> {{palm.FruitColorDescription}}</p>
-                  <p *ngIf="palm.Conspicuousness"><strong>Conspicuousness:</strong> {{palm.Conspicuousness}}</p>
+                <!-- Fruits Card -->
+                <div *ngIf="hasFruitData(palm)" class="modern-card fruits-card">
+                  <div class="card-header">
+                    <div class="icon-badge fruits-icon">
+                      <img src="assets/icons/fruits.png" alt="Fruits" class="icon-img">
+                    </div>
+                    <h3>Fruits</h3>
+                  </div>
+                  <div class="info-items">
+                    <div class="info-description">{{getFruitInfo(palm)}}</div>
+                    <div class="fruit-measurements">
+                      <div *ngIf="palm.AverageFruitLength_cm" class="measurement-item">
+                        <span class="measure-icon">📏</span>
+                        <span class="measure-label">Length</span>
+                        <span class="measure-value">{{palm.AverageFruitLength_cm}} cm</span>
+                      </div>
+                      <div *ngIf="palm.AverageFruitWidth_cm" class="measurement-item">
+                        <span class="measure-icon">↔️</span>
+                        <span class="measure-label">Width</span>
+                        <span class="measure-value">{{palm.AverageFruitWidth_cm}} cm</span>
+                      </div>
+                    </div>
+                    <div *ngIf="palm.FruitColorDescription" class="color-row">
+                      <span class="label">Color</span>
+                      <span class="value color-badge">{{palm.FruitColorDescription}}</span>
+                    </div>
+                    <div *ngIf="palm.Conspicuousness" class="info-row">
+                      <span class="label">Conspicuousness</span>
+                      <span class="value conspicuous-badge">{{palm.Conspicuousness}}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

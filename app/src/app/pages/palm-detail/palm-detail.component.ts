@@ -33,6 +33,7 @@ export class PalmDetailComponent implements OnInit {
   error = false;
   notFound = false;
   activeTab = 0;
+  private tabFragments = ['characteristics', 'native-range', 'gallery'];
 
   // Lightbox properties
   showLightbox = false;
@@ -86,6 +87,11 @@ export class PalmDetailComponent implements OnInit {
       this.loading = false;
       this.palm = palm;
       this.updateFlagsForPalm();
+      // Initialize image URLs for fragment navigation
+      if (this.palm) {
+        this.allImageUrls = this.getAllPhotoUrls(this.palm);
+      }
+      this.handleFragmentNavigation();
       
       if (!palm) {
         this.notFound = true;
@@ -112,6 +118,31 @@ export class PalmDetailComponent implements OnInit {
   }
   setActiveTab(index: number): void {
     this.activeTab = index;
+    // Update URL fragment
+    const fragment = this.tabFragments[index];
+    this.router.navigate([], { fragment: fragment, replaceUrl: true });
+  }
+
+  private handleFragmentNavigation(): void {
+    // Handle initial fragment from URL
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        if (fragment.startsWith('gallery/image-')) {
+          // Handle image fragment
+          this.activeTab = 2; // Gallery tab
+          const imageIndex = parseInt(fragment.replace('gallery/image-', '')) - 1;
+          if (imageIndex >= 0 && this.palm) {
+            setTimeout(() => this.openImageByIndex(imageIndex), 100);
+          }
+        } else {
+          // Handle tab fragment
+          const tabIndex = this.tabFragments.indexOf(fragment);
+          if (tabIndex !== -1) {
+            this.activeTab = tabIndex;
+          }
+        }
+      }
+    });
   }
 
   // Méthodes utilitaires pour accéder aux propriétés du palmier de manière sécurisée
@@ -252,14 +283,36 @@ export class PalmDetailComponent implements OnInit {
     }
     
     this.showLightbox = true;
+    // Update URL with image fragment
+    const imageFragment = `gallery/image-${this.currentImageIndex + 1}`;
+    this.router.navigate([], { fragment: imageFragment, replaceUrl: true });
+    
     // Prevent body scroll when lightbox is open
     document.body.style.overflow = 'hidden';
+  }
+
+  openImageByIndex(index: number) {
+    if (this.palm) {
+      // Ensure allImageUrls is populated
+      if (this.allImageUrls.length === 0) {
+        this.allImageUrls = this.getAllPhotoUrls(this.palm);
+      }
+      
+      if (this.allImageUrls.length > index && index >= 0) {
+        const imageUrl = this.allImageUrls[index];
+        const speciesName = this.getSpeciesName(this.palm);
+        this.openLightbox(imageUrl, speciesName);
+      }
+    }
   }
 
   onImageIndexChange(newIndex: number) {
     this.currentImageIndex = newIndex;
     if (this.allImageUrls[newIndex]) {
       this.currentImageUrl = this.allImageUrls[newIndex];
+      // Update URL fragment for new image
+      const imageFragment = `gallery/image-${newIndex + 1}`;
+      this.router.navigate([], { fragment: imageFragment, replaceUrl: true });
     }
   }
 
@@ -267,6 +320,8 @@ export class PalmDetailComponent implements OnInit {
     this.showLightbox = false;
     this.currentImageUrl = '';
     this.currentSpeciesName = '';
+    // Return to gallery tab fragment
+    this.router.navigate([], { fragment: 'gallery', replaceUrl: true });
     // Restore body scroll
     document.body.style.overflow = 'auto';
   }

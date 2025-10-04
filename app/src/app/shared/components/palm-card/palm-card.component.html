@@ -1,5 +1,5 @@
 <!-- src/app/shared/components/palm-card/palm-card.component.html -->
-<mat-card class="palm-card" [class.animate-card]="shouldShowAnimation" [routerLink]="['/palms', getSpecies() | slugify]">
+<mat-card class="palm-card" [class.animate-card]="shouldShowAnimation" [routerLink]="['/palms', getSpecies() | slugify]" fragment="characteristics">
   <div class="card-image-container">
     <div class="image-wrapper">
       <img mat-card-image [src]="getImageUrl()" [alt]="getSpecies()" class="palm-image" (load)="imageLoaded = true" [class.hidden]="!imageLoaded">
