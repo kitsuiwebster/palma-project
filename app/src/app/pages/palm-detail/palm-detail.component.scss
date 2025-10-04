@@ -542,29 +542,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    
-    &.taxonomy-icon {
-      background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
-    }
-    
-    &.physical-icon {
-      background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-    }
-    
-    &.leaves-icon {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    }
-    
-    &.fruits-icon {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    }
+    background: white;
+    border: 1px solid #e5e7eb;
     
     .icon-img {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       object-fit: contain;
-      filter: brightness(0) invert(1); // Makes PNG icons white
     }
   }
 }
@@ -619,27 +603,28 @@
   }
 }
 
-// Badges and Tags
+// Badges and Tags - Using site colors (green/orange)  
 .genus-badge, .species-badge {
-  background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
-  color: #6b46c1;
+  background: transparent;
+  color: #1f2937;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
+  border: 1px solid #e5e7eb;
 }
 
 .height-badge {
-  background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
-  color: #1d4ed8;
+  background: $accent-color;
+  color: white;
   padding: 6px 12px;
   border-radius: 20px;
   font-weight: 600;
 }
 
 .habitat-badge {
-  background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
-  color: #059669;
+  background: $primary-color;
+  color: white;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.875rem;
@@ -647,8 +632,8 @@
 }
 
 .stem-tag, .property-tag {
-  background: #f3f4f6;
-  color: #4b5563;
+  background: lighten($primary-color, 35%);
+  color: $primary-color;
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 0.8rem;
@@ -656,8 +641,8 @@
 }
 
 .color-badge {
-  background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
-  color: #c2410c;
+  background: $accent-color;
+  color: white;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.875rem;
@@ -665,8 +650,8 @@
 }
 
 .conspicuous-badge {
-  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
-  color: #dc2626;
+  background: darken($accent-color, 10%);
+  color: white;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.875rem;
