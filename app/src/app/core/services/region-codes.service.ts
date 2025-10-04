@@ -162,4 +162,171 @@ export class RegionCodesService {
     await this.loadRegionCodes();
     return code in this.regionCodes;
   }
+
+  // Subdivision mapping for regions without GeoJSON files
+  private readonly subdivisionMapping: { [key: string]: string[] } = {
+    // Borneo - shared between Indonesia and Malaysia
+    'BOR': ['IDN', 'MLY'],
+    
+    // Indonesia islands
+    'JAW': ['IDN'], // Java
+    'SUM': ['IDN'], // Sumatra
+    'SUL': ['IDN'], // Sulawesi
+    'MOL': ['IDN'], // Moluccas
+    'LSI': ['IDN'], // Lesser Sunda Islands
+    
+    // Argentina regions
+    'AGE': ['ARG'], // Argentina East
+    'AGW': ['ARG'], // Argentina West
+    
+    // China regions  
+    'CHC': ['CHN'], // China Central
+    'CHH': ['CHN'], // China South Central
+    'CHS': ['CHN'], // China South
+    'CHT': ['CHN'], // China Tibet
+    
+    // Brazil regions
+    'BZC': ['BRA'], // Brazil Central
+    'BZE': ['BRA'], // Brazil East
+    'BZL': ['BRA'], // Brazil Southeast
+    'BZN': ['BRA'], // Brazil North
+    'BZS': ['BRA'], // Brazil South
+    
+    // Mexico regions
+    'MXC': ['MEX'], // Mexico Central
+    'MXE': ['MEX'], // Mexico East
+    'MXG': ['MEX'], // Mexico Gulf
+    'MXI': ['MEX'], // Mexico Islands
+    'MXN': ['MEX'], // Mexico North
+    'MXS': ['MEX'], // Mexico South
+    'MXT': ['MEX'], // Mexico Southeast
+  };
+
+  private readonly subdivisionNames: { [key: string]: string } = {
+    'BOR': 'Borneo region',
+    'JAW': 'Java island',
+    'SUM': 'Sumatra island', 
+    'SUL': 'Sulawesi island',
+    'MOL': 'Moluccas islands',
+    'LSI': 'Lesser Sunda islands',
+    'AGE': 'East region',
+    'AGW': 'West region',
+    'CHC': 'Central region',
+    'CHH': 'South Central region', 
+    'CHS': 'South region',
+    'CHT': 'Tibet region',
+    'BZC': 'Central region',
+    'BZE': 'East region',
+    'BZL': 'Southeast region',
+    'BZN': 'North region',
+    'BZS': 'South region',
+    'MXC': 'Central region',
+    'MXE': 'East region',
+    'MXG': 'Gulf region',
+    'MXI': 'Islands region',
+    'MXN': 'North region',
+    'MXS': 'South region',
+    'MXT': 'Southeast region',
+  };
+
+  /**
+   * Get parent country codes for a subdivision region
+   * @param subdivisionCode - Subdivision region code (e.g., "BOR", "JAW")
+   * @returns Array of parent country codes or empty array if not a subdivision
+   */
+  getParentCountries(subdivisionCode: string): string[] {
+    return this.subdivisionMapping[subdivisionCode] || [];
+  }
+
+  /**
+   * Get subdivision name for display
+   * @param subdivisionCode - Subdivision region code
+   * @returns Human-readable subdivision name
+   */
+  getSubdivisionName(subdivisionCode: string): string {
+    return this.subdivisionNames[subdivisionCode] || subdivisionCode;
+  }
+
+  /**
+   * Check if a region code is a subdivision (no direct GeoJSON)
+   * @param code - Region code to check
+   * @returns True if it's a subdivision region
+   */
+  isSubdivision(code: string): boolean {
+    return code in this.subdivisionMapping;
+  }
+
+  /**
+   * Convert subdivision codes to display text with parent countries
+   * @param codes - Comma-separated region codes
+   * @param includeFlags - Whether to include flag images
+   * @returns Promise<string> - HTML string with proper subdivision handling
+   */
+  async convertSubdivisionCodesToDisplay(codes: string, includeFlags: boolean = true): Promise<string> {
+    await this.loadRegionCodes();
+
+    if (!codes || codes.trim() === '') {
+      return '';
+    }
+
+    const codeList = codes.split(',').map(code => code.trim());
+    const results: string[] = [];
+
+    for (const code of codeList) {
+      if (this.isSubdivision(code)) {
+        // Handle subdivision
+        const parentCountries = this.getParentCountries(code);
+        const subdivisionName = this.getSubdivisionName(code);
+        
+        if (parentCountries.length === 1) {
+          // Single parent country
+          const parentCode = parentCountries[0];
+          const parentData = this.regionCodes[parentCode];
+          if (parentData) {
+            if (includeFlags && parentData.flag) {
+              const flagImg = `<img src="${parentData.flag}" class="flag-img" alt="${parentData.name} flag">`;
+              results.push(`${flagImg} ${parentData.name} (${subdivisionName})`);
+            } else {
+              results.push(`${parentData.name} (${subdivisionName})`);
+            }
+          } else {
+            results.push(`${parentCode} (${subdivisionName})`);
+          }
+        } else if (parentCountries.length > 1) {
+          // Multiple parent countries (like Borneo)
+          const parentNames: string[] = [];
+          for (const parentCode of parentCountries) {
+            const parentData = this.regionCodes[parentCode];
+            if (parentData) {
+              if (includeFlags && parentData.flag) {
+                const flagImg = `<img src="${parentData.flag}" class="flag-img" alt="${parentData.name} flag">`;
+                parentNames.push(`${flagImg} ${parentData.name}`);
+              } else {
+                parentNames.push(parentData.name);
+              }
+            } else {
+              parentNames.push(parentCode);
+            }
+          }
+          results.push(`${parentNames.join(' and ')} (${subdivisionName})`);
+        }
+      } else {
+        // Handle regular region code
+        const regionData = this.regionCodes[code];
+        if (regionData) {
+          if (includeFlags && regionData.flag) {
+            const flagImg = `<img src="${regionData.flag}" class="flag-img" alt="${regionData.name} flag">`;
+            results.push(`${flagImg} ${regionData.name}`);
+          } else {
+            results.push(regionData.name);
+          }
+        } else {
+          console.warn(`Unknown region code: ${code}`);
+          results.push(code);
+        }
+      }
+    }
+
+    return results.join(', ');
+  }
 }
