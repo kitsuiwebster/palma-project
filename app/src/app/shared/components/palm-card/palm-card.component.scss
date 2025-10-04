@@ -191,11 +191,24 @@
       
       .flag-icon {
         width: 20px;
-        height: 20px;
+        height: 15px;
         border-radius: 2px;
         object-fit: cover;
         opacity: 0.8;
       }
+      
+      .custom-icon {
+        width: 18px;
+        height: 18px;
+        opacity: 0.8;
+      }
+    }
+  }
+  
+  .no-common-names {
+    .no-names-text {
+      font-style: italic;
+      color: lighten($text-secondary, 15%);
     }
   }
 }

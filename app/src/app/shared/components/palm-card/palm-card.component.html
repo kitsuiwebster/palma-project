@@ -60,6 +60,16 @@
         </span>
         <span>{{ palm.CommonNamesSP | formatCommonNames }}</span>
       </div>
+      
+      <!-- Fallback when no common names available -->
+      <div *ngIf="(!palm.CommonNamesEN || palm.CommonNamesEN === 'No Common Name') && 
+                   (!palm.CommonNamesFR || palm.CommonNamesFR === 'Pas de nom commun') && 
+                   (!palm.CommonNamesSP || palm.CommonNamesSP === 'Sin nombre común')" class="info-item no-common-names">
+        <span class="icon-wrapper">
+          <img src="assets/icons/name.png" alt="No Common Names" class="custom-icon">
+        </span>
+        <span class="no-names-text">No common names</span>
+      </div>
     </div>
   </mat-card-content>
 
