@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Solomon Islands","locationCode":"SOL","speciesCount":33,"densityZone":"Very Low Density","color":"#f3e486","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[155.5,-11.8],[155.5,-5.1],[170.2,-5.1],[170.2,-11.8],[155.5,-11.8]]]}}]}

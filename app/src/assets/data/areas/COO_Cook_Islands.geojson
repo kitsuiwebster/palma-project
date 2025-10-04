@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Cook Islands","locationCode":"COO","speciesCount":1,"densityZone":"Very Low Density","color":"#ffff96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[-166,-22],[-166,-8],[-157,-8],[-157,-22],[-166,-22]]]}}]}

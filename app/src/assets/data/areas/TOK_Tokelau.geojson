@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Tokelau","locationCode":"TOK","speciesCount":1,"densityZone":"Very Low Density","color":"#ffff96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[-172.5,-9.6],[-172.5,-8.5],[-171.1,-8.5],[-171.1,-9.6],[-172.5,-9.6]]]}}]}

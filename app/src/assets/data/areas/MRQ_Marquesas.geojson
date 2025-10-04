@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Martinique","locationCode":"MRQ","speciesCount":2,"densityZone":"Very Low Density","color":"#fffe96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[-61.3,14.4],[-61.3,14.9],[-60.8,14.9],[-60.8,14.4],[-61.3,14.4]]]}}]}

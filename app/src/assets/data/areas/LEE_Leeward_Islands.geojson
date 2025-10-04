@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"United States Virgin Islands","locationCode":"LEE","speciesCount":12,"densityZone":"Very Low Density","color":"#fbf691","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[-65.1,17.6],[-65.1,18.4],[-64.6,18.4],[-64.6,17.6],[-65.1,17.6]]]}}]}

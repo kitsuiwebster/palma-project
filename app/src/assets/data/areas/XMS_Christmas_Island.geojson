@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Christmas Island","locationCode":"XMS","speciesCount":1,"densityZone":"Very Low Density","color":"#ffff96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[105.5,-10.6],[105.5,-10.4],[105.8,-10.4],[105.8,-10.6],[105.5,-10.6]]]}}]}

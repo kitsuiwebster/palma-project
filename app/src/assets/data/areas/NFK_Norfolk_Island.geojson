@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Norfolk Island","locationCode":"NFK","speciesCount":5,"densityZone":"Very Low Density","color":"#fdfc94","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[167.9,-29.1],[167.9,-29.0],[167.99,-29.0],[167.99,-29.1],[167.9,-29.1]]]}}]}

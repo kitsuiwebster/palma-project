@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"R\u00e9union","locationCode":"REU","speciesCount":6,"densityZone":"Very Low Density","color":"#fdfb94","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[55.2,-21.4],[55.2,-20.9],[55.8,-20.9],[55.8,-21.4],[55.2,-21.4]]]}}]}

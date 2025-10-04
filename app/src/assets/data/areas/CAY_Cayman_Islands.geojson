@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Cayman Islands","locationCode":"CAY","speciesCount":3,"densityZone":"Very Low Density","color":"#fefd95","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[-81.4,19.3],[-81.4,19.8],[-79.7,19.8],[-79.7,19.3],[-81.4,19.3]]]}}]}

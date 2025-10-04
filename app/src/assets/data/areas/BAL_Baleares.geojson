@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Balearic Islands","locationCode":"BAL","speciesCount":1,"densityZone":"Very Low Density","color":"#ffff96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[0.5,38.5],[0.5,40.1],[4.5,40.1],[4.5,38.5],[0.5,38.5]]]}}]}

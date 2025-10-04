@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Comoros","locationCode":"COM","speciesCount":7,"densityZone":"Very Low Density","color":"#fdfa93","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[43.2,-12.4],[43.2,-11.4],[44.5,-11.4],[44.5,-12.4],[43.2,-12.4]]]}}]}

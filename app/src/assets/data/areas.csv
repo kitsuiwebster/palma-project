@@ -1,0 +1,199 @@
+AreaCode,AreaName,SpeciesCount
+AFG,Afghanistan,1
+AGE,Argentina East,12
+AGW,Argentina West,3
+ALA,Alabama,4
+ALG,Algeria,1
+AND,Andaman Islands,27
+ANG,Angola,13
+ARI,Arizona,1
+ARK,Arkansas,1
+ASS,Assam,43
+BAH,Bahamas,8
+BAL,Baleares,1
+BAN,Bangladesh,39
+BEN,Benin,15
+BER,Bermuda,1
+BIS,Bismarck Archipelago,23
+BKN,Burkina Faso,7
+BLZ,Belize,40
+BOL,Bolivia,80
+BOR,Borneo,307
+BOT,Botswana,2
+BUR,Burma,5
+BZC,Brazil Central,72
+BZE,Brazil East,85
+BZL,Brazil Southeast,80
+BZN,Brazil North,161
+BZS,Brazil South,30
+CAB,Cabinda,14
+CAF,Central African Republic,23
+CAL,California,1
+CAY,Cayman Islands,3
+CBD,Cambodia,40
+CHA,Chad,4
+CHC,China Central,39
+CHH,China South Central,28
+CHS,China South,35
+CHT,China Tibet,5
+CLC,Caroline Islands,1
+CLM,Colombia,236
+CMN,Cameroon,36
+CNY,Canary Islands,1
+COM,Comoros,7
+CON,Congo,24
+COO,Cook Islands,1
+COS,Costa Rica,110
+CPI,Cape Province,1
+CPP,Chagos Archipelago,3
+CPV,Cape Verde,2
+CRL,Caroline Islands,10
+CTM,Christmas Island Territory,1
+CUB,Cuba,85
+CVI,Cape Verde Islands,1
+DJI,Djibouti,4
+DOM,Dominican Republic,26
+EAI,East Africa Islands,1
+ECU,Ecuador,129
+EGY,Egypt,2
+EHM,East Himalaya,29
+ELS,El Salvador,12
+EQG,Equatorial Guinea,16
+ERI,Eritrea,2
+ETH,Ethiopia,5
+FIJ,Fiji,25
+FLA,Florida,11
+FRA,France,1
+FRG,French Guiana,61
+GAB,Gabon,26
+GAM,Gambia,10
+GEO,Georgia,3
+GGI,Gulf of Guinea Islands,8
+GHA,Ghana,18
+GNB,Guinea-Bissau,9
+GST,Gulf States,2
+GUA,Guatemala,64
+GUI,Guinea,11
+GUY,Guyana,55
+HAI,Haiti,26
+HAW,Hawaii,24
+HON,Honduras,61
+IND,India,42
+IRN,Iran,2
+IRQ,Iraq,1
+ITA,Italy,1
+IVO,Ivory Coast,16
+JAM,Jamaica,10
+JAP,Japan,1
+JAW,Java,46
+JNF,Juan Fernandez Islands,1
+KEN,Kenya,7
+KER,Kerguelen Islands,1
+KRI,Kriti,1
+LAO,Laos,52
+LBR,Liberia,14
+LBY,Libya,2
+LEE,Leeward Islands,12
+LOU,Louisiana,2
+LSI,Lesser Sunda Islands,7
+MAU,Mauritius,7
+MCI,Mariana Islands,1
+MDG,Madagascar,195
+MLI,Mali,4
+MLW,Malawi,5
+MLY,Malaysia,232
+MOL,Moluccas,45
+MOR,Morocco,1
+MOZ,Mozambique,8
+MRN,Marion Island,1
+MRQ,Marquesas,2
+MSI,Mascarene Islands,3
+MTN,Mauritania,2
+MXC,Mexico Central,8
+MXE,Mexico East,12
+MXG,Mexico Gulf,35
+MXI,Mexico Islands,1
+MXN,Mexico North,11
+MXS,Mexico South,47
+MXT,Mexico Southeast,59
+MYA,Myanmar,79
+NAM,Namibia,2
+NAT,Natal,4
+NCA,North Carolina,2
+NCB,Nicobar Islands,20
+NEP,Nepal,12
+NFK,Norfolk Island,5
+NGA,Nigeria,30
+NGR,Niger,6
+NIC,Nicaragua,64
+NNS,Nansei-shoto,4
+NSW,New South Wales,4
+NTA,Northern Territory,14
+NWC,New Caledonia,39
+NWG,New Guinea,265
+NZN,New Zealand North,1
+NZS,New Zealand South,1
+OGA,Ogasawara Islands,2
+OKL,Oklahoma,1
+OMA,Oman,3
+PAK,Pakistan,4
+PAL,Palestine,1
+PAN,Panama,131
+PAR,Paraguay,26
+PER,Peru,140
+PHI,Philippines,138
+POR,Portugal,1
+PUE,Puerto Rico,10
+QLD,Queensland,44
+REU,Réunion,6
+ROD,Rodrigues,3
+RWA,Rwanda,4
+SAM,Samoa,11
+SAR,Sardinia,1
+SAU,Saudi Arabia,4
+SCA,South Carolina,4
+SCZ,Santa Cruz Islands,5
+SEN,Senegal,10
+SEY,Seychelles,6
+SIC,Sicily,1
+SIE,Sierra Leone,13
+SIN,Singapore,2
+SOL,Solomon Islands,33
+SOM,Somalia,7
+SPA,Spain,1
+SRL,Sri Lanka,19
+SUD,Sudan,6
+SUL,Sulawesi,65
+SUM,Sumatra,163
+SUR,Suriname,56
+SWC,Southwest Caribbean,2
+SWZ,Swaziland,1
+TAI,Taiwan,8
+TAN,Tanzania,9
+TCI,Tristan da Cunha Islands,5
+TEX,Texas,3
+THA,Thailand,165
+TOG,Togo,9
+TOK,Tokelau,1
+TON,Tonga,2
+TRT,Trinidad and Tobago,23
+TUA,Tuamotu Archipelago,2
+TUN,Tunisia,1
+TUR,Turkey,1
+TVL,Tuvalu,4
+UGA,Uganda,6
+URU,Uruguay,9
+VAN,Vanuatu,18
+VEN,Venezuela,106
+VIC,Victoria,1
+VIE,Vietnam,111
+VNA,Venezuela Antilles,6
+WAL,Wales,1
+WAU,Western Australia,5
+WHM,Western Himalayas,6
+WIN,Windward Islands,11
+XMS,Christmas Island,1
+YEM,Yemen,6
+ZAI,Zaire,36
+ZAM,Zambia,6
+ZIM,Zimbabwe,4

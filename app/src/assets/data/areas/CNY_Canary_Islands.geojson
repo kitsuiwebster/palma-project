@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Canary Islands","locationCode":"CNY","speciesCount":1,"densityZone":"Very Low Density","color":"#ffff96","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[-18.2,27.6],[-18.2,29.5],[-13.3,29.5],[-13.3,27.6],[-18.2,27.6]]]}}]}

@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Sardinia",
+        "locationCode": "SAR"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [8.1, 38.8],
+          [9.8, 38.8],
+          [9.8, 41.3],
+          [8.1, 41.3],
+          [8.1, 38.8]
+        ]]
+      }
+    }
+  ]
+}

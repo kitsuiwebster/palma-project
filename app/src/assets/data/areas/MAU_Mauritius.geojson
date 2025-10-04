@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Mauritius","locationCode":"MAU","speciesCount":7,"densityZone":"Very Low Density","color":"#fdfa93","isPalmZone":true},"geometry":{"type":"Polygon","coordinates":[[[57.3,-20.6],[57.8,-20.6],[57.8,-19.9],[57.3,-19.9],[57.3,-20.6]]]}}]}
