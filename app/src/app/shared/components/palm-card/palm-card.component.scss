@@ -209,3 +209,33 @@
   margin-top: 4px;
   padding-left: 2px;
 }
+
+// Horizontal dividers
+.card-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.12) 20%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.12) 80%,
+    transparent 100%
+  );
+  margin: 14px 16px;
+  opacity: 0.9;
+}
+
+// Language dividers (smaller, for common names section)
+.language-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 30%,
+    rgba(0, 0, 0, 0.10) 50%,
+    rgba(0, 0, 0, 0.08) 70%,
+    transparent 100%
+  );
+  margin: 8px 0;
+  opacity: 0.8;
+}

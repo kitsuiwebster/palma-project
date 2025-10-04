@@ -15,6 +15,8 @@
     </mat-card-title-group>
   </mat-card-header>
 
+  <div class="card-divider"></div>
+
   <mat-card-content>
     <div class="palm-quick-info">
       <div class="info-item">
@@ -37,21 +39,27 @@
       </div>
     </div>
 
+    <div class="card-divider"></div>
+
     <div class="common-names">
       <div *ngIf="palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name'" class="common-name-item">
         <img src="https://flagcdn.com/w20/gb.png" alt="EN" class="common-name-flag">
         <span>{{ palm.CommonNamesEN | formatCommonNames }}</span>
       </div>
+      <div *ngIf="(palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name') && (palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun')" class="language-divider"></div>
       <div *ngIf="palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun'" class="common-name-item">
         <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="common-name-flag">
         <span>{{ palm.CommonNamesFR | formatCommonNames }}</span>
       </div>
+      <div *ngIf="((palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name') || (palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun')) && (palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común')" class="language-divider"></div>
       <div *ngIf="palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común'" class="common-name-item">
         <img src="https://flagcdn.com/w20/es.png" alt="ES" class="common-name-flag">
         <span>{{ palm.CommonNamesSP | formatCommonNames }}</span>
       </div>
     </div>
   </mat-card-content>
+
+  <div class="card-divider"></div>
 
 <mat-card-actions>
   <mat-card-actions>
