@@ -209,6 +209,23 @@ export class RegionCodesService {
     'MXN': ['MEX'], // Mexico North
     'MXS': ['MEX'], // Mexico South
     'MXT': ['MEX'], // Mexico Southeast
+    
+    // Venezuela regions
+    'VNA': ['VEN'], // Venezuela Antilles
+    
+    // Cape Verde regions  
+    'CVI': ['CPV'], // Cape Verde Islands
+    
+    // New Zealand regions
+    'NZN': ['NZL'], // New Zealand North
+    'NZS': ['NZL'], // New Zealand South
+    
+    // Christmas Island regions
+    'XMS': ['AUS'], // Christmas Island (Australian territory)
+    
+    // Caroline Islands regions (both codes point to same place)
+    'CLC': ['FSM'], // Caroline Islands
+    'CRL': ['FSM'], // Caroline Islands
   };
 
   private readonly subdivisionNames: { [key: string]: string } = {
@@ -236,6 +253,13 @@ export class RegionCodesService {
     'MXN': 'North region',
     'MXS': 'South region',
     'MXT': 'Southeast region',
+    'VNA': 'Antilles region',
+    'CVI': 'Cape Verde Islands',
+    'NZN': 'North Island',
+    'NZS': 'South Island', 
+    'XMS': 'Christmas Island',
+    'CLC': 'Caroline Islands',
+    'CRL': 'Caroline Islands',
   };
 
   /**

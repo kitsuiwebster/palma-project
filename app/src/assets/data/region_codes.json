@@ -43,6 +43,10 @@
     "name": "Assam",
     "flag": "https://flagcdn.com/w20/in.png"
   },
+  "AUS": {
+    "name": "Australia",
+    "flag": "https://flagcdn.com/w20/au.png"
+  },
   "BAH": {
     "name": "Bahamas",
     "flag": "https://flagcdn.com/w20/bs.png"
@@ -270,6 +274,10 @@
   "FRA": {
     "name": "France",
     "flag": "https://flagcdn.com/w20/fr.png"
+  },
+  "FSM": {
+    "name": "Federated States of Micronesia",
+    "flag": "https://flagcdn.com/w20/fm.png"
   },
   "FRG": {
     "name": "French Guiana",
@@ -553,6 +561,10 @@
   },
   "NZS": {
     "name": "New Zealand South",
+    "flag": "https://flagcdn.com/w20/nz.png"
+  },
+  "NZL": {
+    "name": "New Zealand",
     "flag": "https://flagcdn.com/w20/nz.png"
   },
   "OGA": {
