@@ -52,22 +52,15 @@ def calculate_unified_countries(region_species):
         'BRA': ['BZC', 'BZE', 'BZL', 'BZN', 'BZS'],  # Brazil = Central + East + Southeast + North + South
         'CHN': ['CHC', 'CHH', 'CHS', 'CHT'],  # China = Central + South Central + South + Tibet
         'MEX': ['MXC', 'MXE', 'MXG', 'MXI', 'MXN', 'MXS', 'MXT'],  # Mexico = Central + East + Gulf + Islands + North + South + Southeast
-        'IDN': ['BOR', 'JAW', 'LSI', 'MOL', 'SUL', 'SUM']  # Indonesia = Borneo + Java + Lesser Sunda + Moluccas + Sulawesi + Sumatra
+        'IDN': ['JAW', 'LSI', 'MOL', 'SUL', 'SUM'],  # Indonesia = Java + Lesser Sunda + Moluccas + Sulawesi + Sumatra
+        # 'MLY': ['BOR']  # Malaysia already includes Borneo in areas.csv, no need to add
     }
     
     unified_totals = {}
     
-    for country, subdivisions in country_subdivisions.items():
-        total = 0
-        subdivision_counts = []
-        
-        for subdivision in subdivisions:
-            count = region_species.get(subdivision, 0)
-            total += count
-            subdivision_counts.append(f"{subdivision}:{count}")
-        
-        unified_totals[country] = total
-        print(f"  {country}: {total} species ({', '.join(subdivision_counts)})")
+    # Don't calculate unified countries - just use the values from areas.csv as they are
+    # This way IDN stays 521, MLY stays 481, etc.
+    print("  Using original values from areas.csv (no subdivision calculation needed)")
     
     return unified_totals
 
@@ -141,12 +134,9 @@ def create_map_geojson():
     if not region_species:
         return False
     
-    # Calculate unified country totals
-    print("\\nCalculating unified country totals:")
-    unified_totals = calculate_unified_countries(region_species)
-    
-    # Combine subdivision and unified data
-    all_species_data = {**region_species, **unified_totals}
+    # Use species data as-is from areas.csv
+    print("\\nUsing species data from areas.csv as-is")
+    all_species_data = region_species
     
     # Load GeoJSON features
     geojson_features = load_area_geojson_files()
