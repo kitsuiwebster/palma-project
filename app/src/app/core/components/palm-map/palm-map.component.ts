@@ -212,11 +212,17 @@ export class PalmMapComponent implements OnInit, AfterViewInit {
   }
 
   private getColor(speciesCount: number): string {
-    if (speciesCount > 150) return '#660000'; // very dark red (150+ species)
-    if (speciesCount > 100) return '#A52A2A'; // brown red (101-150)
-    if (speciesCount > 50) return '#CD5C5C'; // indian red (51-100)
-    if (speciesCount > 10) return '#F4A460'; // sandy brown (11-50)
-    if (speciesCount > 5) return '#FFF8DC'; // cornsilk (6-10)
-    return '#FFFFE0'; // pale yellow (1-5)
+    // Progressive color scheme from species_colors.json
+    if (speciesCount === 0) return '#f0f0f0'; // No species - Light gray
+    if (speciesCount >= 301) return '#990000'; // Exceptional (300+ species) - Dark red
+    if (speciesCount >= 201) return '#cc3300'; // Extremely high (201-300 species) - Red
+    if (speciesCount >= 151) return '#e65500'; // Very high (151-200 species) - Orange-red
+    if (speciesCount >= 101) return '#ff6600'; // High (101-150 species) - Dark orange
+    if (speciesCount >= 61) return '#ff9933'; // Medium-high (61-100 species) - Orange
+    if (speciesCount >= 31) return '#ffcc33'; // Medium (31-60 species) - Orange-yellow
+    if (speciesCount >= 16) return '#ffe066'; // Medium-low (16-30 species) - Yellow
+    if (speciesCount >= 6) return '#fff2aa'; // Low (6-15 species) - Light yellow
+    if (speciesCount >= 1) return '#ffffcc'; // Very low (1-5 species) - Very light yellow
+    return '#f0f0f0'; // Default fallback
   }
 }

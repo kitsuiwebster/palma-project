@@ -101,7 +101,7 @@ MCI,Mariana Islands,1
 MDG,Madagascar,195
 MLI,Mali,4
 MLW,Malawi,5
-MLY,Malaysia,232
+MLY,Malaysia,481
 MOL,Moluccas,45
 MOR,Morocco,1
 MOZ,Mozambique,8
@@ -112,6 +112,7 @@ MTN,Mauritania,2
 MXC,Mexico Central,8
 MXE,Mexico East,12
 MXG,Mexico Gulf,35
+MXI,Mexico Islands,1
 MXI,Mexico Islands,1
 MXN,Mexico North,11
 MXS,Mexico South,47
@@ -197,3 +198,8 @@ YEM,Yemen,6
 ZAI,Zaire,36
 ZAM,Zambia,6
 ZIM,Zimbabwe,4
+BRA,Brazil,428
+CHN,China,107
+MEX,Mexico,173
+ARG,Argentina,15
+IDN,Indonesia,521

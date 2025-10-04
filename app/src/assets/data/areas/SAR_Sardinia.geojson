@@ -5,7 +5,8 @@
       "type": "Feature",
       "properties": {
         "name": "Sardinia",
-        "locationCode": "SAR"
+        "locationCode": "SAR",
+        "speciesCount": 1
       },
       "geometry": {
         "type": "Polygon",
