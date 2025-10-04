@@ -319,4 +319,78 @@ export class RegionCodesService {
 
     return results.join(', ');
   }
+
+  /**
+   * Convert subdivision codes to display text with parent countries (LIMITED)
+   * @param codes - Comma-separated region codes
+   * @param includeFlags - Whether to include flag images
+   * @param maxCount - Maximum number of regions to display
+   * @returns Promise<string> - HTML string with proper subdivision handling
+   */
+  async convertSubdivisionCodesToDisplayLimited(codes: string, includeFlags: boolean = true, maxCount: number = 5): Promise<string> {
+    await this.loadRegionCodes();
+
+    if (!codes || codes.trim() === '') {
+      return '';
+    }
+
+    const codeList = codes.split(',').map(code => code.trim());
+    const results: string[] = [];
+
+    // Process only the first codes up to maxCount, but count subdivisions as multiple entries
+    let processedCount = 0;
+    
+    for (const code of codeList) {
+      if (processedCount >= maxCount) break;
+      
+      if (this.isSubdivision(code)) {
+        // Handle subdivision - show each parent country separately
+        const parentCountries = this.getParentCountries(code);
+        const subdivisionName = this.getSubdivisionName(code);
+        
+        for (const parentCode of parentCountries) {
+          if (processedCount >= maxCount) break;
+          
+          const parentData = this.regionCodes[parentCode];
+          if (parentData) {
+            if (includeFlags && parentData.flag) {
+              const flagImg = `<img src="${parentData.flag}" class="flag-img" alt="${parentData.name} flag">`;
+              results.push(`<div class="region-item">${flagImg} ${parentData.name} (${subdivisionName})</div>`);
+            } else {
+              results.push(`<div class="region-item">${parentData.name} (${subdivisionName})</div>`);
+            }
+          } else {
+            results.push(`<div class="region-item">${parentCode} (${subdivisionName})</div>`);
+          }
+          processedCount++;
+        }
+      } else {
+        // Handle regular region code
+        const regionData = this.regionCodes[code];
+        if (regionData) {
+          if (includeFlags && regionData.flag) {
+            const flagImg = `<img src="${regionData.flag}" class="flag-img" alt="${regionData.name} flag">`;
+            results.push(`<div class="region-item">${flagImg} ${regionData.name}</div>`);
+          } else {
+            results.push(`<div class="region-item">${regionData.name}</div>`);
+          }
+        } else {
+          console.warn(`Unknown region code: ${code}`);
+          results.push(`<div class="region-item">${code}</div>`);
+        }
+        processedCount++;
+      }
+    }
+
+    let output = `<div class="region-list">${results.join('')}</div>`;
+
+    // Add "and X more" message if there are more regions
+    const totalOriginalCodes = codeList.length;
+    if (processedCount < totalOriginalCodes) {
+      const remainingCount = totalOriginalCodes - processedCount;
+      output += `<div class="region-more">and ${remainingCount} more</div>`;
+    }
+
+    return output;
+  }
 }

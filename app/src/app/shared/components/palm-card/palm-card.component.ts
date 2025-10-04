@@ -120,7 +120,7 @@ export class PalmCardComponent implements OnInit, AfterViewInit {
   async loadNativeRegionDisplay(): Promise<void> {
     const nativeRegion = this.getNativeRegion();
     if (nativeRegion && nativeRegion !== 'Unknown region') {
-      this.nativeRegionDisplay = await this.regionCodesService.convertSubdivisionCodesToDisplay(nativeRegion, true);
+      this.nativeRegionDisplay = await this.regionCodesService.convertSubdivisionCodesToDisplayLimited(nativeRegion, true, 5);
       this.cdr.detectChanges();
     } else {
       this.nativeRegionDisplay = nativeRegion;

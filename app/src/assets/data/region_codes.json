@@ -1,4 +1,8 @@
 {
+  "ARG": {
+    "name": "Argentina",
+    "flag": "https://flagcdn.com/w20/ar.png"
+  },
   "AFG": {
     "name": "Afghanistan",
     "flag": "https://flagcdn.com/w20/af.png"
@@ -83,6 +87,10 @@
     "name": "Botswana",
     "flag": "https://flagcdn.com/w20/bw.png"
   },
+  "BRA": {
+    "name": "Brazil",
+    "flag": "https://flagcdn.com/w20/br.png"
+  },
   "BUR": {
     "name": "Burma",
     "flag": "https://flagcdn.com/w20/mm.png"
@@ -145,6 +153,10 @@
   },
   "CHT": {
     "name": "China Tibet",
+    "flag": "https://flagcdn.com/w20/cn.png"
+  },
+  "CHN": {
+    "name": "China",
     "flag": "https://flagcdn.com/w20/cn.png"
   },
   "CLC": {
@@ -469,6 +481,10 @@
   },
   "MXT": {
     "name": "Mexico Southeast",
+    "flag": "https://flagcdn.com/w20/mx.png"
+  },
+  "MEX": {
+    "name": "Mexico",
     "flag": "https://flagcdn.com/w20/mx.png"
   },
   "MYA": {
