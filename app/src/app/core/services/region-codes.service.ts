@@ -225,6 +225,10 @@ export class RegionCodesService {
     
     // Caroline Islands regions
     'CRL': ['FSM'], // Caroline Islands
+    
+    // Papua New Guinea regions
+    'NWG': ['PNG'], // New Guinea
+    'BIS': ['PNG'], // Bismarck Archipelago
   };
 
   private readonly subdivisionNames: { [key: string]: string } = {
@@ -258,6 +262,8 @@ export class RegionCodesService {
     'NZS': 'South Island', 
     'XMS': 'Christmas Island',
     'CRL': 'Caroline Islands',
+    'NWG': 'New Guinea region',
+    'BIS': 'Bismarck Islands',
   };
 
   /**

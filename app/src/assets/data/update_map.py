@@ -53,6 +53,7 @@ def calculate_unified_countries(region_species):
         'CHN': ['CHC', 'CHH', 'CHS', 'CHT'],  # China = Central + South Central + South + Tibet
         'MEX': ['MXC', 'MXE', 'MXG', 'MXI', 'MXN', 'MXS', 'MXT'],  # Mexico = Central + East + Gulf + Islands + North + South + Southeast
         'IDN': ['JAW', 'LSI', 'MOL', 'SUL', 'SUM'],  # Indonesia = Java + Lesser Sunda + Moluccas + Sulawesi + Sumatra
+        'PNG': ['NWG', 'BIS'],  # Papua New Guinea = New Guinea + Bismarck Archipelago
         # 'MLY': ['BOR']  # Malaysia already includes Borneo in areas.csv, no need to add
     }
     
