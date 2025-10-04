@@ -183,7 +183,7 @@ export class SpeciesMapComponent implements OnInit, AfterViewInit {
       popupContent += `Native region<br/>`;
     }
     
-    popupContent += `Species: ${this.speciesName}`;
+    // Remove species name from popup
     
     layer.bindPopup(popupContent);
   }

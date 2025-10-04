@@ -274,13 +274,11 @@ export class RegionCodesService {
 
     for (const code of codeList) {
       if (this.isSubdivision(code)) {
-        // Handle subdivision
+        // Handle subdivision - show each parent country separately
         const parentCountries = this.getParentCountries(code);
         const subdivisionName = this.getSubdivisionName(code);
         
-        if (parentCountries.length === 1) {
-          // Single parent country
-          const parentCode = parentCountries[0];
+        for (const parentCode of parentCountries) {
           const parentData = this.regionCodes[parentCode];
           if (parentData) {
             if (includeFlags && parentData.flag) {
@@ -292,23 +290,6 @@ export class RegionCodesService {
           } else {
             results.push(`${parentCode} (${subdivisionName})`);
           }
-        } else if (parentCountries.length > 1) {
-          // Multiple parent countries (like Borneo)
-          const parentNames: string[] = [];
-          for (const parentCode of parentCountries) {
-            const parentData = this.regionCodes[parentCode];
-            if (parentData) {
-              if (includeFlags && parentData.flag) {
-                const flagImg = `<img src="${parentData.flag}" class="flag-img" alt="${parentData.name} flag">`;
-                parentNames.push(`${flagImg} ${parentData.name}`);
-              } else {
-                parentNames.push(parentData.name);
-              }
-            } else {
-              parentNames.push(parentCode);
-            }
-          }
-          results.push(`${parentNames.join(' and ')} (${subdivisionName})`);
         }
       } else {
         // Handle regular region code
