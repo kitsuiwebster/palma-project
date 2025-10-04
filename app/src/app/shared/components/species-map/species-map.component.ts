@@ -59,7 +59,7 @@ export class SpeciesMapComponent implements OnInit, AfterViewInit {
     this.map = L.map(this.mapElementId, {
       center: [0, 0],
       zoom: 2,
-      minZoom: 1,
+      minZoom: 1.5,          // Prevent excessive zoom out
       maxZoom: 5,
       maxBounds: maxBounds,
       maxBoundsViscosity: 1.0,
@@ -131,14 +131,17 @@ export class SpeciesMapComponent implements OnInit, AfterViewInit {
       });
       baseLayer.addTo(this.map);
 
-      // Add species-specific regions (green)
+      // Add species-specific regions (modern green style)
       const speciesLayer = L.geoJSON({ type: 'FeatureCollection', features: speciesFeatures } as any, {
         style: {
-          fillColor: '#28a745',  // Green for native regions
-          weight: 2,
-          opacity: 1,
-          color: '#155724',      // Dark green border
-          fillOpacity: 0.7,
+          fillColor: '#22c55e',  // Modern bright green
+          weight: 1.5,           // Thinner, cleaner borders  
+          opacity: 0.8,          // Slightly transparent border
+          color: '#16a34a',      // Subtle green border
+          fillOpacity: 0.6,      // More transparent fill for elegance
+          dashArray: '',         // Solid line (no dashes)
+          lineCap: 'round',      // Rounded line caps
+          lineJoin: 'round'      // Rounded line joins
         },
         onEachFeature: (feature, layer) => {
           this.addPopupToFeature(feature, layer, regionCodes);

@@ -82,7 +82,7 @@
         <div class="custom-tabs">
           <div class="tabs-header">
             <button class="tab-button" [class.active]="activeTab === 0" (click)="setActiveTab(0)">Characteristics</button>
-            <button class="tab-button" [class.active]="activeTab === 1" (click)="setActiveTab(1)">Distribution</button>
+            <button class="tab-button" [class.active]="activeTab === 1" (click)="setActiveTab(1)">Native Range</button>
             <button class="tab-button" [class.active]="activeTab === 2" (click)="setActiveTab(2)">Gallery</button>
           </div>
   
@@ -128,9 +128,9 @@
               </div>
             </div>
   
-            <!-- Distribution Tab -->
+            <!-- Native Range Tab -->
             <div *ngIf="activeTab === 1" class="tab-panel">
-              <p>Information about the native regions and distribution of {{getSpeciesName(palm)}}:</p>
+              <p>Native habitat and geographic range of {{getSpeciesName(palm)}}:</p>
               
               <!-- Species-specific map -->
               <app-species-map 
