@@ -208,7 +208,7 @@ export class PalmDetailComponent implements OnInit {
     const nativeRegion = this.getNativeRegion();
     if (nativeRegion && nativeRegion !== 'Unknown region') {
       // For detail page, show all regions (no limit) as there's more space
-      this.nativeRegionDisplay = await this.regionCodesService.convertCodesToDisplay(nativeRegion, true);
+      this.nativeRegionDisplay = await this.regionCodesService.convertSubdivisionCodesToDisplay(nativeRegion, true);
     } else {
       this.nativeRegionDisplay = nativeRegion;
     }

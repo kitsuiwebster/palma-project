@@ -17,6 +17,15 @@ export class RegionCodesService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Clear cache and reload region codes (for testing)
+   */
+  clearCache(): void {
+    this.isLoaded = false;
+    this.loadPromise = null;
+    this.regionCodes = {};
+  }
+
   private loadRegionCodes(): Promise<void> {
     if (this.isLoaded) {
       return Promise.resolve();
