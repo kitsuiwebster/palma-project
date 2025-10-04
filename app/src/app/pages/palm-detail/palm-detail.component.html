@@ -236,17 +236,54 @@
             </div>
   
             <!-- Native Range Tab -->
-            <div *ngIf="activeTab === 1" class="tab-panel">
-              <p>Native habitat and geographic range of {{getSpeciesName(palm)}}:</p>
+            <div *ngIf="activeTab === 1" class="tab-panel native-range-tab">
+              <!-- Header Section -->
+              <div class="native-range-header">
+                <div class="header-icon">
+                  <img src="assets/icons/location.png" alt="Location" class="location-icon">
+                </div>
+                <div class="header-content">
+                  <h2>Native Regions</h2>
+                  <p class="description">Explore the natural habitat and native regions where <em>{{getSpeciesName(palm)}}</em> thrives in the wild.</p>
+                </div>
+              </div>
+
+              <!-- Map Container -->
+              <div class="map-container-wrapper">
+                <div class="map-header">
+                  <h3>Interactive Distribution Map</h3>
+                  <span class="map-subtitle">Native regions highlighted in green</span>
+                </div>
+                <app-species-map 
+                  [nativeRegions]="getNativeRegion()"
+                  [speciesName]="getSpeciesName(palm)">
+                </app-species-map>
+              </div>
               
-              <!-- Species-specific map -->
-              <app-species-map 
-                [nativeRegions]="getNativeRegion()"
-                [speciesName]="getSpeciesName(palm)">
-              </app-species-map>
-              
-              <!-- Region flags and details -->
-              <div class="region-flags" [innerHTML]="nativeRegionDisplay || 'Loading...'"></div>
+              <!-- Regional Details -->
+              <div class="regional-details">
+                <div class="details-header">
+                  <div class="details-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
+                      <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <h3>Native Regions</h3>
+                </div>
+                <div class="regions-content">
+                  <div class="regions-list" [innerHTML]="nativeRegionDisplay || 'Loading region information...'"></div>
+                  <div class="conservation-note">
+                    <div class="note-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </div>
+                    <p>Understanding native distribution is crucial for conservation efforts and sustainable cultivation practices.</p>
+                  </div>
+                </div>
+              </div>
             </div>
   
             <!-- Gallery Tab -->
