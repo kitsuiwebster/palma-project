@@ -42,18 +42,22 @@
     <div class="card-divider"></div>
 
     <div class="common-names">
-      <div *ngIf="palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name'" class="common-name-item">
-        <img src="https://flagcdn.com/w20/gb.png" alt="EN" class="common-name-flag">
+      <div *ngIf="palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name'" class="info-item">
+        <span class="icon-wrapper">
+          <img src="https://flagcdn.com/w20/gb.png" alt="English" class="flag-icon">
+        </span>
         <span>{{ palm.CommonNamesEN | formatCommonNames }}</span>
       </div>
-      <div *ngIf="(palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name') && (palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun')" class="language-divider"></div>
-      <div *ngIf="palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun'" class="common-name-item">
-        <img src="https://flagcdn.com/w20/fr.png" alt="FR" class="common-name-flag">
+      <div *ngIf="palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun'" class="info-item">
+        <span class="icon-wrapper">
+          <img src="https://flagcdn.com/w20/fr.png" alt="French" class="flag-icon">
+        </span>
         <span>{{ palm.CommonNamesFR | formatCommonNames }}</span>
       </div>
-      <div *ngIf="((palm.CommonNamesEN && palm.CommonNamesEN !== 'No Common Name') || (palm.CommonNamesFR && palm.CommonNamesFR !== 'Pas de nom commun')) && (palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común')" class="language-divider"></div>
-      <div *ngIf="palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común'" class="common-name-item">
-        <img src="https://flagcdn.com/w20/es.png" alt="ES" class="common-name-flag">
+      <div *ngIf="palm.CommonNamesSP && palm.CommonNamesSP !== 'Sin nombre común'" class="info-item">
+        <span class="icon-wrapper">
+          <img src="https://flagcdn.com/w20/es.png" alt="Spanish" class="flag-icon">
+        </span>
         <span>{{ palm.CommonNamesSP | formatCommonNames }}</span>
       </div>
     </div>

@@ -165,17 +165,38 @@
 }
 
 .common-names {
-  padding: 0 16px 0;
-  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
   
-  .common-name-item {
+  .info-item {
     display: flex;
     align-items: center;
-    margin-bottom: 0;
-    font-size: 0.95rem;
-    color: $text-dark;
-
-    // common-name-flag styles moved to global styles.scss
+    font-size: 0.9rem;
+    color: $text-secondary;
+    
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
+      flex-shrink: 0;
+      margin-right: 12px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba($primary-color, 0.1), rgba($primary-light, 0.3));
+      
+      .flag-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        object-fit: cover;
+        opacity: 0.8;
+      }
+    }
   }
 }
 
