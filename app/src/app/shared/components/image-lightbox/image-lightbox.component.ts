@@ -50,27 +50,39 @@ export class ImageLightboxComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   previousImage() {
-    if (this.canNavigatePrevious) {
+    if (this.canNavigatePrevious && !this.imageLoading) {
       this.imageLoading = true;
       const newIndex = this.currentIndex - 1;
       this.indexChange.emit(newIndex);
-      // Reload photo credit for new image
-      setTimeout(() => this.loadPhotoCredit(), 100);
+      // Reload photo credit for new image with debounce
+      setTimeout(() => {
+        if (!this.imageLoading) { // Only load if image has finished loading
+          this.loadPhotoCredit();
+        }
+      }, 200);
     }
   }
 
   nextImage() {
-    if (this.canNavigateNext) {
+    if (this.canNavigateNext && !this.imageLoading) {
       this.imageLoading = true;
       const newIndex = this.currentIndex + 1;
       this.indexChange.emit(newIndex);
-      // Reload photo credit for new image
-      setTimeout(() => this.loadPhotoCredit(), 100);
+      // Reload photo credit for new image with debounce
+      setTimeout(() => {
+        if (!this.imageLoading) { // Only load if image has finished loading
+          this.loadPhotoCredit();
+        }
+      }, 200);
     }
   }
 
   onImageLoad() {
     this.imageLoading = false;
+    // Load photo credits once image is loaded
+    if (this.isVisible) {
+      this.loadPhotoCredit();
+    }
   }
 
   onImageError() {
@@ -79,6 +91,8 @@ export class ImageLightboxComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   loadPhotoCredit() {
+    if (this.isLoading) return; // Prevent multiple simultaneous requests
+    
     this.isLoading = true;
     this.photoCreditsService.getPhotoCredits().subscribe({
       next: (credits) => {
@@ -108,11 +122,12 @@ export class ImageLightboxComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   downloadImage() {
-    if (!this.imageUrl) return;
+    const imageUrl = this.currentImageUrl || this.imageUrl;
+    if (!imageUrl) return;
     
     // Create a temporary link to download the image
     const link = document.createElement('a');
-    link.href = this.imageUrl;
+    link.href = imageUrl;
     link.download = `${this.speciesName.replace(/\s+/g, '_')}_photo.jpg`;
     link.target = '_blank';
     document.body.appendChild(link);

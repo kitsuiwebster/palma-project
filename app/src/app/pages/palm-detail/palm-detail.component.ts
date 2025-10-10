@@ -128,11 +128,13 @@ export class PalmDetailComponent implements OnInit {
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
         if (fragment.startsWith('gallery/image-')) {
-          // Handle image fragment
-          this.activeTab = 2; // Gallery tab
-          const imageIndex = parseInt(fragment.replace('gallery/image-', '')) - 1;
-          if (imageIndex >= 0 && this.palm) {
-            setTimeout(() => this.openImageByIndex(imageIndex), 100);
+          // Handle image fragment only if lightbox is not already open
+          if (!this.showLightbox) {
+            this.activeTab = 2; // Gallery tab
+            const imageIndex = parseInt(fragment.replace('gallery/image-', '')) - 1;
+            if (imageIndex >= 0 && this.palm) {
+              setTimeout(() => this.openImageByIndex(imageIndex), 100);
+            }
           }
         } else {
           // Handle tab fragment
@@ -140,6 +142,15 @@ export class PalmDetailComponent implements OnInit {
           if (tabIndex !== -1) {
             this.activeTab = tabIndex;
           }
+        }
+      } else {
+        // Fragment is null/empty - ensure lightbox is closed
+        if (this.showLightbox) {
+          this.showLightbox = false;
+          this.currentImageUrl = '';
+          this.currentSpeciesName = '';
+          this.currentImageIndex = 0;
+          document.body.style.overflow = 'auto';
         }
       }
     });
@@ -270,6 +281,9 @@ export class PalmDetailComponent implements OnInit {
 
   // Lightbox methods
   openLightbox(imageUrl: string, speciesName: string) {
+    // Prevent opening if already open
+    if (this.showLightbox) return;
+    
     this.currentImageUrl = imageUrl;
     this.currentSpeciesName = speciesName;
     
@@ -320,8 +334,19 @@ export class PalmDetailComponent implements OnInit {
     this.showLightbox = false;
     this.currentImageUrl = '';
     this.currentSpeciesName = '';
-    // Return to gallery tab fragment
-    this.router.navigate([], { fragment: 'gallery', replaceUrl: true });
+    this.currentImageIndex = 0;
+    
+    // Clear the fragment completely to avoid reopening
+    this.router.navigate([], { fragment: undefined, replaceUrl: true }).then(() => {
+      // Small delay to ensure navigation is complete
+      setTimeout(() => {
+        // Only set gallery fragment if we're still on the gallery tab
+        if (this.activeTab === 2) {
+          this.router.navigate([], { fragment: 'gallery', replaceUrl: true });
+        }
+      }, 50);
+    });
+    
     // Restore body scroll
     document.body.style.overflow = 'auto';
   }
