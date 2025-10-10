@@ -16,38 +16,19 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getAllPalms(): Observable<PalmTrait[]> {
-    console.log('getAllPalms called');
     // Si les données sont déjà en cache, retourner le cache
     if (this.cachedPalms) {
-      console.log('Returning cached data:', this.cachedPalms.length, 'palms');
       return of(this.cachedPalms);
     }
 
     // Sinon, charger depuis le fichier texte local
-    console.log('Loading data from text file:', this.dataFilePath);
     return this.http.get(this.dataFilePath, { responseType: 'text' }).pipe(
-      tap((textData) =>
-        console.log(
-          'Raw data received, length:',
-          textData.length,
-          'Preview:',
-          textData.substring(0, 100)
-        )
-      ),
       map((textData) => this.parseTextData(textData)),
-      tap((parsedData) =>
-        console.log('Data parsed:', parsedData.length, 'items')
-      ),
       map((palms) => palms.map((palm) => this.processPalmData(palm))),
       tap((processedPalms) => {
-        console.log('Data processed:', processedPalms.length, 'palms');
         this.cachedPalms = processedPalms;
       }),
       catchError((error) => {
-        console.error('ERROR LOADING DATA:', error);
-        if (error.status) {
-          console.error('HTTP status:', error.status, error.statusText);
-        }
         return of([]);
       })
     );
@@ -55,10 +36,7 @@ export class DataService {
 
   // Fonction pour rechercher des palmiers par terme
 searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
-  console.log('Searching palms with term:', term);
-  
   return this.getAllPalms().pipe(
-    tap(all => console.log(`Searching through ${all.length} total palms`)),
     map((palms) => {
       const searchTerm = term.toLowerCase().trim();
       
@@ -195,11 +173,6 @@ searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
         .sort((a, b) => b.score - a.score) // Tri par score décroissant
         .map(item => item.palm);
       
-      console.log(`Found ${results.length} results for "${term}"`);
-      if (results.length > 0) {
-        console.log('First few results:', results.slice(0, 3).map(p => p.genus + ' ' + p.species));
-      }
-      
       // Limiter le nombre de résultats si demandé
       if (limit && results.length > limit) {
         results = results.slice(0, limit);
@@ -267,7 +240,6 @@ searchPalms(term: string, limit: number | null = 30): Observable<PalmTrait[]> {
 
   // Dans DataService
 getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> {
-  console.log(`Getting palms for page ${page} with size ${pageSize}`);
   return this.getAllPalms().pipe(
     map((palms) => {
       // Assurer que pageSize est au moins 20
@@ -285,43 +257,30 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
 
   // Parse le fichier texte en objets
   private parseTextData(textData: string): any[] {
-    console.log('parseTextData started');
-
     // Diviser par lignes
     const lines = textData.split('\n');
-    console.log('Number of lines:', lines.length);
 
     if (lines.length === 0) {
-      console.error('No lines found in text data');
       return [];
     }
 
     // La première ligne contient les en-têtes
     const firstLine = lines[0];
-    console.log('First line:', firstLine);
 
     // Déterminer le délimiteur utilisé
     const delimiter = firstLine.includes('\t') ? '\t' : ' ';
-    console.log('Detected delimiter:', delimiter === '\t' ? 'TAB' : 'SPACE');
 
     const headers = firstLine.split(delimiter).map((header) => header.trim());
-    console.log('Headers:', headers);
 
     const result: any[] = [];
 
     for (let i = 1; i < lines.length; i++) {
-      if (i === 1 || i === 2) {
-        console.log(`Line ${i}:`, lines[i]);
-      }
 
       // Ignorer les lignes vides
       if (!lines[i].trim()) continue;
 
       const currentLine = lines[i].split(delimiter);
 
-      if (i === 1) {
-        console.log('First data line split:', currentLine);
-      }
 
       // Créer l'objet pour cette ligne
       const obj: any = {};
@@ -345,7 +304,6 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
       result.push(obj);
     }
 
-    console.log('Parsing complete, items:', result.length);
     return result;
   }
 

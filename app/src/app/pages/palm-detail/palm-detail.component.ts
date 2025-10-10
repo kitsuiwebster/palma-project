@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Observable, of, switchMap, catchError } from 'rxjs';
+import { Observable, of, switchMap, catchError, map } from 'rxjs';
 import { DataService } from '../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -34,6 +34,7 @@ export class PalmDetailComponent implements OnInit {
   notFound = false;
   activeTab = 0;
   private tabFragments = ['characteristics', 'native-range', 'gallery'];
+  private previousSpeciesSlug: string | null = null;
 
   // Lightbox properties
   showLightbox = false;
@@ -55,6 +56,28 @@ export class PalmDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Disable browser scroll restoration immediately
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Clear any unwanted fragments from URL that cause auto-scroll
+    const currentUrl = this.router.url;
+    if (currentUrl.includes('#characteristics') || currentUrl.includes('#gallery') || currentUrl.includes('#native-range')) {
+      // Clear URL fragment first
+      this.router.navigate([], { fragment: undefined, replaceUrl: true });
+    }
+    
+    // Force scroll to top with comprehensive approach
+    const mainContent = document.querySelector('.main-content');
+    const appContainer = document.querySelector('.app-container');
+    
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    if (mainContent) (mainContent as HTMLElement).scrollTop = 0;
+    if (appContainer) (appContainer as HTMLElement).scrollTop = 0;
+    
     // Load references.txt
     this.http.get('/assets/data/references.txt', { responseType: 'text' }).subscribe(data => {
       const lines = data.split('\n').slice(1); // skip header
@@ -70,20 +93,22 @@ export class PalmDetailComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params) => {
         const speciesSlug = params.get('species') || '';
+        const isNewSpecies = this.previousSpeciesSlug !== speciesSlug;
+        this.previousSpeciesSlug = speciesSlug;
+        
         this.loading = true;
         this.error = false;
         this.notFound = false;
         
         return this.dataService.getPalmBySlug(speciesSlug).pipe(
           catchError((error) => {
-            console.error('Error fetching palm details:', error);
             this.loading = false;
             this.error = true;
             return of(null);
           })
-        );
+        ).pipe(map(palm => ({ palm, isNewSpecies })));
       }),
-    ).subscribe((palm) => {
+    ).subscribe(({ palm, isNewSpecies }) => {
       this.loading = false;
       this.palm = palm;
       this.updateFlagsForPalm();
@@ -110,10 +135,6 @@ export class PalmDetailComponent implements OnInit {
         content: `Learn about ${speciesName}, a palm species from the ${genus} genus native to ${distribution}.`,
       });
       
-      // Scroll to top when new species loads
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
     });
   }
   setActiveTab(index: number): void {
@@ -261,6 +282,26 @@ export class PalmDetailComponent implements OnInit {
     if (this.palm) {
       this.loadNativeRegionDisplay();
     }
+  }
+
+  private shouldScrollToTop(): boolean {
+    // Check if we have a referrer and if it's from the same site
+    const referrer = document.referrer;
+    const currentOrigin = window.location.origin;
+    
+    // Don't scroll if coming from the same site (e.g., search results)
+    if (referrer && referrer.startsWith(currentOrigin)) {
+      // Don't scroll if coming from search, quiz, or other internal pages
+      const referrerPath = referrer.replace(currentOrigin, '');
+      if (referrerPath.includes('/search') || 
+          referrerPath.includes('/quiz') || 
+          referrerPath.includes('/palms/')) {
+        return false;
+      }
+    }
+    
+    // Scroll to top for external links or direct access
+    return true;
   }
 
   // Modify ngOnInit subscription to call updateFlagsForPalm

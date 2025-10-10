@@ -75,9 +75,9 @@ export class RegionCodesService {
           results.push(regionData.name);
         }
       } else {
-        // Fallback: display the code itself if not found
+        // Fallback: display a user-friendly message instead of the raw code
         console.warn(`Unknown region code: ${code}`);
-        results.push(code);
+        results.push(`Unknown region (${code})`);
       }
     }
 
@@ -115,9 +115,9 @@ export class RegionCodesService {
           results.push(`<div class="region-item">${regionData.name}</div>`);
         }
       } else {
-        // Fallback: display the code itself if not found
+        // Fallback: display a user-friendly message instead of the raw code
         console.warn(`Unknown region code: ${code}`);
-        results.push(`<div class="region-item">${code}</div>`);
+        results.push(`<div class="region-item">Unknown region (${code})</div>`);
       }
     }
 
@@ -150,7 +150,7 @@ export class RegionCodesService {
   async getRegionName(code: string): Promise<string> {
     await this.loadRegionCodes();
     const regionData = this.regionCodes[code];
-    return regionData ? regionData.name : code;
+    return regionData ? regionData.name : `Unknown region (${code})`;
   }
 
   /**
@@ -340,7 +340,8 @@ export class RegionCodesService {
           }
         } else {
           console.warn(`Unknown region code: ${code}`);
-          results.push(code);
+          // Instead of showing the raw code, show a more user-friendly message
+          results.push(`Unknown region (${code})`);
         }
       }
     }
@@ -404,7 +405,7 @@ export class RegionCodesService {
           }
         } else {
           console.warn(`Unknown region code: ${code}`);
-          results.push(`<div class="region-item">${code}</div>`);
+          results.push(`<div class="region-item">Unknown region (${code})</div>`);
         }
         processedCount++;
       }

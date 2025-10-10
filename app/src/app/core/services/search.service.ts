@@ -16,7 +16,6 @@ export class SearchService {
   
   // Méthode pour mettre à jour les résultats de recherche
   updateSearchResults(results: PalmTrait[] | null): void {
-    console.log("SearchService: updateSearchResults called with", results ? results.length : 0, "results");
     this.searchResultsSource.next(results);
   }
   

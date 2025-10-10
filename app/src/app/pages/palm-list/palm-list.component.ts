@@ -86,7 +86,6 @@ export class PalmListComponent implements OnInit, OnDestroy {
   points in the component's lifecycle. For example, `ngOnInit` is called after Angular has
   initialized all data-bound properties of a directive. */
   ngOnInit(): void {
-    console.log("PalmListComponent initialized");
     
     // Check if this is a direct navigation to /palms (no search context)
     this.route.queryParams.subscribe(params => {
@@ -95,14 +94,12 @@ export class PalmListComponent implements OnInit, OnDestroy {
       
       // If no search-related query parameters and we're on the main /palms route, clear any existing search results
       if (!hasSearchParams && currentUrl === '') { // Empty string means we're at the root of this route (/palms)
-        console.log("Direct navigation to /palms detected - clearing search results");
         this.searchService.clearSearchResults();
       }
     });
     
     // S'abonner aux changements de résultats de recherche
     this.searchSubscription = this.searchService.searchResults$.subscribe(results => {
-      console.log("PalmListComponent: received search results", results ? results.length : 0);
       if (results) {
         this.filteredPalms = results;
         this.filteredPalmsByGenus$ = of(this.groupPalmsByGenus(results)); // 👈 ici
@@ -141,7 +138,6 @@ export class PalmListComponent implements OnInit, OnDestroy {
   loadTotalCount(): void {
     this.dataService.getTotalPalmsCount().subscribe({
       next: (count) => {
-        console.log("Total palm count:", count);
         this.totalItems = count;
       },
       error: (err) => console.error("Error getting total count:", err)
@@ -149,13 +145,11 @@ export class PalmListComponent implements OnInit, OnDestroy {
   }
 
   loadCurrentPage(): void {
-    console.log(`Loading page ${this.currentPage}, size ${this.pageSize}`);
     this.loading = true;
     this.error = false;
     
     this.dataService.getPaginatedPalms(this.currentPage, this.pageSize).subscribe({
       next: (palms) => {
-        console.log(`Page loaded with ${palms.length} palms of ${this.pageSize} requested`);
         this.palms = palms;
         this.loading = false;
       },
@@ -192,9 +186,6 @@ export class PalmListComponent implements OnInit, OnDestroy {
 
   loadGenera(): void {
     this.palmsByGenus$ = this.dataService.getPalmsByGenus().pipe(
-      tap(genera => {
-        console.log("Genera loaded:", Object.keys(genera).length);
-      }),
       catchError(error => {
         console.error("Error loading genera:", error);
         return of({});
@@ -203,10 +194,8 @@ export class PalmListComponent implements OnInit, OnDestroy {
   }
 
   onPageChange(event: any): void {
-    console.log("Page event received:", event);
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    console.log(`Changing to page ${this.currentPage}, size ${this.pageSize}`);
     this.updateDisplayedPalms(); // Utiliser la nouvelle méthode
     if (this.listTop) {
       this.listTop.nativeElement.scrollIntoView({ behavior: 'smooth' });
@@ -231,7 +220,6 @@ export class PalmListComponent implements OnInit, OnDestroy {
   changePageSize(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const newPageSize = Number(selectElement.value);
-    console.log('Changing page size to:', newPageSize);
     
     this.pageSize = newPageSize;
     this.currentPage = 0; // Retour à la première page

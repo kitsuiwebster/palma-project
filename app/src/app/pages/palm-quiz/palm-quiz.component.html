@@ -1,0 +1,263 @@
+<!-- Palm Quiz Component -->
+<div class="quiz-container">
+  <!-- Quiz Configuration (Initial State) -->
+  <div *ngIf="!quizStarted && !quizCompleted" class="quiz-setup">
+    <div class="header">
+      <h1>🌴 Palm Knowledge Quiz</h1>
+      <p class="subtitle">Test your expertise on palm species from around the world</p>
+    </div>
+
+
+    <!-- Quiz Configuration Form -->
+    <div class="config-section">
+      <h3>Quiz Settings</h3>
+      
+      <!-- Number of Questions -->
+      <div class="config-group">
+        <label for="num-questions">Number of Questions</label>
+        <select id="num-questions" [(ngModel)]="quizConfig.numberOfQuestions" class="form-select">
+          <option value="5">5 Questions (Quick)</option>
+          <option value="10">10 Questions (Standard)</option>
+          <option value="15">15 Questions (Extended)</option>
+          <option value="20">20 Questions (Comprehensive)</option>
+        </select>
+      </div>
+
+
+      <!-- Categories -->
+      <div class="config-group">
+        <label>Quiz Categories <small>(Select specific topics or leave empty for all)</small></label>
+        <div class="categories-grid">
+          <div *ngFor="let category of categories" 
+               class="category-option"
+               [class.selected]="isCategorySelected(category.value)"
+               (click)="onCategoryChange(category.value, !isCategorySelected(category.value))">
+            <span class="category-icon">{{ category.icon }}</span>
+            <span class="category-label">{{ category.label }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Options -->
+      <div class="config-group">
+        <div class="checkbox-group">
+          <label class="checkbox-option">
+            <input type="checkbox" [(ngModel)]="quizConfig.includeImages">
+            <span class="checkmark"></span>
+            Include image identification questions
+          </label>
+        </div>
+        
+        <div class="time-limit-group">
+          <label class="checkbox-option">
+            <input type="checkbox" [ngModel]="quizConfig.timeLimit !== undefined" 
+                   (ngModelChange)="quizConfig.timeLimit = $event ? 30 : undefined">
+            <span class="checkmark"></span>
+            Time limit per question
+          </label>
+          <select *ngIf="quizConfig.timeLimit !== undefined" 
+                  [(ngModel)]="quizConfig.timeLimit" 
+                  class="form-select time-select">
+            <option value="15">15 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="60">1 minute</option>
+            <option value="120">2 minutes</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Start Quiz Button -->
+      <button class="start-quiz-btn" 
+              (click)="generateQuiz()" 
+              [disabled]="isLoading"
+              [class.loading]="isLoading">
+        <span *ngIf="!isLoading">Start Quiz</span>
+        <span *ngIf="isLoading">Generating Questions...</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz in Progress -->
+  <div *ngIf="quizStarted && currentSession && !quizCompleted" class="quiz-active">
+    <!-- Progress Bar -->
+    <div class="quiz-progress">
+      <div class="progress-info">
+        <span class="question-counter">
+          Question {{ currentQuestionIndex + 1 }} of {{ currentSession.questions.length }}
+        </span>
+        <span *ngIf="quizConfig.timeLimit && !isAnswered" class="time-remaining">
+          ⏱️ {{ timeRemaining }}s
+        </span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="getProgressPercentage()"></div>
+      </div>
+    </div>
+
+    <!-- Current Question -->
+    <div *ngIf="getCurrentQuestion() as question" class="question-container">
+      <!-- Question Header -->
+      <div class="question-header">
+        <div class="question-meta">
+          <span class="category-badge">
+            {{ getCategoryIcon(question.category) }} {{ question.category | titlecase }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Question Image (if applicable) -->
+      <div *ngIf="question.imageUrl" class="question-image">
+        <img [src]="question.imageUrl" [alt]="'Palm species image'" class="quiz-image">
+      </div>
+
+      <!-- Question Text -->
+      <div class="question-text">
+        <h2>{{ question.question }}</h2>
+      </div>
+
+      <!-- Answer Options -->
+      <div class="answer-options">
+        <div *ngFor="let option of question.options" 
+             class="answer-option"
+             [class.selected]="selectedAnswer === option"
+             [class.correct]="isAnswered && option === question.correctAnswer"
+             [class.incorrect]="isAnswered && selectedAnswer === option && option !== question.correctAnswer"
+             [class.disabled]="isAnswered"
+             (click)="selectAnswer(option)">
+          <span class="option-text">{{ option }}</span>
+          <span *ngIf="isAnswered && option === question.correctAnswer" class="result-icon correct">✓</span>
+          <span *ngIf="isAnswered && selectedAnswer === option && option !== question.correctAnswer" class="result-icon incorrect">✗</span>
+        </div>
+      </div>
+
+      <!-- Explanation -->
+      <div *ngIf="showExplanation && question.explanation" class="explanation">
+        <div class="explanation-content">
+          <h4>Explanation</h4>
+          <p>{{ question.explanation }}</p>
+          <div *ngIf="question.relatedSpecies" class="related-species">
+            <button class="species-link" (click)="goToSpeciesDetail(question.relatedSpecies)">
+              Learn more about {{ question.relatedSpecies }} →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="question-actions">
+        <div *ngIf="isAnswered" class="primary-actions">
+          <button class="next-btn" (click)="nextQuestion()">
+            <span *ngIf="currentQuestionIndex < currentSession.questions.length - 1">Next Question</span>
+            <span *ngIf="currentQuestionIndex === currentSession.questions.length - 1">Complete Quiz</span>
+          </button>
+        </div>
+        <div class="secondary-actions">
+          <button class="quit-btn" (click)="quitQuiz()">
+            Quit Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Completed -->
+  <div *ngIf="quizCompleted && currentSession" class="quiz-results">
+    <div class="results-header">
+      <h1>🎉 Quiz Completed!</h1>
+      <div class="final-score" [class]="getScoreColor(currentSession.score)">
+        <span class="score-number">{{ currentSession.score }}%</span>
+        <span class="score-label">Final Score</span>
+      </div>
+    </div>
+
+    <!-- Detailed Results -->
+    <div class="results-details">
+      <div class="result-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{ getCorrectAnswersCount() }}</span>
+          <span class="stat-label">Correct</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">{{ getIncorrectAnswersCount() }}</span>
+          <span class="stat-label">Incorrect</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">{{ formatTime((currentSession.endTime!.getTime() - currentSession.startTime.getTime())) }}</span>
+          <span class="stat-label">Total Time</span>
+        </div>
+        <div class="stat-item" *ngIf="currentSession.category">
+          <span class="stat-number">{{ getCategoryIcon(currentSession.category) }}</span>
+          <span class="stat-label">{{ currentSession.category | titlecase }}</span>
+        </div>
+      </div>
+
+      <!-- Performance Message -->
+      <div class="performance-message">
+        <div *ngIf="currentSession.score >= 90" class="message excellent">
+          <h3>🌟 Excellent!</h3>
+          <p>You're a true palm expert! Your knowledge of palm species is outstanding.</p>
+        </div>
+        <div *ngIf="currentSession.score >= 70 && currentSession.score < 90" class="message good">
+          <h3>👏 Well Done!</h3>
+          <p>Great job! You have a solid understanding of palm species and their characteristics.</p>
+        </div>
+        <div *ngIf="currentSession.score >= 50 && currentSession.score < 70" class="message average">
+          <h3>👍 Good Effort!</h3>
+          <p>Not bad! Keep exploring and learning more about the fascinating world of palms.</p>
+        </div>
+        <div *ngIf="currentSession.score < 50" class="message needs-improvement">
+          <h3>🌱 Keep Learning!</h3>
+          <p>There's always more to discover about palms. Try browsing the species database to learn more!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="results-actions">
+      <button class="action-btn primary" (click)="retryQuiz()">
+        Take Another Quiz
+      </button>
+      <button class="action-btn secondary" (click)="shareResults()">
+        Share Results
+      </button>
+      <button class="action-btn secondary" (click)="router.navigate(['/palms/search'])">
+        Explore Palms
+      </button>
+    </div>
+
+    <!-- Question Review -->
+    <div class="question-review">
+      <h3>Question Review</h3>
+      <div class="review-list">
+        <div *ngFor="let answer of currentSession.answers; let i = index" 
+             class="review-item"
+             [class.correct]="answer.isCorrect"
+             [class.incorrect]="!answer.isCorrect">
+          <div class="review-header">
+            <span class="question-number">Q{{ i + 1 }}</span>
+            <span class="review-result" [class.correct]="answer.isCorrect" [class.incorrect]="!answer.isCorrect">
+              {{ answer.isCorrect ? '✓' : '✗' }}
+            </span>
+          </div>
+          <div class="review-content">
+            <p class="question-text">{{ currentSession.questions[i].question }}</p>
+            <div class="answer-comparison">
+              <div *ngIf="!answer.isCorrect" class="your-answer incorrect">
+                Your answer: {{ answer.selectedAnswer || 'No answer' }}
+              </div>
+              <div class="correct-answer">
+                Correct answer: {{ currentSession.questions[i].correctAnswer }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="loading-spinner"></div>
+    <p>Preparing your palm quiz...</p>
+  </div>
+</div>

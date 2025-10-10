@@ -49,7 +49,6 @@ export class PaginatorComponent implements OnChanges, OnInit {
     // Si pageSize change depuis le composant parent, mettre à jour internalPageSize
     else if (changes['pageSize'] && !changes['pageSize'].firstChange) {
       this.internalPageSize = changes['pageSize'].currentValue;
-      console.log('PageSize changed from parent:', this.internalPageSize);
     }
   }
 
@@ -101,7 +100,6 @@ export class PaginatorComponent implements OnChanges, OnInit {
   changePageSize(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const newPageSize = Number(selectElement.value);
-    console.log('Changing page size to:', newPageSize);
     
     // Mettre à jour les deux valeurs
     this.pageSize = newPageSize;
@@ -115,12 +113,6 @@ export class PaginatorComponent implements OnChanges, OnInit {
   }
 
   private emitPageEvent(): void {
-    console.log('Emitting page event:', {
-      pageIndex: this.pageIndex,
-      pageSize: this.pageSize,
-      length: this.length
-    });
-    
     this.page.emit({
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,

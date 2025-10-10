@@ -16,6 +16,9 @@
       <a class="nav-link" routerLink="/data" routerLinkActive="active">
         <span class="nav-text">Palms Data</span>
       </a>
+      <a class="nav-link" routerLink="/quiz" routerLinkActive="active">
+        <span class="nav-text">Quiz</span>
+      </a>
       <a class="nav-link" routerLink="/about" routerLinkActive="active">
         <span class="nav-text">About</span>
       </a>
@@ -63,6 +66,12 @@
           <img src="assets/icons/chart.png" alt="Palms Data icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">Palms Data</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/quiz" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/quiz.png" alt="Quiz icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Palm Quiz</span>
       </a>
       <a class="mobile-nav-link" routerLink="/about" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">

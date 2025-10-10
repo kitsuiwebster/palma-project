@@ -60,6 +60,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/privacy/privacy.component').then(c => c.PrivacyComponent)
   },
   {
+    path: 'quiz',
+    loadComponent: () => import('./pages/palm-quiz/palm-quiz.component').then(c => c.PalmQuizComponent)
+  },
+  {
     path: 'photos-credits',
     redirectTo: 'data/photo-credits'
   },

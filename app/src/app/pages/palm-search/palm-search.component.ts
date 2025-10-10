@@ -163,7 +163,6 @@ export class PalmSearchComponent implements OnInit {
     if (this.searchForm.value.query && this.searchForm.value.query.trim() !== '') {
       this.dataService.searchPalms(this.searchForm.value.query, null).pipe(
         tap(results => {
-          console.log('Text search results:', results.length);
           // Store the base search results
           this.currentSearchResults = results;
           // After getting text search results, apply other filters
@@ -171,7 +170,6 @@ export class PalmSearchComponent implements OnInit {
           this.totalResults = filteredResults.length;
           // Reset to first page for new search
           this.currentPage = 0;
-          console.log('After all filters applied:', this.totalResults);
           this.searchService.updateSearchResults(filteredResults);
           this.loading = false;
           // Update search results observable directly
@@ -188,7 +186,6 @@ export class PalmSearchComponent implements OnInit {
       this.totalResults = filteredResults.length;
       // Reset to first page for new search
       this.currentPage = 0;
-      console.log('Filter-only search results count:', this.totalResults);
       this.searchService.updateSearchResults(filteredResults);
       this.loading = false;
       // Update search results observable directly
@@ -198,6 +195,7 @@ export class PalmSearchComponent implements OnInit {
       );
     }
   }
+
 
   private filterPalms(palms: PalmTrait[], formValues: any): PalmTrait[] {
     const genus = formValues.genus || '';
@@ -214,31 +212,21 @@ export class PalmSearchComponent implements OnInit {
 
     let results = [...palms]; // Create a copy to avoid modifying the original
 
-    console.log('Starting filtering with', results.length, 'palms');
-    console.log('Filtering criteria:', formValues);
-
     // Don't filter by query text here - that's handled by the searchPalms service call
 
     if (genus) {
-      console.log('Filtering by genus:', genus);
       results = results.filter((palm: PalmTrait) => (palm.accGenus || palm.genus) === genus);
-      console.log('After genus filter:', results.length);
     }
 
     if (tribe) {
-      console.log('Filtering by tribe:', tribe);
       results = results.filter((palm: PalmTrait) => (palm.PalmTribe || palm.tribe) === tribe);
-      console.log('After tribe filter:', results.length);
     }
 
     if (subfamily) {
-      console.log('Filtering by subfamily:', subfamily);
       results = results.filter((palm: PalmTrait) => palm.PalmSubfamily === subfamily);
-      console.log('After subfamily filter:', results.length);
     }
 
     if (stemType) {
-      console.log('Filtering by stemType:', stemType);
       if (stemType === 'Climbing') {
         results = results.filter((palm: PalmTrait) => palm.Climbing === 1);
       } else if (stemType === 'Acaulescent') {
@@ -246,11 +234,9 @@ export class PalmSearchComponent implements OnInit {
       } else if (stemType === 'Erect') {
         results = results.filter((palm: PalmTrait) => palm.Erect === 1);
       }
-      console.log('After stemType filter:', results.length);
     }
 
     if (stemProperty) {
-      console.log('Filtering by stemProperty:', stemProperty);
       if (stemProperty === 'StemSolitary') {
         results = results.filter((palm: PalmTrait) => palm.StemSolitary === 1);
       } else if (stemProperty === 'StemArmed') {
@@ -258,56 +244,42 @@ export class PalmSearchComponent implements OnInit {
       } else if (stemProperty === 'LeavesArmed') {
         results = results.filter((palm: PalmTrait) => palm.LeavesArmed === 1);
       }
-      console.log('After stemProperty filter:', results.length);
     }
 
     if (understoreyCanopy) {
-      console.log('Filtering by understoreyCanopy:', understoreyCanopy);
       results = results.filter((palm: PalmTrait) => palm.UnderstoreyCanopy === understoreyCanopy);
-      console.log('After understoreyCanopy filter:', results.length);
     }
 
     if (fruitSize) {
-      console.log('Filtering by fruitSize:', fruitSize);
       results = results.filter((palm: PalmTrait) => palm.FruitSizeCategorical === fruitSize);
-      console.log('After fruitSize filter:', results.length);
     }
 
     if (conspicuousness) {
-      console.log('Filtering by conspicuousness:', conspicuousness);
       results = results.filter((palm: PalmTrait) => palm.Conspicuousness === conspicuousness);
-      console.log('After conspicuousness filter:', results.length);
     }
 
     if (nativeRegion) {
-      console.log('Filtering by nativeRegion:', nativeRegion);
       results = results.filter((palm: PalmTrait) => {
         const palmNativeRegion = palm.NativeRegion || '';
         // Check if the selected region code is present in the palm's native regions
         return new RegExp(`\\b${nativeRegion}\\b`).test(palmNativeRegion);
       });
-      console.log('After nativeRegion filter:', results.length);
     }
 
     if (heightMin !== null) {
-      console.log('Filtering by heightMin:', heightMin);
       results = results.filter((palm: PalmTrait) => {
         const height = palm.MaxStemHeight_m || palm.height_max_m || 0;
         return height !== null && height >= heightMin;
       });
-      console.log('After heightMin filter:', results.length);
     }
 
     if (heightMax !== null) {
-      console.log('Filtering by heightMax:', heightMax);
       results = results.filter((palm: PalmTrait) => {
         const height = palm.MaxStemHeight_m || palm.height_max_m || 0;
         return height !== null && height <= heightMax;
       });
-      console.log('After heightMax filter:', results.length);
     }
 
-    console.log('Final filtered results count:', results.length);
     return results;
   }
 
@@ -337,9 +309,6 @@ export class PalmSearchComponent implements OnInit {
     if (formValues.heightMin) queryParams.heightMin = formValues.heightMin;
     if (formValues.heightMax) queryParams.heightMax = formValues.heightMax;
 
-    // Log the query parameters for debugging
-    console.log('Search initiated with queryParams:', queryParams);
-
     // Reset to first page
     this.currentPage = 0;
     
@@ -349,6 +318,18 @@ export class PalmSearchComponent implements OnInit {
     // Mark search as done and execute search
     this.searchDone = true;
     this.executeSearch();
+    
+    // Scroll to results after a delay to ensure DOM is updated
+    setTimeout(() => {
+      const resultsElement = document.getElementById('search-results-anchor');
+      
+      if (resultsElement) {
+        resultsElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 1000);
   }
 
   clearFilters(): void {
@@ -498,7 +479,6 @@ export class PalmSearchComponent implements OnInit {
       this.allFruitSizes = this.filterOptionsCache.allFruitSizes;
       this.allConspicuousness = this.filterOptionsCache.allConspicuousness;
       this.allRegions = this.filterOptionsCache.allRegions;
-      console.log('Filter options loaded from cache');
     } else {
       // Extract all unique options from data
       this.allGenera = [...new Set(this.allPalms.map(palm => palm.accGenus || palm.genus).filter(Boolean) as string[])].sort();
@@ -521,15 +501,6 @@ export class PalmSearchComponent implements OnInit {
         allConspicuousness: this.allConspicuousness,
         allRegions: this.allRegions
       };
-      
-      console.log('All filter options initialized and cached:', {
-        genera: this.allGenera.length,
-        tribes: this.allPalmTribes.length,
-        subfamilies: this.allPalmSubfamilies.length,
-        habitats: this.allHabitats.length,
-        fruitSizes: this.allFruitSizes.length,
-        conspicuousness: this.allConspicuousness.length
-      });
     }
 
     // Initialize available options to all options (no filtering yet)
@@ -553,9 +524,6 @@ export class PalmSearchComponent implements OnInit {
       .map(code => ({ code, name: code })) // Temporary: use code as name
       .sort((a, b) => a.code.localeCompare(b.code));
     
-    console.log('initializeRegionsSync: Found', this.allRegions.length, 'regions');
-    console.log('First 5 regions:', this.allRegions.slice(0, 5));
-    
     // Load region names asynchronously
     this.loadRegionNames();
   }
@@ -570,11 +538,11 @@ export class PalmSearchComponent implements OnInit {
           const name = await this.regionCodesService.getRegionName(region.code);
           regions.push({ code: region.code, name });
         } else {
-          regions.push({ code: region.code, name: region.code });
+          regions.push({ code: region.code, name: `Unknown region (${region.code})` });
         }
       } catch (error) {
         console.warn(`Error loading name for region ${region.code}:`, error);
-        regions.push({ code: region.code, name: region.code });
+        regions.push({ code: region.code, name: `Unknown region (${region.code})` });
       }
     }
     
@@ -588,7 +556,6 @@ export class PalmSearchComponent implements OnInit {
     
     // Trigger change detection to update the UI
     this.cdr.detectChanges();
-    console.log('Regions loaded:', this.allRegions.length);
   }
 
   // Reset all available options to full lists (no filtering)
