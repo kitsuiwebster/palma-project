@@ -1,7 +1,25 @@
 .overview-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0; /* PAS DE PADDING HORIZONTAL POUR PERMETTRE LE DÉBORDEMENT !!! */
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  // Conteneur interne pour le contenu normal
+  .content-wrapper {
+    padding: 0 20px;
+    
+    @media (max-width: 768px) {
+      padding: 0 8px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0 6px;
+    }
+  }
 }
 
 /* Hero Section */
@@ -58,9 +76,22 @@
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  padding: 30px;
+  padding: 0; /* PAS DE PADDING POUR PERMETTRE DÉBORDEMENT !!! */
   position: relative;
   overflow: hidden;
+  
+  // Padding seulement pour le contenu qui en a besoin
+  .content-wrapper {
+    padding: 30px;
+    
+    @media (max-width: 768px) {
+      padding: 20px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 15px;
+    }
+  }
 }
 
 /* Map styles */
@@ -75,6 +106,66 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+// Container wrapper pour la carte - DÉBORDE COMPLÈTEMENT !!!
+.map-container-wrapper {
+  margin: 32px 0;
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(156, 163, 175, 0.1);
+  
+  @media (max-width: 768px) {
+    /* PLEINE LARGEUR D'ÉCRAN COMME PALM-DETAIL !!! */
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+    padding: 8px 16px !important;
+    border-radius: 0 !important;
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+  }
+  
+  @media (max-width: 480px) {
+    padding: 4px 8px !important;
+  }
+
+  .map-header {
+    margin-bottom: 20px;
+    text-align: center;
+
+    h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .map-subtitle {
+      color: #6b7280;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      &::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background: #22c55e;
+        border-radius: 3px;
+      }
+    }
+  }
 }
 
 /* Map Legend */

@@ -5,6 +5,17 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  @media (max-width: 768px) {
+    height: 300px;
+    margin: 0.5rem 0;
+    border-radius: 0; /* PAS DE BORDER RADIUS EN MOBILE !!! */
+  }
+  
+  @media (max-width: 480px) {
+    height: 250px;
+    margin: 0.25rem 0;
+  }
 }
 
 .species-map {
@@ -28,10 +39,4 @@
   background: #f8f9fa;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .species-map-container {
-    height: 300px;
-    margin: 0.5rem 0;
-  }
-}
+/* Mobile responsiveness - intégré dans le composant principal */

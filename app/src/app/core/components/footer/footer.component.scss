@@ -15,14 +15,24 @@
     padding-bottom: 48px;
     position: relative;
     
-    @media (max-width: 1024px) {
-      grid-template-columns: 1fr 1fr;
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 40px;
+    }
+    
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
     }
     
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
       gap: 32px;
+    }
+    
+    @media (max-width: 576px) {
+      gap: 24px;
+      padding-bottom: 32px;
     }
   }
 
@@ -220,6 +230,24 @@
         
         &:hover {
           background: rgba($primary-color, 0.6);
+        }
+        
+        @media (max-width: 768px) {
+          width: 6px !important;
+          height: 6px !important;
+          
+          &.active {
+            transform: scale(1.1) !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          width: 4px !important;
+          height: 4px !important;
+          
+          &.active {
+            transform: scale(1.0) !important;
+          }
         }
       }
     }

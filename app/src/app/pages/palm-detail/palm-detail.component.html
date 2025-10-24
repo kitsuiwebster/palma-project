@@ -1,5 +1,6 @@
 <!-- src/app/features/palms/pages/palm-detail/palm-detail.component.html -->
 <div class="palm-detail-container">
+  <div class="container">
     <div *ngIf="loading" class="loading-spinner">
       <div class="custom-spinner"></div>
       <p>Loading palm information...</p>
@@ -320,3 +321,4 @@
       (indexChange)="onImageIndexChange($event)">
     </app-image-lightbox>
   </div>
+</div>

@@ -1,22 +1,31 @@
 <!-- Overview Tab Content -->
 <div class="overview-container">
-  <!-- Hero Section -->
-  <div class="hero-section">
-    <div class="hero-content">
-      <h1>Palma-1.0</h1>
-      <p class="subtitle">A comprehensive global dataset on palm diversity</p>
+  <div class="content-wrapper">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Palma-1.0</h1>
+        <p class="subtitle">A comprehensive global dataset on palm diversity</p>
+      </div>
     </div>
   </div>
 
-  <!-- Map Container - Full Width -->
+  <!-- Map Container - Full Width (sans wrapper pour débordement) -->
   <div class="section-container map-section">
-    <h2 class="section-title">Native Palm Species Distribution by Geographic Zone</h2>
-    <div class="map-container">
+    <div class="content-wrapper">
+      <h2 class="section-title">Native Palm Species Distribution by Geographic Zone</h2>
+    </div>
+    <div class="map-container-wrapper">
+      <div class="map-header">
+        <h3>Global Palm Distribution</h3>
+        <span class="map-subtitle">Color intensity reflects species diversity</span>
+      </div>
       <app-palm-map></app-palm-map>
     </div>
     
-    <!-- Map Legend -->
-    <div class="map-legend">
+    <div class="content-wrapper">
+      <!-- Map Legend -->
+      <div class="map-legend">
       <h3 class="legend-title">Species Diversity</h3>
       <div class="legend-items">
         <div class="legend-item">
@@ -74,40 +83,43 @@
         Color intensity reflects palm species diversity across geographic regions. 
         <strong>Top regions:</strong> Indonesia (521), Malaysia (481), Brazil (428), Colombia (236).
       </p>
+      </div>
     </div>
   </div>
 
-  <!-- Dataset Summary -->
-  <div class="dataset-summary">
-    <h3>About Palma-1.0 Dataset</h3>
-    <p class="summary-text">
-      Palma-1.0 is a comprehensive dataset on the world's palms,
-      based on PalmTraits 1.0 and enriched with information from GBIF, iNaturalist, Wikimedia Commons and POWO. It documents
-      the diversity, the origin of palms, and botanic characteristics of palms, an
-      essential botanical family in tropical and subtropical ecosystems.
-    </p>
-    
-    <div class="dataset-highlights">
-      <div class="highlight-card">
-        <div class="icon-wrapper">
-          <img src="assets/icons/location.png" alt="Location" class="custom-icon">
+  <div class="content-wrapper">
+    <!-- Dataset Summary -->
+    <div class="dataset-summary">
+      <h3>About Palma-1.0 Dataset</h3>
+      <p class="summary-text">
+        Palma-1.0 is a comprehensive dataset on the world's palms,
+        based on PalmTraits 1.0 and enriched with information from GBIF, iNaturalist, Wikimedia Commons and POWO. It documents
+        the diversity, the origin of palms, and botanic characteristics of palms, an
+        essential botanical family in tropical and subtropical ecosystems.
+      </p>
+      
+      <div class="dataset-highlights">
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <img src="assets/icons/location.png" alt="Location" class="custom-icon">
+          </div>
+          <h4>Native Zones</h4>
+          <p>Detailed mapping of natural geographical ranges and distribution patterns.</p>
         </div>
-        <h4>Native Zones</h4>
-        <p>Detailed mapping of natural geographical ranges and distribution patterns.</p>
-      </div>
-      <div class="highlight-card">
-        <div class="icon-wrapper">
-          <img src="assets/icons/dna.png" alt="Taxonomy" class="custom-icon">
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <img src="assets/icons/dna.png" alt="Taxonomy" class="custom-icon">
+          </div>
+          <h4>Taxonomy</h4>
+          <p>Details on species, genera, tribes, and subfamilies with phylogenetic relationships.</p>
         </div>
-        <h4>Taxonomy</h4>
-        <p>Details on species, genera, tribes, and subfamilies with phylogenetic relationships.</p>
-      </div>
-      <div class="highlight-card">
-        <div class="icon-wrapper">
-          <img src="assets/icons/palm.png" alt="Morphology" class="custom-icon">
+        <div class="highlight-card">
+          <div class="icon-wrapper">
+            <img src="assets/icons/palm.png" alt="Morphology" class="custom-icon">
+          </div>
+          <h4>Morphological Traits</h4>
+          <p>Details on size, leaf structure, flowers, and fruits with extensive measurements.</p>
         </div>
-        <h4>Morphological Traits</h4>
-        <p>Details on size, leaf structure, flowers, and fruits with extensive measurements.</p>
       </div>
     </div>
   </div>

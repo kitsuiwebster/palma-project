@@ -387,16 +387,42 @@ h1, h2, h3, h4, h5, h6 {
 .shadow { box-shadow: $box-shadow-light !important; }
 .shadow-lg { box-shadow: $box-shadow-medium !important; }
 
-// Utilitaires responsive
+// Utilitaires responsive - improved breakpoints
+.hide-xs {
+  @media (max-width: 576px) {
+    display: none !important;
+  }
+}
+
 .hide-sm {
   @media (max-width: 768px) {
     display: none !important;
   }
 }
 
+.hide-md {
+  @media (max-width: 992px) {
+    display: none !important;
+  }
+}
+
+.show-xs {
+  display: none !important;
+  @media (max-width: 576px) {
+    display: block !important;
+  }
+}
+
 .show-sm {
   display: none !important;
   @media (max-width: 768px) {
+    display: block !important;
+  }
+}
+
+.show-md {
+  display: none !important;
+  @media (max-width: 992px) {
     display: block !important;
   }
 }
@@ -492,6 +518,21 @@ h1, h2, h3, h4, h5, h6 {
 .bg-accent-light { background-color: $accent-light !important; }
 .bg-light { background-color: $background-light !important; }
 .bg-white { background-color: white !important; }
+
+// Global fixes for touch targets
+button, .mat-mdc-button, .mat-mdc-icon-button {
+  min-height: 44px !important;
+  min-width: 44px !important;
+}
+
+// Responsive font scaling - NORMAL MOBILE SIZE
+body {
+  font-size: 16px;
+  
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+}
 
 
 

@@ -1,12 +1,31 @@
 @import '../../../styles.scss';
 
 .palm-detail-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: $spacing-unit * 3;
-  
+  padding: $spacing-unit * 4 0; /* PAS DE PADDING HORIZONTAL COMME PALM-DATA !!! */
+  background-color: $background-light;
+  min-height: calc(100vh - 75px);
+
   @media (max-width: 768px) {
-    padding: $spacing-unit * 2;
+    padding: $spacing-unit * 2 0; /* PAS DE PADDING HORIZONTAL !!! */
+  }
+
+  @media (max-width: 480px) {
+    padding: $spacing-unit * 1.5 0; /* PAS DE PADDING HORIZONTAL !!! */
+  }
+  
+  // CONTAINER INTERNE AVEC PADDING CONTRÔLÉ COMME PALM-DATA !!!
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-unit * 2;
+    
+    @media (max-width: 768px) {
+      padding: 0 8px !important; /* PADDING MINIMAL MAIS VISIBLE !!! */
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0 6px !important; /* PADDING ULTRA MINIMAL MAIS LISIBLE !!! */
+    }
   }
 }
 
@@ -340,6 +359,14 @@
   .tab-content {
     padding: $spacing-unit * 3;
     
+    @media (max-width: 768px) {
+      padding: $spacing-unit * 2 !important; /* PADDING RÉDUIT MAIS LISIBLE !!! */
+    }
+    
+    @media (max-width: 480px) {
+      padding: $spacing-unit * 1.5 !important; /* PADDING MINIMAL MAIS VISIBLE !!! */
+    }
+    
     .tab-panel {
       animation: fadeIn 0.4s ease-out forwards;
     }
@@ -502,6 +529,18 @@
     grid-template-columns: 1fr;  // 1 column on medium screens and below
     gap: 16px;
   }
+  
+  @media (max-width: 768px) {
+    gap: 12px !important; /* GAPS RÉDUITS MAIS LISIBLES !!! */
+    margin-top: 12px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 8px !important; /* GAPS MINIMAL MAIS VISIBLE !!! */
+    margin-top: 8px !important;
+  }
 }
 
 .modern-card {
@@ -513,6 +552,16 @@
     0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(156, 163, 175, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  @media (max-width: 768px) {
+    padding: 16px !important; /* PADDING RÉDUIT MAIS LISIBLE !!! */
+    border-radius: 12px !important;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 12px !important; /* PADDING MINIMAL MAIS VISIBLE !!! */
+    border-radius: 8px !important;
+  }
   
   &:hover {
     transform: translateY(-2px);
@@ -811,6 +860,25 @@
       0 4px 20px rgba(0, 0, 0, 0.05),
       0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(156, 163, 175, 0.1);
+    
+    @media (max-width: 768px) {
+      /* PLEINE LARGEUR D'ÉCRAN IDENTIQUE À PALM-DATA !!! */
+      margin-left: calc(-50vw + 50%) !important;
+      margin-right: calc(-50vw + 50%) !important;
+      margin-top: 16px !important;
+      margin-bottom: 16px !important;
+      padding: 8px 16px !important;
+      border-radius: 0 !important;
+      width: 100vw !important;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      transform: translateX(-50%);
+    }
+    
+    @media (max-width: 480px) {
+      padding: 4px 8px !important;
+    }
 
     .map-header {
       margin-bottom: 20px;

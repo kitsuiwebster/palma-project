@@ -18,9 +18,24 @@
   padding-top: 85px; // Espace pour le header fixe
   box-sizing: border-box; /* S'assure que le padding est inclus dans la largeur */
   
+  @media (max-width: 992px) {
+    padding: $spacing-unit * 1.8;
+    padding-top: 80px;
+  }
+  
   @media (max-width: 768px) {
     padding: $spacing-unit * 1.5;
     padding-top: 75px; // Ajustement pour mobile
+  }
+  
+  @media (max-width: 576px) {
+    padding: $spacing-unit * 1.2;
+    padding-top: 70px;
+  }
+  
+  @media (max-width: 400px) {
+    padding: $spacing-unit;
+    padding-top: 65px;
   }
 }
 

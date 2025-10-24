@@ -4,13 +4,22 @@
   padding: 40px 20px;
   
   @media (max-width: 768px) {
-    padding: 20px 15px;
+    padding: 20px 8px !important; /* PADDING RÉDUIT !!! */
+  }
+  
+  @media (max-width: 480px) {
+    padding: 15px 4px !important; /* PADDING MINIMAL !!! */
   }
 }
 
 .about-content {
   max-width: 1000px;
   margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    max-width: 100% !important; /* PLEINE LARGEUR EN MOBILE !!! */
+    margin: 0 !important;
+  }
   
   h1 {
     text-align: center;
@@ -128,6 +137,18 @@
     margin-bottom: 16px;
     font-size: 1.05rem;
     text-align: justify;
+    
+    @media (max-width: 768px) {
+      text-align: left !important; /* PAS DE JUSTIFY EN MOBILE !!! */
+      font-size: 1rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.95rem; /* PLUS PETIT EN MOBILE !!! */
+      line-height: 1.6;
+    }
   }
 }
 
@@ -170,7 +191,16 @@
   gap: 16px;
   
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* UNE COLONNE EN MOBILE !!! */
+    gap: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 8px; /* GAPS RÉDUITS !!! */
+  }
+  
+  @media (max-width: 320px) {
+    grid-template-columns: 1fr !important; /* FORCE UNE COLONNE !!! */
   }
 }
 
@@ -234,6 +264,16 @@
   justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
+  
+  @media (max-width: 768px) {
+    gap: 16px; /* GAP RÉDUIT EN MOBILE !!! */
+  }
+  
+  @media (max-width: 480px) {
+    gap: 12px; /* GAP PLUS PETIT !!! */
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .contact-link {
@@ -248,6 +288,27 @@
   font-weight: 500;
   transition: all 0.3s ease;
   border: 2px solid transparent;
+  flex-shrink: 0; /* EMPÊCHE LA COMPRESSION !!! */
+  white-space: nowrap; /* EMPÊCHE LE RETOUR À LA LIGNE !!! */
+  
+  @media (max-width: 768px) {
+    padding: 10px 16px; /* PADDING RÉDUIT EN MOBILE !!! */
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 10px 14px; /* ENCORE PLUS PETIT !!! */
+    font-size: 0.85rem;
+    width: auto;
+    max-width: 90vw; /* LARGEUR MAXIMALE !!! */
+    justify-content: center;
+  }
+  
+  @media (max-width: 320px) {
+    padding: 8px 12px; /* TRÈS PETIT ÉCRAN !!! */
+    font-size: 0.8rem;
+    max-width: 85vw;
+  }
   
   &:hover {
     background: #4caf50;
@@ -258,23 +319,18 @@
   
   .contact-icon {
     font-size: 1.2rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
   }
 }
 
-// Responsive adjustments
-@media (max-width: 768px) {
-  .contact-info {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .contact-link {
-    width: 100%;
-    max-width: 280px;
-    justify-content: center;
-  }
-}
+// Responsive adjustments supprimées - intégrées dans les règles ci-dessus
 
 // Extra small screens
 @media (max-width: 480px) {
@@ -377,15 +433,7 @@
     }
   }
   
-  .contact-link {
-    padding: 10px 16px;
-    max-width: 100%;
-    font-size: 0.9rem;
-    
-    .contact-icon {
-      font-size: 1.1rem;
-    }
-  }
+  // Contact link styles déjà intégrés ci-dessus
 }
 
 // Very small screens
