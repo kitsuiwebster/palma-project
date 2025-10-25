@@ -1,0 +1,111 @@
+{
+  "colorScheme": "yellow-orange-red",
+  "description": "Progressive color mapping based on native species count per area",
+  "ranges": [
+    {
+      "min": 0,
+      "max": 0,
+      "color": "#f0f0f0",
+      "hex": "#f0f0f0",
+      "description": "No species - Light gray"
+    },
+    {
+      "min": 1,
+      "max": 5,
+      "color": "#ffffcc",
+      "hex": "#ffffcc", 
+      "description": "Very low (1-5 species) - Very light yellow"
+    },
+    {
+      "min": 6,
+      "max": 15,
+      "color": "#fff2aa",
+      "hex": "#fff2aa",
+      "description": "Low (6-15 species) - Light yellow"
+    },
+    {
+      "min": 16,
+      "max": 30,
+      "color": "#ffe066",
+      "hex": "#ffe066",
+      "description": "Medium-low (16-30 species) - Yellow"
+    },
+    {
+      "min": 31,
+      "max": 60,
+      "color": "#ffcc33",
+      "hex": "#ffcc33",
+      "description": "Medium (31-60 species) - Orange-yellow"
+    },
+    {
+      "min": 61,
+      "max": 100,
+      "color": "#ff9933",
+      "hex": "#ff9933",
+      "description": "Medium-high (61-100 species) - Orange"
+    },
+    {
+      "min": 101,
+      "max": 150,
+      "color": "#ff6600",
+      "hex": "#ff6600",
+      "description": "High (101-150 species) - Dark orange"
+    },
+    {
+      "min": 151,
+      "max": 200,
+      "color": "#e65500",
+      "hex": "#e65500",
+      "description": "Very high (151-200 species) - Orange-red"
+    },
+    {
+      "min": 201,
+      "max": 300,
+      "color": "#cc3300",
+      "hex": "#cc3300",
+      "description": "Extremely high (201-300 species) - Red"
+    },
+    {
+      "min": 301,
+      "max": 999,
+      "color": "#990000",
+      "hex": "#990000",
+      "description": "Exceptional (300+ species) - Dark red"
+    }
+  ],
+  "specialCases": {
+    "BOR": {
+      "species": 307,
+      "color": "#990000",
+      "note": "Borneo - Exceptional biodiversity hotspot"
+    },
+    "BRA": {
+      "species": 428,
+      "color": "#990000",
+      "note": "Brazil - Highest species count (combined regions)"
+    },
+    "CLM": {
+      "species": 236,
+      "color": "#cc3300",
+      "note": "Colombia - Major biodiversity center"
+    },
+    "NWG": {
+      "species": 265,
+      "color": "#cc3300",
+      "note": "New Guinea - High species diversity"
+    },
+    "MLY": {
+      "species": 232,
+      "color": "#cc3300",
+      "note": "Malaysia - Southeast Asian hotspot"
+    }
+  },
+  "css": {
+    "low": "#ffffcc",
+    "medium": "#ffcc33", 
+    "high": "#ff6600",
+    "veryHigh": "#cc3300",
+    "exceptional": "#990000"
+  },
+  "leafletColorFunction": "function(speciesCount) { const ranges = [[0, '#f0f0f0'], [1, '#ffffcc'], [6, '#fff2aa'], [16, '#ffe066'], [31, '#ffcc33'], [61, '#ff9933'], [101, '#ff6600'], [151, '#e65500'], [201, '#cc3300'], [301, '#990000']]; for (let i = ranges.length - 1; i >= 0; i--) { if (speciesCount >= ranges[i][0]) return ranges[i][1]; } return '#f0f0f0'; }"
+}
