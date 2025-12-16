@@ -1,14 +1,20 @@
 .about-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fffe 0%, #e8f5e9 100%);
-  padding: 40px 20px;
+  padding: 40px 20px 80px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-bottom: -80px;
   
   @media (max-width: 768px) {
-    padding: 20px 8px !important; /* PADDING RÉDUIT !!! */
+    padding: 20px 8px 40px !important; /* PADDING RÉDUIT !!! */
+    margin-bottom: -40px;
   }
   
   @media (max-width: 480px) {
-    padding: 15px 4px !important; /* PADDING MINIMAL !!! */
+    padding: 15px 4px 40px !important; /* PADDING MINIMAL !!! */
+    margin-bottom: -40px;
   }
 }
 

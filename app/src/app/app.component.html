@@ -2,11 +2,13 @@
 <div class="app-container">
   <app-header></app-header>
   
-  <div class="main-content">
+  <div class="main-content" [class.full-width-page]="isFullWidthPage || isAboutPage">
     <router-outlet></router-outlet>
   </div>
   
-  <app-footer></app-footer>
+  @if (!isFullWidthPage) {
+    <app-footer></app-footer>
+  }
   
   <!-- RGPD Cookie Consent Modal -->
   <app-cookie-consent></app-cookie-consent>

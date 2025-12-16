@@ -70,6 +70,12 @@ body {
   width: 100%;
 }
 
+// Disable scroll for home page
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
 // Typographie
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-secondary;
