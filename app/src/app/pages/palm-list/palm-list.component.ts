@@ -4,7 +4,8 @@ import { Observable, of, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../core/services/data.service';
-import { SearchService } from '../../core/services/search.service'; // Importer le service
+import { SearchService } from '../../core/services/search.service';
+import { SeoService } from '../../core/services/seo.service';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { SearchBarComponent } from '../../shared/components/search-bar/search-bar.component';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
@@ -74,8 +75,9 @@ export class PalmListComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private searchService: SearchService, // Injecter le service de recherche
-    private route: ActivatedRoute // Injecter ActivatedRoute pour détecter la navigation
+    private searchService: SearchService,
+    private route: ActivatedRoute,
+    private seoService: SeoService
   ) {
     // Initialiser la subscription
     this.searchSubscription = new Subscription();
@@ -86,7 +88,11 @@ export class PalmListComponent implements OnInit, OnDestroy {
   points in the component's lifecycle. For example, `ngOnInit` is called after Angular has
   initialized all data-bound properties of a directive. */
   ngOnInit(): void {
-    
+    this.seoService.update({
+      title: 'Browse All Palm Species',
+      description: 'Browse and explore over 2,500 palm species organized by genus. Find detailed information on taxonomy, morphology, and geographic distribution.',
+    });
+
     // Check if this is a direct navigation to /palms (no search context)
     this.route.queryParams.subscribe(params => {
       const hasSearchParams = params['q'] || params['from'] === 'search';

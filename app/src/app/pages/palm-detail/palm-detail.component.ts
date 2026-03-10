@@ -5,12 +5,14 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, of, switchMap, catchError, map } from 'rxjs';
 import { DataService } from '../../core/services/data.service';
 import { Title, Meta } from '@angular/platform-browser';
+import { SeoService } from '../../core/services/seo.service';
 import { CommonModule } from '@angular/common';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { RegionCodesService } from '../../core/services/region-codes.service';
 import { FormatCommonNamesPipe } from '../../shared/pipes/format-common-names.pipe';
 import { ImageLightboxComponent } from '../../shared/components/image-lightbox/image-lightbox.component';
 import { SpeciesMapComponent } from '../../shared/components/species-map/species-map.component';
+import { SlugifyPipe } from '../../shared/pipes/slugify.pipe';
 
 @Component({
   selector: 'app-palm-detail',
@@ -23,6 +25,7 @@ import { SpeciesMapComponent } from '../../shared/components/species-map/species
     FormatCommonNamesPipe,
     ImageLightboxComponent,
     SpeciesMapComponent,
+    SlugifyPipe,
   ],
 })
 export class PalmDetailComponent implements OnInit {
@@ -49,6 +52,7 @@ export class PalmDetailComponent implements OnInit {
     private dataService: DataService,
     private titleService: Title,
     private metaService: Meta,
+    private seoService: SeoService,
     private regionCodesService: RegionCodesService,
     private http: HttpClient
   ) {
@@ -127,12 +131,26 @@ export class PalmDetailComponent implements OnInit {
       // Set page title and meta for SEO
       const speciesName = palm.SpecName || palm.species || 'Unknown Species';
       const genus = palm.accGenus || palm.genus || 'Unknown Genus';
+      const tribe = palm.PalmTribe || palm.tribe || '';
+      const subfamily = palm.PalmSubfamily || '';
       const distribution = palm.distribution || 'various regions';
+      const slug = this.route.snapshot.paramMap.get('species') || '';
+      const description = `Learn about ${speciesName}, a palm species from the ${genus} genus native to ${distribution}. Taxonomy, morphological traits, distribution map, and photos.`;
 
-      this.titleService.setTitle(`${speciesName} - Palm Encyclopedia`);
-      this.metaService.updateTag({
-        name: 'description',
-        content: `Learn about ${speciesName}, a palm species from the ${genus} genus native to ${distribution}.`,
+      this.seoService.update({
+        title: `${speciesName}`,
+        description,
+        image: palm.image_url?.startsWith('http') ? palm.image_url : undefined,
+        type: 'article',
+        jsonLd: this.seoService.getSpeciesSchema({
+          speciesName,
+          genus,
+          tribe,
+          subfamily,
+          distribution,
+          imageUrl: palm.image_url,
+          slug,
+        }),
       });
       
     });

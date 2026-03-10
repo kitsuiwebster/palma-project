@@ -1,6 +1,7 @@
 {
-  "name": "palmier",
-  "short_name": "palmier",
+  "name": "Palm Encyclopedia",
+  "short_name": "Palma",
+  "description": "A comprehensive encyclopedia of over 2,500 palm species",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

@@ -78,6 +78,7 @@
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{genus}} <span class="count">({{getGenusCount(palmsByGenus[genus])}})</span>
+                <a class="genus-page-link" [routerLink]="['/palms/genus', genus | slugify]" (click)="$event.stopPropagation()">View genus page</a>
               </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-nav-list>

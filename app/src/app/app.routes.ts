@@ -17,6 +17,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/palm-search/palm-search.component').then(c => c.PalmSearchComponent)
       },
       {
+        path: 'genus/:genus',
+        loadComponent: () => import('./pages/genus-detail/genus-detail.component').then(c => c.GenusDetailComponent)
+      },
+      {
         path: ':species',
         loadComponent: () => import('./pages/palm-detail/palm-detail.component').then(c => c.PalmDetailComponent)
       }
@@ -73,6 +77,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'palms'
+    loadComponent: () => import('./pages/not-found/not-found.component').then(c => c.NotFoundComponent)
   }
 ];

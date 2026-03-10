@@ -1,0 +1,100 @@
+<div class="genus-detail-container">
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading genus information...</p>
+  </div>
+
+  <!-- Not Found -->
+  <div *ngIf="notFound && !loading" class="not-found">
+    <h1>Genus Not Found</h1>
+    <p>Sorry, we couldn't find information about this palm genus.</p>
+    <a routerLink="/palms" class="btn-primary">Browse All Palms</a>
+  </div>
+
+  <!-- Genus Content -->
+  <ng-container *ngIf="!loading && !notFound && species.length > 0">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/">Home</a>
+        </li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item">
+          <a routerLink="/palms">Palms</a>
+        </li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item current" aria-current="page">
+          <span>{{ genusName }}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="genus-header">
+      <h1>{{ genusName }}</h1>
+      <p class="genus-subtitle">
+        {{ species.length }} species
+        <span *ngIf="subfamilies.length > 0"> &middot; {{ subfamilies[0] }}</span>
+        <span *ngIf="tribes.length > 0"> &middot; {{ tribes[0] }}</span>
+      </p>
+    </header>
+
+    <!-- Stats Overview -->
+    <section class="genus-stats">
+      <div class="stat-card" *ngIf="avgHeight !== null">
+        <span class="stat-value">{{ avgHeight }} m</span>
+        <span class="stat-label">Avg. height</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ species.length }}</span>
+        <span class="stat-label">Species</span>
+      </div>
+      <div class="stat-card" *ngIf="erect > 0">
+        <span class="stat-value">{{ erect }}</span>
+        <span class="stat-label">Erect</span>
+      </div>
+      <div class="stat-card" *ngIf="climbers > 0">
+        <span class="stat-value">{{ climbers }}</span>
+        <span class="stat-label">Climbing</span>
+      </div>
+      <div class="stat-card" *ngIf="acaulescent > 0">
+        <span class="stat-value">{{ acaulescent }}</span>
+        <span class="stat-label">Acaulescent</span>
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="genus-description">
+      <p>
+        The genus <strong><em>{{ genusName }}</em></strong> contains <strong>{{ species.length }}</strong> known palm species
+        <span *ngIf="subfamilies.length > 0">within the <strong>{{ subfamilies[0] }}</strong> subfamily</span><span *ngIf="tribes.length > 0">, tribe <strong>{{ tribes[0] }}</strong></span>.
+        <span *ngIf="avgHeight !== null">
+          Species in this genus reach an average maximum height of <strong>{{ avgHeight }} meters</strong>.
+        </span>
+        <span *ngIf="habitats.length > 0">
+          They are typically found in <strong>{{ habitats.join(' and ') }}</strong> habitats.
+        </span>
+      </p>
+    </section>
+
+    <!-- Species Grid -->
+    <section class="species-section">
+      <h2>All {{ genusName }} Species</h2>
+      <div class="palm-grid">
+        <app-palm-card *ngFor="let palm of species" [palm]="palm"></app-palm-card>
+      </div>
+    </section>
+
+    <!-- See Also -->
+    <section class="see-also">
+      <a routerLink="/palms" class="link-back">
+        ← Browse all palm species
+      </a>
+      <a routerLink="/palms/search" class="link-back">
+        Advanced Search →
+      </a>
+    </section>
+  </ng-container>
+</div>

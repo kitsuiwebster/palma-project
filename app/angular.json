@@ -32,7 +32,9 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
-              }
+              },
+              "src/sitemap.xml",
+              "src/robots.txt"
             ],
             "styles": [
               "src/styles.scss",

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SeoService } from '../../core/services/seo.service';
 
 // Import all the tab components
 import { OverviewComponent } from '../overview/overview.component';
@@ -30,9 +31,33 @@ export class PalmDataComponent implements OnInit, OnDestroy {
   activeTab: 'overview' | 'dataset' | 'methodology' | 'references' | 'photos' = 'overview';
   private routeSubscription: Subscription = new Subscription();
   
+  private seoMeta: Record<string, { title: string; description: string; jsonLd?: Record<string, unknown> }> = {
+    overview: {
+      title: 'Data Overview',
+      description: 'Overview of the Palm Encyclopedia dataset with interactive maps and statistics on palm species distribution worldwide.',
+    },
+    dataset: {
+      title: 'Palm Species Dataset',
+      description: 'Download and explore the comprehensive dataset of 2,557 palm species with 35 morphological and geographic attributes.',
+    },
+    methodology: {
+      title: 'Methodology',
+      description: 'Learn about the methodology behind the Palm Encyclopedia dataset, including data collection, sources, and classification standards.',
+    },
+    references: {
+      title: 'References',
+      description: 'Scientific references and sources used to compile the Palm Encyclopedia dataset of over 2,500 palm species.',
+    },
+    photos: {
+      title: 'Photo Credits',
+      description: 'Photo credits and attributions for images used throughout the Palm Encyclopedia.',
+    },
+  };
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +76,16 @@ export class PalmDataComponent implements OnInit, OnDestroy {
         this.activeTab = 'overview';
       }
       
+      // Update SEO meta for current tab
+      const meta = this.seoMeta[this.activeTab];
+      if (meta) {
+        this.seoService.update({
+          title: meta.title,
+          description: meta.description,
+          jsonLd: this.activeTab === 'dataset' ? this.seoService.getDatasetSchema() : undefined,
+        });
+      }
+
       // Scroll to top when route changes
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -9,6 +9,7 @@ import { PalmTrait } from '../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
 import { CommonModule } from '@angular/common';
 import { RegionCodesService } from '../../core/services/region-codes.service';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-palm-search',
@@ -79,7 +80,8 @@ export class PalmSearchComponent implements OnInit {
     private fb: FormBuilder,
     private searchService: SearchService,
     private regionCodesService: RegionCodesService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private seoService: SeoService
   ) {
     this.searchForm = this.fb.group({
       query: [''],
@@ -101,6 +103,11 @@ export class PalmSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.seoService.update({
+      title: 'Search Palm Species',
+      description: 'Search and filter over 2,500 palm species by name, genus, tribe, habitat, stem type, fruit size, native region, and more.',
+    });
+
     // First load all palms to populate filter options
     this.dataService.getAllPalms().pipe(
       tap(palms => {

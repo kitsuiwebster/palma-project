@@ -663,6 +663,18 @@
   border: 1px solid #e5e7eb;
 }
 
+.genus-link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba($primary-color, 0.1);
+    border-color: $primary-color;
+    color: $primary-dark;
+  }
+}
+
 .height-badge {
   background: $accent-color;
   color: white;

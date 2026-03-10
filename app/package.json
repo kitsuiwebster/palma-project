@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:prod": "ng build --configuration production --base-href /",
+    "build:prod": "node scripts/generate-sitemap.js && ng build --configuration production --base-href /",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
     "update-map": "python3 scripts/update_map_geojson.py"
   },
   "private": true,

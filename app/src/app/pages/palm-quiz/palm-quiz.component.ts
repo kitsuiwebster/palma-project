@@ -11,6 +11,7 @@ import {
   QuestionCategory
 } from '../../core/models/quiz.model';
 import { Title, Meta } from '@angular/platform-browser';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-palm-quiz',
@@ -64,14 +65,14 @@ export class PalmQuizComponent implements OnInit, OnDestroy {
     private quizService: QuizService,
     public router: Router,
     private titleService: Title,
-    private metaService: Meta
+    private metaService: Meta,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle('Palm Quiz - Test Your Knowledge - Palm Encyclopedia');
-    this.metaService.updateTag({
-      name: 'description',
-      content: 'Test your knowledge of palm species with our interactive quiz. Learn about palm identification, geography, morphology, and taxonomy.'
+    this.seoService.update({
+      title: 'Palm Quiz - Test Your Knowledge',
+      description: 'Test your knowledge of palm species with our interactive quiz. Learn about palm identification, geography, morphology, and taxonomy.',
     });
     
     // Subscribe to quiz session updates

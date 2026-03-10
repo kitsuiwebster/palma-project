@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-about',
@@ -8,6 +9,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
+  constructor(private seoService: SeoService) {}
 
+  ngOnInit(): void {
+    this.seoService.update({
+      title: 'About',
+      description: 'Learn about Palm Encyclopedia, a comprehensive database of over 2,500 palm species with scientific data, distribution maps, and photographs.',
+    });
+  }
 }

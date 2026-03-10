@@ -32,12 +32,12 @@
               <li class="breadcrumb-item">
                 <a routerLink="/palms">
                   <img src="assets/icons/palm.png" alt="Home" class="breadcrumb-icon">
-                  Home
+                  Palms
                 </a>
               </li>
               <li class="breadcrumb-separator">/</li>
               <li class="breadcrumb-item">
-                <a routerLink="/palms">Browse Palms</a>
+                <a [routerLink]="['/palms/genus', getGenus(palm) | slugify]">{{getGenus(palm)}}</a>
               </li>
               <li class="breadcrumb-separator">/</li>
               <li class="breadcrumb-item current" aria-current="page">
@@ -69,7 +69,7 @@
   
       <div class="palm-content">
         <div class="palm-image-container" (click)="openLightbox(palm.image_url || 'assets/images/palm-default.jpg', getSpeciesName(palm))">
-          <img [src]="palm.image_url || 'assets/images/palm-default.jpg'" [alt]="getSpeciesName(palm)" class="palm-image clickable-image">
+          <img [src]="palm.image_url || 'assets/images/palm-default.jpg'" [alt]="getSpeciesName(palm) + ' - palm species photo'" class="palm-image clickable-image" loading="eager">
           <div class="image-overlay">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -102,7 +102,7 @@
                   <div class="info-items">
                     <div class="info-row">
                       <span class="label">Genus</span>
-                      <span class="value genus-badge">{{getGenus(palm)}}</span>
+                      <a [routerLink]="['/palms/genus', getGenus(palm) | slugify]" class="value genus-badge genus-link">{{getGenus(palm)}}</a>
                     </div>
                     <div class="info-row">
                       <span class="label">Species</span>
@@ -292,7 +292,7 @@
               <div *ngIf="getAllPhotoUrls(palm).length > 0; else noImages">
                 <div class="photo-gallery">
                   <div class="photo-container" *ngFor="let url of getAllPhotoUrls(palm)" (click)="openLightbox(url, getSpeciesName(palm))">
-                    <img [src]="url" alt="Palm photo" class="gallery-photo clickable-image" />
+                    <img [src]="url" [alt]="getSpeciesName(palm) + ' photo'" class="gallery-photo clickable-image" loading="lazy" />
                     <div class="gallery-overlay">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

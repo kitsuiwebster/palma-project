@@ -357,6 +357,42 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
   }
 
 
+  // Récupérer les espèces d'un genre par slug
+  getPalmsByGenusSlug(genusSlug: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        return palms.filter(
+          (p) => this.slugify(p.accGenus || p.genus || '') === genusSlug
+        );
+      })
+    );
+  }
+
+  // Récupérer la liste de tous les genres uniques
+  getAllGenera(): Observable<{ name: string; slug: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const genusMap = new Map<string, number>();
+        palms.forEach((p) => {
+          const genus = p.accGenus || p.genus || 'Unknown';
+          genusMap.set(genus, (genusMap.get(genus) || 0) + 1);
+        });
+        return Array.from(genusMap.entries())
+          .map(([name, count]) => ({
+            name,
+            slug: this.slugify(name),
+            count,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+      })
+    );
+  }
+
+  // Exposer slugify pour utilisation externe (sitemap, liens)
+  toSlug(text: string): string {
+    return this.slugify(text);
+  }
+
   // Méthode utilitaire pour créer un slug à partir d'une chaîne
   private slugify(text: string): string {
     return text
