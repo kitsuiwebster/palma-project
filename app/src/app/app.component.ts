@@ -55,7 +55,9 @@ export class AppComponent implements OnInit {
         this.isAboutPage = currentUrl === '/about';
 
         // Scroll to top on every navigation
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, left: 0 });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
 
         // Disable scroll only on home page
         const isHomePage = currentUrl === '/' || currentUrl === '/home';
