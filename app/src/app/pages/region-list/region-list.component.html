@@ -1,0 +1,84 @@
+<div class="region-list-container">
+  <!-- Header -->
+  <header class="page-header">
+    <h1>Palm Species by Region</h1>
+    <p class="page-subtitle">
+      {{ regions.length }} regions &middot; Explore palm biodiversity around the world
+    </p>
+  </header>
+
+  <!-- Search & Sort -->
+  <div class="filter-bar">
+    <div class="search-input-wrapper">
+      <img src="assets/icons/search.png" alt="Search" class="search-icon">
+      <input
+        type="text"
+        placeholder="Search regions..."
+        (input)="onSearch($event)"
+        class="search-input"
+      />
+    </div>
+    <div class="sort-toggles">
+      <button
+        class="sort-btn"
+        [class.active]="sortBy === 'count'"
+        (click)="toggleSort('count')"
+      >
+        Most species
+      </button>
+      <button
+        class="sort-btn"
+        [class.active]="sortBy === 'name'"
+        (click)="toggleSort('name')"
+      >
+        A–Z
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading regions...</p>
+  </div>
+
+  <!-- Results count -->
+  <p class="results-count" *ngIf="!loading && searchQuery">
+    {{ filteredRegions.length }} regions found
+  </p>
+
+  <!-- Regions Grid -->
+  <div class="regions-grid" *ngIf="!loading">
+    <a
+      *ngFor="let region of filteredRegions"
+      [routerLink]="['/palms/region', region.code.toLowerCase()]"
+      class="region-card"
+    >
+      <div class="region-card-header">
+        <img
+          *ngIf="region.flag"
+          [src]="region.flag"
+          [alt]="region.name + ' flag'"
+          class="region-flag"
+          loading="lazy"
+        >
+        <span class="region-name">{{ region.name }}</span>
+      </div>
+      <div class="region-card-footer">
+        <span class="region-count">{{ region.count }}</span>
+        <span class="count-label">species</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- No results -->
+  <div *ngIf="!loading && filteredRegions.length === 0" class="no-results">
+    <p>No regions matching your search.</p>
+  </div>
+
+  <!-- See Also -->
+  <section class="see-also" *ngIf="!loading">
+    <a routerLink="/palms" class="link-back">← Browse all species</a>
+    <a routerLink="/palms/genus" class="link-back">Browse by genus →</a>
+  </section>
+</div>

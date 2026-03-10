@@ -10,30 +10,63 @@
     <div class="spacer"></div>
     <!-- Navigation for desktop -->
     <nav class="desktop-nav">
-      <a class="nav-link" routerLink="/palms" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <span class="nav-text">Browse Palms</span>
-      </a>
-      <a class="nav-link" routerLink="/data" routerLinkActive="active">
-        <span class="nav-text">Palms Data</span>
-      </a>
+      <!-- Browse Palms mega-dropdown -->
+      <div class="nav-dropdown">
+        <a class="nav-link" routerLink="/palms" routerLinkActive="active">
+          <span class="nav-text">Browse Palms <span class="caret">▾</span></span>
+        </a>
+        <div class="dropdown-panel dropdown-wide">
+          <div class="dropdown-columns">
+            <div class="dropdown-column">
+              <a class="dropdown-item highlight" routerLink="/palms">
+                All 2,500+ Species →
+              </a>
+              <a class="dropdown-item" routerLink="/palms/search">Advanced Search</a>
+            </div>
+            <div class="dropdown-column">
+              <a class="dropdown-item highlight" routerLink="/palms/genus">
+                All 185+ Genera →
+              </a>
+              <a class="dropdown-item" routerLink="/palms/genus/cocos">Cocos (Coconut)</a>
+              <a class="dropdown-item" routerLink="/palms/genus/phoenix">Phoenix (Date Palm)</a>
+              <a class="dropdown-item" routerLink="/palms/genus/areca">Areca</a>
+              <a class="dropdown-item" routerLink="/palms/genus/chamaedorea">Chamaedorea</a>
+              <a class="dropdown-item" routerLink="/palms/genus/calamus">Calamus (Rattan)</a>
+            </div>
+            <div class="dropdown-column">
+              <a class="dropdown-item highlight" routerLink="/palms/region">
+                All 190+ Regions →
+              </a>
+              <a class="dropdown-item" routerLink="/palms/region/bor">Borneo</a>
+              <a class="dropdown-item" routerLink="/palms/region/nwg">New Guinea</a>
+              <a class="dropdown-item" routerLink="/palms/region/mdg">Madagascar</a>
+              <a class="dropdown-item" routerLink="/palms/region/bze">Brazil East</a>
+              <a class="dropdown-item" routerLink="/palms/region/col">Colombia</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data dropdown -->
+      <div class="nav-dropdown">
+        <a class="nav-link" routerLink="/data" routerLinkActive="active">
+          <span class="nav-text">Data <span class="caret">▾</span></span>
+        </a>
+        <div class="dropdown-panel">
+          <a class="dropdown-item" routerLink="/data/overview">Overview</a>
+          <a class="dropdown-item" routerLink="/data/dataset">Dataset</a>
+          <a class="dropdown-item" routerLink="/data/methodology">Methodology</a>
+          <a class="dropdown-item" routerLink="/data/references">References</a>
+          <a class="dropdown-item" routerLink="/data/photo-credits">Photo Credits</a>
+        </div>
+      </div>
+
       <a class="nav-link" routerLink="/quiz" routerLinkActive="active">
         <span class="nav-text">Quiz</span>
       </a>
       <a class="nav-link" routerLink="/about" routerLinkActive="active">
         <span class="nav-text">About</span>
       </a>
-      <div class="info-menu-wrapper">
-        <div class="custom-menu info-menu" [class.visible]="isInfoMenuOpen">
-          <div class="menu-items">
-            <a class="menu-item" routerLink="/data/photo-credits" (click)="closeInfoMenu()">
-              <span>Photograph Credits</span>
-            </a>
-            <a class="menu-item" routerLink="/data/references" (click)="closeInfoMenu()">
-              <span>References</span>
-            </a>
-          </div>
-        </div>
-      </div>
     </nav>
     <!-- Mobile menu button -->
     <button class="mobile-menu-button" (click)="toggleMenu()">
@@ -60,6 +93,18 @@
           <img src="assets/icons/search.png" alt="Search icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">Advanced Search</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/palms/genus" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/taxonomy.png" alt="Genera icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Browse by Genus</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/palms/region" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/location.png" alt="Regions icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Browse by Region</span>
       </a>
       <a class="mobile-nav-link" routerLink="/data" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">

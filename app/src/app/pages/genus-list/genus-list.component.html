@@ -1,0 +1,75 @@
+<div class="genus-list-container">
+  <!-- Header -->
+  <header class="page-header">
+    <h1>All Palm Genera</h1>
+    <p class="page-subtitle">
+      {{ genera.length }} genera &middot; {{ totalSpecies | number }} species in the Arecaceae family
+    </p>
+  </header>
+
+  <!-- Search & Filter -->
+  <div class="filter-bar">
+    <div class="search-input-wrapper">
+      <img src="assets/icons/search.png" alt="Search" class="search-icon">
+      <input
+        type="text"
+        placeholder="Search genera..."
+        (input)="onSearch($event)"
+        class="search-input"
+      />
+    </div>
+  </div>
+
+  <!-- Alphabet Filter -->
+  <div class="alphabet-filter">
+    <button
+      *ngFor="let letter of letters"
+      class="letter-btn"
+      [class.active]="selectedLetter === letter"
+      (click)="filterByLetter(letter)"
+    >
+      {{ letter }}
+    </button>
+    <button
+      class="letter-btn clear-btn"
+      *ngIf="selectedLetter"
+      (click)="filterByLetter('')"
+    >
+      All
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading genera...</p>
+  </div>
+
+  <!-- Results count -->
+  <p class="results-count" *ngIf="!loading && (searchQuery || selectedLetter)">
+    {{ filteredGenera.length }} genera found
+  </p>
+
+  <!-- Genera Grid -->
+  <div class="genera-grid" *ngIf="!loading">
+    <a
+      *ngFor="let genus of filteredGenera"
+      [routerLink]="['/palms/genus', genus.slug]"
+      class="genus-card"
+    >
+      <span class="genus-name">{{ genus.name }}</span>
+      <span class="genus-count">{{ genus.count }} <span class="count-label">species</span></span>
+    </a>
+  </div>
+
+  <!-- No results -->
+  <div *ngIf="!loading && filteredGenera.length === 0" class="no-results">
+    <p>No genera matching your search.</p>
+  </div>
+
+  <!-- See Also -->
+  <section class="see-also" *ngIf="!loading">
+    <a routerLink="/palms" class="link-back">← Browse all species</a>
+    <a routerLink="/palms/region" class="link-back">Browse by region →</a>
+  </section>
+</div>

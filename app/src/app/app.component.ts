@@ -53,7 +53,10 @@ export class AppComponent implements OnInit {
         const currentUrl = event.urlAfterRedirects;
         this.isFullWidthPage = currentUrl === '/' || currentUrl === '/home';
         this.isAboutPage = currentUrl === '/about';
-        
+
+        // Scroll to top on every navigation
+        window.scrollTo(0, 0);
+
         // Disable scroll only on home page
         const isHomePage = currentUrl === '/' || currentUrl === '/home';
         if (isHomePage) {

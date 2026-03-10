@@ -17,8 +17,16 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/palm-search/palm-search.component').then(c => c.PalmSearchComponent)
       },
       {
+        path: 'genus',
+        loadComponent: () => import('./pages/genus-list/genus-list.component').then(c => c.GenusListComponent)
+      },
+      {
         path: 'genus/:genus',
         loadComponent: () => import('./pages/genus-detail/genus-detail.component').then(c => c.GenusDetailComponent)
+      },
+      {
+        path: 'region',
+        loadComponent: () => import('./pages/region-list/region-list.component').then(c => c.RegionListComponent)
       },
       {
         path: 'region/:region',

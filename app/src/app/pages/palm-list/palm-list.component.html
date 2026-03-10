@@ -1,6 +1,17 @@
 <!-- Title moved inside container -->
 <div class="palm-list-container" #listTop>
   <h1 class="palm-list-title">Browse through more than 2,500 palm species</h1>
+  <div class="browse-links">
+    <a routerLink="/palms/genus" class="browse-link">
+      <img src="assets/icons/taxonomy.png" alt="Genera" class="browse-icon">
+      Browse by Genus
+    </a>
+    <a routerLink="/palms/region" class="browse-link">
+      <img src="assets/icons/location.png" alt="Regions" class="browse-icon">
+      Browse by Region
+    </a>
+  </div>
+
   <div class="palm-list-header">
     <app-search-bar></app-search-bar>
     <div class="view-toggles">

@@ -77,6 +77,8 @@ function generateSitemap(speciesList, generaList, regionsList) {
     { loc: '/', changefreq: 'weekly', priority: '1.0' },
     { loc: '/palms', changefreq: 'daily', priority: '0.9' },
     { loc: '/palms/search', changefreq: 'weekly', priority: '0.8' },
+    { loc: '/palms/genus', changefreq: 'monthly', priority: '0.8' },
+    { loc: '/palms/region', changefreq: 'monthly', priority: '0.8' },
     { loc: '/data', changefreq: 'monthly', priority: '0.8' },
     { loc: '/data/overview', changefreq: 'monthly', priority: '0.7' },
     { loc: '/data/dataset', changefreq: 'monthly', priority: '0.7' },
