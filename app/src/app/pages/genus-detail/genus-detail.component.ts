@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Observable, of, switchMap, map, catchError, tap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { DataService } from '../../core/services/data.service';
 import { SeoService } from '../../core/services/seo.service';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
 import { SlugifyPipe } from '../../shared/pipes/slugify.pipe';
+import { PaginatorComponent } from '../../shared/components/paginator/paginator.component';
 
 @Component({
   selector: 'app-genus-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, PalmCardComponent, SlugifyPipe],
+  imports: [CommonModule, RouterModule, PalmCardComponent, SlugifyPipe, PaginatorComponent],
   templateUrl: './genus-detail.component.html',
   styleUrls: ['./genus-detail.component.scss'],
 })
@@ -19,6 +20,9 @@ export class GenusDetailComponent implements OnInit {
   genusName = '';
   genusSlug = '';
   species: PalmTrait[] = [];
+  displayedSpecies: PalmTrait[] = [];
+  currentPage = 0;
+  pageSize = 20;
   loading = true;
   notFound = false;
 
@@ -56,6 +60,8 @@ export class GenusDetailComponent implements OnInit {
         }
 
         this.species = species;
+        this.currentPage = 0;
+        this.updateDisplayedSpecies();
         this.genusName = species[0].accGenus || species[0].genus || 'Unknown';
         this.computeStats();
         this.updateSeo();
@@ -128,6 +134,17 @@ export class GenusDetailComponent implements OnInit {
           : {}),
       },
     });
+  }
+
+  updateDisplayedSpecies(): void {
+    const start = this.currentPage * this.pageSize;
+    this.displayedSpecies = this.species.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updateDisplayedSpecies();
   }
 
   getSpeciesName(palm: PalmTrait): string {

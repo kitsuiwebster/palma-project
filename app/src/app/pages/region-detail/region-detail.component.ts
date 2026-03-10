@@ -8,11 +8,12 @@ import { RegionCodesService } from '../../core/services/region-codes.service';
 import { PalmTrait } from '../../core/models/palm-trait.model';
 import { PalmCardComponent } from '../../shared/components/palm-card/palm-card.component';
 import { SlugifyPipe } from '../../shared/pipes/slugify.pipe';
+import { PaginatorComponent } from '../../shared/components/paginator/paginator.component';
 
 @Component({
   selector: 'app-region-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, PalmCardComponent, SlugifyPipe],
+  imports: [CommonModule, RouterModule, PalmCardComponent, SlugifyPipe, PaginatorComponent],
   templateUrl: './region-detail.component.html',
   styleUrls: ['./region-detail.component.scss'],
 })
@@ -21,6 +22,9 @@ export class RegionDetailComponent implements OnInit {
   regionName = '';
   regionFlag = '';
   species: PalmTrait[] = [];
+  displayedSpecies: PalmTrait[] = [];
+  currentPage = 0;
+  pageSize = 20;
   loading = true;
   notFound = false;
 
@@ -58,6 +62,8 @@ export class RegionDetailComponent implements OnInit {
         }
 
         this.species = species;
+        this.currentPage = 0;
+        this.updateDisplayedSpecies();
 
         // Load region name and flag
         this.regionName = await this.regionCodesService.getRegionName(this.regionCode);
@@ -101,6 +107,17 @@ export class RegionDetailComponent implements OnInit {
     this.climbers = this.species.filter((p) => p.Climbing === 1).length;
     this.erect = this.species.filter((p) => p.Erect === 1).length;
     this.acaulescent = this.species.filter((p) => p.Acaulescent === 1).length;
+  }
+
+  updateDisplayedSpecies(): void {
+    const start = this.currentPage * this.pageSize;
+    this.displayedSpecies = this.species.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: any): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updateDisplayedSpecies();
   }
 
   private updateSeo(): void {

@@ -22,6 +22,9 @@
                 All 2,500+ Species →
               </a>
               <a class="dropdown-item" routerLink="/palms/search">Advanced Search</a>
+              <a class="dropdown-item" routerLink="/palms/characteristics">By Characteristics</a>
+              <a class="dropdown-item" routerLink="/palms/taxonomy">Taxonomy</a>
+              <a class="dropdown-item" routerLink="/glossary">Glossary</a>
             </div>
             <div class="dropdown-column">
               <a class="dropdown-item highlight" routerLink="/palms/genus">
@@ -105,6 +108,24 @@
           <img src="assets/icons/location.png" alt="Regions icon" class="custom-icon">
         </span>
         <span class="mobile-nav-text">Browse by Region</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/palms/characteristics" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/palm.png" alt="Characteristics icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">By Characteristics</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/palms/taxonomy" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/taxonomy.png" alt="Taxonomy icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Taxonomy</span>
+      </a>
+      <a class="mobile-nav-link" routerLink="/glossary" routerLinkActive="active" (click)="toggleMenu()">
+        <span class="icon-wrapper mobile-nav-icon">
+          <img src="assets/icons/book.png" alt="Glossary icon" class="custom-icon">
+        </span>
+        <span class="mobile-nav-text">Glossary</span>
       </a>
       <a class="mobile-nav-link" routerLink="/data" routerLinkActive="active" (click)="toggleMenu()">
         <span class="icon-wrapper mobile-nav-icon">

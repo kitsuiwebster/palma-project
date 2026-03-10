@@ -1,0 +1,47 @@
+<div class="glossary-list-container">
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+      <li class="breadcrumb-separator">/</li>
+      <li class="breadcrumb-item current" aria-current="page"><span>Glossary</span></li>
+    </ol>
+  </nav>
+
+  <header class="page-header">
+    <h1>Palm Glossary</h1>
+    <p class="page-subtitle">Botanical terms and definitions for palm enthusiasts</p>
+  </header>
+
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="Search terms..."
+      [value]="searchQuery"
+      (input)="onSearch($event)"
+      class="search-input"
+    />
+  </div>
+
+  <div *ngFor="let cat of filteredCategories" class="category-section">
+    <div class="category-header">
+      <div class="category-image">
+        <img [src]="'assets/images/cards/glossary/' + getCategorySlug(cat.name) + '.jpg'" [alt]="cat.name" loading="lazy">
+      </div>
+      <h2>{{ cat.name }}</h2>
+    </div>
+    <div class="terms-grid">
+      <a *ngFor="let term of cat.terms"
+         [routerLink]="['/glossary', term.slug]"
+         class="term-card">
+        <span class="term-name">{{ term.term }}</span>
+        <span class="term-def">{{ term.shortDef }}</span>
+      </a>
+    </div>
+  </div>
+
+  <section class="see-also">
+    <a routerLink="/palms" class="link-back">← Browse all species</a>
+    <a routerLink="/palms/taxonomy" class="link-back">Palm taxonomy →</a>
+    <a routerLink="/palms/characteristics" class="link-back">Browse by characteristics →</a>
+  </section>
+</div>

@@ -420,6 +420,244 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
     );
   }
 
+  // ===== Characteristic-based filtering =====
+
+  // Get palms by stem type (climbing, acaulescent, erect)
+  getPalmsByStemType(stemType: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        switch (stemType) {
+          case 'climbing': return palms.filter(p => p.Climbing === 1);
+          case 'acaulescent': return palms.filter(p => p.Acaulescent === 1);
+          case 'erect': return palms.filter(p => p.Erect === 1);
+          case 'solitary': return palms.filter(p => p.StemSolitary === 1);
+          case 'armed': return palms.filter(p => p.StemArmed === 1);
+          default: return [];
+        }
+      })
+    );
+  }
+
+  // Get all stem types with counts
+  getAllStemTypes(): Observable<{ slug: string; label: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const types = [
+          { slug: 'climbing', label: 'Climbing Palms', field: 'Climbing' as keyof PalmTrait },
+          { slug: 'acaulescent', label: 'Acaulescent Palms', field: 'Acaulescent' as keyof PalmTrait },
+          { slug: 'erect', label: 'Erect Palms', field: 'Erect' as keyof PalmTrait },
+          { slug: 'solitary', label: 'Solitary Palms', field: 'StemSolitary' as keyof PalmTrait },
+          { slug: 'armed', label: 'Armed Stem Palms', field: 'StemArmed' as keyof PalmTrait },
+        ];
+        return types.map(t => ({
+          slug: t.slug,
+          label: t.label,
+          count: palms.filter(p => p[t.field] === 1).length,
+        })).filter(t => t.count > 0);
+      })
+    );
+  }
+
+  // Get palms by fruit shape
+  getPalmsByFruitShape(shape: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => palms.filter(p =>
+        p.FruitShape && p.FruitShape.toLowerCase() === shape.toLowerCase()
+      ))
+    );
+  }
+
+  // Get all fruit shapes with counts
+  getAllFruitShapes(): Observable<{ slug: string; label: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const shapeMap = new Map<string, number>();
+        palms.forEach(p => {
+          if (p.FruitShape) {
+            const shape = p.FruitShape.toLowerCase();
+            shapeMap.set(shape, (shapeMap.get(shape) || 0) + 1);
+          }
+        });
+        return Array.from(shapeMap.entries())
+          .map(([shape, count]) => ({
+            slug: shape,
+            label: shape.charAt(0).toUpperCase() + shape.slice(1) + ' Fruit',
+            count,
+          }))
+          .sort((a, b) => b.count - a.count);
+      })
+    );
+  }
+
+  // Get palms by main fruit color
+  getPalmsByFruitColor(color: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => palms.filter(p => {
+        if (!p.MainFruitColors) return false;
+        const colors = p.MainFruitColors.toLowerCase().split(';');
+        return colors.includes(color.toLowerCase());
+      }))
+    );
+  }
+
+  // Get all main fruit colors with counts
+  getAllFruitColors(): Observable<{ slug: string; label: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const colorMap = new Map<string, number>();
+        palms.forEach(p => {
+          if (p.MainFruitColors) {
+            const colors = p.MainFruitColors.toLowerCase().split(';');
+            colors.forEach(c => {
+              const color = c.trim();
+              if (color) colorMap.set(color, (colorMap.get(color) || 0) + 1);
+            });
+          }
+        });
+        return Array.from(colorMap.entries())
+          .map(([color, count]) => ({
+            slug: color,
+            label: color.charAt(0).toUpperCase() + color.slice(1) + ' Fruit',
+            count,
+          }))
+          .sort((a, b) => b.count - a.count);
+      })
+    );
+  }
+
+  // Get palms by understorey/canopy habitat
+  getPalmsByHabitat(habitat: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => palms.filter(p =>
+        p.UnderstoreyCanopy && p.UnderstoreyCanopy.toLowerCase() === habitat.toLowerCase()
+      ))
+    );
+  }
+
+  // Get all habitats with counts
+  getAllHabitats(): Observable<{ slug: string; label: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const habitatMap = new Map<string, number>();
+        palms.forEach(p => {
+          if (p.UnderstoreyCanopy) {
+            habitatMap.set(p.UnderstoreyCanopy.toLowerCase(), (habitatMap.get(p.UnderstoreyCanopy.toLowerCase()) || 0) + 1);
+          }
+        });
+        return Array.from(habitatMap.entries())
+          .map(([habitat, count]) => ({
+            slug: habitat,
+            label: habitat.charAt(0).toUpperCase() + habitat.slice(1) + ' Palms',
+            count,
+          }))
+          .sort((a, b) => b.count - a.count);
+      })
+    );
+  }
+
+  // ===== Height-based filtering =====
+
+  getPalmsByHeightRange(range: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const heightRanges: { [key: string]: [number, number] } = {
+          'small': [0, 5],
+          'medium': [5, 15],
+          'tall': [15, 30],
+          'very-tall': [30, 200],
+        };
+        const [min, max] = heightRanges[range] || [0, 0];
+        return palms.filter(p => {
+          const h = p.MaxStemHeight_m || p.height_max_m;
+          return h != null && h > min && h <= max;
+        });
+      })
+    );
+  }
+
+  getAllHeightRanges(): Observable<{ slug: string; label: string; range: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const ranges = [
+          { slug: 'small', label: 'Small Palms', range: '0 - 5 m', min: 0, max: 5 },
+          { slug: 'medium', label: 'Medium Palms', range: '5 - 15 m', min: 5, max: 15 },
+          { slug: 'tall', label: 'Tall Palms', range: '15 - 30 m', min: 15, max: 30 },
+          { slug: 'very-tall', label: 'Very Tall Palms', range: '30+ m', min: 30, max: 200 },
+        ];
+        return ranges.map(r => ({
+          slug: r.slug,
+          label: r.label,
+          range: r.range,
+          count: palms.filter(p => {
+            const h = p.MaxStemHeight_m || p.height_max_m;
+            return h != null && h > r.min && h <= r.max;
+          }).length,
+        })).filter(r => r.count > 0);
+      })
+    );
+  }
+
+  // ===== Taxonomy-based filtering =====
+
+  getPalmsBySubfamily(subfamily: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => palms.filter(p =>
+        p.PalmSubfamily && this.slugify(p.PalmSubfamily) === subfamily
+      ))
+    );
+  }
+
+  getAllSubfamilies(): Observable<{ name: string; slug: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const map = new Map<string, number>();
+        palms.forEach(p => {
+          if (p.PalmSubfamily) {
+            map.set(p.PalmSubfamily, (map.get(p.PalmSubfamily) || 0) + 1);
+          }
+        });
+        return Array.from(map.entries())
+          .map(([name, count]) => ({ name, slug: this.slugify(name), count }))
+          .sort((a, b) => b.count - a.count);
+      })
+    );
+  }
+
+  getPalmsByTribe(tribe: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => palms.filter(p =>
+        (p.PalmTribe || p.tribe) && this.slugify(p.PalmTribe || p.tribe || '') === tribe
+      ))
+    );
+  }
+
+  getAllTribes(): Observable<{ name: string; slug: string; subfamily: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const tribeMap = new Map<string, { subfamily: string; count: number }>();
+        palms.forEach(p => {
+          const tribe = p.PalmTribe || p.tribe;
+          if (tribe && tribe !== 'Unknown') {
+            const existing = tribeMap.get(tribe);
+            if (existing) {
+              existing.count++;
+            } else {
+              tribeMap.set(tribe, { subfamily: p.PalmSubfamily || '', count: 1 });
+            }
+          }
+        });
+        return Array.from(tribeMap.entries())
+          .map(([name, data]) => ({
+            name,
+            slug: this.slugify(name),
+            subfamily: data.subfamily,
+            count: data.count,
+          }))
+          .sort((a, b) => b.count - a.count);
+      })
+    );
+  }
+
   // Exposer slugify pour utilisation externe (sitemap, liens)
   toSlug(text: string): string {
     return this.slugify(text);

@@ -1,0 +1,108 @@
+<div class="taxonomy-detail-container">
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading taxonomy...</p>
+  </div>
+
+  <div *ngIf="notFound && !loading" class="not-found">
+    <h1>Taxon Not Found</h1>
+    <p>Sorry, we couldn't find information about this taxonomic group.</p>
+    <a routerLink="/palms/taxonomy" class="btn-primary">Browse Taxonomy</a>
+  </div>
+
+  <ng-container *ngIf="!loading && !notFound && species.length > 0">
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item"><a routerLink="/palms">Palms</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item"><a routerLink="/palms/taxonomy">Taxonomy</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item current" aria-current="page"><span>{{ name }}</span></li>
+      </ol>
+    </nav>
+
+    <header class="page-header">
+      <h1>{{ name }}</h1>
+      <p class="page-subtitle">
+        {{ rank === 'subfamily' ? 'Subfamily' : 'Tribe' }} &middot; {{ species.length }} species
+        <span *ngIf="rank === 'tribe' && parentSubfamily"> &middot; {{ parentSubfamily }}</span>
+      </p>
+    </header>
+
+    <section class="stats-row">
+      <div class="stat-card">
+        <span class="stat-value">{{ species.length }}</span>
+        <span class="stat-label">Species</span>
+      </div>
+      <div class="stat-card" *ngIf="avgHeight !== null">
+        <span class="stat-value">{{ avgHeight }} m</span>
+        <span class="stat-label">Avg. height</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ genera.length }}</span>
+        <span class="stat-label">Genera</span>
+      </div>
+      <div class="stat-card" *ngIf="tribes.length > 0">
+        <span class="stat-value">{{ tribes.length }}</span>
+        <span class="stat-label">Tribes</span>
+      </div>
+    </section>
+
+    <section class="description">
+      <p>
+        The {{ rank }} <strong><em>{{ name }}</em></strong> contains
+        <strong>{{ species.length }}</strong> palm species across
+        <strong>{{ genera.length }}</strong> genera<span *ngIf="rank === 'tribe' && parentSubfamily">,
+        within the <strong>{{ parentSubfamily }}</strong> subfamily</span>.
+        <span *ngIf="avgHeight !== null">
+          Species in this group reach an average maximum height of <strong>{{ avgHeight }} meters</strong>.
+        </span>
+      </p>
+    </section>
+
+    <!-- Tribes (only for subfamily) -->
+    <section class="chips-section" *ngIf="tribes.length > 0">
+      <h2>Tribes in {{ name }}</h2>
+      <div class="chips">
+        <a *ngFor="let t of tribes"
+           [routerLink]="['/palms/taxonomy/tribe', t.slug]"
+           class="chip">
+          {{ t.name }} <span class="chip-count">({{ t.count }})</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Genera -->
+    <section class="chips-section" *ngIf="genera.length > 0">
+      <h2>Genera</h2>
+      <div class="chips">
+        <a *ngFor="let g of genera"
+           [routerLink]="['/palms/genus', g.slug]"
+           class="chip">
+          {{ g.name }} <span class="chip-count">({{ g.count }})</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Species Grid -->
+    <section class="species-section">
+      <h2>All Species</h2>
+      <div class="palm-grid">
+        <app-palm-card *ngFor="let palm of displayedSpecies" [palm]="palm"></app-palm-card>
+      </div>
+      <app-paginator
+        [length]="species.length"
+        [pageSize]="pageSize"
+        [pageIndex]="currentPage"
+        (page)="onPageChange($event)">
+      </app-paginator>
+    </section>
+
+    <section class="see-also">
+      <a routerLink="/palms/taxonomy" class="link-back">&larr; All taxonomy</a>
+      <a routerLink="/palms/genus" class="link-back">Browse by genus &rarr;</a>
+    </section>
+  </ng-container>
+</div>

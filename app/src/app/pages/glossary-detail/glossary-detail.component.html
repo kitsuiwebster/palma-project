@@ -1,0 +1,63 @@
+<div class="glossary-detail-container">
+  <div *ngIf="notFound" class="not-found">
+    <h1>Term Not Found</h1>
+    <p>Sorry, we couldn't find this glossary term.</p>
+    <a routerLink="/glossary" class="btn-primary">Browse Glossary</a>
+  </div>
+
+  <ng-container *ngIf="term">
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item"><a routerLink="/glossary">Glossary</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item current" aria-current="page"><span>{{ term.term }}</span></li>
+      </ol>
+    </nav>
+
+    <header class="page-header">
+      <span class="term-category">{{ term.category }}</span>
+      <h1>{{ term.term }}</h1>
+      <p class="term-definition">{{ term.definition }}</p>
+    </header>
+
+    <section class="term-details">
+      <p>{{ term.details }}</p>
+    </section>
+
+    <!-- Link to characteristic page -->
+    <section class="explore-link" *ngIf="term.relatedCharacteristic">
+      <a [routerLink]="['/palms/characteristic', term.relatedCharacteristic.type, term.relatedCharacteristic.value]"
+         class="explore-btn">
+        Explore all {{ term.term.toLowerCase() }} palm species →
+      </a>
+    </section>
+
+    <!-- Example species -->
+    <section class="examples-section" *ngIf="exampleSpecies.length > 0">
+      <h2>Example Species</h2>
+      <div class="palm-grid">
+        <app-palm-card *ngFor="let palm of exampleSpecies" [palm]="palm"></app-palm-card>
+      </div>
+    </section>
+
+    <!-- Related Terms -->
+    <section class="related-terms" *ngIf="getRelatedTerms().length > 0">
+      <h2>Related Terms</h2>
+      <div class="related-grid">
+        <a *ngFor="let related of getRelatedTerms()"
+           [routerLink]="['/glossary', related.slug]"
+           class="related-card">
+          <span class="related-name">{{ related.term }}</span>
+          <span class="related-def">{{ related.definition }}</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="see-also">
+      <a routerLink="/glossary" class="link-back">← All glossary terms</a>
+      <a routerLink="/palms/taxonomy" class="link-back">Palm taxonomy →</a>
+    </section>
+  </ng-container>
+</div>

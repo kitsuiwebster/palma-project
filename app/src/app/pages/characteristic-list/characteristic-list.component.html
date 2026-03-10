@@ -1,0 +1,119 @@
+<div class="characteristic-list-container">
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading characteristics...</p>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item"><a routerLink="/palms">Palms</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item current" aria-current="page"><span>Characteristics</span></li>
+      </ol>
+    </nav>
+
+    <header class="page-header">
+      <h1>Browse Palms by Characteristics</h1>
+      <p class="page-subtitle">Explore palm species by their physical traits and morphology</p>
+    </header>
+
+    <!-- Stem Type -->
+    <section class="trait-section">
+      <h2>Stem Type</h2>
+      <div class="trait-grid">
+        <a *ngFor="let item of stemTypes"
+           [routerLink]="['/palms/characteristic/stem', item.slug]"
+           class="trait-card has-image">
+          <div class="trait-image">
+            <img [src]="'assets/images/cards/stem/' + item.slug + '.jpg'" [alt]="item.label + ' palm'" loading="lazy">
+          </div>
+          <div class="trait-content">
+            <span class="trait-name">{{ item.label }}</span>
+            <span class="trait-count">{{ item.count }} species</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Height Ranges -->
+    <section class="trait-section">
+      <h2>Height</h2>
+      <div class="trait-grid">
+        <a *ngFor="let item of heightRanges"
+           [routerLink]="['/palms/characteristic/height', item.slug]"
+           class="trait-card has-image">
+          <div class="trait-image">
+            <img [src]="'assets/images/cards/height/' + item.slug + '.jpg'" [alt]="item.label + ' palm'" loading="lazy">
+          </div>
+          <div class="trait-content">
+            <span class="trait-name">{{ item.label }}</span>
+            <span class="trait-range">{{ item.range }}</span>
+            <span class="trait-count">{{ item.count }} species</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Fruit Shape -->
+    <section class="trait-section">
+      <h2>Fruit Shape</h2>
+      <div class="trait-grid">
+        <a *ngFor="let item of fruitShapes"
+           [routerLink]="['/palms/characteristic/fruit-shape', item.slug]"
+           class="trait-card has-image">
+          <div class="trait-image">
+            <img [src]="'assets/images/cards/fruit-shape/' + item.slug + '.jpg'" [alt]="item.label + ' palm fruit'" loading="lazy">
+          </div>
+          <div class="trait-content">
+            <span class="trait-name">{{ item.label }}</span>
+            <span class="trait-count">{{ item.count }} species</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Fruit Color -->
+    <section class="trait-section">
+      <h2>Fruit Color</h2>
+      <div class="trait-grid">
+        <a *ngFor="let item of fruitColors"
+           [routerLink]="['/palms/characteristic/fruit-color', item.slug]"
+           class="trait-card has-color">
+          <div class="color-swatch" [style.background]="getColorValue(item.slug)"></div>
+          <div class="trait-content">
+            <span class="trait-name">{{ item.label }}</span>
+            <span class="trait-count">{{ item.count }} species</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Habitat -->
+    <section class="trait-section">
+      <h2>Habitat</h2>
+      <div class="trait-grid">
+        <a *ngFor="let item of habitats"
+           [routerLink]="['/palms/characteristic/habitat', item.slug]"
+           class="trait-card has-image">
+          <div class="trait-image">
+            <img [src]="'assets/images/cards/habitat/' + item.slug + '.jpg'" [alt]="item.label + ' habitat'" loading="lazy">
+          </div>
+          <div class="trait-content">
+            <span class="trait-name">{{ item.label }}</span>
+            <span class="trait-count">{{ item.count }} species</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="see-also">
+      <a routerLink="/palms" class="link-back">← Browse all species</a>
+      <a routerLink="/palms/genus" class="link-back">Browse by genus →</a>
+      <a routerLink="/palms/region" class="link-back">Browse by region →</a>
+      <a routerLink="/palms/taxonomy" class="link-back">Browse by taxonomy →</a>
+    </section>
+  </ng-container>
+</div>

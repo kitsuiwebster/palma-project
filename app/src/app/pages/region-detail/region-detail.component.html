@@ -101,8 +101,14 @@
     <section class="species-section">
       <h2>All Palm Species in {{ regionName }}</h2>
       <div class="palm-grid">
-        <app-palm-card *ngFor="let palm of species" [palm]="palm"></app-palm-card>
+        <app-palm-card *ngFor="let palm of displayedSpecies" [palm]="palm"></app-palm-card>
       </div>
+      <app-paginator
+        [length]="species.length"
+        [pageSize]="pageSize"
+        [pageIndex]="currentPage"
+        (page)="onPageChange($event)">
+      </app-paginator>
     </section>
 
     <!-- See Also -->

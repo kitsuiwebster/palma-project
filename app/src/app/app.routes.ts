@@ -33,10 +33,38 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/region-detail/region-detail.component').then(c => c.RegionDetailComponent)
       },
       {
+        path: 'characteristics',
+        loadComponent: () => import('./pages/characteristic-list/characteristic-list.component').then(c => c.CharacteristicListComponent)
+      },
+      {
+        path: 'characteristic/:type/:value',
+        loadComponent: () => import('./pages/characteristic-detail/characteristic-detail.component').then(c => c.CharacteristicDetailComponent)
+      },
+      {
+        path: 'taxonomy',
+        loadComponent: () => import('./pages/taxonomy-list/taxonomy-list.component').then(c => c.TaxonomyListComponent)
+      },
+      {
+        path: 'taxonomy/subfamily/:slug',
+        loadComponent: () => import('./pages/taxonomy-detail/taxonomy-detail.component').then(c => c.TaxonomyDetailComponent)
+      },
+      {
+        path: 'taxonomy/tribe/:slug',
+        loadComponent: () => import('./pages/taxonomy-detail/taxonomy-detail.component').then(c => c.TaxonomyDetailComponent)
+      },
+      {
         path: ':species',
         loadComponent: () => import('./pages/palm-detail/palm-detail.component').then(c => c.PalmDetailComponent)
       }
     ]
+  },
+  {
+    path: 'glossary',
+    loadComponent: () => import('./pages/glossary-list/glossary-list.component').then(c => c.GlossaryListComponent)
+  },
+  {
+    path: 'glossary/:term',
+    loadComponent: () => import('./pages/glossary-detail/glossary-detail.component').then(c => c.GlossaryDetailComponent)
   },
   {
     path: 'data',

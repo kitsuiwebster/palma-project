@@ -1,0 +1,305 @@
+@import "../../../styles.scss";
+
+.taxonomy-detail-container {
+  padding: $spacing-unit * 4 $spacing-unit * 2;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: $spacing-unit * 2 $spacing-unit;
+  }
+}
+
+// Breadcrumb
+.breadcrumb-nav {
+  margin-bottom: $spacing-unit * 3;
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    gap: $spacing-unit;
+  }
+
+  .breadcrumb-item a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-dark;
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-item.current span {
+    color: $text-secondary;
+    font-weight: 600;
+  }
+
+  .breadcrumb-separator {
+    color: $text-secondary;
+    opacity: 0.5;
+  }
+}
+
+// Header
+.page-header {
+  margin-bottom: $spacing-unit * 3;
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-style: italic;
+    background: linear-gradient(135deg, $primary-dark, $accent-dark);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 0 0 $spacing-unit 0;
+    line-height: 1.1;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .page-subtitle {
+    font-size: 1.1rem;
+    color: $text-secondary;
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+// Stats
+.stats-row {
+  display: flex;
+  gap: $spacing-unit * 2;
+  margin-bottom: $spacing-unit * 4;
+  flex-wrap: wrap;
+
+  .stat-card {
+    background: white;
+    border-radius: $border-radius * 1.5;
+    padding: $spacing-unit * 2 $spacing-unit * 3;
+    box-shadow: $box-shadow-light;
+    border: 1px solid rgba($primary-color, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    transition: $transition-standard;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $box-shadow-medium;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: $primary-dark;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: $text-secondary;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+  }
+}
+
+// Description
+.description {
+  background: linear-gradient(135deg, rgba($primary-color, 0.04), rgba($accent-color, 0.04));
+  border-radius: $border-radius * 1.5;
+  padding: $spacing-unit * 3;
+  margin-bottom: $spacing-unit * 4;
+  border-left: 4px solid $primary-color;
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: $text-dark;
+    margin: 0;
+  }
+}
+
+// Chips Section
+.chips-section {
+  margin-bottom: $spacing-unit * 4;
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $primary-dark;
+    margin-bottom: $spacing-unit * 2;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-unit;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: rgba($primary-color, 0.08);
+    border: 1px solid rgba($primary-color, 0.15);
+    border-radius: 20px;
+    text-decoration: none;
+    color: $primary-dark;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba($primary-color, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .chip-count {
+      color: $text-secondary;
+      font-weight: 400;
+      font-style: normal;
+      margin-left: 4px;
+    }
+  }
+}
+
+// Species Section
+.species-section {
+  margin-bottom: $spacing-unit * 4;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-dark;
+    margin-bottom: $spacing-unit * 3;
+    position: relative;
+    padding-bottom: $spacing-unit;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, $primary-color, $accent-color);
+      border-radius: 3px;
+    }
+  }
+}
+
+// Palm Grid
+.palm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: $spacing-unit * 3;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $spacing-unit * 2.5;
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 1.5;
+  }
+}
+
+// See Also
+.see-also {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $spacing-unit * 2;
+  padding-top: $spacing-unit * 3;
+  border-top: 1px solid rgba($primary-color, 0.1);
+
+  .link-back {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-dark;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Loading & Not Found
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-unit * 12 0;
+
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid $primary-color;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: $spacing-unit * 2;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.not-found {
+  text-align: center;
+  padding: $spacing-unit * 12 0;
+
+  h1 {
+    font-size: 1.8rem;
+    color: $text-dark;
+    margin-bottom: $spacing-unit;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: $spacing-unit * 3;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: $spacing-unit * 1.5 $spacing-unit * 3;
+    background: $primary-color;
+    color: white;
+    border-radius: $border-radius;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $primary-dark;
+    }
+  }
+}

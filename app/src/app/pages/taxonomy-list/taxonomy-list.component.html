@@ -1,0 +1,51 @@
+<div class="taxonomy-list-container">
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading taxonomy...</p>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item"><a routerLink="/palms">Palms</a></li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item current" aria-current="page"><span>Taxonomy</span></li>
+      </ol>
+    </nav>
+
+    <header class="page-header">
+      <h1>Palm Taxonomy</h1>
+      <p class="page-subtitle">Family Arecaceae &middot; 5 subfamilies &middot; {{ tribes.length }} tribes</p>
+    </header>
+
+    <section class="taxonomy-section" *ngFor="let sf of subfamilies">
+      <div class="subfamily-card">
+        <a [routerLink]="['/palms/taxonomy/subfamily', sf.slug]" class="subfamily-header">
+          <div class="sf-image">
+            <img [src]="'assets/images/cards/taxonomy/' + sf.slug + '.jpg'" [alt]="sf.name" loading="lazy">
+          </div>
+          <div class="sf-info">
+            <h2>{{ sf.name }}</h2>
+            <span class="sf-count">{{ sf.count }} species</span>
+          </div>
+        </a>
+        <div class="tribe-grid">
+          <a *ngFor="let tribe of getTribesBySubfamily(sf.name)"
+             [routerLink]="['/palms/taxonomy/tribe', tribe.slug]"
+             class="tribe-card">
+            <span class="tribe-name">{{ tribe.name }}</span>
+            <span class="tribe-count">{{ tribe.count }} species</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="see-also">
+      <a routerLink="/palms" class="link-back">&larr; Browse all species</a>
+      <a routerLink="/palms/genus" class="link-back">Browse by genus &rarr;</a>
+      <a routerLink="/palms/characteristics" class="link-back">Browse by characteristics &rarr;</a>
+    </section>
+  </ng-container>
+</div>
