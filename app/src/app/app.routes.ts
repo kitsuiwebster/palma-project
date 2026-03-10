@@ -21,6 +21,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/genus-detail/genus-detail.component').then(c => c.GenusDetailComponent)
       },
       {
+        path: 'region/:region',
+        loadComponent: () => import('./pages/region-detail/region-detail.component').then(c => c.RegionDetailComponent)
+      },
+      {
         path: ':species',
         loadComponent: () => import('./pages/palm-detail/palm-detail.component').then(c => c.PalmDetailComponent)
       }

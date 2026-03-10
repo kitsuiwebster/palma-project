@@ -9,6 +9,7 @@ const path = require('path');
 
 const BASE_URL = 'https://palma-encyclopedia.com';
 const DATASET_PATH = path.join(__dirname, '..', 'src', 'assets', 'data', 'dataset.txt');
+const REGION_CODES_PATH = path.join(__dirname, '..', 'src', 'assets', 'data', 'region_codes.json');
 const OUTPUT_PATH = path.join(__dirname, '..', 'src', 'sitemap.xml');
 
 function slugify(text) {
@@ -34,24 +35,42 @@ function parseDataset() {
     process.exit(1);
   }
 
+  const nativeRegionIndex = headers.indexOf('NativeRegion');
+
   const species = [];
   const genera = new Set();
+  const regions = new Set();
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
     const cols = lines[i].split('\t');
     const name = cols[specNameIndex]?.trim();
     const genus = genusIndex !== -1 ? cols[genusIndex]?.trim() : null;
+    const nativeRegion = nativeRegionIndex !== -1 ? cols[nativeRegionIndex]?.trim() : null;
     if (name) {
       species.push(name);
     }
     if (genus) {
       genera.add(genus);
     }
+    if (nativeRegion) {
+      const codes = nativeRegion.match(/\b[A-Z]{2,3}\b/g) || [];
+      codes.forEach(code => regions.add(code));
+    }
   }
-  return { species, genera: Array.from(genera).sort() };
+
+  // Filter regions: only include codes that exist in region_codes.json
+  let validRegions = Array.from(regions);
+  try {
+    const regionCodesData = JSON.parse(fs.readFileSync(REGION_CODES_PATH, 'utf-8'));
+    validRegions = validRegions.filter(code => code in regionCodesData);
+  } catch (e) {
+    console.warn('Could not read region_codes.json, including all regions');
+  }
+
+  return { species, genera: Array.from(genera).sort(), regions: validRegions.sort() };
 }
 
-function generateSitemap(speciesList, generaList) {
+function generateSitemap(speciesList, generaList, regionsList) {
   const today = new Date().toISOString().split('T')[0];
 
   const staticPages = [
@@ -102,6 +121,18 @@ function generateSitemap(speciesList, generaList) {
 `;
   }
 
+  // Region pages
+  for (const region of regionsList) {
+    xml += `  <url>
+    <loc>${BASE_URL}/palms/region/${region.toLowerCase()}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+`;
+  }
+
   // Species pages
   for (const species of speciesList) {
     const slug = slugify(species);
@@ -120,10 +151,10 @@ function generateSitemap(speciesList, generaList) {
 }
 
 // Main
-const { species: speciesList, genera: generaList } = parseDataset();
-console.log(`Found ${speciesList.length} species and ${generaList.length} genera in dataset`);
+const { species: speciesList, genera: generaList, regions: regionsList } = parseDataset();
+console.log(`Found ${speciesList.length} species, ${generaList.length} genera, and ${regionsList.length} regions in dataset`);
 
-const totalUrls = 12 + generaList.length + speciesList.length;
-const sitemap = generateSitemap(speciesList, generaList);
+const totalUrls = 12 + generaList.length + regionsList.length + speciesList.length;
+const sitemap = generateSitemap(speciesList, generaList, regionsList);
 fs.writeFileSync(OUTPUT_PATH, sitemap, 'utf-8');
 console.log(`Sitemap generated at ${OUTPUT_PATH} with ${totalUrls} URLs`);

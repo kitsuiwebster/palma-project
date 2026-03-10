@@ -279,6 +279,7 @@ export class PalmDetailComponent implements OnInit {
   }
 
   nativeRegionDisplay: string = '';
+  regionCodes: string[] = [];
 
   getNativeRegion(): string {
     // Use the new format with region codes
@@ -299,6 +300,9 @@ export class PalmDetailComponent implements OnInit {
   private updateFlagsForPalm(): void {
     if (this.palm) {
       this.loadNativeRegionDisplay();
+      // Extract region codes for linking
+      const nativeRegion = this.palm.NativeRegion || this.palm.native_region || '';
+      this.regionCodes = (nativeRegion.match(/\b[A-Z]{2,3}\b/g) || []);
     }
   }
 

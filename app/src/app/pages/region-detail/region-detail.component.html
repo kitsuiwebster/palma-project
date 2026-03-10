@@ -1,0 +1,118 @@
+<div class="region-detail-container">
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading region information...</p>
+  </div>
+
+  <!-- Not Found -->
+  <div *ngIf="notFound && !loading" class="not-found">
+    <h1>Region Not Found</h1>
+    <p>Sorry, we couldn't find palm species for this region.</p>
+    <a routerLink="/palms" class="btn-primary">Browse All Palms</a>
+  </div>
+
+  <!-- Region Content -->
+  <ng-container *ngIf="!loading && !notFound && species.length > 0">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/">Home</a>
+        </li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item">
+          <a routerLink="/palms">Palms</a>
+        </li>
+        <li class="breadcrumb-separator">/</li>
+        <li class="breadcrumb-item current" aria-current="page">
+          <span>{{ regionName }}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="region-header">
+      <div class="region-title-row">
+        <img *ngIf="regionFlag" [src]="regionFlag" [alt]="regionName + ' flag'" class="region-flag">
+        <h1>{{ regionName }}</h1>
+      </div>
+      <p class="region-subtitle">
+        {{ species.length }} native palm species
+        <span *ngIf="genera.length > 0"> &middot; {{ genera.length }} genera</span>
+      </p>
+    </header>
+
+    <!-- Stats Overview -->
+    <section class="region-stats">
+      <div class="stat-card">
+        <span class="stat-value">{{ species.length }}</span>
+        <span class="stat-label">Species</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{{ genera.length }}</span>
+        <span class="stat-label">Genera</span>
+      </div>
+      <div class="stat-card" *ngIf="avgHeight !== null">
+        <span class="stat-value">{{ avgHeight }} m</span>
+        <span class="stat-label">Avg. height</span>
+      </div>
+      <div class="stat-card" *ngIf="erect > 0">
+        <span class="stat-value">{{ erect }}</span>
+        <span class="stat-label">Erect</span>
+      </div>
+      <div class="stat-card" *ngIf="climbers > 0">
+        <span class="stat-value">{{ climbers }}</span>
+        <span class="stat-label">Climbing</span>
+      </div>
+      <div class="stat-card" *ngIf="acaulescent > 0">
+        <span class="stat-value">{{ acaulescent }}</span>
+        <span class="stat-label">Acaulescent</span>
+      </div>
+    </section>
+
+    <!-- Description -->
+    <section class="region-description">
+      <p>
+        <strong>{{ regionName }}</strong> is home to <strong>{{ species.length }}</strong> native palm species
+        across <strong>{{ genera.length }}</strong> genera<span *ngIf="subfamilies.length > 0">,
+        spanning {{ subfamilies.length }} subfamil{{ subfamilies.length === 1 ? 'y' : 'ies' }}
+        ({{ subfamilies.join(', ') }})</span>.
+        <span *ngIf="avgHeight !== null">
+          The average maximum height of palms in this region is <strong>{{ avgHeight }} meters</strong>.
+        </span>
+      </p>
+    </section>
+
+    <!-- Top Genera -->
+    <section class="genera-breakdown" *ngIf="genera.length > 1">
+      <h2>Genera in {{ regionName }}</h2>
+      <div class="genera-chips">
+        <a *ngFor="let g of genera"
+           [routerLink]="['/palms/genus', g.name | slugify]"
+           class="genus-chip">
+          <strong>{{ g.name }}</strong>
+          <span class="chip-count">{{ g.count }}</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Species Grid -->
+    <section class="species-section">
+      <h2>All Palm Species in {{ regionName }}</h2>
+      <div class="palm-grid">
+        <app-palm-card *ngFor="let palm of species" [palm]="palm"></app-palm-card>
+      </div>
+    </section>
+
+    <!-- See Also -->
+    <section class="see-also">
+      <a routerLink="/palms" class="link-back">
+        ← Browse all palm species
+      </a>
+      <a routerLink="/palms/search" class="link-back">
+        Advanced Search →
+      </a>
+    </section>
+  </ng-container>
+</div>

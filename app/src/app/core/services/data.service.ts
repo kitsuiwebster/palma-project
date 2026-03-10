@@ -388,6 +388,38 @@ getPaginatedPalms(page: number, pageSize: number = 20): Observable<PalmTrait[]> 
     );
   }
 
+  // Récupérer les espèces d'une région par code
+  getPalmsByRegionCode(regionCode: string): Observable<PalmTrait[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const code = regionCode.toUpperCase();
+        return palms.filter((p) => {
+          const nativeRegion = p.NativeRegion || '';
+          return new RegExp(`\\b${code}\\b`).test(nativeRegion);
+        });
+      })
+    );
+  }
+
+  // Récupérer la liste de toutes les régions uniques avec nombre d'espèces
+  getAllRegions(): Observable<{ code: string; count: number }[]> {
+    return this.getAllPalms().pipe(
+      map((palms) => {
+        const regionMap = new Map<string, number>();
+        palms.forEach((p) => {
+          const nativeRegion = p.NativeRegion || '';
+          const codes = nativeRegion.match(/\b[A-Z]{2,3}\b/g) || [];
+          codes.forEach((code) => {
+            regionMap.set(code, (regionMap.get(code) || 0) + 1);
+          });
+        });
+        return Array.from(regionMap.entries())
+          .map(([code, count]) => ({ code, count }))
+          .sort((a, b) => b.count - a.count);
+      })
+    );
+  }
+
   // Exposer slugify pour utilisation externe (sitemap, liens)
   toSlug(text: string): string {
     return this.slugify(text);
