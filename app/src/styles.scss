@@ -55,6 +55,12 @@ $box-shadow-medium: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 // Base
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -539,7 +545,6 @@ body {
     font-size: 14px;
   }
 }
-
 
 
 
