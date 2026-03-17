@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { PalmDataComponent } from './pages/palm-data/palm-data.component';
 
 export const routes: Routes = [
   {
@@ -71,27 +72,27 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+        component: PalmDataComponent
       },
       {
         path: 'overview',
-        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+        component: PalmDataComponent
       },
       {
         path: 'dataset',
-        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+        component: PalmDataComponent
       },
       {
         path: 'methodology',
-        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+        component: PalmDataComponent
       },
       {
         path: 'references',
-        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+        component: PalmDataComponent
       },
       {
         path: 'photo-credits',
-        loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
+        component: PalmDataComponent
       }
     ]
   },
