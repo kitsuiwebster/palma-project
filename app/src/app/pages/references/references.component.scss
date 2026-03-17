@@ -266,24 +266,7 @@ $background-dark: #eeeeee; // Gris très clair
         }
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 4px;
-        height: 0;
-        transition: height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      }
-
-      &:hover::before {
-        height: 100%;
-      }
-
       &.trait {
-        &::before {
-          background: linear-gradient(to bottom, $primary-color, $primary-dark);
-        }
 
         .result-badge {
           background-color: rgba($primary-color, 0.15);
@@ -292,10 +275,6 @@ $background-dark: #eeeeee; // Gris très clair
       }
 
       &.reference {
-        &::before {
-          background: linear-gradient(to bottom, $accent-color, $accent-dark);
-        }
-
         .result-badge {
           background-color: rgba($accent-color, 0.15);
           color: $accent-dark;
@@ -376,17 +355,6 @@ $background-dark: #eeeeee; // Gris très clair
     overflow: hidden;
     border: 1px solid rgba($primary-color, 0.1);
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: 3px 0 0 3px;
-    }
-
     &::after {
       content: "";
       position: absolute;
@@ -411,20 +379,7 @@ $background-dark: #eeeeee; // Gris très clair
       font-size: 1.5rem;
       font-weight: 700;
       color: $primary-dark;
-      padding-left: 1rem;
       z-index: 1;
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 4px;
-        height: 80%;
-        background: $accent-color;
-        border-radius: 2px;
-      }
     }
 
     .source-link {
@@ -564,24 +519,9 @@ $background-dark: #eeeeee; // Gris très clair
         background-color: $primary-light;
         transform: translateX(5px);
 
-        &::before {
-          height: 100%;
-        }
-
         .reference-actions {
           opacity: 1;
         }
-      }
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 4px;
-        height: 0;
-        background: linear-gradient(to bottom, $primary-color, $accent-color);
-        transition: height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       }
 
       &:last-child {
@@ -595,7 +535,6 @@ $background-dark: #eeeeee; // Gris très clair
         color: $text-secondary;
         line-height: 1.6;
         padding-right: 2rem;
-        padding-left: 1rem;
       }
 
       .reference-actions {

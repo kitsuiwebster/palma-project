@@ -50,17 +50,6 @@
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: $border-radius 0 0 $border-radius;
-    }
-
     p {
       font-size: 1.15rem;
       color: $text-secondary;
@@ -279,26 +268,10 @@
     position: relative;
     overflow: hidden;
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 0%;
-      background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: 2px;
-      transition: height 0.4s ease;
-    }
-
     &:hover {
       background-color: rgba($primary-color, 0.08);
       transform: translateX(5px);
       box-shadow: 0 5px 15px rgba($primary-color, 0.08);
-
-      &::before {
-        height: 100%;
-      }
 
       .variable-name {
         color: darken($primary-color, 10%);
@@ -333,7 +306,6 @@
       padding: $spacing-unit $spacing-unit * 1.5;
       border-radius: $border-radius;
       align-self: flex-start;
-      border-left: 2px solid rgba($primary-color, 0.2);
       margin-left: $spacing-unit;
 
       .example-value {
@@ -357,7 +329,6 @@
       );
       padding: $spacing-unit $spacing-unit * 1.5;
       border-radius: $border-radius;
-      border-left: 3px solid rgba($accent-color, 0.3);
       margin-left: $spacing-unit;
       margin-top: $spacing-unit;
       line-height: 1.5;
@@ -638,18 +609,6 @@
     overflow: hidden;
     animation: fadeIn 0.6s ease-out;
 
-    /* Left border decoration */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: $border-radius 0 0 $border-radius;
-    }
-
     /* Background decoration */
     &::after {
       content: "";
@@ -713,7 +672,6 @@
         position: relative;
         z-index: 1;
         padding-left: $spacing-unit;
-        border-left: 2px dashed rgba($primary-color, 0.3);
       }
 
       .citation-box {
@@ -975,18 +933,6 @@
     overflow: hidden;
     animation: fadeIn 0.8s ease-out;
   
-    /* Left border decoration */
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: $border-radius 0 0 $border-radius;
-    }
-  
     /* Background decoration */
     &::after {
       content: "";
@@ -1161,17 +1107,6 @@
     border: 1px solid rgba($primary-color, 0.08);
     position: relative;
     overflow: hidden;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 6px;
-      height: 100%;
-      background: linear-gradient(to bottom, $primary-color, $accent-color);
-      border-radius: $border-radius 0 0 $border-radius;
-    }
 
     h3 {
       font-size: 1.5rem;
