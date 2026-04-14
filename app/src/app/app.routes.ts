@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { PalmDataComponent } from './pages/palm-data/palm-data.component';
 
 export const routes: Routes = [
   {
@@ -69,11 +68,11 @@ export const routes: Routes = [
   },
   {
     path: 'data',
-    component: PalmDataComponent
+    loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
   },
   {
     path: 'data/:tab',
-    component: PalmDataComponent
+    loadComponent: () => import('./pages/palm-data/palm-data.component').then(c => c.PalmDataComponent)
   },
   {
     path: 'about',
