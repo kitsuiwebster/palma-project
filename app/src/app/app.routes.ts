@@ -69,32 +69,11 @@ export const routes: Routes = [
   },
   {
     path: 'data',
-    children: [
-      {
-        path: '',
-        component: PalmDataComponent
-      },
-      {
-        path: 'overview',
-        component: PalmDataComponent
-      },
-      {
-        path: 'dataset',
-        component: PalmDataComponent
-      },
-      {
-        path: 'methodology',
-        component: PalmDataComponent
-      },
-      {
-        path: 'references',
-        component: PalmDataComponent
-      },
-      {
-        path: 'photo-credits',
-        component: PalmDataComponent
-      }
-    ]
+    component: PalmDataComponent
+  },
+  {
+    path: 'data/:tab',
+    component: PalmDataComponent
   },
   {
     path: 'about',

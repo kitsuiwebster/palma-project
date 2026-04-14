@@ -61,22 +61,16 @@ export class PalmDataComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Listen to route changes to update active tab
-    this.routeSubscription = this.route.url.subscribe(urlSegments => {
-      const lastSegment = urlSegments[urlSegments.length - 1];
-      if (lastSegment) {
-        const path = lastSegment.path;
-        if (path === 'photo-credits') {
-          this.activeTab = 'photos';
-        } else if (['overview', 'dataset', 'methodology', 'references'].includes(path)) {
-          this.activeTab = path as 'overview' | 'dataset' | 'methodology' | 'references';
-        }
+    this.routeSubscription = this.route.paramMap.subscribe(params => {
+      const tab = params.get('tab');
+      if (tab === 'photo-credits') {
+        this.activeTab = 'photos';
+      } else if (tab && ['overview', 'dataset', 'methodology', 'references'].includes(tab)) {
+        this.activeTab = tab as 'overview' | 'dataset' | 'methodology' | 'references';
       } else {
-        // Default route /data
         this.activeTab = 'overview';
       }
-      
-      // Update SEO meta for current tab
+
       const meta = this.seoMeta[this.activeTab];
       if (meta) {
         this.seoService.update({
@@ -85,11 +79,6 @@ export class PalmDataComponent implements OnInit, OnDestroy {
           jsonLd: this.activeTab === 'dataset' ? this.seoService.getDatasetSchema() : undefined,
         });
       }
-
-      // Scroll to top when route changes
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
     });
   }
 
@@ -99,19 +88,13 @@ export class PalmDataComponent implements OnInit, OnDestroy {
   
   switchTab(tab: 'overview' | 'dataset' | 'methodology' | 'references' | 'photos'): void {
     this.activeTab = tab;
-    // Navigate to the corresponding route
     const routeMap = {
       'overview': '/data/overview',
-      'dataset': '/data/dataset', 
+      'dataset': '/data/dataset',
       'methodology': '/data/methodology',
       'references': '/data/references',
       'photos': '/data/photo-credits'
     };
-    this.router.navigate([routeMap[tab]]);
-    
-    // Scroll to top after tab switch
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 150);
+    this.router.navigateByUrl(routeMap[tab], { replaceUrl: false });
   }
 }
