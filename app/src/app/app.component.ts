@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
     this.checkCurrentRoute();
 
     // Detect route changes to apply full-width for home page
+    let previousUrl = this.router.url;
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -54,10 +55,17 @@ export class AppComponent implements OnInit {
         this.isFullWidthPage = currentUrl === '/' || currentUrl === '/home';
         this.isAboutPage = currentUrl === '/about';
 
-        // Scroll to top on every navigation
-        window.scrollTo({ top: 0, left: 0 });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
+        // Skip scroll-to-top when only switching tabs on the same page
+        const stripFragment = (url: string) => url.split('#')[0];
+        const isDataTabSwitch = currentUrl.startsWith('/data') && previousUrl.startsWith('/data');
+        const isSamePathFragmentChange = stripFragment(currentUrl) === stripFragment(previousUrl);
+        previousUrl = currentUrl;
+
+        if (!isDataTabSwitch && !isSamePathFragmentChange) {
+          window.scrollTo({ top: 0, left: 0 });
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }
 
         // Disable scroll only on home page
         const isHomePage = currentUrl === '/' || currentUrl === '/home';
