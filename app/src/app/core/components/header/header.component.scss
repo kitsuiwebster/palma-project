@@ -217,7 +217,7 @@
         &:hover {
           background: rgba($primary-color, 0.08);
           color: $primary-dark;
-          padding-left: 18px;
+          transform: translateX(4px);
         }
 
         &.highlight {
