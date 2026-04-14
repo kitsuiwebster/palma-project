@@ -88,10 +88,13 @@
           <mat-expansion-panel *ngFor="let genus of (Object.keys(palmsByGenus) | sort)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{genus}} <span class="count">({{getGenusCount(palmsByGenus[genus])}})</span>
+                <span class="genus-title-text">{{genus}} <span class="count">({{getGenusCount(palmsByGenus[genus])}})</span></span>
                 <a class="genus-page-link" [routerLink]="['/palms/genus', genus | slugify]" (click)="$event.stopPropagation()">View genus page</a>
               </mat-panel-title>
             </mat-expansion-panel-header>
+            <a class="genus-page-link-mobile" [routerLink]="['/palms/genus', genus | slugify]">
+              View genus page →
+            </a>
             <mat-nav-list>
               <a class="palm-item animate-card" mat-list-item *ngFor="let palm of palmsByGenus[genus]"
                 [routerLink]="['/palms', getSpeciesName(palm) | slugify]">
