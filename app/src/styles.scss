@@ -31,8 +31,8 @@ $status-unknown:     $ink-faint;
 // ============================================================================
 // TYPOGRAPHIE
 // ============================================================================
-$font-display: 'EB Garamond', 'Garamond', 'Times New Roman', Georgia, serif;
-$font-body:    'Lora', Georgia, 'Times New Roman', serif;
+$font-display: 'Spectral', 'Garamond', 'Times New Roman', Georgia, serif;
+$font-body:    'Spectral', Georgia, 'Times New Roman', serif;
 $font-label:   'Special Elite', 'Courier New', monospace; // étiquettes type "specimen", parcimonieux
 
 // Aliases pour compat avec composants existants qui référencent ces variables
@@ -114,19 +114,21 @@ $paper-texture-strong: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.or
 }
 
 html, body {
-  height: 100%;
   margin: 0;
   font-family: $font-body;
-  background-color: $paper;
-  background-image: $paper-texture;
   color: $ink;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  position: relative;
   width: 100%;
   font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+}
+
+body {
+  background-color: $paper;
+  background-image: $paper-texture;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 body.no-scroll {
@@ -325,8 +327,6 @@ hr,
     transform: translateY(-3px);
     box-shadow: $box-shadow-medium;
     border-color: rgba($gold-aged, 0.7);
-
-    .palm-image { transform: scale(1.04); }
   }
 
   .palm-image-container {
@@ -351,7 +351,6 @@ hr,
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
     filter: sepia(0.12) saturate(0.95);
   }
 
@@ -413,12 +412,12 @@ hr,
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 22px;
+  padding: 11px 22px;
   border-radius: $border-radius-sm;
   font-family: $font-display;
   font-weight: 600;
   font-size: 0.95rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-align: center;
   cursor: pointer;
   transition: $transition-standard;
@@ -428,6 +427,26 @@ hr,
   line-height: 1.2;
 
   &:active { transform: translateY(1px); }
+}
+
+// ============================================================================
+// COMPENSATION OPTIQUE — icônes dans contexte texte all-caps
+// Les caps habitent la moitié haute de leur line-box. Une icône centrée
+// par flex `align-items: center` paraît donc plus basse que le texte.
+// On la remonte de 2px pour rétablir l'équilibre visuel.
+// ============================================================================
+.btn > img,
+.btn > svg,
+.btn > mat-icon,
+.btn .btn-icon,
+.btn .icon,
+.btn > .icon-wrapper,
+.tab-button > .icon-wrapper,
+.tab-button > img,
+.tab-button > .custom-icon,
+.advanced-search-button .icon-wrapper,
+.start-quiz-btn .icon-wrapper {
+  transform: translateY(-2px);
 }
 
 .btn-primary {
