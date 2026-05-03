@@ -1,3 +1,13 @@
-<div class="species-map-container">
-  <div [id]="getMapElementId()" class="species-map"></div>
+<div class="species-map-wrapper">
+  <header class="species-map-header">
+    <span class="map-eyebrow">Plate</span>
+    <h4 class="map-title">Native distribution</h4>
+    <span class="map-legend" aria-label="Legend: green areas indicate native regions">
+      <span class="legend-swatch" aria-hidden="true"></span>
+      <span class="legend-label">Native regions</span>
+    </span>
+  </header>
+  <div class="species-map-container">
+    <div [id]="getMapElementId()" class="species-map"></div>
+  </div>
 </div>
