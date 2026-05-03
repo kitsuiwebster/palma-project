@@ -16,126 +16,104 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
-      border-radius: $border-radius;
+      width: 90px;
+      height: 1px;
+      background: linear-gradient(to right, $gold-aged, rgba($gold-aged, 0));
     }
 
     h2 {
+      font-family: $font-display;
       font-size: 2.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, $primary-dark, $accent-dark);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      font-weight: 600;
+      color: $ink;
       margin: 0 0 $spacing-unit * 1.5 0;
-      letter-spacing: -0.5px;
+      letter-spacing: 0.4px;
+      font-feature-settings: "onum" 1;
     }
 
     p {
-      font-size: 1.2rem;
-      color: $text-secondary;
+      font-family: $font-body;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: $ink-soft;
       margin: 0;
+      line-height: 1.65;
     }
   }
 
   .dataset-overview {
-    background: white;
-    border-radius: $border-radius * 2;
+    @include paper-surface($paper-cream);
+    @include gold-border();
+    border-radius: $border-radius;
     box-shadow: $box-shadow-light;
     padding: $spacing-unit * 3.5;
     margin-bottom: $spacing-unit * 5;
-    border: 1px solid rgba($primary-color, 0.1);
     position: relative;
     overflow: hidden;
 
     p {
-      font-size: 1.15rem;
-      color: $text-secondary;
-      line-height: 1.8;
+      font-family: $font-body;
+      font-size: 1.1rem;
+      color: $ink;
+      line-height: 1.75;
       margin: 0;
       padding-left: $spacing-unit;
     }
   }
 
-  /* Dataset variables section */
+  /* Dataset variables section — registre */
   .dataset-variables {
     display: flex;
     flex-direction: column;
-    gap: $spacing-unit * 3.5;
+    gap: $spacing-unit * 3;
     margin-bottom: $spacing-unit * 5;
     align-items: center;
   }
 
   .variable-group {
     width: 100%;
-    max-width: 800px;
-    background: white;
-    border-radius: $border-radius * 1.5;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.08);
-    border: 1px solid rgba($primary-color, 0.08);
+    max-width: 820px;
+    background-color: $paper-cream;
+    background-image: $paper-texture;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
+    border: 1px solid rgba($gold-aged, 0.5);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     overflow: hidden;
     cursor: pointer;
     position: relative;
     z-index: 1;
 
-    &::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      box-shadow: 0 15px 35px rgba($primary-color, 0.2);
-      opacity: 0;
-      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-
     &:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
+      box-shadow: $box-shadow-medium;
       cursor: default;
-
-      &::after {
-        opacity: 1;
-      }
 
       .group-header {
         cursor: pointer;
       }
 
       .header-icon {
-        transform: scale(1.1) rotate(5deg);
-        background: linear-gradient(
-          135deg,
-          rgba($primary-color, 0.25),
-          rgba($accent-color, 0.25)
-        );
+        background-color: rgba($herb-green, 0.18);
       }
     }
 
     &.expanded {
-      box-shadow: 0 15px 35px rgba($primary-color, 0.15);
+      box-shadow: $box-shadow-medium;
       cursor: default;
 
       .group-header {
-        border-bottom: 1px solid rgba($primary-color, 0.1);
+        border-bottom: 1px solid rgba($gold-aged, 0.5);
 
         .header-icon {
-          background: linear-gradient(
-            135deg,
-            rgba($primary-color, 0.25),
-            rgba($accent-color, 0.25)
-          );
+          background-color: rgba($herb-green, 0.2);
         }
 
         cursor: pointer;
       }
 
       .expand-icon {
-        background-color: rgba($primary-color, 0.1);
+        background-color: rgba($herb-green, 0.12);
       }
 
       .expand-icon .icon-wrapper {
@@ -151,8 +129,9 @@
       .header-icon {
         width: 48px;
         height: 48px;
-        border-radius: 12px;
-        background: rgba($primary-color, 0.1);
+        border-radius: $border-radius-sm;
+        background-color: rgba($herb-green, 0.1);
+        border: 1px solid rgba($herb-green, 0.25);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -173,11 +152,13 @@
 
       h3 {
         flex: 1;
+        font-family: $font-display;
         font-size: 1.4rem;
-        font-weight: 700;
-        color: $primary-dark;
+        font-weight: 600;
+        color: $ink;
         margin: 0;
         transition: color 0.3s ease;
+        letter-spacing: 0.2px;
       }
 
       .expand-icon {
@@ -187,7 +168,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgba($primary-color, 0.05);
+        background-color: rgba($ink-faint, 0.08);
         transition: all 0.3s ease;
 
         .icon-wrapper {
@@ -209,32 +190,28 @@
   .variables-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     padding: 24px;
     max-height: none;
     overflow-y: visible;
 
-    /* Stylized scrollbar */
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
 
     &::-webkit-scrollbar-track {
-      background: rgba($primary-color, 0.05);
-      border-radius: 10px;
+      background: rgba($ink-faint, 0.06);
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba($primary-color, 0.2);
-      border-radius: 10px;
+      background: rgba($ink-faint, 0.35);
 
       &:hover {
-        background: rgba($primary-color, 0.3);
+        background: rgba($ink-faint, 0.55);
       }
     }
 
-    /* Animation for list items */
     .variable-item {
       animation: fadeInUp 0.5s ease forwards;
       opacity: 0;
@@ -258,84 +235,93 @@
     }
   }
 
+  // Lignes alternées style "registre"
   .variable-item {
     display: flex;
     flex-direction: column;
     padding: $spacing-unit * 2;
-    border-radius: $border-radius * 1.5;
-    background-color: rgba($primary-color, 0.03);
+    border-radius: $border-radius-sm;
+    background-color: $paper;
+    border: 1px solid transparent;
+    border-bottom: 1px dashed rgba($gold-aged, 0.4);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 
+    &:nth-child(even) {
+      background-color: rgba($paper-aged, 0.5);
+    }
+
     &:hover {
-      background-color: rgba($primary-color, 0.08);
-      transform: translateX(5px);
-      box-shadow: 0 5px 15px rgba($primary-color, 0.08);
+      background-color: rgba($herb-green, 0.06);
+      border-color: rgba($herb-green, 0.25);
 
       .variable-name {
-        color: darken($primary-color, 10%);
+        color: $herb-green-dark;
       }
     }
 
     .variable-name {
-      font-weight: 700;
-      color: $primary-dark;
+      font-family: $font-display;
+      font-weight: 600;
+      color: $ink;
       margin-bottom: calc($spacing-unit / 1.5);
       font-size: 1.1rem;
       padding-left: $spacing-unit;
       transition: color 0.3s ease;
+      letter-spacing: 0.2px;
     }
 
     .variable-description {
+      font-family: $font-body;
       font-size: 0.95rem;
-      color: $text-secondary;
+      color: $ink-soft;
       margin-bottom: $spacing-unit * 1.5;
-      line-height: 1.6;
+      line-height: 1.65;
       padding-left: $spacing-unit;
     }
 
     .variable-example {
-      font-size: 0.85rem;
-      color: $text-secondary;
-      background: linear-gradient(
-        to right,
-        rgba($primary-color, 0.05),
-        rgba($accent-color, 0.05)
-      );
+      font-family: $font-body;
+      font-size: 0.88rem;
+      color: $ink-soft;
+      background-color: $paper-cream;
+      border: 1px dashed rgba($gold-aged, 0.5);
       padding: $spacing-unit $spacing-unit * 1.5;
-      border-radius: $border-radius;
+      border-radius: $border-radius-sm;
       align-self: flex-start;
       margin-left: $spacing-unit;
+      font-feature-settings: "onum" 1;
 
       .example-value {
-        font-family: "Roboto Mono", monospace;
+        font-family: "Roboto Mono", "Special Elite", monospace;
         font-weight: 600;
-        color: $primary-dark;
-        background-color: rgba(white, 0.7);
+        color: $herb-green-dark;
+        background-color: $paper;
         padding: 2px 6px;
-        border-radius: 4px;
+        border-radius: $border-radius-sm;
         margin-left: 4px;
+        border: 1px solid rgba($gold-aged, 0.4);
       }
     }
 
     .variable-note {
-      font-size: 0.8rem;
-      color: $text-secondary;
-      background: linear-gradient(
-        to right,
-        rgba($accent-color, 0.05),
-        rgba($primary-color, 0.05)
-      );
+      font-family: $font-body;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: $ink-soft;
+      background-color: rgba($paper-aged, 0.6);
+      border-left: 2px solid $herb-green;
       padding: $spacing-unit $spacing-unit * 1.5;
-      border-radius: $border-radius;
+      border-radius: 0 $border-radius-sm $border-radius-sm 0;
       margin-left: $spacing-unit;
       margin-top: $spacing-unit;
-      line-height: 1.5;
+      line-height: 1.55;
 
       strong {
-        color: $accent-dark;
+        color: $herb-green-dark;
         font-weight: 600;
+        font-style: normal;
       }
     }
   }
@@ -343,7 +329,7 @@
   .dataset-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: $spacing-unit * 3.5;
+    gap: $spacing-unit * 3;
     margin-bottom: $spacing-unit * 6;
 
     @media (max-width: 768px) {
@@ -352,57 +338,38 @@
     }
 
     .stats-card {
-      background: white;
-      border-radius: $border-radius * 2;
-      box-shadow: 0 10px 30px rgba($primary-color, 0.08);
+      @include paper-surface($paper-cream);
+      @include gold-border();
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
       padding: $spacing-unit * 3;
-      border: 1px solid rgba($primary-color, 0.08);
       display: flex;
       align-items: flex-start;
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       position: relative;
       overflow: hidden;
 
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(
-          135deg,
-          rgba($primary-color, 0.03),
-          rgba($accent-color, 0.03)
-        );
-        border-radius: 0 0 0 100%;
-        z-index: 0;
-      }
-
       &:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba($primary-color, 0.12);
+        transform: translateY(-4px);
+        box-shadow: $box-shadow-medium;
 
         .stat-icon {
-          transform: scale(1.1) rotate(10deg);
-          background: linear-gradient(135deg, $primary-color, $accent-color);
+          background-color: rgba($herb-green, 0.2);
+          border-color: rgba($herb-green, 0.5);
         }
       }
 
       .stat-icon {
         width: 60px;
         height: 60px;
-        border-radius: 15px;
-        background: linear-gradient(
-          135deg,
-          rgba($primary-color, 0.15),
-          rgba($accent-color, 0.15)
-        );
+        border-radius: $border-radius-sm;
+        background-color: rgba($herb-green, 0.1);
+        border: 1px solid rgba($herb-green, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
         margin-right: $spacing-unit * 2.5;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.4s ease;
         position: relative;
         z-index: 1;
 
@@ -425,29 +392,29 @@
         z-index: 1;
 
         h4 {
-          font-size: 1.15rem;
-          font-weight: 600;
-          color: $text-secondary;
+          font-family: $font-label;
+          font-size: 0.82rem;
+          font-weight: 400;
+          letter-spacing: 1.2px;
+          text-transform: uppercase;
+          color: $ink-soft;
           margin: 0 0 calc($spacing-unit / 1.5) 0;
         }
 
         .stat-value {
-          font-size: 1.8rem;
-          font-weight: 800;
-          background: linear-gradient(
-            to right,
-            darken($primary-color, 10%),
-            darken($accent-color, 5%)
-          );
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
+          font-family: $font-display;
+          font-size: 2.1rem;
+          font-weight: 600;
+          color: $ink;
           margin-bottom: $spacing-unit * 1.5;
+          letter-spacing: 0.3px;
+          font-feature-settings: "onum" 1;
         }
 
         .stat-details {
+          font-family: $font-body;
           font-size: 0.95rem;
-          color: $text-secondary;
+          color: $ink-soft;
           margin: 0;
           line-height: 1.6;
         }
@@ -460,9 +427,10 @@
     margin-bottom: $spacing-unit * 5;
 
     h3 {
+      font-family: $font-display;
       font-size: 1.8rem;
-      font-weight: 700;
-      color: $primary-dark;
+      font-weight: 600;
+      color: $ink;
       margin: 0 0 $spacing-unit * 3 0;
       position: relative;
       display: inline-block;
@@ -473,10 +441,9 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(to right, $primary-color, $accent-color);
-        border-radius: 3px;
+        width: 70px;
+        height: 1px;
+        background: linear-gradient(to right, $gold-aged, rgba($gold-aged, 0));
       }
     }
 
@@ -497,11 +464,11 @@
       min-width: 280px;
       display: flex;
       align-items: center;
-      background: white;
-      border-radius: $border-radius * 1.5;
-      box-shadow: 0 10px 30px rgba($primary-color, 0.08);
+      @include paper-surface($paper-cream);
+      @include gold-border();
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-light;
       padding: $spacing-unit * 2.5;
-      border: 1px solid rgba($primary-color, 0.08);
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       position: relative;
       overflow: hidden;
@@ -510,36 +477,17 @@
         flex: 0 0 100%;
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 100px;
-        height: 100px;
-        background: linear-gradient(
-          135deg,
-          rgba($primary-color, 0.05),
-          rgba($accent-color, 0.05)
-        );
-        border-radius: 50%;
-        transition: all 0.5s ease;
-      }
-
       &:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 40px rgba($primary-color, 0.12);
-
-        &::before {
-          transform: scale(3);
-        }
+        transform: translateY(-4px);
+        box-shadow: $box-shadow-medium;
 
         .api-logo {
-          transform: scale(1.1) rotate(5deg);
+          background-color: rgba($herb-green, 0.12);
         }
 
         .data-count {
-          background-color: rgba($accent-color, 0.2);
+          background-color: rgba($herb-green, 0.18);
+          color: $herb-green-dark;
         }
       }
 
@@ -547,19 +495,21 @@
         width: 70px;
         height: 70px;
         margin-right: $spacing-unit * 2.5;
-        border-radius: 12px;
+        border-radius: $border-radius-sm;
         padding: $spacing-unit;
-        background-color: rgba($primary-color, 0.05);
+        background-color: $paper;
+        border: 1px solid rgba($gold-aged, 0.4);
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.4s ease;
 
         .api-logo-image {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          border-radius: 12px;
+          border-radius: $border-radius-sm;
+          filter: sepia(0.1);
         }
       }
 
@@ -570,67 +520,57 @@
 
         h4 {
           margin: 0 0 calc($spacing-unit / 1.5) 0;
+          font-family: $font-display;
           font-size: 1.3rem;
-          font-weight: 700;
-          color: $primary-dark;
+          font-weight: 600;
+          color: $ink;
         }
 
         p {
           margin: 0 0 $spacing-unit * 1.2 0;
+          font-family: $font-body;
           font-size: 0.95rem;
-          color: $text-secondary;
-          line-height: 1.5;
+          color: $ink-soft;
+          line-height: 1.55;
         }
 
         .data-count {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: darken($accent-color, 10%);
-          background-color: rgba($accent-color, 0.1);
+          font-family: $font-label;
+          font-size: 0.78rem;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          font-weight: 400;
+          color: $ink-soft;
+          background-color: $paper-aged;
+          border: 1px solid rgba($gold-aged, 0.5);
           padding: calc($spacing-unit / 1.5) $spacing-unit * 1.2;
-          border-radius: 30px;
+          border-radius: $border-radius-sm;
           display: inline-block;
           transition: all 0.3s ease;
+          font-feature-settings: "onum" 1;
         }
       }
     }
   }
 
-  // UPDATED DATA USAGE SECTION
+  // DATA USAGE SECTION
   .data-usage {
-    background: white;
-    border-radius: $border-radius * 2;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.1);
+    @include paper-surface($paper-cream);
+    @include gold-border();
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
     padding: $spacing-unit * 3.5;
     margin-top: $spacing-unit * 5;
     margin-bottom: $spacing-unit * 5;
-    border: 1px solid rgba($primary-color, 0.08);
     position: relative;
     overflow: hidden;
     animation: fadeIn 0.6s ease-out;
 
-    /* Background decoration */
-    &::after {
-      content: "";
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(
-        135deg,
-        rgba($primary-color, 0.05),
-        rgba($accent-color, 0.05)
-      );
-      border-radius: 50%;
-      z-index: 0;
-      opacity: 0.6;
-    }
-
     h3 {
+      font-family: $font-display;
       font-size: 1.6rem;
-      font-weight: 700;
-      color: $primary-dark;
+      font-weight: 600;
+      color: $ink;
       margin: 0 0 $spacing-unit * 2 0;
       position: relative;
       z-index: 1;
@@ -641,8 +581,9 @@
         width: 36px;
         height: 36px;
         margin-right: $spacing-unit * 1.5;
-        border-radius: 8px;
-        background-color: rgba($primary-color, 0.1);
+        border-radius: $border-radius-sm;
+        background-color: rgba($herb-green, 0.1);
+        border: 1px solid rgba($herb-green, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -665,34 +606,37 @@
       z-index: 1;
 
       p {
+        font-family: $font-body;
         font-size: 1.1rem;
-        color: $text-secondary;
+        color: $ink;
         margin-bottom: $spacing-unit * 3;
-        line-height: 1.7;
+        line-height: 1.75;
         position: relative;
         z-index: 1;
         padding-left: $spacing-unit;
       }
 
       .citation-box {
-        background-color: rgba($primary-color, 0.04);
-        border-radius: $border-radius;
+        background-color: $paper;
+        background-image: $paper-texture;
+        border-radius: $border-radius-sm;
         padding: $spacing-unit * 2;
-        box-shadow: 0 4px 15px rgba($primary-color, 0.06);
-        border: 1px solid rgba($primary-color, 0.08);
+        box-shadow: $box-shadow-light;
+        border: 1px dashed rgba($gold-aged, 0.55);
         position: relative;
         transition: all 0.3s ease;
 
         &:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba($primary-color, 0.1);
+          transform: translateY(-2px);
+          box-shadow: $box-shadow-medium;
         }
 
         h4 {
           margin: 0 0 $spacing-unit 0;
+          font-family: $font-display;
           font-size: 1.1rem;
           font-weight: 600;
-          color: $primary-dark;
+          color: $ink;
           display: flex;
           align-items: center;
 
@@ -700,8 +644,9 @@
             width: 24px;
             height: 24px;
             margin-right: $spacing-unit;
-            border-radius: 6px;
-            background-color: rgba($accent-color, 0.1);
+            border-radius: $border-radius-sm;
+            background-color: rgba($gold-aged, 0.2);
+            border: 1px solid rgba($gold-aged, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -720,37 +665,37 @@
         }
 
         .citation {
-          font-family: $font-secondary;
-          font-size: 0.95rem;
-          color: $text-secondary;
-          padding: $spacing-unit * 1.5;
-          background-color: white;
-          border-radius: $border-radius;
+          font-family: $font-display;
+          font-style: italic;
+          font-size: 0.98rem;
+          color: $ink-soft;
+          padding: $spacing-unit * 2;
+          background-color: $paper-cream;
+          border-radius: $border-radius-sm;
           margin-bottom: $spacing-unit * 2;
-          border: 1px solid rgba($primary-color, 0.1);
-          line-height: 1.6;
+          border: 1px solid rgba($gold-aged, 0.4);
+          line-height: 1.65;
           position: relative;
 
-          /* Quotation mark decoration */
           &::before {
-            content: "\201C"; /* Code Unicode pour guillemet ouvrant */
+            content: "\201C";
             position: absolute;
-            top: -10px;
+            top: -8px;
             left: 10px;
-            font-size: 40px;
-            color: rgba($primary-color, 0.2);
-            font-family: Georgia, serif;
+            font-size: 44px;
+            color: rgba($gold-aged, 0.6);
+            font-family: $font-display, Georgia, serif;
             line-height: 1;
           }
 
           &::after {
-            content: "\201D"; /* Code Unicode pour guillemet fermant */
+            content: "\201D";
             position: absolute;
-            bottom: -30px;
+            bottom: -28px;
             right: 10px;
-            font-size: 40px;
-            color: rgba($primary-color, 0.2);
-            font-family: Georgia, serif;
+            font-size: 44px;
+            color: rgba($gold-aged, 0.6);
+            font-family: $font-display, Georgia, serif;
             line-height: 1;
           }
         }
@@ -758,52 +703,35 @@
     }
   }
 
-  // UPDATED DATASET DOWNLOAD SECTION
+  // DATASET DOWNLOAD SECTION
   .dataset-download {
-    background: white;
-    border-radius: $border-radius * 2;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.1);
+    @include paper-surface($paper-cream);
+    @include gold-border();
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
     padding: $spacing-unit * 4;
     margin-top: $spacing-unit * 5;
     margin-bottom: $spacing-unit * 5;
-    border: 1px solid rgba($primary-color, 0.08);
     position: relative;
     overflow: hidden;
     animation: fadeIn 0.8s ease-out;
 
-    /* Top gradient line */
     &::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 6px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
+      height: 2px;
+      background: linear-gradient(to right, $gold-aged, rgba($gold-aged, 0));
       z-index: 1;
     }
 
-    /* Background decoration */
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: -100px;
-      right: -100px;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(
-        circle,
-        rgba($primary-color, 0.04) 0%,
-        rgba($accent-color, 0.04) 100%
-      );
-      border-radius: 50%;
-      z-index: 0;
-    }
-
     h3 {
+      font-family: $font-display;
       font-size: 1.6rem;
-      font-weight: 700;
-      color: $primary-dark;
+      font-weight: 600;
+      color: $ink;
       margin: 0 0 $spacing-unit * 2 0;
       position: relative;
       z-index: 1;
@@ -814,8 +742,9 @@
         width: 40px;
         height: 40px;
         margin-right: $spacing-unit * 1.5;
-        border-radius: 10px;
-        background-color: rgba($primary-color, 0.08);
+        border-radius: $border-radius-sm;
+        background-color: rgba($herb-green, 0.1);
+        border: 1px solid rgba($herb-green, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -841,76 +770,47 @@
     position: relative;
     z-index: 1;
     justify-content: flex-start;
-  
+
     @media (max-width: 768px) {
       flex-direction: column;
       gap: $spacing-unit * 1.5;
     }
-  
+
     .btn-outline {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 150px;  // Réduit de 180px à 150px
-      padding: $spacing-unit * 1.2 $spacing-unit * 2;  // Réduit le padding
-      border-radius: $border-radius * 2;  // Un peu moins arrondi (de 3 à 2)
-      border: 2px solid rgba($primary-color, 0.2);
-      background: white;
-      color: $primary-dark;
-      font-weight: 600;
-      font-size: 0.95rem;  // Légèrement plus petit
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      min-width: 150px;
+      padding: $spacing-unit * 1.2 $spacing-unit * 2;
+      border-radius: $border-radius-sm;
+      border: 1.5px solid $ink;
+      background: transparent;
+      color: $ink;
+      font-family: $font-label;
+      font-weight: 400;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba($primary-color, 0.05);
-      
-      &::after {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle,
-          rgba($primary-color, 0.1) 0%,
-          transparent 70%
-        );
-        opacity: 0;
-        transform: scale(0.8);
-        transition: all 0.4s ease;
-        z-index: -1;
-      }
-  
+
       &:hover {
-        background-color: $primary-color;
-        color: white;
-        border-color: $primary-color;
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba($primary-color, 0.2);
-        
-        &::after {
-          opacity: 0.2;
-          transform: scale(1);
-        }
-  
-        .icon-wrapper {
-          transform: translateY(-3px);
+        background-color: $ink;
+        color: $paper;
+        border-color: $ink;
+
+        .icon-wrapper .custom-icon {
           filter: brightness(0) invert(1);
         }
       }
-  
-      &:active {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 10px rgba($primary-color, 0.2);
-      }
-  
+
       .icon-wrapper {
-        width: 20px;  // Réduit de 24px à 20px
-        height: 20px;  // Réduit de 24px à 20px
-        margin-right: $spacing-unit;  // Réduit la marge
+        width: 18px;
+        height: 18px;
+        margin-right: $spacing-unit;
         transition: all 0.3s ease;
-  
+
         .custom-icon {
           width: 100%;
           height: 100%;
@@ -920,60 +820,45 @@
     }
   }
 
-  // GitHub Repository Section
-.huggingface-repository {
-    background: white;
-    border-radius: $border-radius * 2;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.1);
+  // Repository Section
+  .huggingface-repository {
+    @include paper-surface($paper-cream);
+    @include gold-border();
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
     padding: $spacing-unit * 3.5;
     margin-top: $spacing-unit * 5;
     margin-bottom: $spacing-unit * 5;
-    border: 1px solid rgba($primary-color, 0.08);
     position: relative;
     overflow: hidden;
     animation: fadeIn 0.8s ease-out;
-  
-    /* Background decoration */
-    &::after {
-      content: "";
-      position: absolute;
-      top: -100px;
-      left: -100px;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(
-        circle,
-        rgba($primary-color, 0.04) 0%,
-        rgba($accent-color, 0.04) 100%
-      );
-      border-radius: 50%;
-      z-index: 0;
-    }
-  
+
     h3 {
+      font-family: $font-display;
       font-size: 1.6rem;
-      font-weight: 700;
-      color: $primary-dark;
+      font-weight: 600;
+      color: $ink;
       margin: 0 0 $spacing-unit * 2 0;
       position: relative;
       z-index: 1;
       display: flex;
       align-items: center;
-  
+
       .header-icon {
         width: 40px;
         height: 40px;
         margin-right: $spacing-unit * 1.5;
-        border-radius: 10px;
-        background-color: rgba($primary-color, 0.08);
+        border-radius: $border-radius-sm;
+        background-color: rgba($herb-green, 0.1);
+        border: 1px solid rgba($herb-green, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
-  
+
         .icon-wrapper {
           width: 26px;
           height: 26px;
-  
+
           .custom-icon {
             width: 100%;
             height: 100%;
@@ -982,110 +867,83 @@
         }
       }
     }
-  
+
     p {
+      font-family: $font-body;
       font-size: 1.1rem;
-      color: $text-secondary;
+      color: $ink;
       margin-bottom: $spacing-unit * 3;
-      line-height: 1.7;
+      line-height: 1.75;
       position: relative;
       z-index: 1;
       padding-left: $spacing-unit * 0.5;
     }
-  
+
     .repository-links {
       display: flex;
       gap: $spacing-unit * 2.5;
       flex-wrap: wrap;
       position: relative;
       z-index: 1;
-      
+
       @media (max-width: 768px) {
         flex-direction: column;
         gap: $spacing-unit * 1.5;
       }
-      
+
       .btn-repository {
         display: flex;
         align-items: center;
         justify-content: space-between;
         min-width: 220px;
         padding: $spacing-unit * 1.2 $spacing-unit * 2;
-        border-radius: $border-radius * 1.5;
-        border: 2px solid rgba($primary-color, 0.2);
-        background: white;
-        color: $primary-dark;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: $border-radius-sm;
+        border: 1.5px solid $ink;
+        background: transparent;
+        color: $ink;
+        font-family: $font-label;
+        font-weight: 400;
+        font-size: 0.88rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
         text-decoration: none;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 6px rgba($primary-color, 0.05);
-        
-        &::after {
-          content: "";
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(
-            circle,
-            rgba($primary-color, 0.1) 0%,
-            transparent 70%
-          );
-          opacity: 0;
-          transform: scale(0.8);
-          transition: all 0.4s ease;
-          z-index: -1;
-        }
-        
+
         &:hover {
-          background-color: $primary-color;
-          color: white;
-          border-color: $primary-color;
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba($primary-color, 0.15);
-          
-          &::after {
-            opacity: 0.2;
-            transform: scale(1);
-          }
-          
+          background-color: $ink;
+          color: $paper;
+          border-color: $ink;
+
           .icon-wrapper, .arrow-icon {
             filter: brightness(0) invert(1);
           }
         }
-        
-        &:active {
-          transform: translateY(-2px);
-          box-shadow: 0 5px 10px rgba($primary-color, 0.15);
-        }
-        
+
         .icon-wrapper {
           width: 20px;
           height: 20px;
           margin-right: $spacing-unit;
           transition: all 0.3s ease;
-          
+
           .custom-icon {
             width: 100%;
             height: 100%;
             object-fit: contain;
           }
         }
-        
+
         span {
           flex: 1;
         }
-        
+
         .arrow-icon {
           width: 16px;
           height: 16px;
           margin-left: $spacing-unit;
           transition: all 0.3s ease;
-          
+
           .custom-icon {
             width: 100%;
             height: 100%;
@@ -1100,46 +958,48 @@
       display: block;
       width: 100%;
       margin-top: $spacing-unit * 2;
-      border: 1px solid rgba($primary-color, 0.15);
-      border-radius: $border-radius;
+      border: 1px solid rgba($gold-aged, 0.5);
+      border-radius: $border-radius-sm;
       position: relative;
       z-index: 1;
-      background: white;
+      background: $paper;
     }
   }
 
   // Export section styles
   .export-section {
-    background: white;
-    border-radius: $border-radius * 2;
-    box-shadow: 0 10px 30px rgba($primary-color, 0.1);
+    @include paper-surface($paper-cream);
+    @include gold-border();
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
     padding: $spacing-unit * 3;
     margin: $spacing-unit * 3 0;
-    border: 1px solid rgba($primary-color, 0.08);
     position: relative;
     overflow: hidden;
 
     h3 {
+      font-family: $font-display;
       font-size: 1.5rem;
-      font-weight: 700;
-      color: $primary-dark;
+      font-weight: 600;
+      color: $ink;
       margin: 0 0 $spacing-unit 0;
       position: relative;
       z-index: 1;
     }
 
     p {
-      color: $text-secondary;
+      font-family: $font-body;
+      color: $ink-soft;
       margin-bottom: $spacing-unit * 2;
       font-size: 1.05rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .export-buttons {
       display: flex;
       gap: $spacing-unit * 2;
       flex-wrap: wrap;
-      
+
       @media (max-width: 768px) {
         flex-direction: column;
         gap: $spacing-unit * 1.5;
@@ -1150,32 +1010,28 @@
         flex-direction: column;
         align-items: center;
         padding: $spacing-unit * 1.5 $spacing-unit * 2;
-        background: white;
-        border: 2px solid rgba($primary-color, 0.2);
-        border-radius: $border-radius;
+        background-color: $paper;
+        border: 1.5px solid $ink;
+        border-radius: $border-radius-sm;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba($primary-dark, 0.08);
         min-width: 180px;
         flex: 1;
 
         &:hover {
-          background: $primary-color;
-          color: white;
-          border-color: $primary-color;
-          transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba($primary-dark, 0.15);
+          background-color: $ink;
+          border-color: $ink;
 
-          .icon-wrapper {
+          .icon-wrapper .custom-icon {
             filter: brightness(0) invert(1);
           }
 
           span {
-            color: white;
+            color: $paper;
           }
 
           small {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba($paper, 0.85);
           }
         }
 
@@ -1193,16 +1049,20 @@
         }
 
         span {
-          font-weight: 600;
-          font-size: 0.95rem;
+          font-family: $font-label;
+          font-weight: 400;
+          font-size: 0.85rem;
+          letter-spacing: 1px;
+          text-transform: uppercase;
           margin-bottom: $spacing-unit * 0.5;
-          color: $primary-dark;
+          color: $ink;
           transition: color 0.3s ease;
         }
 
         small {
-          font-size: 0.8rem;
-          color: $text-secondary;
+          font-family: $font-body;
+          font-size: 0.82rem;
+          color: $ink-soft;
           text-align: center;
           transition: color 0.3s ease;
         }
@@ -1227,18 +1087,21 @@
   display: flex;
   align-items: center;
   padding: $spacing-unit $spacing-unit * 1.5;
-  border-radius: $border-radius;
-  border: 1px solid rgba($primary-color, 0.2);
-  background: white;
-  color: $text-secondary;
-  font-size: 0.9rem;
-  font-weight: 600;
+  border-radius: $border-radius-sm;
+  border: 1.5px solid $ink-faint;
+  background: transparent;
+  color: $ink-soft;
+  font-family: $font-label;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 400;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: rgba($primary-color, 0.05);
-    border-color: rgba($primary-color, 0.3);
-    transform: translateY(-2px);
+    background-color: $ink;
+    color: $paper;
+    border-color: $ink;
   }
 
   .icon-wrapper {
@@ -1270,22 +1133,24 @@
   object-fit: contain;
 }
 
-// Toast notification
+// Toast notification — encre
 .toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #4caf50;
-  color: white;
+  background-color: $ink;
+  color: $paper;
+  border: 1px solid $gold-aged;
   padding: 12px 20px;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: $border-radius-sm;
+  box-shadow: $box-shadow-medium;
   transform: translateY(100px);
   opacity: 0;
   transition: all 0.3s ease;
   z-index: 1000;
-  font-size: 0.9rem;
-  
+  font-family: $font-body;
+  font-size: 0.92rem;
+
   &.show {
     transform: translateY(0);
     opacity: 1;

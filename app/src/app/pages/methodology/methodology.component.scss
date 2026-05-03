@@ -1,62 +1,66 @@
+@import "../../../styles.scss";
+
 .methodology-section {
   .section-header {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     position: relative;
-    padding-bottom: 8px;
+    padding-bottom: 12px;
 
     &::after {
       content: "";
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(to right, #4caf50, #2196f3);
-      border-radius: 4px;
+      width: 90px;
+      height: 1px;
+      background: linear-gradient(to right, $gold-aged, rgba($gold-aged, 0));
     }
 
     h2 {
+      font-family: $font-display;
       font-size: 2.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #2c3e50, #34495e);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin: 0 0 6px 0;
-      letter-spacing: -0.5px;
+      font-weight: 600;
+      color: $ink;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.4px;
+      font-feature-settings: "onum" 1;
     }
 
     p {
-      font-size: 1.2rem;
-      color: #777;
+      font-family: $font-body;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: $ink-soft;
       margin: 0;
-      max-width: 800px;
+      max-width: 820px;
+      line-height: 1.65;
     }
   }
 
   .method-steps {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-bottom: 20px;
+    gap: 18px;
+    margin-bottom: 24px;
   }
 
   .method-step {
     display: flex;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(76, 175, 80, 0.05);
+    background-color: $paper-cream;
+    background-image: $paper-texture;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
+    border: 1px solid rgba($gold-aged, 0.5);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      transform: translateY(-3px);
+      box-shadow: $box-shadow-medium;
 
       .step-icon {
-        transform: scale(1.1) rotate(5deg);
-        background: linear-gradient(135deg, #4caf50, #2196f3);
+        transform: scale(1.05);
+        background-color: rgba($herb-green, 0.18);
       }
     }
 
@@ -64,12 +68,12 @@
       flex-direction: column;
 
       .step-content {
-        padding: 15px; /* Plus de padding sur mobile */
+        padding: 16px;
       }
 
       .step-icon {
-        margin-bottom: 10px; /* Marge en bas sur mobile */
-        align-self: flex-start; /* Aligner à gauche sur mobile */
+        margin-bottom: 10px;
+        align-self: flex-start;
       }
     }
 
@@ -78,34 +82,40 @@
       align-items: center;
       justify-content: center;
       min-width: 80px;
-      background: linear-gradient(135deg, #4caf50, #81c784);
-      color: white;
-      font-size: 1.8rem;
-      font-weight: 700;
+      background-color: $ink;
+      color: $paper;
+      font-family: $font-display;
+      font-size: 1.9rem;
+      font-weight: 600;
+      font-feature-settings: "onum" 1;
+      border-right: 1px solid rgba($gold-aged, 0.3);
 
       @media (max-width: 768px) {
         min-height: 60px;
+        border-right: none;
+        border-bottom: 1px solid rgba($gold-aged, 0.3);
       }
     }
 
     .step-content {
-      padding: 12px;
+      padding: 16px;
       flex: 1;
       display: flex;
-      align-items: center; /* Centre verticalement */
+      align-items: center;
 
       .step-icon {
         width: 48px;
         height: 48px;
-        border-radius: 12px;
-        background: rgba(76, 175, 80, 0.1);
+        border-radius: $border-radius-sm;
+        background-color: rgba($herb-green, 0.1);
+        border: 1px solid rgba($herb-green, 0.25);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
-        transition: all 0.4s ease;
+        margin-right: 18px;
+        transition: all 0.3s ease;
         flex-shrink: 0;
-        align-self: center; /* Force l'alignement vertical au centre */
+        align-self: center;
 
         .icon-wrapper {
           width: 26px;
@@ -124,16 +134,19 @@
 
         h3 {
           margin: 0 0 8px 0;
+          font-family: $font-display;
           font-size: 1.3rem;
-          font-weight: 700;
-          color: #2c3e50;
+          font-weight: 600;
+          color: $ink;
+          letter-spacing: 0.2px;
         }
 
         p {
           margin: 0;
+          font-family: $font-body;
           font-size: 1rem;
-          color: #777;
-          line-height: 1.6;
+          color: $ink-soft;
+          line-height: 1.65;
         }
       }
     }

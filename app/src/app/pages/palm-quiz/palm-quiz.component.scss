@@ -1,10 +1,14 @@
-// Palm Quiz Component Styles
+@import "../../../styles.scss";
+
+// Palm Quiz Component Styles - planche d'examen botanique
 
 .quiz-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
   min-height: 80vh;
+  font-family: $font-body;
+  color: $ink;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -18,10 +22,12 @@
     margin-bottom: 2rem;
 
     h1 {
+      font-family: $font-display;
       font-size: 2.5rem;
-      font-weight: 700;
-      color: #2d5a27;
+      font-weight: 600;
+      color: $ink;
       margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
 
       @media (max-width: 768px) {
         font-size: 2rem;
@@ -29,8 +35,10 @@
     }
 
     .subtitle {
+      font-family: $font-body;
+      font-style: italic;
       font-size: 1.1rem;
-      color: #666;
+      color: $ink-soft;
       font-weight: 400;
     }
   }
@@ -39,16 +47,18 @@
 
 // Configuration Section
 .config-section {
-  background: white;
-  border-radius: 16px;
+  @include paper-surface($paper-cream);
+  @include gold-border(1px);
+  border-radius: $border-radius;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-  border: 1px solid #e9ecef;
+  box-shadow: $box-shadow-light;
 
   h3 {
+    font-family: $font-display;
     margin-bottom: 1.5rem;
-    color: #2d5a27;
+    color: $ink;
     font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   .config-group {
@@ -56,28 +66,39 @@
 
     label {
       display: block;
-      font-weight: 600;
+      font-family: $font-label;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
       margin-bottom: 0.75rem;
-      color: #495057;
+      color: $ink-soft;
 
       small {
+        font-family: $font-body;
         font-weight: 400;
-        color: #6c757d;
+        font-style: italic;
+        text-transform: none;
+        letter-spacing: 0;
+        color: $ink-faint;
       }
     }
 
     .form-select {
       width: 100%;
       padding: 0.75rem 1rem;
-      border: 2px solid #e9ecef;
-      border-radius: 8px;
+      background-color: $paper;
+      border: 1px solid $paper-deep;
+      border-radius: $border-radius-sm;
+      font-family: $font-body;
       font-size: 1rem;
+      color: $ink;
       transition: border-color 0.3s ease;
 
       &:focus {
         outline: none;
-        border-color: #52ab4c;
-        box-shadow: 0 0 0 3px rgba(82, 171, 76, 0.1);
+        border-color: $herb-green;
+        box-shadow: 0 0 0 2px rgba($herb-green, 0.15);
       }
     }
   }
@@ -91,8 +112,9 @@
   gap: 0.75rem;
 
   .category-option {
-    border: 2px solid #e9ecef;
-    border-radius: 8px;
+    border: 1px solid $paper-deep;
+    background-color: $paper;
+    border-radius: $border-radius-sm;
     padding: 0.75rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -101,13 +123,14 @@
     gap: 0.5rem;
 
     &:hover {
-      border-color: #52ab4c;
-      background-color: #f8fdf8;
+      border-color: $herb-green;
+      background-color: rgba($herb-green, 0.05);
     }
 
     &.selected {
-      border-color: #52ab4c;
-      background-color: #f0f8f0;
+      border-color: $herb-green;
+      background-color: rgba($herb-green, 0.1);
+      box-shadow: inset 0 0 0 1px $herb-green;
     }
 
     .category-icon {
@@ -115,8 +138,10 @@
     }
 
     .category-label {
-      font-size: 0.9rem;
+      font-family: $font-body;
+      font-size: 0.95rem;
       font-weight: 500;
+      color: $ink;
     }
   }
 }
@@ -131,11 +156,13 @@
     gap: 0.5rem;
     cursor: pointer;
     margin-bottom: 0.5rem;
+    font-family: $font-body;
+    color: $ink;
 
     input[type="checkbox"] {
       width: 18px;
       height: 18px;
-      accent-color: #52ab4c;
+      accent-color: $herb-green;
     }
   }
 
@@ -146,32 +173,39 @@
   }
 }
 
-// Start Quiz Button
+// Start Quiz Button - tampon style
 .start-quiz-btn {
   width: 100%;
   padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #52ab4c 0%, #2d5a27 100%);
-  color: white;
-  border: none;
-  border-radius: 12px;
+  font-family: $font-label;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: transparent;
+  color: $herb-green-dark;
+  border: 1.5px solid $herb-green;
+  border-radius: $border-radius-sm;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
 
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(82, 171, 76, 0.3);
+    background-color: $herb-green;
+    color: $paper;
+    transform: translateY(-1px);
+    box-shadow: $box-shadow-medium;
   }
 
   &:disabled {
-    opacity: 0.7;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
   &.loading {
-    background: #6c757d;
+    background: $paper-aged;
+    color: $ink-soft;
+    border-color: $paper-deep;
   }
 }
 
@@ -187,36 +221,44 @@
       margin-bottom: 0.5rem;
 
       .question-counter {
-        font-weight: 600;
-        color: #2d5a27;
+        font-family: $font-label;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: $herb-green-dark;
       }
 
       .time-remaining {
+        font-family: $font-display;
+        font-feature-settings: "onum" 1;
         font-weight: 600;
-        color: #dc3545;
+        font-size: 1.05rem;
+        color: $seal-red;
       }
     }
 
     .progress-bar {
-      height: 8px;
-      background-color: #e9ecef;
-      border-radius: 4px;
+      height: 6px;
+      background-color: $paper-aged;
+      border: 1px solid $paper-deep;
+      border-radius: 0;
       overflow: hidden;
 
       .progress-fill {
         height: 100%;
-        background: linear-gradient(90deg, #52ab4c 0%, #2d5a27 100%);
+        background: $herb-green;
         transition: width 0.3s ease;
       }
     }
   }
 
   .question-container {
-    background: white;
-    border-radius: 16px;
+    @include paper-surface($paper-cream);
+    @include gold-border(1px);
+    border-radius: $border-radius;
     padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e9ecef;
+    box-shadow: $box-shadow-light;
 
     .question-header {
       margin-bottom: 1.5rem;
@@ -228,12 +270,15 @@
 
         .category-badge {
           padding: 0.25rem 0.75rem;
-          border-radius: 20px;
-          font-size: 0.8rem;
+          border-radius: $border-radius-sm;
+          font-family: $font-label;
+          font-size: 0.72rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
           font-weight: 500;
-          background-color: #f8f9fa;
-          color: #495057;
-          border: 1px solid #dee2e6;
+          background-color: $paper-aged;
+          color: $ink-soft;
+          border: 1px solid $paper-deep;
         }
       }
     }
@@ -245,8 +290,9 @@
       .quiz-image {
         max-width: 100%;
         max-height: 300px;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: $border-radius-sm;
+        border: 1px solid $paper-deep;
+        box-shadow: $box-shadow-light;
       }
     }
 
@@ -254,10 +300,12 @@
       margin-bottom: 2rem;
 
       h2 {
+        font-family: $font-display;
         font-size: 1.5rem;
         font-weight: 600;
-        color: #2d5a27;
+        color: $ink;
         line-height: 1.4;
+        letter-spacing: 0.01em;
 
         @media (max-width: 768px) {
           font-size: 1.3rem;
@@ -271,8 +319,9 @@
       margin-bottom: 2rem;
 
       .answer-option {
-        border: 2px solid #e9ecef;
-        border-radius: 12px;
+        border: 1px solid $paper-deep;
+        background-color: $paper;
+        border-radius: $border-radius-sm;
         padding: 1rem 1.5rem;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -280,27 +329,30 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
+        font-family: $font-body;
+        color: $ink;
 
         &:hover:not(.disabled) {
-          border-color: #52ab4c;
-          background-color: #f8fdf8;
+          border-color: $herb-green;
+          background-color: rgba($herb-green, 0.05);
         }
 
         &.selected:not(.disabled) {
-          border-color: #52ab4c;
-          background-color: #f0f8f0;
+          border-color: $herb-green;
+          background-color: rgba($herb-green, 0.1);
+          box-shadow: inset 0 0 0 1px $herb-green;
         }
 
         &.correct {
-          border-color: #28a745;
-          background-color: #d4edda;
-          color: #155724;
+          border: 2px solid $herb-green;
+          background-color: rgba($herb-green, 0.12);
+          color: $herb-green-dark;
         }
 
         &.incorrect {
-          border-color: #dc3545;
-          background-color: #f8d7da;
-          color: #721c24;
+          border: 2px solid $seal-red;
+          background-color: rgba($seal-red, 0.1);
+          color: $seal-red;
         }
 
         &.disabled {
@@ -312,32 +364,37 @@
         }
 
         .result-icon {
-          font-weight: bold;
-          font-size: 1.2rem;
+          font-family: $font-display;
+          font-weight: 600;
+          font-size: 1.3rem;
 
-          &.correct { color: #28a745; }
-          &.incorrect { color: #dc3545; }
+          &.correct { color: $herb-green; }
+          &.incorrect { color: $seal-red; }
         }
       }
     }
 
     .explanation {
-      background: #f8f9fa;
-      border-radius: 12px;
+      background-color: rgba($paper-aged, 0.55);
+      border: 1px solid $paper-deep;
+      border-left: 3px solid $herb-green;
+      border-radius: $border-radius-sm;
       padding: 1.5rem;
       margin-bottom: 2rem;
-      border-left: 4px solid #52ab4c;
 
       .explanation-content {
         h4 {
-          color: #2d5a27;
+          font-family: $font-display;
+          color: $herb-green-dark;
           font-weight: 600;
           margin-bottom: 0.75rem;
+          letter-spacing: 0.02em;
         }
 
         p {
-          color: #495057;
-          line-height: 1.6;
+          font-family: $font-body;
+          color: $ink-soft;
+          line-height: 1.7;
           margin-bottom: 1rem;
         }
 
@@ -345,14 +402,19 @@
           .species-link {
             background: none;
             border: none;
-            color: #52ab4c;
+            font-family: $font-body;
+            font-style: italic;
+            color: $herb-green;
             font-weight: 500;
             cursor: pointer;
             text-decoration: underline;
+            text-decoration-color: $gold-aged;
+            text-underline-offset: 3px;
             padding: 0;
 
             &:hover {
-              color: #2d5a27;
+              color: $herb-green-dark;
+              text-decoration-color: $herb-green;
             }
           }
         }
@@ -361,43 +423,51 @@
 
     .question-actions {
       text-align: center;
-      
+
       .primary-actions {
         margin-bottom: 1rem;
-        
+
         .next-btn {
           padding: 0.75rem 2rem;
-          font-size: 1rem;
-          font-weight: 600;
-          background: linear-gradient(135deg, #52ab4c 0%, #2d5a27 100%);
-          color: white;
-          border: none;
-          border-radius: 8px;
+          font-family: $font-label;
+          font-size: 0.85rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          font-weight: 500;
+          background: transparent;
+          color: $herb-green-dark;
+          border: 1.5px solid $herb-green;
+          border-radius: $border-radius-sm;
           cursor: pointer;
           transition: all 0.3s ease;
 
           &:hover {
+            background-color: $herb-green;
+            color: $paper;
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(82, 171, 76, 0.3);
+            box-shadow: $box-shadow-light;
           }
         }
       }
-      
+
       .secondary-actions {
         .quit-btn {
           padding: 0.5rem 1.5rem;
-          font-size: 0.9rem;
+          font-family: $font-label;
+          font-size: 0.78rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
           font-weight: 500;
           background: transparent;
-          color: #dc3545;
-          border: 2px solid #dc3545;
-          border-radius: 6px;
+          color: $seal-red;
+          border: 1px solid $seal-red;
+          border-radius: $border-radius-sm;
           cursor: pointer;
           transition: all 0.3s ease;
 
           &:hover {
-            background: #dc3545;
-            color: white;
+            background: $seal-red;
+            color: $paper;
           }
         }
       }
@@ -405,7 +475,7 @@
   }
 }
 
-// Quiz Results
+// Quiz Results - carnet de notes
 .quiz-results {
   text-align: center;
 
@@ -413,48 +483,55 @@
     margin-bottom: 2rem;
 
     h1 {
+      font-family: $font-display;
       font-size: 2.5rem;
-      color: #2d5a27;
+      font-weight: 600;
+      color: $ink;
       margin-bottom: 1rem;
+      letter-spacing: 0.02em;
     }
 
     .final-score {
       display: inline-block;
       padding: 1.5rem 2rem;
-      border-radius: 20px;
-      background: white;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      border: 3px solid;
+      border-radius: $border-radius;
+      @include paper-surface($paper-cream);
+      box-shadow: $box-shadow-medium;
+      border: 2px solid;
 
-      &.success { border-color: #28a745; }
-      &.warning { border-color: #ffc107; }
-      &.danger { border-color: #dc3545; }
+      &.success { border-color: $herb-green; }
+      &.warning { border-color: $gold-aged; }
+      &.danger { border-color: $seal-red; }
 
       .score-number {
         display: block;
+        font-family: $font-display;
+        font-feature-settings: "onum" 1;
         font-size: 3rem;
-        font-weight: bold;
+        font-weight: 600;
 
-        &.success { color: #28a745; }
-        &.warning { color: #ffc107; }
-        &.danger { color: #dc3545; }
+        &.success { color: $herb-green-dark; }
+        &.warning { color: darken($gold-aged, 10%); }
+        &.danger { color: $seal-red; }
       }
 
       .score-label {
-        font-size: 1.1rem;
-        color: #666;
+        font-family: $font-label;
+        font-size: 0.85rem;
+        color: $ink-soft;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.12em;
       }
     }
   }
 
   .results-details {
-    background: white;
-    border-radius: 16px;
+    @include paper-surface($paper-cream);
+    @include gold-border(1px);
+    border-radius: $border-radius;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow-light;
 
     .result-stats {
       display: grid;
@@ -465,15 +542,20 @@
       .stat-item {
         .stat-number {
           display: block;
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #2d5a27;
+          font-family: $font-display;
+          font-feature-settings: "onum" 1;
+          font-size: 1.7rem;
+          font-weight: 600;
+          color: $herb-green-dark;
         }
 
         .stat-label {
           display: block;
-          font-size: 0.9rem;
-          color: #666;
+          font-family: $font-label;
+          font-size: 0.75rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: $ink-soft;
           margin-top: 0.25rem;
         }
       }
@@ -482,42 +564,50 @@
     .performance-message {
       .message {
         padding: 1.5rem;
-        border-radius: 12px;
+        border-radius: $border-radius-sm;
         margin-bottom: 1rem;
+        font-family: $font-body;
 
         &.excellent {
-          background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-          border: 1px solid #28a745;
-          color: #155724;
+          background: rgba($herb-green, 0.1);
+          border: 1px solid $herb-green;
+          border-left: 3px solid $herb-green;
+          color: $herb-green-dark;
         }
 
         &.good {
-          background: linear-gradient(135deg, #cce7ff 0%, #b8daff 100%);
-          border: 1px solid #007bff;
-          color: #004085;
+          background: rgba($paper-aged, 0.6);
+          border: 1px solid $gold-aged;
+          border-left: 3px solid $gold-aged;
+          color: $ink;
         }
 
         &.average {
-          background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-          border: 1px solid #ffc107;
-          color: #856404;
+          background: rgba($gold-faint, 0.25);
+          border: 1px solid $gold-aged;
+          border-left: 3px solid $gold-aged;
+          color: darken($gold-aged, 15%);
         }
 
         &.needs-improvement {
-          background: linear-gradient(135deg, #f8d7da 0%, #f1c2c7 100%);
-          border: 1px solid #dc3545;
-          color: #721c24;
+          background: rgba($seal-red, 0.08);
+          border: 1px solid $seal-red;
+          border-left: 3px solid $seal-red;
+          color: $seal-red;
         }
 
         h3 {
+          font-family: $font-display;
           margin-bottom: 0.5rem;
           font-size: 1.3rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
         }
 
         p {
           margin: 0;
           font-size: 1rem;
-          line-height: 1.5;
+          line-height: 1.6;
         }
       }
     }
@@ -532,80 +622,98 @@
 
     .action-btn {
       padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
+      font-family: $font-label;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border-radius: $border-radius-sm;
       cursor: pointer;
       transition: all 0.3s ease;
 
       &.primary {
-        background: linear-gradient(135deg, #52ab4c 0%, #2d5a27 100%);
-        color: white;
+        background: transparent;
+        color: $herb-green-dark;
+        border: 1.5px solid $herb-green;
 
         &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(82, 171, 76, 0.3);
+          background-color: $herb-green;
+          color: $paper;
+          transform: translateY(-1px);
+          box-shadow: $box-shadow-light;
         }
       }
 
       &.secondary {
-        background: white;
-        color: #52ab4c;
-        border: 2px solid #52ab4c;
+        background: $paper;
+        color: $herb-green-dark;
+        border: 1px solid $paper-deep;
 
         &:hover {
-          background: #f8fdf8;
+          background: $paper-cream;
+          border-color: $herb-green-light;
         }
       }
     }
   }
 
   .question-review {
-    background: white;
-    border-radius: 16px;
+    @include paper-surface($paper-cream);
+    @include gold-border(1px);
+    border-radius: $border-radius;
     padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow-light;
     text-align: left;
 
     h3 {
-      color: #2d5a27;
+      font-family: $font-display;
+      color: $ink;
       margin-bottom: 1.5rem;
       text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
     .review-list {
       .review-item {
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
+        border: 1px solid $paper-deep;
+        background-color: $paper;
+        border-radius: $border-radius-sm;
         margin-bottom: 1rem;
         overflow: hidden;
 
         &.correct {
-          border-left: 4px solid #28a745;
+          border-left: 3px solid $herb-green;
         }
 
         &.incorrect {
-          border-left: 4px solid #dc3545;
+          border-left: 3px solid $seal-red;
         }
 
         .review-header {
-          background: #f8f9fa;
+          background: rgba($paper-aged, 0.55);
+          border-bottom: 1px solid $paper-deep;
           padding: 0.75rem 1rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
 
           .question-number {
-            font-weight: 600;
-            color: #495057;
+            font-family: $font-label;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: $ink-soft;
           }
 
           .review-result {
-            font-weight: bold;
+            font-family: $font-display;
+            font-weight: 600;
             font-size: 1.1rem;
 
-            &.correct { color: #28a745; }
-            &.incorrect { color: #dc3545; }
+            &.correct { color: $herb-green; }
+            &.incorrect { color: $seal-red; }
           }
         }
 
@@ -613,29 +721,31 @@
           padding: 1rem;
 
           .question-text {
+            font-family: $font-body;
             font-weight: 500;
             margin-bottom: 0.75rem;
-            color: #2d5a27;
+            color: $ink;
           }
 
           .answer-comparison {
             .your-answer, .correct-answer {
               padding: 0.5rem;
               margin: 0.25rem 0;
-              border-radius: 4px;
+              border-radius: $border-radius-sm;
+              font-family: $font-body;
               font-size: 0.9rem;
             }
 
             .your-answer.incorrect {
-              background: #f8d7da;
-              color: #721c24;
-              border: 1px solid #f5c6cb;
+              background: rgba($seal-red, 0.08);
+              color: $seal-red;
+              border: 1px solid rgba($seal-red, 0.4);
             }
 
             .correct-answer {
-              background: #d4edda;
-              color: #155724;
-              border: 1px solid #c3e6cb;
+              background: rgba($herb-green, 0.1);
+              color: $herb-green-dark;
+              border: 1px solid rgba($herb-green, 0.4);
             }
           }
         }
@@ -652,15 +762,17 @@
   .loading-spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid #e9ecef;
-    border-top: 4px solid #52ab4c;
+    border: 3px solid rgba($herb-green, 0.18);
+    border-top: 3px solid $herb-green;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto 1rem;
   }
 
   p {
-    color: #666;
+    font-family: $font-body;
+    font-style: italic;
+    color: $ink-soft;
     font-size: 1.1rem;
   }
 }

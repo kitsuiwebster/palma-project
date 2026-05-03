@@ -1,11 +1,9 @@
 @import "../../../styles.scss";
 
-// Hero Section
+// Hero Section — frontispice de carnet d'explorateur
 .hero {
-  background: linear-gradient(135deg, 
-    #f8fffe 0%, 
-    #f0f9f7 50%,
-    #e8f5f2 100%);
+  background-color: $paper;
+  background-image: $paper-texture-strong;
   padding: $spacing-unit * 8 0;
   height: 100vh;
   display: flex;
@@ -24,16 +22,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      45deg,
-      rgba(76, 175, 80, 0.03) 0%,
-      rgba(129, 199, 132, 0.05) 25%,
-      rgba(46, 125, 50, 0.02) 50%,
-      rgba(76, 175, 80, 0.04) 75%,
-      rgba(129, 199, 132, 0.03) 100%
-    );
-    background-size: 200% 200%;
-    animation: gradientFlow 10s ease-in-out infinite;
+    background-image: $paper-texture;
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: $spacing-unit * 3;
+    left: $spacing-unit * 3;
+    right: $spacing-unit * 3;
+    bottom: $spacing-unit * 3;
+    border: 1px solid rgba($gold-aged, 0.35);
+    pointer-events: none;
     z-index: 0;
   }
 
@@ -58,38 +60,39 @@
   .hero-text {
     .hero-title {
       margin: 0 0 $spacing-unit * 3;
-      
+
       .title-main {
         display: block;
-        font-size: 3.5rem;
-        font-weight: 800;
-        color: $text-dark;
-        background: linear-gradient(135deg, $primary-dark, $accent-dark);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        line-height: 1.1;
-        
+        font-family: $font-display;
+        font-size: 4rem;
+        font-weight: 600;
+        color: $ink;
+        line-height: 1.05;
+        letter-spacing: 0.5px;
+        font-feature-settings: "onum" 1, "liga" 1;
+
         @media (max-width: 768px) {
-          font-size: 2.2rem;
+          font-size: 2.4rem;
         }
-        
+
         @media (max-width: 480px) {
-          font-size: 1.8rem;
+          font-size: 1.9rem;
         }
       }
 
       .title-subtitle {
         display: block;
-        font-size: 1.3rem;
+        font-family: $font-display;
+        font-style: italic;
+        font-size: 1.4rem;
         font-weight: 400;
-        color: $text-secondary;
-        margin-top: $spacing-unit;
-        
+        color: $ink-soft;
+        margin-top: $spacing-unit * 1.5;
+
         @media (max-width: 768px) {
-          font-size: 1.1rem;
+          font-size: 1.15rem;
         }
-        
+
         @media (max-width: 480px) {
           font-size: 1rem;
         }
@@ -97,22 +100,23 @@
     }
 
     .hero-description {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: $text-secondary;
+      font-family: $font-body;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: $ink-soft;
       margin: 0 0 $spacing-unit * 4;
 
       strong {
-        color: $primary-dark;
+        color: $herb-green-dark;
         font-weight: 600;
       }
-      
+
       @media (max-width: 768px) {
         font-size: 1rem;
       }
-      
+
       @media (max-width: 480px) {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
     }
 
@@ -135,28 +139,38 @@
     .palm-illustration {
       width: 400px;
       height: 400px;
-      background: white;
+      background-color: $paper-cream;
+      background-image: $paper-texture;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: $box-shadow-medium;
+      box-shadow: $box-shadow-light;
+      border: 1px solid rgba($gold-aged, 0.5);
       position: relative;
 
       &::before {
         content: '';
         position: absolute;
-        inset: -20px;
+        inset: -14px;
         border-radius: 50%;
-        background: linear-gradient(135deg, $primary-color, $accent-color);
-        opacity: 0.1;
+        border: 1px solid rgba($gold-aged, 0.4);
+        z-index: -1;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: -28px;
+        border-radius: 50%;
+        border: 1px dashed rgba($ink-faint, 0.35);
         z-index: -1;
       }
 
       .palm-icon {
         width: 350px;
         height: 350px;
-        filter: sepia(1) hue-rotate(80deg) saturate(1.5);
+        filter: sepia(0.7) saturate(0.7) hue-rotate(40deg) brightness(0.95);
       }
 
       @media (max-width: 768px) {
@@ -172,61 +186,46 @@
   }
 }
 
-// Buttons
+// Boutons "tampon"
 .btn-primary, .btn-outline {
   display: inline-flex;
   align-items: center;
   gap: $spacing-unit;
-  padding: $spacing-unit * 1.5 $spacing-unit * 3;
-  border-radius: $border-radius * 2;
+  padding: $spacing-unit * 1.4 $spacing-unit * 3;
+  border-radius: $border-radius-sm;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
+  font-family: $font-label;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
   transition: $transition-standard;
-  border: 2px solid transparent;
+  border: 1.5px solid $ink;
 
   .btn-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, $primary-color, darken($primary-color, 5%));
-  color: white;
+  background-color: $ink;
+  color: $paper;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: $box-shadow-medium;
+    background-color: $herb-green-dark;
+    border-color: $herb-green-dark;
+    color: $paper;
   }
 }
 
 .btn-outline {
-  background: white;
-  color: $primary-color;
-  border-color: $primary-color;
+  background-color: transparent;
+  color: $ink;
+  border-color: $ink;
 
   &:hover {
-    background: $primary-color;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: $box-shadow-light;
+    background-color: $ink;
+    color: $paper;
   }
 }
-
-// Animation pour l'effet de dégradé fluide
-@keyframes gradientFlow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 100% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  75% {
-    background-position: 0% 100%;
-  }
-}
-

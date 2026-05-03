@@ -1,94 +1,136 @@
+@import "../../../styles.scss";
+
 .privacy-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
-  line-height: 1.6;
-  color: #333;
+  line-height: 1.7;
+  font-family: $font-body;
+  color: $ink;
 }
 
 .privacy-content {
-  background: #fff;
-  border-radius: 8px;
+  @include paper-surface($paper-cream);
+  @include gold-border(1px);
+  border-radius: $border-radius;
   padding: 40px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow-light;
 }
 
 h1 {
-  color: #2d5016;
+  font-family: $font-display;
+  color: $ink;
   font-size: 2.5em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   margin-bottom: 20px;
   text-align: center;
-  border-bottom: 3px solid #66bb6a;
+  border-bottom: 1px solid $gold-aged;
   padding-bottom: 15px;
+  position: relative;
+
+  &::after {
+    content: "\2766";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6em;
+    color: $gold-aged;
+    background-color: $paper-cream;
+    padding: 0 0.5rem;
+  }
 }
 
 .last-updated {
   text-align: center;
-  background: #f5f5f5;
+  background-color: rgba($paper-aged, 0.55);
+  border: 1px solid $paper-deep;
   padding: 15px;
-  border-radius: 6px;
+  border-radius: $border-radius-sm;
   margin-bottom: 30px;
-  
+
   p {
     margin: 0;
-    color: #666;
+    color: $ink-soft;
+    font-family: $font-body;
+    font-style: italic;
     font-size: 0.95em;
   }
 }
 
 .privacy-section {
   margin-bottom: 40px;
-  
+
   h2 {
-    color: #2d5016;
-    font-size: 1.5em;
-    margin-bottom: 15px;
+    font-family: $font-display;
+    color: $ink;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 18px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 1px solid $paper-deep;
+    letter-spacing: 0.02em;
   }
-  
+
   h3 {
-    color: #4a4a4a;
+    font-family: $font-display;
+    color: $herb-green-dark;
     font-size: 1.2em;
-    margin: 20px 0 10px 0;
+    font-weight: 600;
+    margin: 22px 0 10px 0;
+    letter-spacing: 0.02em;
   }
-  
+
   p {
     margin-bottom: 15px;
     text-align: justify;
+    font-family: $font-body;
+    line-height: 1.7;
+    color: $ink;
   }
-  
+
   ul {
     margin: 15px 0;
     padding-left: 30px;
-    
+
     li {
-      margin-bottom: 8px;
-      
+      margin-bottom: 10px;
+      line-height: 1.7;
+
       strong {
-        color: #2d5016;
+        font-family: $font-display;
+        color: $herb-green-dark;
+        font-weight: 600;
       }
     }
   }
 }
 
 .contact-info {
-  background: #f8f9fa;
+  @include paper-surface($paper-aged);
   padding: 20px;
-  border-radius: 6px;
-  border-left: 4px solid #66bb6a;
+  border-radius: $border-radius-sm;
+  border-left: 3px solid $herb-green;
+  border: 1px solid $paper-deep;
+  border-left: 3px solid $herb-green;
   margin: 20px 0;
-  
+
   p {
     margin: 5px 0;
+    font-family: $font-body;
+    color: $ink;
   }
-  
+
   a {
-    color: #2d5016;
-    text-decoration: none;
-    
+    color: $herb-green;
+    text-decoration: underline;
+    text-decoration-color: $gold-aged;
+    text-underline-offset: 3px;
+
     &:hover {
-      text-decoration: underline;
+      color: $herb-green-dark;
+      text-decoration-color: $herb-green;
     }
   }
 }
@@ -96,14 +138,16 @@ h1 {
 .policy-footer {
   margin-top: 40px;
   padding: 25px;
-  background: #f0f7f0;
-  border-radius: 6px;
-  border: 1px solid #e0e8e0;
-  
+  background-color: rgba($paper-aged, 0.6);
+  background-image: $paper-texture;
+  border-radius: $border-radius-sm;
+  border: 1px solid $paper-deep;
+
   p {
     margin: 0;
     text-align: center;
-    color: #5a5a5a;
+    color: $ink-soft;
+    font-family: $font-body;
     font-style: italic;
   }
 }
@@ -113,20 +157,20 @@ h1 {
   .privacy-container {
     padding: 20px 15px;
   }
-  
+
   .privacy-content {
     padding: 25px;
   }
-  
+
   h1 {
     font-size: 2em;
   }
-  
+
   .privacy-section {
     h2 {
-      font-size: 1.3em;
+      font-size: 1.35em;
     }
-    
+
     h3 {
       font-size: 1.1em;
     }
@@ -138,72 +182,72 @@ h1 {
   .privacy-container {
     padding: 15px 10px;
   }
-  
+
   .privacy-content {
     padding: 20px;
-    border-radius: 6px;
+    border-radius: $border-radius-sm;
   }
-  
+
   h1 {
     font-size: 1.8em;
     margin-bottom: 15px;
     padding-bottom: 12px;
   }
-  
+
   .last-updated {
     padding: 12px;
     margin-bottom: 25px;
-    
+
     p {
       font-size: 0.9em;
     }
   }
-  
+
   .privacy-section {
     margin-bottom: 30px;
-    
+
     h2 {
       font-size: 1.25em;
       margin-bottom: 12px;
       padding-bottom: 6px;
     }
-    
+
     h3 {
       font-size: 1.05em;
       margin: 16px 0 8px 0;
     }
-    
+
     p {
       margin-bottom: 12px;
       font-size: 0.95em;
       text-align: left;
     }
-    
+
     ul {
       margin: 12px 0;
       padding-left: 20px;
-      
+
       li {
         margin-bottom: 6px;
         font-size: 0.95em;
       }
     }
   }
-  
+
   .contact-info {
     padding: 16px;
     margin: 16px 0;
-    
+
     p {
       margin: 4px 0;
       font-size: 0.95em;
     }
   }
-  
+
   .policy-footer {
     margin-top: 30px;
     padding: 20px;
-    
+
     p {
       font-size: 0.9em;
     }
@@ -215,69 +259,69 @@ h1 {
   .privacy-container {
     padding: 10px 8px;
   }
-  
+
   .privacy-content {
     padding: 16px;
   }
-  
+
   h1 {
     font-size: 1.6em;
     margin-bottom: 12px;
     padding-bottom: 10px;
   }
-  
+
   .last-updated {
     padding: 10px;
     margin-bottom: 20px;
-    
+
     p {
       font-size: 0.85em;
     }
   }
-  
+
   .privacy-section {
     margin-bottom: 25px;
-    
+
     h2 {
       font-size: 1.2em;
       margin-bottom: 10px;
     }
-    
+
     h3 {
       font-size: 1em;
       margin: 14px 0 6px 0;
     }
-    
+
     p {
       margin-bottom: 10px;
       font-size: 0.9em;
     }
-    
+
     ul {
       margin: 10px 0;
       padding-left: 16px;
-      
+
       li {
         margin-bottom: 4px;
         font-size: 0.9em;
       }
     }
   }
-  
+
   .contact-info {
     padding: 12px;
     margin: 12px 0;
-    
+
     p {
       margin: 3px 0;
       font-size: 0.9em;
     }
   }
-  
+
   .policy-footer {
     margin-top: 25px;
     padding: 16px;
-    
+
     p {
       font-size: 0.85em;
     }
@@ -290,17 +334,22 @@ h1 {
     max-width: none;
     padding: 0;
   }
-  
+
   .privacy-content {
     box-shadow: none;
     border: none;
+    background: none;
   }
-  
+
   h1 {
     color: #000;
     border-bottom-color: #ccc;
+
+    &::after {
+      display: none;
+    }
   }
-  
+
   .privacy-section h2 {
     color: #000;
     border-bottom-color: #ccc;

@@ -22,16 +22,14 @@
   }
 
   h1 {
+    font-family: $font-display;
     font-size: 2.4rem;
-    font-weight: 800;
+    font-weight: 600;
     margin: 0;
-    color: $primary-dark;
-    background: linear-gradient(135deg, $primary-dark, $accent-dark);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    letter-spacing: -0.5px;
+    color: $herb-green;
+    letter-spacing: 0.5px;
     position: relative;
+    font-feature-settings: "onum" 1;
 
     &::after {
       content: "";
@@ -39,9 +37,9 @@
       left: 0;
       bottom: -8px;
       width: 60px;
-      height: 3px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
-      border-radius: 3px;
+      height: 1px;
+      background-color: rgba($gold-aged, 0.5);
+      border-radius: 0;
     }
 
     @media (max-width: 768px) {
@@ -51,7 +49,7 @@
 
   app-search-bar {
     flex: 1;
-    max-width: calc(100% - 60px); // Ajusté pour laisser l'espace aux toggles
+    max-width: calc(100% - 60px);
 
     @media (max-width: 768px) {
       max-width: 100%;
@@ -64,13 +62,14 @@
 .view-toggles {
   display: flex;
   gap: $spacing-unit;
-  background-color: rgba($primary-color, 0.1);
-  border-radius: 24px;
+  background-color: rgba($paper-aged, 0.6);
+  background-image: $paper-texture;
+  border-radius: $border-radius;
   padding: 4px;
-  border: 1px solid rgba($primary-color, 0.15);
+  border: 1px solid rgba($gold-aged, 0.4);
   align-self: center;
-  margin-left: 10px; // Ajoute un espace à gauche des toggles
-  flex-shrink: 0; // Empêche le rétrécissement des toggles
+  margin-left: 10px;
+  flex-shrink: 0;
 
   @media (max-width: 768px) {
     align-self: center;
@@ -81,28 +80,25 @@
   button {
     width: 44px;
     height: 44px;
-    border-radius: 20px;
+    border-radius: $border-radius;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    background: none;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
 
     &.active {
-      background: linear-gradient(
-        135deg,
-        $primary-color,
-        lighten($primary-color, 10%)
-      );
-      box-shadow: 0 4px 10px rgba($primary-color, 0.25);
+      background-color: $herb-green;
+      box-shadow: $box-shadow-light;
 
       .custom-icon {
-        transform: scale(1.1); /* Légèrement plus grande quand active */
+        transform: scale(1.1);
+        filter: brightness(0) invert(1) sepia(0.1);
       }
     }
 
     &:hover:not(.active) {
-      background: rgba($primary-color, 0.2);
+      background-color: rgba($herb-green, 0.12);
     }
 
     .icon-wrapper {
@@ -114,7 +110,7 @@
     }
 
     .custom-icon {
-      width: 24px; // Taille réduite pour un meilleur alignement
+      width: 24px;
       height: 24px;
       transition: all 0.3s ease;
     }
@@ -137,9 +133,10 @@
   }
 
   p {
-    color: $text-secondary;
+    color: $ink-soft;
+    font-family: $font-body;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 
@@ -165,8 +162,8 @@
 }
 
 .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #555;
+  border: 4px solid rgba($paper-aged, 0.5);
+  border-top: 4px solid $herb-green;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -180,7 +177,9 @@
   justify-content: center;
   padding: $spacing-unit * 8 0;
   text-align: center;
-  background-color: rgba($warn-color, 0.05);
+  background-color: rgba($seal-red, 0.06);
+  background-image: $paper-texture;
+  border: 1px solid rgba($seal-red, 0.3);
   border-radius: $border-radius;
   margin: $spacing-unit * 3 0;
 
@@ -191,7 +190,8 @@
     align-items: center;
     justify-content: center;
     margin-bottom: $spacing-unit * 2;
-    background-color: rgba($warn-color, 0.1);
+    background-color: rgba($seal-red, 0.12);
+    border: 1px solid rgba($seal-red, 0.3);
     border-radius: 50%;
     padding: $spacing-unit;
   }
@@ -199,12 +199,12 @@
   .custom-icon {
     width: 32px;
     height: 32px;
-    filter: invert(32%) sepia(93%) saturate(1352%) hue-rotate(336deg)
-      brightness(119%) contrast(119%);
+    filter: sepia(0.4) saturate(1.2) hue-rotate(-10deg);
   }
 
   p {
-    color: $text-secondary;
+    color: $ink-soft;
+    font-family: $font-body;
     font-size: 1.1rem;
     margin-bottom: $spacing-unit * 3;
     max-width: 500px;
@@ -249,14 +249,18 @@
     .mat-paginator-container {
       min-height: unset;
       padding: $spacing-unit $spacing-unit * 2;
-      background-color: white;
+      background-color: $paper-cream;
+      background-image: $paper-texture;
+      border: 1px solid rgba($gold-aged, 0.45);
       border-radius: $border-radius;
       box-shadow: $box-shadow-light;
     }
 
     .mat-paginator-range-label {
       margin: 0 $spacing-unit * 3;
-      color: $text-secondary;
+      color: $ink-soft;
+      font-family: $font-body;
+      font-feature-settings: "onum" 1;
     }
 
     .mat-paginator-navigation-previous,
@@ -266,7 +270,7 @@
       border-radius: 50%;
 
       &:hover {
-        background-color: rgba($primary-color, 0.1);
+        background-color: rgba($herb-green, 0.12);
       }
     }
   }
@@ -277,9 +281,11 @@
 
   ::ng-deep .mat-expansion-panel {
     margin-bottom: $spacing-unit;
+    background-color: $paper-cream !important;
+    background-image: $paper-texture;
     border-radius: $border-radius !important;
     box-shadow: $box-shadow-light !important;
-    border: 1px solid rgba($primary-color, 0.1);
+    border: 1px solid rgba($gold-aged, 0.45);
     overflow: hidden;
 
     &:not(.mat-expanded) {
@@ -296,25 +302,30 @@
       padding: 0 $spacing-unit * 3;
 
       &:hover {
-        background-color: rgba($primary-color, 0.05);
+        background-color: rgba($herb-green, 0.06);
       }
     }
 
     .mat-expansion-panel-header-title {
-      color: $primary-dark;
-      font-size: 1.1rem;
+      color: $herb-green;
+      font-family: $font-display;
+      font-style: italic;
+      font-size: 1.15rem;
       font-weight: 600;
 
       .count {
         margin-left: $spacing-unit;
-        color: $text-secondary;
-        font-weight: normal;
+        color: $ink-faint;
+        font-family: $font-body;
+        font-style: normal;
+        font-weight: 400;
         font-size: 0.95rem;
+        font-feature-settings: "onum" 1;
       }
     }
 
     .mat-expansion-indicator::after {
-      color: $primary-color;
+      color: $herb-green;
     }
 
     .mat-expansion-panel-body {
@@ -339,7 +350,7 @@
       margin: 2px 0;
 
       &:hover {
-        background-color: rgba($primary-color, 0.1);
+        background-color: rgba($herb-green, 0.1);
 
         .mat-list-item-content {
           padding-left: $spacing-unit * 3;
@@ -349,7 +360,8 @@
       .mat-list-item-content {
         padding: $spacing-unit $spacing-unit * 2;
         transition: all 0.3s ease;
-        color: $text-secondary;
+        color: $ink-soft;
+        font-family: $font-body;
         font-weight: 500;
       }
     }
@@ -372,20 +384,16 @@
     text-decoration: underline;
   }
 
-  // Ajouter ces styles à la fin du fichier palm-list.component.scss
-
   .search-results-banner {
-    background: linear-gradient(
-      135deg,
-      rgba($primary-color, 0.07),
-      rgba($primary-color, 0.12)
-    );
+    background-color: rgba($paper-aged, 0.55);
+    background-image: $paper-texture;
+    border: 1px solid rgba($gold-aged, 0.45);
+    border-left: 3px solid $herb-green;
     border-radius: $border-radius;
     padding: $spacing-unit * 2;
     margin-bottom: $spacing-unit * 3;
     box-shadow: $box-shadow-light;
     animation: fadeIn 0.3s ease-out forwards;
-    border-left: 4px solid $primary-color;
 
     .search-info {
       display: flex;
@@ -399,23 +407,30 @@
       }
 
       .search-count {
+        font-family: $font-body;
         font-weight: 600;
-        color: $primary-dark;
+        color: $herb-green-dark;
         font-size: 1.05rem;
+        font-feature-settings: "onum" 1;
       }
 
       .clear-search {
         display: flex;
         align-items: center;
-        color: #ff7043;
+        color: $seal-red;
+        font-family: $font-label;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
         transition: $transition-standard;
         padding: $spacing-unit $spacing-unit * 2;
-        border-radius: 20px;
-        border: 1px solid #ff7043;
+        border-radius: $border-radius;
+        border: 1px solid $seal-red;
+        background-color: transparent;
 
         &:hover {
-          background-color: #ff7043;
-          color: white;
+          background-color: $seal-red;
+          color: $paper;
         }
 
         .icon-wrapper {
@@ -435,7 +450,9 @@
   .no-results-message {
     text-align: center;
     padding: $spacing-unit * 6 0;
-    color: $text-secondary;
+    color: $ink-soft;
+    font-family: $font-body;
+    font-style: italic;
 
     p {
       font-size: 1.1rem;
@@ -486,23 +503,23 @@
   .advanced-search-button {
     margin: 0 2px;
     padding: 8px 20px;
-    border-radius: 22px;
-    border: none;
+    border-radius: $border-radius;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    color: $text-secondary;
+    color: $ink-soft;
     text-decoration: none;
     display: flex;
     align-items: center;
-    font-weight: 600;
+    font-family: $font-label;
+    font-weight: 400;
     position: relative;
     overflow: hidden;
     margin-left: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-size: 0.9rem;
-    background: rgba($primary-color, 0.1);
-    border: 1px solid rgba($primary-color, 0.15);
-    
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    background-color: transparent;
+    border: 1px solid rgba($herb-green, 0.5);
+
     &::before {
       content: "";
       position: absolute;
@@ -510,31 +527,33 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba($primary-color, 0), rgba($primary-color, 0.2));
+      background-color: rgba($herb-green, 0.08);
       opacity: 0;
       transition: opacity 0.3s ease;
       z-index: -1;
     }
 
     &:hover {
-      color: $primary-dark;
+      color: $herb-green-dark;
+      border-color: $herb-green;
       transform: translateY(-1px);
 
       &::before {
         opacity: 1;
       }
     }
-    
+
     &:active {
       transform: translateY(0);
     }
 
     &.active {
-      background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
-      color: $text-light;
-      box-shadow: 0 4px 10px rgba($primary-color, 0.25);
+      background-color: $herb-green;
+      color: $paper;
+      border-color: $herb-green;
+      box-shadow: $box-shadow-light;
     }
-    
+
     .icon-wrapper {
       width: 24px;
       height: 24px;
@@ -542,23 +561,23 @@
       align-items: center;
       justify-content: center;
     }
-  
+
     @media (max-width: 768px) {
       margin: $spacing-unit 0 0 0;
     }
   }
-  
+
   /* Responsive positioning */
   .palm-list-header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-  
+
     @media (max-width: 768px) {
       flex-direction: column;
       align-items: stretch;
-  
+
       .advanced-search-button {
         width: 100%;
         margin: $spacing-unit 0 0 0;
@@ -579,11 +598,13 @@
     justify-content: center;
     gap: $spacing-unit;
     padding: $spacing-unit * 1.5 $spacing-unit * 3;
-    background: white;
-    border: 1px solid rgba($primary-color, 0.15);
-    border-radius: 24px;
+    background-color: $paper-cream;
+    background-image: $paper-texture;
+    border: 1px solid rgba($gold-aged, 0.45);
+    border-radius: $border-radius;
     text-decoration: none;
-    color: $text-dark;
+    color: $ink;
+    font-family: $font-display;
     font-weight: 600;
     font-size: 0.95rem;
     transition: all 0.25s ease;
@@ -592,8 +613,8 @@
     &:hover {
       transform: translateY(-2px);
       box-shadow: $box-shadow-medium;
-      border-color: $primary-color;
-      color: $primary-dark;
+      border-color: $herb-green;
+      color: $herb-green-dark;
     }
 
     .browse-icon {
@@ -617,19 +638,22 @@
 
 .genus-page-link {
   margin-left: auto;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: $primary-color;
+  font-family: $font-label;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: $herb-green;
   text-decoration: none;
   padding: 2px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba($primary-color, 0.3);
+  border-radius: $border-radius;
+  border: 1px solid rgba($herb-green, 0.4);
   transition: all 0.2s ease;
   white-space: nowrap;
 
   &:hover {
-    background: rgba($primary-color, 0.1);
-    color: $primary-dark;
+    background-color: $herb-green;
+    color: $paper;
   }
 
   @media (max-width: 768px) {
@@ -644,33 +668,37 @@
     display: inline-flex;
     align-items: center;
     margin: 0 $spacing-unit * 2 $spacing-unit;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: $primary-color;
+    font-family: $font-label;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: $herb-green;
     text-decoration: none;
     padding: 6px 12px;
-    border-radius: 12px;
-    background: rgba($primary-color, 0.08);
+    border-radius: $border-radius;
+    background-color: rgba($paper-aged, 0.6);
+    border: 1px solid rgba($herb-green, 0.4);
     transition: all 0.2s ease;
     width: fit-content;
 
     &:hover {
-      background: rgba($primary-color, 0.14);
-      color: $primary-dark;
+      background-color: $herb-green;
+      color: $paper;
     }
   }
 }
 
 .palm-list-title {
+  font-family: $font-display;
   font-size: 2.2em;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
-  background: linear-gradient(135deg, $primary-color, $accent-color);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: $herb-green;
+  letter-spacing: 0.5px;
   position: relative;
   margin-bottom: 20px;
+  font-feature-settings: "onum" 1;
 
   @media (max-width: 768px) {
     font-size: 1.5rem;
@@ -683,9 +711,9 @@
     transform: translateX(-50%);
     bottom: -8px;
     width: 80px;
-    height: 4px;
-    background: linear-gradient(to right, $primary-color, $accent-color);
-    border-radius: 2px;
+    height: 1px;
+    background-color: rgba($gold-aged, 0.5);
+    border-radius: 0;
   }
 
   @media (max-width: 768px) {

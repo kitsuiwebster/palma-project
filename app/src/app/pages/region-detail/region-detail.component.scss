@@ -4,6 +4,8 @@
   padding: $spacing-unit * 4 $spacing-unit * 2;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: $paper;
+  background-image: $paper-texture;
 
   @media (max-width: 768px) {
     padding: $spacing-unit * 2 $spacing-unit;
@@ -20,37 +22,43 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    font-family: $font-body;
     font-size: 0.9rem;
     flex-wrap: wrap;
     gap: $spacing-unit;
   }
 
   .breadcrumb-item a {
-    color: $primary-color;
+    color: $herb-green;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
+    border-bottom: 1px solid rgba($herb-green, 0.25);
+    transition: color 0.2s, border-color 0.2s;
 
     &:hover {
-      color: $primary-dark;
-      text-decoration: underline;
+      color: $herb-green-dark;
+      border-bottom-color: $herb-green-dark;
     }
   }
 
   .breadcrumb-item.current span {
-    color: $text-secondary;
-    font-weight: 600;
+    color: $ink-soft;
+    font-family: $font-display;
+    font-style: italic;
+    font-weight: 500;
   }
 
   .breadcrumb-separator {
-    color: $text-secondary;
-    opacity: 0.5;
+    color: $ink-faint;
+    opacity: 0.7;
   }
 }
 
 // Header
 .region-header {
   margin-bottom: $spacing-unit * 3;
+  padding-bottom: $spacing-unit * 2;
+  border-bottom: 1px solid rgba($gold-aged, 0.45);
 
   .region-title-row {
     display: flex;
@@ -62,30 +70,33 @@
     width: 48px;
     height: 36px;
     object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    border-radius: $border-radius-sm;
+    border: 1px solid rgba($gold-aged, 0.5);
+    box-shadow: 0 2px 4px rgba($ink, 0.15);
+    filter: sepia(0.10) saturate(0.95);
   }
 
   h1 {
+    font-family: $font-display;
     font-size: 2.8rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, $primary-dark, $accent-dark);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+    font-weight: 600;
+    color: $ink;
+    letter-spacing: 0.005em;
     margin: 0;
-    line-height: 1.1;
+    line-height: 1.15;
 
     @media (max-width: 768px) {
-      font-size: 2rem;
+      font-size: 2.1rem;
     }
   }
 
   .region-subtitle {
-    font-size: 1.1rem;
-    color: $text-secondary;
+    font-family: $font-body;
+    font-size: 1.05rem;
+    color: $ink-soft;
     margin: $spacing-unit 0 0;
-    font-weight: 500;
+    font-weight: 400;
+    font-style: italic;
   }
 }
 
@@ -97,11 +108,11 @@
   flex-wrap: wrap;
 
   .stat-card {
-    background: white;
-    border-radius: $border-radius * 1.5;
+    @include paper-surface($paper-cream);
+    @include gold-border();
+    border-radius: $border-radius;
     padding: $spacing-unit * 2 $spacing-unit * 3;
     box-shadow: $box-shadow-light;
-    border: 1px solid rgba($primary-color, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,20 +122,24 @@
     &:hover {
       transform: translateY(-2px);
       box-shadow: $box-shadow-medium;
+      border-color: rgba($gold-aged, 0.65);
     }
 
     .stat-value {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: $primary-dark;
+      font-family: $font-display;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: $herb-green-dark;
       line-height: 1.2;
+      font-feature-settings: "onum" 1;
     }
 
     .stat-label {
-      font-size: 0.8rem;
-      color: $text-secondary;
+      font-family: $font-label;
+      font-size: 0.72rem;
+      color: $ink-faint;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.1em;
       margin-top: 4px;
     }
   }
@@ -132,16 +147,19 @@
 
 // Description
 .region-description {
-  background: linear-gradient(135deg, rgba($primary-color, 0.04), rgba($accent-color, 0.04));
-  border-radius: $border-radius * 1.5;
+  @include paper-surface($paper-cream);
+  border: 1px solid rgba($gold-aged, 0.4);
+  border-left: 3px solid $herb-green;
+  border-radius: $border-radius;
   padding: $spacing-unit * 3;
   margin-bottom: $spacing-unit * 4;
-  border-left: 4px solid $primary-color;
+  box-shadow: $box-shadow-light;
 
   p {
+    font-family: $font-body;
     font-size: 1.05rem;
     line-height: 1.7;
-    color: $text-dark;
+    color: $ink;
     margin: 0;
   }
 }
@@ -151,12 +169,14 @@
   margin-bottom: $spacing-unit * 4;
 
   h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: $primary-dark;
+    font-family: $font-display;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: $ink;
     margin-bottom: $spacing-unit * 2;
     position: relative;
     padding-bottom: $spacing-unit;
+    letter-spacing: 0.005em;
 
     &::after {
       content: "";
@@ -164,9 +184,9 @@
       left: 0;
       bottom: 0;
       width: 60px;
-      height: 3px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
-      border-radius: 3px;
+      height: 1px;
+      background: $gold-aged;
+      border-radius: 0;
     }
   }
 
@@ -181,33 +201,41 @@
     align-items: center;
     gap: $spacing-unit;
     padding: $spacing-unit $spacing-unit * 2;
-    background: white;
-    border: 1px solid rgba($primary-color, 0.15);
-    border-radius: 20px;
+    background: $paper-cream;
+    border: 1px solid rgba($gold-aged, 0.5);
+    border-radius: $border-radius;
     text-decoration: none;
-    color: $text-dark;
-    font-size: 0.9rem;
+    color: $ink;
+    font-family: $font-body;
+    font-size: 0.92rem;
     transition: all 0.2s ease;
     box-shadow: $box-shadow-light;
 
     &:hover {
-      border-color: $primary-color;
-      background: rgba($primary-color, 0.05);
+      border-color: $herb-green;
+      background: rgba($herb-green, 0.05);
       transform: translateY(-1px);
       box-shadow: $box-shadow-medium;
     }
 
     strong {
+      font-family: $font-display;
       font-style: italic;
+      font-weight: 600;
+      color: $herb-green-dark;
     }
 
     .chip-count {
-      background: rgba($primary-color, 0.1);
-      color: $primary-dark;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 0.8rem;
+      background: rgba($herb-green, 0.08);
+      color: $herb-green-dark;
+      border: 1px solid rgba($herb-green, 0.2);
+      padding: 1px 8px;
+      border-radius: $border-radius-sm;
+      font-family: $font-label;
+      font-size: 0.72rem;
       font-weight: 600;
+      letter-spacing: 0.04em;
+      font-feature-settings: "onum" 1;
     }
   }
 }
@@ -217,12 +245,14 @@
   margin-bottom: $spacing-unit * 4;
 
   h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: $primary-dark;
+    font-family: $font-display;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: $ink;
     margin-bottom: $spacing-unit * 3;
     position: relative;
     padding-bottom: $spacing-unit;
+    letter-spacing: 0.005em;
 
     &::after {
       content: "";
@@ -230,9 +260,9 @@
       left: 0;
       bottom: 0;
       width: 60px;
-      height: 3px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
-      border-radius: 3px;
+      height: 1px;
+      background: $gold-aged;
+      border-radius: 0;
     }
   }
 }
@@ -261,18 +291,20 @@
   flex-wrap: wrap;
   gap: $spacing-unit * 2;
   padding-top: $spacing-unit * 3;
-  border-top: 1px solid rgba($primary-color, 0.1);
+  border-top: 1px solid rgba($gold-aged, 0.4);
 
   .link-back {
-    color: $primary-color;
+    color: $herb-green;
     text-decoration: none;
-    font-weight: 600;
+    font-family: $font-body;
+    font-weight: 500;
     font-size: 0.95rem;
-    transition: color 0.2s;
+    border-bottom: 1px solid rgba($herb-green, 0.25);
+    transition: color 0.2s, border-color 0.2s;
 
     &:hover {
-      color: $primary-dark;
-      text-decoration: underline;
+      color: $herb-green-dark;
+      border-bottom-color: $herb-green-dark;
     }
   }
 }
@@ -286,19 +318,21 @@
   padding: $spacing-unit * 12 0;
 
   .spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid $primary-color;
+    border: 3px solid rgba($herb-green, 0.18);
+    border-top: 3px solid $herb-green;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     animation: spin 1s linear infinite;
     margin-bottom: $spacing-unit * 2;
   }
 
   p {
-    color: $text-secondary;
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-family: $font-body;
+    font-style: italic;
+    color: $ink-soft;
+    font-size: 1.05rem;
+    font-weight: 400;
   }
 }
 
@@ -312,28 +346,37 @@
   padding: $spacing-unit * 12 0;
 
   h1 {
-    font-size: 1.8rem;
-    color: $text-dark;
+    font-family: $font-display;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: $ink;
     margin-bottom: $spacing-unit;
   }
 
   p {
-    color: $text-secondary;
+    font-family: $font-body;
+    color: $ink-soft;
     margin-bottom: $spacing-unit * 3;
   }
 
   .btn-primary {
     display: inline-block;
-    padding: $spacing-unit * 1.5 $spacing-unit * 3;
-    background: $primary-color;
-    color: white;
+    padding: $spacing-unit * 1.25 $spacing-unit * 3;
+    background: transparent;
+    color: $herb-green;
+    border: 1px solid $herb-green;
     border-radius: $border-radius;
     text-decoration: none;
-    font-weight: 600;
-    transition: background 0.2s;
+    font-family: $font-label;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: $primary-dark;
+      background: $herb-green;
+      color: $paper;
     }
   }
 }
