@@ -190,14 +190,15 @@
         text-decoration: none;
         border-bottom: none;
         border-radius: $border-radius-sm;
-        transition: all 0.15s ease;
+        transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
         display: block;
         white-space: nowrap;
+        transform: translateX(0);
 
         &:hover {
           background-color: rgba($herb-green, 0.1);
           color: $herb-green-dark;
-          padding-left: 18px;
+          transform: translateX(4px);
         }
 
         &.highlight {
