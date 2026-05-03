@@ -290,25 +290,6 @@ export class PalmQuizComponent implements OnInit, OnDestroy {
     this.resetQuiz();
   }
 
-  shareResults(): void {
-    if (!this.currentSession) return;
-    
-    const text = `I just scored ${this.currentSession.score}% on a Palm Quiz! 🌴 Test your knowledge at`;
-    const url = window.location.origin + '/quiz';
-    
-    if (navigator.share) {
-      navigator.share({
-        title: 'Palm Quiz Results',
-        text: text,
-        url: url
-      });
-    } else {
-      // Fallback to clipboard
-      navigator.clipboard.writeText(`${text} ${url}`);
-      // You could show a toast notification here
-    }
-  }
-
   formatTime(milliseconds: number): string {
     const seconds = Math.floor(milliseconds / 1000);
     const minutes = Math.floor(seconds / 60);
