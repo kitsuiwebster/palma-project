@@ -5,127 +5,155 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
+  border-radius: $border-radius;
   overflow: hidden;
-  background-color: white;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: $paper-cream;
+  background-image: $paper-texture;
+  border: 1px solid rgba($gold-aged, 0.45);
+  transition: $transition-standard;
+  box-shadow: $box-shadow-light;
   cursor: pointer;
-  
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    
-    .palm-image {
-      transform: scale(1.08);
-    }
+
+  &::before {
+    // filet sépia haut, signature de fiche d'herbier
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba($gold-aged, 0.6), transparent);
+    z-index: 2;
   }
-  
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $box-shadow-medium;
+    border-color: rgba($gold-aged, 0.75);
+
+    .palm-image { transform: scale(1.05); }
+  }
+
   .card-image-container {
     position: relative;
     height: 200px;
     overflow: hidden;
-    
+    background-color: $paper-aged;
+    border-bottom: 1px solid rgba($gold-aged, 0.4);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba($paper-aged, 0.1);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
     .palm-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: sepia(0.12) saturate(0.95);
     }
-
   }
-  
+
   mat-card-header {
-    padding: 16px 16px 8px;
-    
+    padding: 18px 18px 6px;
+
     mat-card-title {
       margin-bottom: 4px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: $text-dark;
+      font-family: $font-display;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: $ink;
       line-height: 1.3;
-      
-      @media (max-width: 768px) {
-        font-size: 1.1rem;
-      }
+      letter-spacing: 0.01em;
+
+      @media (max-width: 768px) { font-size: 1.15rem; }
     }
-    
+
     mat-card-subtitle {
-      color: $text-secondary;
+      font-family: $font-display;
+      color: $ink-soft;
       font-style: italic;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
   }
-  
+
   mat-card-content {
-    padding: 8px 16px 16px;
+    padding: 6px 18px 16px;
     flex-grow: 1;
-    
+
     .palm-quick-info {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-top: 8px;
-      
+
       .info-item {
         display: flex;
         align-items: center;
-        font-size: 0.9rem;
-        color: $text-secondary;
-        
+        font-size: 0.92rem;
+        color: $ink-soft;
+
         .icon-wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 32px;
-          height: 32px;
+          width: 30px;
+          height: 30px;
           margin-right: 12px;
-          border-radius: 8px;
-          background: linear-gradient(135deg, rgba($primary-color, 0.1), rgba($primary-light, 0.3));
-          
+          border-radius: $border-radius-sm;
+          background-color: rgba($paper-aged, 0.7);
+          border: 1px solid rgba($gold-aged, 0.35);
+
           .custom-icon {
-            width: 18px;
-            height: 18px;
-            opacity: 0.8;
+            width: 17px;
+            height: 17px;
+            opacity: 0.75;
+            filter: sepia(0.4) saturate(0.7);
           }
         }
       }
     }
   }
-  
+
   mat-card-actions {
-    padding: 8px 16px 16px;
+    padding: 6px 18px 16px;
     margin: 0;
-    
+
     button {
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      padding: 4px 12px;
-      
+      font-family: $font-display !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.06em !important;
+      transition: $transition-standard !important;
+      padding: 6px 14px !important;
+      color: $herb-green !important;
+      border: 1px solid rgba($herb-green, 0.4) !important;
+      border-radius: $border-radius-sm !important;
+      background-color: transparent !important;
+
       &:hover {
-        background-color: rgba($primary-color, 0.1);
-        transform: translateY(-2px);
-        border-radius: 10px;
+        background-color: $herb-green !important;
+        color: $paper !important;
+        border-color: $herb-green !important;
       }
     }
   }
 }
 
-// Animation for cards when they appear - solution CSS pure
 .palm-card {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-// Appliquer l'animation uniquement via la classe spécifique
 .animate-card {
   opacity: 1;
   transform: translateY(0);
 }
-
-// Flag styles moved to global styles.scss for consistency
 
 .image-wrapper {
   position: relative;
@@ -142,16 +170,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba($paper-aged, 0.6);
   z-index: 2;
 }
 
 .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #555;
+  border: 3px solid rgba($ink-soft, 0.18);
+  border-top: 3px solid $herb-green;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   animation: spin 1s linear infinite;
 }
 
@@ -160,60 +188,60 @@
   100% { transform: rotate(360deg); }
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .common-names {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   margin-top: 8px;
-  
+
   .info-item {
     display: flex;
     align-items: center;
     font-size: 0.9rem;
-    color: $text-secondary;
-    
+    color: $ink-soft;
+
     .icon-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      min-height: 32px;
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      min-height: 30px;
       flex-shrink: 0;
       margin-right: 12px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba($primary-color, 0.1), rgba($primary-light, 0.3));
-      
+      border-radius: $border-radius-sm;
+      background-color: rgba($paper-aged, 0.65);
+      border: 1px solid rgba($gold-aged, 0.3);
+
       .flag-icon {
-        width: 20px;
-        height: 15px;
-        border-radius: 2px;
+        width: 19px;
+        height: 14px;
+        border-radius: 1px;
         object-fit: cover;
-        opacity: 0.8;
+        opacity: 0.9;
+        filter: sepia(0.08) saturate(0.92);
       }
-      
+
       .custom-icon {
-        width: 18px;
-        height: 18px;
-        opacity: 0.8;
+        width: 17px;
+        height: 17px;
+        opacity: 0.75;
+        filter: sepia(0.4) saturate(0.7);
       }
     }
   }
-  
+
   .no-common-names {
     .no-names-text {
       font-style: italic;
-      color: lighten($text-secondary, 15%);
+      color: $ink-faint;
     }
   }
 }
 
-// Region display styles
 .region-list {
   display: flex;
   flex-direction: column;
@@ -222,54 +250,53 @@
   .region-item {
     display: flex;
     align-items: center;
-    font-size: 0.85rem;
-    color: $text-secondary;
-    line-height: 1.3;
+    font-size: 0.88rem;
+    color: $ink-soft;
+    line-height: 1.35;
 
     .flag-img {
       width: 16px;
       height: 12px;
       margin-right: 6px;
-      border-radius: 2px;
+      border-radius: 1px;
       object-fit: cover;
     }
   }
 }
 
 .region-more {
-  font-size: 0.8rem;
-  color: lighten($text-secondary, 15%);
+  font-size: 0.82rem;
+  color: $ink-faint;
   font-style: italic;
   margin-top: 4px;
   padding-left: 2px;
 }
 
-// Horizontal dividers
 .card-divider {
   height: 1px;
-  background: linear-gradient(
+  background-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.12) 20%,
-    rgba(0, 0, 0, 0.15) 50%,
-    rgba(0, 0, 0, 0.12) 80%,
+    rgba($gold-aged, 0.5) 25%,
+    rgba($gold-aged, 0.5) 75%,
     transparent 100%
   );
-  margin: 14px 16px;
-  opacity: 0.9;
+  margin: 14px 18px;
+  opacity: 0.95;
+  border: none;
 }
 
-// Language dividers (smaller, for common names section)
 .language-divider {
   height: 1px;
-  background: linear-gradient(
+  background-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.08) 30%,
-    rgba(0, 0, 0, 0.10) 50%,
-    rgba(0, 0, 0, 0.08) 70%,
+    rgba($ink-soft, 0.18) 30%,
+    rgba($ink-soft, 0.22) 50%,
+    rgba($ink-soft, 0.18) 70%,
     transparent 100%
   );
   margin: 8px 0;
-  opacity: 0.8;
+  opacity: 0.85;
+  border: none;
 }

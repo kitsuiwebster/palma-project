@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(#1a140e, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,14 +17,8 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    backdrop-filter: blur(0px);
-  }
-  to {
-    opacity: 1;
-    backdrop-filter: blur(4px);
-  }
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to   { opacity: 1; backdrop-filter: blur(4px); }
 }
 
 .lightbox-container {
@@ -34,7 +28,7 @@
   animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   max-width: 90vw;
   max-height: 85vh;
-  
+
   @media (max-width: 768px) {
     max-width: 95vw;
     max-height: 90vh;
@@ -42,22 +36,16 @@
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+  from { opacity: 0; transform: scale(0.92) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .close-button {
   position: absolute;
-  top: 10px;             // Inside the image container, top-right corner
+  top: 10px;
   right: 10px;
-  background: rgba(0, 0, 0, 0.7);  // Darker background for better contrast on images
-  border: none;
+  background: rgba($ink, 0.8);
+  border: 1px solid rgba($paper, 0.2);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -66,20 +54,21 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: white;          // White icon for better visibility
+  color: $paper;
   z-index: 10001;
-  backdrop-filter: blur(4px);  // Subtle blur effect
-  
+  backdrop-filter: blur(4px);
+
   &:hover {
-    background: rgba(0, 0, 0, 0.9);
-    transform: scale(1.1);
+    background: $ink;
+    border-color: rgba($paper, 0.4);
+    transform: scale(1.08);
   }
-  
+
   svg {
     width: 20px;
     height: 20px;
   }
-  
+
   @media (max-width: 768px) {
     top: 8px;
     right: 8px;
@@ -94,10 +83,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
-  
-  @media (max-width: 768px) {
-    margin-bottom: 12px;
-  }
+
+  @media (max-width: 768px) { margin-bottom: 12px; }
 }
 
 .image-loader {
@@ -107,22 +94,23 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  color: white;
+  color: $paper;
   z-index: 10;
-  
+
   span {
+    font-family: $font-display;
+    font-style: italic;
     font-size: 1rem;
-    font-weight: 500;
-    opacity: 0.9;
+    opacity: 0.85;
   }
 }
 
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba($paper, 0.25);
   border-radius: 50%;
-  border-top-color: white;
+  border-top-color: $gold-faint;
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -134,9 +122,9 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
-  border: none;
+  background: rgba($ink, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba($paper, 0.2);
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -144,13 +132,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: white;
+  color: $paper;
   transition: all 0.3s ease;
   z-index: 10;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.9);
-    transform: translateY(-50%) scale(1.1);
+    background: $ink;
+    border-color: rgba($paper, 0.4);
+    transform: translateY(-50%) scale(1.08);
   }
 
   &:active {
@@ -165,28 +154,19 @@
   @media (max-width: 768px) {
     width: 44px;
     height: 44px;
-    
-    svg {
-      width: 20px;
-      height: 20px;
-    }
+
+    svg { width: 20px; height: 20px; }
   }
 }
 
 .nav-button-prev {
   left: 20px;
-  
-  @media (max-width: 768px) {
-    left: 10px;
-  }
+  @media (max-width: 768px) { left: 10px; }
 }
 
 .nav-button-next {
   right: 20px;
-  
-  @media (max-width: 768px) {
-    right: 10px;
-  }
+  @media (max-width: 768px) { right: 10px; }
 }
 
 .lightbox-image {
@@ -195,37 +175,37 @@
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: $border-radius;
+  box-shadow: 0 12px 40px rgba(#000, 0.55);
+  border: 1px solid rgba($gold-aged, 0.35);
   transition: transform 0.3s ease, opacity 0.3s ease;
+  filter: sepia(0.05) saturate(0.97);
 
-  &.loading {
-    opacity: 0;
-  }
-  
+  &.loading { opacity: 0; }
+
   @media (max-width: 768px) {
     max-width: 95vw;
     max-height: calc(90vh - 140px);
   }
-  
-  &:hover {
-    transform: scale(1.02);
-  }
+
+  &:hover { transform: scale(1.01); }
 }
 
 .image-info {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+  background-color: rgba($paper, 0.95);
+  background-image: $paper-texture;
+  border: 1px solid rgba($gold-aged, 0.45);
+  backdrop-filter: blur(8px);
+  border-radius: $border-radius;
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px rgba($ink, 0.25);
   flex-shrink: 0;
   min-height: 80px;
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 12px;
@@ -240,12 +220,14 @@
 }
 
 .species-title {
-  font-size: 1.1rem;
+  font-family: $font-display;
+  font-size: 1.15rem;
   font-weight: 600;
-  color: $primary-dark;
+  color: $ink;
   margin: 0 0 8px 0;
   font-style: italic;
-  
+  letter-spacing: 0.01em;
+
   @media (max-width: 768px) {
     font-size: 1rem;
     text-align: center;
@@ -253,14 +235,16 @@
 }
 
 .image-counter {
-  font-size: 0.9rem;
-  color: $text-secondary;
-  font-weight: 500;
+  font-family: $font-label;
+  font-size: 0.78rem;
+  color: $ink-soft;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   margin-bottom: 8px;
-  
+
   @media (max-width: 768px) {
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
   }
 }
 
@@ -270,7 +254,7 @@
   gap: 12px;
   align-items: center;
   font-size: 0.85rem;
-  
+
   @media (max-width: 768px) {
     justify-content: center;
     gap: 8px;
@@ -281,14 +265,13 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: $text-secondary;
-  
-  svg {
-    color: $primary-color;
-  }
-  
+  color: $ink-soft;
+
+  svg { color: $herb-green; }
+
   span {
     font-weight: 500;
+    color: $ink;
   }
 }
 
@@ -299,110 +282,105 @@
 }
 
 .license-badge {
-  background: $primary-light;
-  color: $primary-dark;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  border: 1px solid rgba($primary-color, 0.2);
-  
+  background-color: rgba($herb-green, 0.1);
+  color: $herb-green-dark;
+  padding: 3px 9px;
+  border: 1px solid rgba($herb-green, 0.4);
+  border-radius: $border-radius-sm;
+  font-family: $font-label;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
   &.warning {
-    background: #fff3cd;
-    color: #856404;
-    border-color: #ffeaa7;
+    background-color: rgba($gold-aged, 0.15);
+    color: darken($gold-aged, 18%);
+    border-color: rgba($gold-aged, 0.55);
   }
 }
 
 .license-desc {
-  color: $text-secondary;
-  font-size: 0.75rem;
+  color: $ink-soft;
+  font-size: 0.78rem;
   font-style: italic;
 }
 
 .source-badge {
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  
+  padding: 3px 9px;
+  border-radius: $border-radius-sm;
+  font-family: $font-label;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+
   &.inaturalist {
-    background: #74ac00;
-    color: white;
+    background-color: rgba($herb-green, 0.12);
+    color: $herb-green-dark;
   }
-  
+
   &.wikimedia {
-    background: #006699;
-    color: white;
+    background-color: rgba($ink-soft, 0.1);
+    color: $ink;
   }
-  
+
   &.other {
-    background: $background-dark;
-    color: $text-secondary;
+    background-color: rgba($paper-aged, 0.6);
+    color: $ink-soft;
   }
 }
 
 .no-credit {
-  color: $text-secondary;
-  font-size: 0.85rem;
+  color: $ink-faint;
+  font-size: 0.88rem;
   font-style: italic;
 }
 
 .download-button {
-  background: $primary-color;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  background-color: transparent;
+  color: $herb-green;
+  border: 1.5px solid $herb-green;
+  border-radius: $border-radius-sm;
   padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-family: $font-display;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: $transition-standard;
   flex-shrink: 0;
-  
+
   &:hover {
-    background: $primary-dark;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+    background-color: $herb-green;
+    color: $paper;
+    box-shadow: $box-shadow-light;
   }
-  
-  &:active {
-    transform: translateY(0);
-  }
-  
+
+  &:active { transform: translateY(1px); }
+
   svg {
     width: 16px;
     height: 16px;
   }
-  
+
   @media (max-width: 768px) {
     padding: 8px 14px;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
 }
 
-// Loading state
 .loading {
-  .image-details {
-    opacity: 0.7;
-  }
+  .image-details { opacity: 0.7; }
 }
 
-// Animation for close
 .lightbox-overlay.closing {
   animation: fadeOut 0.2s ease-in forwards;
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.95);
-  }
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.96); }
 }

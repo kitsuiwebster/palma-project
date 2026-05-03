@@ -1,211 +1,226 @@
 @import '../../../../styles.scss';
 
 .footer {
-  color: $text-dark;
+  color: $ink;
   padding: 60px 0 0;
   margin-top: 80px;
   position: relative;
-  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #eeeeee 100%);
-  border-top: 1px solid rgba($primary-color, 0.1);
-  
+  background-color: $paper-aged;
+  background-image: $paper-texture-strong;
+  border-top: 1px solid rgba($gold-aged, 0.6);
+
+  &::before {
+    // Filet décoratif sépia juste sous le bord supérieur
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent 5%, rgba($gold-aged, 0.5) 30%, rgba($gold-aged, 0.5) 70%, transparent 95%);
+  }
+
   .footer-content {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1.5fr;
     gap: 48px;
     padding-bottom: 48px;
     position: relative;
-    
-    @media (max-width: 1200px) {
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 40px;
-    }
-    
-    @media (max-width: 992px) {
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-    }
-    
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    
-    @media (max-width: 576px) {
-      gap: 24px;
-      padding-bottom: 32px;
-    }
+
+    @media (max-width: 1200px) { grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+    @media (max-width: 992px)  { grid-template-columns: 1fr 1fr; gap: 36px; }
+    @media (max-width: 768px)  { grid-template-columns: 1fr; gap: 32px; }
+    @media (max-width: 576px)  { gap: 24px; padding-bottom: 32px; }
   }
 
   .footer-section {
     &.project-info {
       .footer-logo {
         margin-bottom: 20px;
-        
+
         h3 {
-          font-size: 1.8rem;
-          font-weight: 800;
-          background: linear-gradient(135deg, $primary-dark, $accent-dark);
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-          margin: 0 0 8px 0;
-          letter-spacing: -0.5px;
+          font-family: $font-display;
+          font-size: 1.95rem;
+          font-weight: 600;
+          color: $ink;
+          margin: 0 0 6px 0;
+          letter-spacing: 0.02em;
         }
-        
+
         .tagline {
-          color: $text-secondary;
+          font-family: $font-display;
+          color: $ink-soft;
           font-size: 0.95rem;
-          font-weight: 500;
+          font-style: italic;
           margin: 0;
         }
       }
-      
+
       .description {
         font-size: 0.95rem;
-        line-height: 1.6;
-        color: $text-secondary;
+        line-height: 1.65;
+        color: $ink-soft;
         margin-bottom: 24px;
         max-width: 400px;
       }
-      
+
       .footer-stats {
         display: flex;
-        gap: 24px;
-        
-        @media (max-width: 480px) {
-          flex-wrap: wrap;
-          gap: 16px;
-        }
-        
+        gap: 20px;
+
+        @media (max-width: 480px) { flex-wrap: wrap; gap: 14px; }
+
         .stat-item {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 16px;
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-          border: 1px solid rgba($primary-color, 0.08);
+          padding: 14px 18px;
+          background-color: $paper-cream;
+          background-image: $paper-texture;
+          border: 1px solid rgba($gold-aged, 0.5);
+          border-radius: $border-radius;
+          box-shadow: $box-shadow-light;
           min-width: 80px;
-          
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            right: 8px;
+            height: 1px;
+            background: rgba($gold-aged, 0.4);
+          }
+
           .stat-number {
-            font-size: 1.4rem;
+            font-family: $font-display;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: $primary-dark;
+            color: $herb-green-dark;
             margin-bottom: 4px;
             line-height: 1;
+            font-feature-settings: "onum" 1;
           }
-          
+
           .stat-label {
-            font-size: 0.8rem;
-            color: $text-secondary;
-            font-weight: 500;
+            font-family: $font-label;
+            font-size: 0.7rem;
+            color: $ink-soft;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.15em;
           }
         }
       }
     }
 
     h3 {
-      color: $primary-dark;
-      font-size: 1.1rem;
-      margin-bottom: 20px;
+      font-family: $font-display;
+      color: $ink;
+      font-size: 1.15rem;
+      margin-bottom: 22px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.14em;
       position: relative;
-      
+
       &::after {
         content: "";
         position: absolute;
         left: 0;
-        bottom: -6px;
-        width: 30px;
-        height: 2px;
-        background: linear-gradient(to right, $primary-color, $accent-color);
-        border-radius: 2px;
+        bottom: -8px;
+        width: 36px;
+        height: 1px;
+        background: $gold-aged;
+        box-shadow: 0 3px 0 rgba($gold-aged, 0.4);
       }
     }
 
     p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: $text-secondary;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: $ink-soft;
       margin-bottom: 12px;
     }
   }
 
   .contact-info {
     margin-bottom: 20px;
-    
+
     .contact-item {
       display: flex;
       align-items: center;
       gap: 8px;
       margin-bottom: 8px;
-      font-size: 0.9rem;
-      color: $text-secondary;
-      
+      font-size: 0.92rem;
+      color: $ink-soft;
+
       svg {
         flex-shrink: 0;
-        color: $primary-color;
+        color: $herb-green;
       }
-      
+
       a {
-        color: $primary-dark;
+        color: $ink;
         text-decoration: none;
+        border-bottom: 1px solid rgba($gold-aged, 0.5);
         font-weight: 500;
-        transition: color 0.2s ease;
-        
+        transition: $transition-standard;
+
         &:hover {
-          color: $accent-dark;
+          color: $herb-green-dark;
+          border-bottom-color: $herb-green;
         }
       }
     }
   }
-  
+
   .quotes-carousel {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    border-left: 4px solid $primary-color;
+    background-color: $paper-cream;
+    background-image: $paper-texture;
+    padding: 22px 22px 32px;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
+    border: 1px solid rgba($gold-aged, 0.5);
+    border-left: 3px solid $herb-green;
     position: relative;
     min-height: 160px;
-    
+
     .quote-item {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      right: 20px;
+      top: 22px;
+      left: 22px;
+      right: 22px;
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
       transition: all 0.5s ease-in-out;
-      
+
       &.active {
         opacity: 1;
         transform: translateY(0);
       }
-      
+
       .quote {
-        font-size: 0.9rem;
-        line-height: 1.5;
-        color: $text-secondary;
+        font-family: $font-display;
+        font-size: 0.98rem;
+        line-height: 1.55;
+        color: $ink-soft;
         margin: 0;
         font-style: italic;
-        
+
         .quote-author {
           display: block;
-          margin-top: 8px;
+          margin-top: 10px;
+          font-family: $font-label;
           font-style: normal;
-          font-size: 0.8rem;
-          color: $primary-dark;
-          font-weight: 500;
+          font-size: 0.75rem;
+          color: $herb-green-dark;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
         }
       }
     }
-    
+
     .quote-indicators {
       position: absolute;
       bottom: 12px;
@@ -213,7 +228,7 @@
       transform: translateX(-50%);
       display: flex;
       gap: 8px;
-      
+
       .indicator {
         width: 6px !important;
         height: 6px !important;
@@ -223,7 +238,7 @@
         max-height: 6px !important;
         border: none !important;
         border-radius: 50% !important;
-        background: rgba($primary-color, 0.3) !important;
+        background: rgba($ink-soft, 0.3) !important;
         cursor: pointer !important;
         transition: all 0.3s ease !important;
         padding: 0 !important;
@@ -233,21 +248,19 @@
         flex-shrink: 0 !important;
         font-size: 0 !important;
         line-height: 0 !important;
-        
+
         &.active {
-          background: $primary-color !important;
+          background: $herb-green !important;
           transform: scale(1.3) !important;
         }
-        
-        &:hover {
-          background: rgba($primary-color, 0.6) !important;
-        }
-        
+
+        &:hover { background: rgba($ink-soft, 0.55) !important; }
+
         &:focus {
           outline: none !important;
-          box-shadow: 0 0 0 2px rgba($primary-color, 0.2) !important;
+          box-shadow: 0 0 0 2px rgba($herb-green, 0.25) !important;
         }
-        
+
         @media (max-width: 768px) {
           width: 5px !important;
           height: 5px !important;
@@ -255,12 +268,9 @@
           min-height: 5px !important;
           max-width: 5px !important;
           max-height: 5px !important;
-          
-          &.active {
-            transform: scale(1.2) !important;
-          }
+          &.active { transform: scale(1.2) !important; }
         }
-        
+
         @media (max-width: 480px) {
           width: 4px !important;
           height: 4px !important;
@@ -268,10 +278,7 @@
           min-height: 4px !important;
           max-width: 4px !important;
           max-height: 4px !important;
-          
-          &.active {
-            transform: scale(1.1) !important;
-          }
+          &.active { transform: scale(1.1) !important; }
         }
       }
     }
@@ -280,129 +287,106 @@
   .footer-nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    
+    gap: 6px;
+
     a {
-      color: $text-secondary;
+      color: $ink-soft;
       text-decoration: none;
-      font-size: 0.9rem;
-      padding: 6px 0;
-      transition: all 0.2s ease;
+      border-bottom: none;
+      font-size: 0.92rem;
+      padding: 5px 0;
+      transition: $transition-standard;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       font-weight: 400;
       position: relative;
-      
+
       svg {
         width: 12px;
         height: 12px;
-        opacity: 0.7;
+        opacity: 0.55;
+        color: $gold-aged;
       }
-      
+
       &:hover {
-        color: $primary-dark;
+        color: $herb-green-dark;
         transform: translateX(4px);
       }
-      
-      &:hover svg {
-        opacity: 1;
-      }
+
+      &:hover svg { opacity: 1; }
     }
   }
 
   .footer-bottom {
-    background: linear-gradient(135deg, #eeeeee 0%, #e0e0e0 100%);
+    background-color: rgba($paper-deep, 0.5);
+    background-image: $paper-texture;
     padding: 20px 0;
+    font-family: $font-display;
     font-size: 0.85rem;
-    border-top: 1px solid rgba($primary-color, 0.15);
-    
+    border-top: 1px solid rgba($gold-aged, 0.5);
+
     .footer-bottom-content {
       display: flex;
       justify-content: center;
       align-items: center;
-      
+
       .copyright {
         margin: 0;
-        color: $text-secondary;
+        color: $ink-soft;
+        font-style: italic;
         font-weight: 400;
         text-align: center;
+        letter-spacing: 0.03em;
       }
     }
   }
 }
 
-// Responsive adjustments
 @media (max-width: 480px) {
   .footer {
     padding: 40px 0 0;
     margin-top: 40px;
-    
-    .footer-content {
-      gap: 24px;
-      padding-bottom: 32px;
-    }
-    
+
+    .footer-content { gap: 24px; padding-bottom: 32px; }
+
     .footer-section {
       &.project-info {
-        .footer-logo h3 {
-          font-size: 1.5rem;
-        }
-        
-        .description {
-          font-size: 0.9rem;
-        }
-        
+        .footer-logo h3 { font-size: 1.55rem; }
+        .description { font-size: 0.9rem; }
+
         .footer-stats .stat-item {
-          padding: 12px;
+          padding: 12px 14px;
           min-width: 70px;
-          
-          .stat-number {
-            font-size: 1.2rem;
-          }
-          
-          .stat-label {
-            font-size: 0.75rem;
-          }
+          .stat-number { font-size: 1.25rem; }
+          .stat-label { font-size: 0.65rem; }
         }
       }
-      
-      h3 {
-        font-size: 1rem;
-        margin-bottom: 16px;
-      }
+
+      h3 { font-size: 1rem; margin-bottom: 18px; }
     }
-    
+
     .quotes-carousel {
-      padding: 16px;
+      padding: 18px 18px 30px;
       min-height: 170px;
-      
+
       .quote-item {
-        top: 16px;
-        left: 16px;
-        right: 16px;
-        
+        top: 18px;
+        left: 18px;
+        right: 18px;
         .quote {
-          font-size: 0.85rem;
-          
-          .quote-author {
-            font-size: 0.75rem;
-          }
+          font-size: 0.9rem;
+          .quote-author { font-size: 0.7rem; }
         }
       }
-      
-      .quote-indicators {
-        bottom: 8px;
-      }
+
+      .quote-indicators { bottom: 8px; }
     }
-    
-    .footer-bottom {
-      padding: 16px 0;
-    }
+
+    .footer-bottom { padding: 16px 0; }
   }
 }
 
-// Pour éviter les problèmes d'overlay
 :host {
   display: block;
   position: relative;
